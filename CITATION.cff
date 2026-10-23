@@ -3,7 +3,15 @@ message: "If you use these records or scripts, please cite the paper below and t
 title: "Replication of The Price of Failure Risk: Clipped Barrier Policy Gradients with Convex Regularization"
 type: dataset
 date-released: 2026-10-23
-license: [MIT, CC-BY-4.0]
+license: CC-BY-4.0
+abstract: >-
+  Replication repository of the paper The Price of Failure Risk: Clipped Barrier Policy Gradients with Convex
+  Regularization, checked against revision 73 of the paper. It holds every study's simulator, training and analysis
+  scripts, the protocols fixed before each campaign, and the records of every run, so that each table and figure of
+  the paper can be regenerated from the records and each campaign can be run again. The studies are the
+  wear-allowance asset, the fuel-tank controller, the solvable flow and a Safety-Gymnasium navigation task. The
+  records are licensed under CC BY 4.0 (LICENSE-records.md) and the code under MIT (LICENSE). The toolbox for
+  applying the method to new problems is barrierpg (https://github.com/pma-papers/barrierpg).
 repository-code: "https://github.com/pma-papers/bpg-replication"
 authors:
   - family-names: Malo
