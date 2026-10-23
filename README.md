@@ -105,7 +105,9 @@ files and nine logs); nothing else in them changed.
 
 The code is under the MIT licence ([`LICENSE`](LICENSE)); the protocols, reports, run records, trained policies,
 tables and figures are under CC BY 4.0 ([`LICENSE-records.md`](LICENSE-records.md)). Cite the paper and this
-repository as in [`CITATION.cff`](CITATION.cff).
+repository as in [`CITATION.cff`](CITATION.cff). The repository is archived on Zenodo:
+[10.5281/zenodo.23597426](https://doi.org/10.5281/zenodo.23597426) for all versions,
+[10.5281/zenodo.23597427](https://doi.org/10.5281/zenodo.23597427) for the release of revision 73.
 
 ## Observations of the paper and the protocols
 
