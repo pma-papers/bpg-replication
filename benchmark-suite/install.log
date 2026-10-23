@@ -1,0 +1,21 @@
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+safety-gymnasium 1.0.0 requires gymnasium-robotics==1.2.2, which is not installed.
+safety-gymnasium 1.0.0 requires gymnasium==0.28.1, but you have gymnasium 1.2.3 which is incompatible.
+safety-gymnasium 1.0.0 requires mujoco==2.3.3, but you have mujoco 3.15.0 which is incompatible.
+safety-gymnasium 1.0.0 requires pygame==2.1.0, but you have pygame 2.6.1 which is incompatible.
+Traceback (most recent call last):
+  File "<stdin>", line 7, in <module>
+  File "<project>/barrier-policy-gradients/numerics-v63/.venv/lib/python3.13/site-packages/safety_gymnasium/__init__.py", line 22, in <module>
+    from safety_gymnasium import vector, wrappers
+  File "<project>/barrier-policy-gradients/numerics-v63/.venv/lib/python3.13/site-packages/safety_gymnasium/vector/__init__.py", line 24, in <module>
+    from safety_gymnasium.utils.registration import make as safety_make
+  File "<project>/barrier-policy-gradients/numerics-v63/.venv/lib/python3.13/site-packages/safety_gymnasium/utils/registration.py", line 28, in <module>
+    from gymnasium.wrappers.compatibility import EnvCompatibility
+ModuleNotFoundError: No module named 'gymnasium.wrappers.compatibility'
+safety_gymnasium IMPORT FAILED: ModuleNotFoundError("No module named 'gymnasium.wrappers.compatibility'")
+mujoco 3.15.0
+gymnasium 1.2.3
+stable_baselines3 2.9.0
+torch 2.14.1
+pygame 2.6.1
+install exit 0

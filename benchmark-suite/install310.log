@@ -1,0 +1,11 @@
+uv: uv 0.13.0 (Homebrew 2026-10-09 aarch64-apple-darwin)
+Creating virtual environment at: .venv310
+Activate with: source .venv310/bin/activate
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "<project>/barrier-policy-gradients/numerics-v63/.venv310/lib/python3.10/site-packages/safety_gymnasium/__init__.py", line 23, in <module>
+    from safety_gymnasium.tasks.safe_multi_agent.safe_mujoco_multi import make_ma
+  File "<project>/barrier-policy-gradients/numerics-v63/.venv310/lib/python3.10/site-packages/safety_gymnasium/tasks/safe_multi_agent/safe_mujoco_multi.py", line 23, in <module>
+    from gymnasium_robotics.envs.multiagent_mujoco.mujoco_multi import MultiAgentMujocoEnv
+ModuleNotFoundError: No module named 'gymnasium_robotics'
+exit 1

@@ -1,0 +1,216 @@
+{
+ "arms": {
+  "fixed-m0": {
+   "kind": "fixed",
+   "m": 0.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "fixed-m0.1": {
+   "kind": "fixed",
+   "m": 0.1,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "fixed-m0.3": {
+   "kind": "fixed",
+   "m": 0.3,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "fixed-m1": {
+   "kind": "fixed",
+   "m": 1.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "fixed-m3": {
+   "kind": "fixed",
+   "m": 3.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "fixed-m10": {
+   "kind": "fixed",
+   "m": 10.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "barrier-m1": {
+   "kind": "barrier",
+   "m": 1.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "barrier-m3": {
+   "kind": "barrier",
+   "m": 3.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "adaptive-a0.05-s5": {
+   "kind": "adaptive",
+   "alpha": 0.05,
+   "dual_step": 5.0,
+   "multiplier0": 0.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "adaptive-a0.05-s1": {
+   "kind": "adaptive",
+   "alpha": 0.05,
+   "dual_step": 1.0,
+   "multiplier0": 0.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "adaptive-a0.01-s5": {
+   "kind": "adaptive",
+   "alpha": 0.01,
+   "dual_step": 5.0,
+   "multiplier0": 0.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "adaptive-a0-s5": {
+   "kind": "adaptive",
+   "alpha": 0.0,
+   "dual_step": 5.0,
+   "multiplier0": 0.0,
+   "model": {
+    "wear_shape": 0.5
+   }
+  },
+  "anchored-e0.01": {
+   "kind": "anchored",
+   "m": 0.03,
+   "eta": 0.01,
+   "model": {
+    "wear_shape": 0.5
+   },
+   "incumbent": {
+    "span": 3.0,
+    "std": 0.1
+   }
+  },
+  "anchored-e0.1": {
+   "kind": "anchored",
+   "m": 0.03,
+   "eta": 0.1,
+   "model": {
+    "wear_shape": 0.5
+   },
+   "incumbent": {
+    "span": 3.0,
+    "std": 0.1
+   }
+  },
+  "anchored-e1": {
+   "kind": "anchored",
+   "m": 0.03,
+   "eta": 1.0,
+   "model": {
+    "wear_shape": 0.5
+   },
+   "incumbent": {
+    "span": 3.0,
+    "std": 0.1
+   }
+  }
+ },
+ "stages": {
+  "pilot": {
+   "steps": 200000,
+   "eval_n": 20000,
+   "seeds": [
+    91001
+   ]
+  },
+  "pilot1m": {
+   "steps": 1000000,
+   "eval_n": 20000,
+   "seeds": [
+    91002
+   ]
+  },
+  "pilot3m": {
+   "steps": 3000000,
+   "eval_n": 20000,
+   "seeds": [
+    91003
+   ]
+  },
+  "pilotlin": {
+   "steps": 3000000,
+   "eval_n": 20000,
+   "seeds": [
+    91004,
+    91005
+   ],
+   "lr_linear": true
+  },
+  "pilotbig": {
+   "steps": 8000000,
+   "eval_n": 20000,
+   "seeds": [
+    91006,
+    91007
+   ],
+   "lr_linear": true,
+   "ppo": {
+    "n_envs": 32,
+    "n_steps": 256,
+    "batch_size": 1024,
+    "n_epochs": 10
+   }
+  },
+  "pilotanch": {
+   "steps": 1000000,
+   "eval_n": 20000,
+   "seeds": [
+    91008
+   ],
+   "lr_linear": true
+  },
+  "pilotanch2": {
+   "steps": 1000000,
+   "eval_n": 20000,
+   "seeds": [
+    91009
+   ],
+   "lr_linear": true
+  },
+  "campaign": {
+   "steps": 8000000,
+   "eval_n": 20000,
+   "seeds": [
+    92001,
+    92002,
+    92003,
+    92004,
+    92005,
+    92006,
+    92007,
+    92008
+   ],
+   "lr_linear": true,
+   "ppo": {
+    "n_envs": 32,
+    "n_steps": 256,
+    "batch_size": 1024,
+    "n_epochs": 10
+   }
+  }
+ }
+}

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<project>/sicon-risk-regularization/numerics-v39/wear_param_anchor.py", line 130, in <module>
+    print(f"kappa_p={args.kappa:g} seed={args.seed}: risk={s['risk']:.4f} U={s['U']:.3f} A={r['action_kl']:.3f} dist={r['distance']:.3f} "
+                                                                                           ^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to dict.__format__

@@ -1,0 +1,162 @@
+{
+ "arm": {
+  "kind": "param-sgd",
+  "m": 0.03,
+  "kappa_p": 10.0,
+  "kappa_1": 0.009,
+  "model": {
+   "wear_shape": 0.5
+  },
+  "incumbent": {
+   "span": 3.0,
+   "std": 0.1
+  },
+  "anchor_logstd": true,
+  "prior_logstd": -2.3025850929940455,
+  "optimizer": "sgd",
+  "lr0": 0.001,
+  "zero_grad": false
+ },
+ "seed": 94006,
+ "steps": 8003584,
+ "train_wall": 254.1929741250351,
+ "prior_policy": {
+  "stochastic": {
+   "n": 20000,
+   "seed": 154006,
+   "m": 0.03,
+   "horizon": null,
+   "budget_scale": 1.0,
+   "risk": 0.01015,
+   "failures": 203,
+   "U": 2.7321678511588665,
+   "U_se": 0.012640715465697132,
+   "I": 1.7223791737921648,
+   "steps": 396314,
+   "min_reserve_q": [
+    -0.00013812642263955055,
+    0.10638812034368399,
+    0.38125822105070845,
+    0.6164545325107954
+   ],
+   "near": {
+    "0.02": 0.0147,
+    "0.05": 0.0242,
+    "0.1": 0.04595,
+    "0.2": 0.1053
+   }
+  },
+  "mean_action": {
+   "n": 20000,
+   "seed": 155006,
+   "m": 0.03,
+   "horizon": null,
+   "budget_scale": 1.0,
+   "risk": 0.0014,
+   "failures": 28,
+   "U": 2.715440593189403,
+   "U_se": 0.012483120303296015,
+   "I": 1.7460207278989437,
+   "steps": 399483,
+   "min_reserve_q": [
+    0.03154356195734082,
+    0.11330414167381184,
+    0.37619586340848243,
+    0.6198800720371622
+   ],
+   "near": {
+    "0.02": 0.00605,
+    "0.05": 0.01715,
+    "0.1": 0.04235,
+    "0.2": 0.1054
+   }
+  },
+  "action_kl": {
+   "A": 0.006256436686409287,
+   "A_se": 5.274199904500091e-05
+  },
+  "fit_mse": 7.674636435694993e-06
+ },
+ "log_std": -2.3005874156951904,
+ "distance": 1.971285104751587,
+ "n_actor_params": 4418,
+ "spread": 0.029657639685571932,
+ "predicted_spread": {
+  "particle_form": 0.03,
+  "adam_laplace_coupled": 0.012727922061357855
+ },
+ "hook": {
+  "form": "sgd",
+  "zero_grad": false,
+  "order": "gradient (clipped), pull in the gradient, step, noise",
+  "optimizer": "SGD, no momentum, one optimizer over actor, critic and dispersion",
+  "lr0": 0.001,
+  "schedule": "linear to zero, updated once per rollout, clipped at zero in the hook",
+  "noise_generator": "torch.Generator seeded 1094006",
+  "optimizer_steps": 78160,
+  "lr_sum_flow_time": 39.022510079999584,
+  "lr_max": 0.000998976,
+  "contraction_per_step_at_lr_max": 0.99001024,
+  "integrated_noise_variance_per_parameter": 0.7024051814400137,
+  "mean_clipped_actor_grad_norm": 0.48116946664813737,
+  "versions": {
+   "sb3": "2.7.1",
+   "torch": "2.8.0",
+   "python": "3.13.3"
+  }
+ },
+ "stochastic": {
+  "n": 20000,
+  "seed": 104006,
+  "m": 0.03,
+  "horizon": null,
+  "budget_scale": 1.0,
+  "risk": 0.0084,
+  "failures": 168,
+  "U": 2.894834928872555,
+  "U_se": 0.012816612989105969,
+  "I": 1.733006200672723,
+  "steps": 396172,
+  "min_reserve_q": [
+   0.005627642919139856,
+   0.10101261356272742,
+   0.34493941028698416,
+   0.5853442542503107
+  ],
+  "near": {
+   "0.02": 0.0137,
+   "0.05": 0.02425,
+   "0.1": 0.04925,
+   "0.2": 0.12025
+  }
+ },
+ "mean_action": {
+  "n": 20000,
+  "seed": 114006,
+  "m": 0.03,
+  "horizon": null,
+  "budget_scale": 1.0,
+  "risk": 0.0,
+  "failures": 0,
+  "U": 2.8782339341723557,
+  "U_se": 0.012738967510826071,
+  "I": 1.7589235052369396,
+  "steps": 400984,
+  "min_reserve_q": [
+   0.044506428799162945,
+   0.10721694245172184,
+   0.34194392226391235,
+   0.5797619940985109
+  ],
+  "near": {
+   "0.02": 0.00135,
+   "0.05": 0.013,
+   "0.1": 0.0447,
+   "0.2": 0.1223
+  }
+ },
+ "action_kl": {
+  "A": 2.2339141480949665,
+  "A_se": 0.00822280258868394
+ }
+}

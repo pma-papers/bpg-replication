@@ -1,0 +1,264 @@
+{
+ "arms": {
+  "lunar-unlimited": {
+   "kind": "fixed",
+   "m": 0.0,
+   "budget": 1000000.0
+  },
+  "lunar-m0": {
+   "kind": "fixed",
+   "m": 0.0,
+   "budget": 20.0
+  },
+  "lunar-m0.05": {
+   "kind": "fixed",
+   "m": 0.05,
+   "budget": 20.0
+  },
+  "lunar-m0.15": {
+   "kind": "fixed",
+   "m": 0.15,
+   "budget": 20.0
+  },
+  "lunar-m0.5": {
+   "kind": "fixed",
+   "m": 0.5,
+   "budget": 20.0
+  },
+  "lunar-adaptive-a0.05": {
+   "kind": "adaptive",
+   "alpha": 0.05,
+   "dual_step": 50.0,
+   "multiplier0": 0.0,
+   "budget": 20.0
+  },
+  "lunar-b25-m0.5": {
+   "kind": "fixed",
+   "m": 0.5,
+   "budget": 25.0
+  },
+  "lunar-b25-m0": {
+   "kind": "fixed",
+   "m": 0.0,
+   "budget": 25.0
+  },
+  "lunar-b20-m0": {
+   "kind": "fixed",
+   "m": 0.0,
+   "budget": 20.0
+  },
+  "lunar-b20-m0.5": {
+   "kind": "fixed",
+   "m": 0.5,
+   "budget": 20.0
+  },
+  "lunar-b24-m0": {
+   "kind": "fixed",
+   "m": 0.0,
+   "budget": 24.0
+  },
+  "lunar-b24-m0.5": {
+   "kind": "fixed",
+   "m": 0.5,
+   "budget": 24.0
+  },
+  "lunar-b21-m0": {
+   "kind": "fixed",
+   "m": 0.0,
+   "budget": 21.0
+  },
+  "lunar-b21-m0.5": {
+   "kind": "fixed",
+   "m": 0.5,
+   "budget": 21.0
+  },
+  "lunar-b22-m0": {
+   "kind": "fixed",
+   "m": 0.0,
+   "budget": 22.0
+  },
+  "lunar-b22-m0.5": {
+   "kind": "fixed",
+   "m": 0.5,
+   "budget": 22.0
+  },
+  "lunar-b23-m0": {
+   "kind": "fixed",
+   "m": 0.0,
+   "budget": 23.0
+  },
+  "lunar-b23-m0.5": {
+   "kind": "fixed",
+   "m": 0.5,
+   "budget": 23.0
+  },
+  "lunar-b22-m0.05": {
+   "kind": "fixed",
+   "m": 0.05,
+   "budget": 22.0
+  },
+  "lunar-b22-m0.15": {
+   "kind": "fixed",
+   "m": 0.15,
+   "budget": 22.0
+  },
+  "lunar-b22-m2": {
+   "kind": "fixed",
+   "m": 2.0,
+   "budget": 22.0
+  },
+  "lunar-b22-adaptive-a0.05": {
+   "kind": "adaptive",
+   "alpha": 0.05,
+   "dual_step": 100.0,
+   "multiplier0": 0.0,
+   "budget": 22.0
+  },
+  "lunar-b22-adaptive-a0.02": {
+   "kind": "adaptive",
+   "alpha": 0.02,
+   "dual_step": 100.0,
+   "multiplier0": 0.0,
+   "budget": 22.0
+  },
+  "lunar-b22-adaptive-a0.05-s5": {
+   "kind": "adaptive",
+   "alpha": 0.05,
+   "dual_step": 5.0,
+   "multiplier0": 0.0,
+   "budget": 22.0
+  },
+  "lunar-b22-adaptive-a0.02-s5": {
+   "kind": "adaptive",
+   "alpha": 0.02,
+   "dual_step": 5.0,
+   "multiplier0": 0.0,
+   "budget": 22.0
+  }
+ },
+ "stages": {
+  "pilot": {
+   "steps": 300000,
+   "eval_n": 300,
+   "seeds": [
+    71001
+   ]
+  },
+  "campaign": {
+   "steps": 5000000,
+   "warm_steps": 3000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "arms": [
+    "lunar-unlimited",
+    "lunar-b22-m0",
+    "lunar-b22-m0.05",
+    "lunar-b22-m0.15",
+    "lunar-b22-m0.5",
+    "lunar-b22-m2",
+    "lunar-b22-adaptive-a0.05",
+    "lunar-b22-adaptive-a0.02",
+    "lunar-b21-m0",
+    "lunar-b21-m0.5",
+    "lunar-b22-adaptive-a0.05-s5",
+    "lunar-b22-adaptive-a0.02-s5",
+    "lunar-b20-m0",
+    "lunar-b20-m0.5"
+   ],
+   "ppo": {
+    "normalize": false,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "protocol_note": "Adaptive arms with dual step 5 were added on 2026-10-03 after the pre-registered step 100 ran away (failure rate 1 in the first rollouts, multiplier past 10^4); the step-100 runs are reported as well. Tank-20 arms (prices 0 and 0.5) were added after the tank-21 arms turned out to be respected by most campaign controllers, so that (P7) is tested at a tank the controller cannot respect, as in the pilots."
+  },
+  "pilot2m": {
+   "steps": 2000000,
+   "eval_n": 500,
+   "seeds": [
+    71003
+   ]
+  },
+  "pilotraw": {
+   "steps": 2000000,
+   "eval_n": 300,
+   "seeds": [
+    71004
+   ],
+   "ppo": {
+    "normalize": false
+   }
+  },
+  "pilotraw2": {
+   "steps": 2000000,
+   "eval_n": 300,
+   "seeds": [
+    71005
+   ],
+   "ppo": {
+    "normalize": false,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   }
+  },
+  "pilot5m": {
+   "steps": 5000000,
+   "eval_n": 300,
+   "seeds": [
+    71006
+   ],
+   "ppo": {
+    "normalize": false,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   }
+  },
+  "pilot5mb": {
+   "steps": 5000000,
+   "eval_n": 300,
+   "seeds": [
+    71007
+   ],
+   "ppo": {
+    "normalize": false,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "n_steps": 2048,
+    "batch_size": 256,
+    "n_epochs": 10
+   }
+  },
+  "pilotb": {
+   "steps": 5000000,
+   "eval_n": 300,
+   "seeds": [
+    71008
+   ],
+   "ppo": {
+    "normalize": false,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   }
+  },
+  "pilotw": {
+   "steps": 5000000,
+   "warm_steps": 3000000,
+   "eval_n": 300,
+   "seeds": [
+    71006
+   ],
+   "ppo": {
+    "normalize": false,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   }
+  }
+ }
+}

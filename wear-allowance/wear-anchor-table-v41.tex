@@ -1,0 +1,20 @@
+\setlength{\tabcolsep}{4pt}\begin{tabular}{llrrrrr}
+\toprule
+Configuration & Setting & $q_\beta$ (\%) & $U$ & $\mathcal A$ & $\|\theta-\theta_0\|$ & $\sigma_a$ \\
+\midrule
+Prior policy & $\theta_0$, $\sigma_a=0.37$ & $6.04\pm0.13$ & $2.85\pm0.01$ & $93$ & -- & $0.37$ \\
+Parameter anchor & $\kappa_p=1$ & $23.20\pm0.72$ & $3.82\pm0.03$ & $171$ & $0.180$ & $0.37$ \\
+ & $\kappa_p=10$ & $8.75\pm0.22$ & $3.04\pm0.02$ & $95$ & $0.029$ & $0.37$ \\
+ & $\kappa_p=100$ & $6.43\pm0.17$ & $2.86\pm0.02$ & $94$ & $0.003$ & $0.37$ \\
+Mean-only prior & $\kappa_p=100$ & $34.32\pm0.31$ & $4.01\pm0.03$ & $3.8\times10^{4}$ & $0.002$ & $7.50$ \\
+Prior policy, matched & $\theta_0$, $\sigma_a=0.1$ (incumbent) & $1.03\pm0.06$ & $2.73\pm0.01$ & $2.2\times10^{-3}$ & -- & $0.10$ \\
+Matched prior & $\kappa_p=0$ (unanchored control) & $35.02\pm3.61$ & $4.37\pm0.10$ & $276$ & $2.939$ & $0.02$ \\
+ & $\kappa_p=1$ & $18.66\pm0.77$ & $3.63\pm0.02$ & $62$ & $0.138$ & $0.10$ \\
+ & $\kappa_p=10$ & $3.35\pm0.34$ & $2.89\pm0.02$ & $2$ & $0.021$ & $0.10$ \\
+ & $\kappa_p=100$ & $1.21\pm0.14$ & $2.74\pm0.01$ & $0.023$ & $0.002$ & $0.10$ \\
+Action regularization & $\eta=0.01$ & $5.80\pm2.34$ & $3.34\pm0.06$ & $30$ & -- & $0.06$ \\
+ & $\eta=0.1$ & $1.47\pm0.16$ & $2.80\pm0.02$ & $0.43$ & -- & $0.10$ \\
+ & $\eta=1$ & $1.13\pm0.09$ & $2.73\pm0.01$ & $7.1\times10^{-3}$ & -- & $0.10$ \\
+\bottomrule
+\multicolumn{7}{@{}l@{}}{Matched prior: prior policy equal to the action reference (incumbent rule, dispersion $0.1$); other rows: earlier campaigns.} \\
+\end{tabular}

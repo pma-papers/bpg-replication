@@ -1,0 +1,111 @@
+{
+ "crashed_b22_m0.5": {
+  "mean": 0.16479999999999997,
+  "rounded": "0.16",
+  "per_seed": [
+   0.156,
+   0.058,
+   0.359,
+   0.069,
+   0.182
+  ]
+ },
+ "no_tank_fuel": {
+  "quantiles": [
+   0.1,
+   0.25,
+   0.5,
+   0.75,
+   0.9
+  ],
+  "quantile_means_over_seeds": [
+   22.575607303567136,
+   23.266726729706864,
+   24.39287601873279,
+   25.899854184698313,
+   27.069219564989577
+  ],
+  "median_per_seed": [
+   23.002845331169656,
+   23.162385975345963,
+   25.695037942640482,
+   24.93538292560727,
+   25.168727918900572
+  ],
+  "median_range": "23.0-25.7",
+  "note": "fuel_quantiles are the 10, 25, 50, 75 and 90 percent quantiles of the fuel used per episode (lunar.py)"
+ },
+ "episode_length": {
+  "lunar-b22-m0.5": {
+   "mean_over_seeds": 183.7044,
+   "per_seed": [
+    202.363,
+    184.994,
+    162.932,
+    185.538,
+    182.695
+   ]
+  },
+  "lunar-b22-adaptive-a0.05-s5": {
+   "mean_over_seeds": 179.9112,
+   "per_seed": [
+    184.949,
+    172.653,
+    151.627,
+    186.299,
+    204.028
+   ]
+  },
+  "lunar-b22-adaptive-a0.02-s5": {
+   "mean_over_seeds": 178.907,
+   "per_seed": [
+    177.644,
+    174.738,
+    148.228,
+    194.002,
+    199.923
+   ]
+  },
+  "lunar-b21-m0.5": {
+   "mean_over_seeds": 178.0746,
+   "per_seed": [
+    172.938,
+    180.691,
+    170.003,
+    188.704,
+    178.037
+   ]
+  },
+  "lunar-b20-m0.5": {
+   "mean_over_seeds": 167.38479999999998,
+   "per_seed": [
+    170.424,
+    165.71,
+    150.224,
+    183.768,
+    166.798
+   ]
+  },
+  "lunar-unlimited": {
+   "mean_over_seeds": 216.7714,
+   "per_seed": [
+    207.816,
+    210.149,
+    228.995,
+    212.746,
+    224.151
+   ]
+  },
+  "lunar-b22-m0": {
+   "mean_over_seeds": 181.9314,
+   "per_seed": [
+    180.281,
+    186.464,
+    167.738,
+    184.596,
+    190.578
+   ]
+  }
+ },
+ "median_exhaustion_frame": "not available: result.json stores only the mean episode length over all episodes ('length') and the fuel-use quantiles ('fuel_quantiles'); no episode-level data"
+}

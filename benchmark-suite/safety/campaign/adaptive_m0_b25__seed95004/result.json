@@ -1,0 +1,1745 @@
+{
+ "arm": {
+  "kind": "adaptive",
+  "m": 0.0,
+  "budget": 25.0,
+  "beta": 0.999,
+  "alpha": 0.05,
+  "dual_step": 0.5,
+  "multiplier0": 0.0,
+  "task": "SafetyPointGoal1-v0",
+  "H": 1000,
+  "cost_limit": 25.0
+ },
+ "seed": 95004,
+ "steps": 2007040,
+ "train_wall": 2220.6137959589832,
+ "steps_per_second": 903.8221790985721,
+ "trace": [
+  {
+   "steps": 8192,
+   "multiplier": 0.0375,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 5.75
+  },
+  {
+   "steps": 16384,
+   "multiplier": 0.2625,
+   "episodes": 8,
+   "failure_rate": 0.5,
+   "mean_cost": 13.0
+  },
+  {
+   "steps": 24576,
+   "multiplier": 0.42500000000000004,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 9.75
+  },
+  {
+   "steps": 32768,
+   "multiplier": 0.6272727272727273,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 13.909090909090908
+  },
+  {
+   "steps": 40960,
+   "multiplier": 0.8330419580419581,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 12.692307692307692
+  },
+  {
+   "steps": 49152,
+   "multiplier": 0.8705419580419581,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 9.125
+  },
+  {
+   "steps": 57344,
+   "multiplier": 1.1669705294705295,
+   "episodes": 14,
+   "failure_rate": 0.6428571428571429,
+   "mean_cost": 17.571428571428573
+  },
+  {
+   "steps": 65536,
+   "multiplier": 1.3342782217782219,
+   "episodes": 13,
+   "failure_rate": 0.38461538461538464,
+   "mean_cost": 15.461538461538462
+  },
+  {
+   "steps": 73728,
+   "multiplier": 1.509278221778222,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 14.7
+  },
+  {
+   "steps": 81920,
+   "multiplier": 1.8057067932067934,
+   "episodes": 14,
+   "failure_rate": 0.6428571428571429,
+   "mean_cost": 18.285714285714285
+  },
+  {
+   "steps": 90112,
+   "multiplier": 2.0499375624375626,
+   "episodes": 13,
+   "failure_rate": 0.5384615384615384,
+   "mean_cost": 14.0
+  },
+  {
+   "steps": 98304,
+   "multiplier": 2.2124375624375627,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 9.75
+  },
+  {
+   "steps": 106496,
+   "multiplier": 2.456668331668332,
+   "episodes": 13,
+   "failure_rate": 0.5384615384615384,
+   "mean_cost": 17.46153846153846
+  },
+  {
+   "steps": 114688,
+   "multiplier": 2.837918331668332,
+   "episodes": 16,
+   "failure_rate": 0.8125,
+   "mean_cost": 23.8125
+  },
+  {
+   "steps": 122880,
+   "multiplier": 3.1700611888111894,
+   "episodes": 14,
+   "failure_rate": 0.7142857142857143,
+   "mean_cost": 21.642857142857142
+  },
+  {
+   "steps": 131072,
+   "multiplier": 3.4950611888111895,
+   "episodes": 10,
+   "failure_rate": 0.7,
+   "mean_cost": 18.2
+  },
+  {
+   "steps": 139264,
+   "multiplier": 3.8138111888111896,
+   "episodes": 16,
+   "failure_rate": 0.6875,
+   "mean_cost": 19.25
+  },
+  {
+   "steps": 147456,
+   "multiplier": 4.03881118881119,
+   "episodes": 8,
+   "failure_rate": 0.5,
+   "mean_cost": 19.625
+  },
+  {
+   "steps": 155648,
+   "multiplier": 4.406668331668333,
+   "episodes": 14,
+   "failure_rate": 0.7857142857142857,
+   "mean_cost": 20.428571428571427
+  },
+  {
+   "steps": 163840,
+   "multiplier": 4.481668331668333,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 7.7
+  },
+  {
+   "steps": 172032,
+   "multiplier": 4.567779442779444,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 10.333333333333334
+  },
+  {
+   "steps": 180224,
+   "multiplier": 4.88893328893329,
+   "episodes": 13,
+   "failure_rate": 0.6923076923076923,
+   "mean_cost": 19.384615384615383
+  },
+  {
+   "steps": 188416,
+   "multiplier": 5.094702519702521,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 15.384615384615385
+  },
+  {
+   "steps": 196608,
+   "multiplier": 5.269702519702521,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 15.1
+  },
+  {
+   "steps": 204800,
+   "multiplier": 5.536369186369187,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 21.416666666666668
+  },
+  {
+   "steps": 212992,
+   "multiplier": 5.711369186369187,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 12.9
+  },
+  {
+   "steps": 221184,
+   "multiplier": 5.978035853035854,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 18.833333333333332
+  },
+  {
+   "steps": 229376,
+   "multiplier": 6.21970251970252,
+   "episodes": 15,
+   "failure_rate": 0.5333333333333333,
+   "mean_cost": 17.4
+  },
+  {
+   "steps": 237568,
+   "multiplier": 6.39470251970252,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 14.9
+  },
+  {
+   "steps": 245760,
+   "multiplier": 6.56970251970252,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 14.8
+  },
+  {
+   "steps": 253952,
+   "multiplier": 6.901845376845377,
+   "episodes": 14,
+   "failure_rate": 0.7142857142857143,
+   "mean_cost": 19.571428571428573
+  },
+  {
+   "steps": 262144,
+   "multiplier": 7.099067599067599,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 13.444444444444445
+  },
+  {
+   "steps": 270336,
+   "multiplier": 7.3240675990675985,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 19.333333333333332
+  },
+  {
+   "steps": 278528,
+   "multiplier": 7.526340326340326,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 15.0
+  },
+  {
+   "steps": 286720,
+   "multiplier": 7.723562548562548,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 15.555555555555555
+  },
+  {
+   "steps": 294912,
+   "multiplier": 8.087451437451437,
+   "episodes": 9,
+   "failure_rate": 0.7777777777777778,
+   "mean_cost": 21.88888888888889
+  },
+  {
+   "steps": 303104,
+   "multiplier": 8.348165723165723,
+   "episodes": 14,
+   "failure_rate": 0.5714285714285714,
+   "mean_cost": 18.357142857142858
+  },
+  {
+   "steps": 311296,
+   "multiplier": 8.573165723165722,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 17.583333333333332
+  },
+  {
+   "steps": 319488,
+   "multiplier": 8.770387945387945,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 11.555555555555555
+  },
+  {
+   "steps": 327680,
+   "multiplier": 9.102530802530802,
+   "episodes": 14,
+   "failure_rate": 0.7142857142857143,
+   "mean_cost": 18.571428571428573
+  },
+  {
+   "steps": 335872,
+   "multiplier": 9.277530802530803,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 15.1
+  },
+  {
+   "steps": 344064,
+   "multiplier": 9.38889443889444,
+   "episodes": 11,
+   "failure_rate": 0.2727272727272727,
+   "mean_cost": 10.909090909090908
+  },
+  {
+   "steps": 352256,
+   "multiplier": 9.586116661116662,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 16.11111111111111
+  },
+  {
+   "steps": 360448,
+   "multiplier": 9.78838938838939,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 11.818181818181818
+  },
+  {
+   "steps": 368640,
+   "multiplier": 9.994158619158622,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 15.0
+  },
+  {
+   "steps": 376832,
+   "multiplier": 10.19643134643135,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 12.909090909090908
+  },
+  {
+   "steps": 385024,
+   "multiplier": 10.489613164613168,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 17.636363636363637
+  },
+  {
+   "steps": 393216,
+   "multiplier": 10.564613164613167,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 7.1
+  },
+  {
+   "steps": 401408,
+   "multiplier": 10.675976800976803,
+   "episodes": 11,
+   "failure_rate": 0.2727272727272727,
+   "mean_cost": 7.090909090909091
+  },
+  {
+   "steps": 409600,
+   "multiplier": 10.800976800976803,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 14.5
+  },
+  {
+   "steps": 417792,
+   "multiplier": 10.887087912087914,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 9.222222222222221
+  },
+  {
+   "steps": 425984,
+   "multiplier": 11.237087912087913,
+   "episodes": 8,
+   "failure_rate": 0.75,
+   "mean_cost": 19.5
+  },
+  {
+   "steps": 434176,
+   "multiplier": 11.362087912087913,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 10.2
+  },
+  {
+   "steps": 442368,
+   "multiplier": 11.47345154845155,
+   "episodes": 11,
+   "failure_rate": 0.2727272727272727,
+   "mean_cost": 11.363636363636363
+  },
+  {
+   "steps": 450560,
+   "multiplier": 11.44845154845155,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 6.375
+  },
+  {
+   "steps": 458752,
+   "multiplier": 11.60526973026973,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 11.363636363636363
+  },
+  {
+   "steps": 466944,
+   "multiplier": 11.746936396936398,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 11.333333333333334
+  },
+  {
+   "steps": 475136,
+   "multiplier": 11.777491952491953,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 5.333333333333333
+  },
+  {
+   "steps": 483328,
+   "multiplier": 11.902491952491953,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 9.2
+  },
+  {
+   "steps": 491520,
+   "multiplier": 12.027491952491953,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 10.7
+  },
+  {
+   "steps": 499712,
+   "multiplier": 12.058047508047508,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 2.888888888888889
+  },
+  {
+   "steps": 507904,
+   "multiplier": 12.033047508047508,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 2.125
+  },
+  {
+   "steps": 516096,
+   "multiplier": 12.119158619158618,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 11.333333333333334
+  },
+  {
+   "steps": 524288,
+   "multiplier": 12.294158619158619,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 10.4
+  },
+  {
+   "steps": 532480,
+   "multiplier": 12.369158619158618,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 7.9
+  },
+  {
+   "steps": 540672,
+   "multiplier": 12.406658619158618,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 5.25
+  },
+  {
+   "steps": 548864,
+   "multiplier": 12.518022255522254,
+   "episodes": 11,
+   "failure_rate": 0.2727272727272727,
+   "mean_cost": 8.545454545454545
+  },
+  {
+   "steps": 557056,
+   "multiplier": 12.743022255522254,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 16.5
+  },
+  {
+   "steps": 565248,
+   "multiplier": 12.808931346431345,
+   "episodes": 11,
+   "failure_rate": 0.18181818181818182,
+   "mean_cost": 5.909090909090909
+  },
+  {
+   "steps": 573440,
+   "multiplier": 12.846431346431345,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 3.25
+  },
+  {
+   "steps": 581632,
+   "multiplier": 12.883931346431345,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 10.0
+  },
+  {
+   "steps": 589824,
+   "multiplier": 12.970042457542455,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 8.555555555555555
+  },
+  {
+   "steps": 598016,
+   "multiplier": 13.095042457542455,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 11.2
+  },
+  {
+   "steps": 606208,
+   "multiplier": 13.12559801309801,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 4.666666666666667
+  },
+  {
+   "steps": 614400,
+   "multiplier": 13.28809801309801,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 11.375
+  },
+  {
+   "steps": 622592,
+   "multiplier": 13.45059801309801,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 9.75
+  },
+  {
+   "steps": 630784,
+   "multiplier": 13.57559801309801,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 10.6
+  },
+  {
+   "steps": 638976,
+   "multiplier": 13.66170912420912,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 8.11111111111111
+  },
+  {
+   "steps": 647168,
+   "multiplier": 13.736709124209119,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 9.1
+  },
+  {
+   "steps": 655360,
+   "multiplier": 13.938981851481847,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 14.727272727272727
+  },
+  {
+   "steps": 663552,
+   "multiplier": 13.913981851481847,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 0.0
+  },
+  {
+   "steps": 671744,
+   "multiplier": 14.000092962592957,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 9.777777777777779
+  },
+  {
+   "steps": 679936,
+   "multiplier": 14.030648518148512,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 7.0
+  },
+  {
+   "steps": 688128,
+   "multiplier": 14.142012154512148,
+   "episodes": 11,
+   "failure_rate": 0.2727272727272727,
+   "mean_cost": 16.636363636363637
+  },
+  {
+   "steps": 696320,
+   "multiplier": 14.179512154512148,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 8.125
+  },
+  {
+   "steps": 704512,
+   "multiplier": 14.279512154512148,
+   "episodes": 8,
+   "failure_rate": 0.25,
+   "mean_cost": 8.625
+  },
+  {
+   "steps": 712704,
+   "multiplier": 14.354512154512147,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 5.2
+  },
+  {
+   "steps": 720896,
+   "multiplier": 14.440623265623257,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 9.777777777777779
+  },
+  {
+   "steps": 729088,
+   "multiplier": 14.565623265623257,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 11.1
+  },
+  {
+   "steps": 737280,
+   "multiplier": 14.596178821178812,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 3.888888888888889
+  },
+  {
+   "steps": 745472,
+   "multiplier": 14.633678821178812,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 8.0
+  },
+  {
+   "steps": 753664,
+   "multiplier": 14.817012154512145,
+   "episodes": 12,
+   "failure_rate": 0.4166666666666667,
+   "mean_cost": 14.083333333333334
+  },
+  {
+   "steps": 761856,
+   "multiplier": 14.958678821178813,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 10.11111111111111
+  },
+  {
+   "steps": 770048,
+   "multiplier": 15.044789932289923,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 7.222222222222222
+  },
+  {
+   "steps": 778240,
+   "multiplier": 15.130901043401034,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 8.444444444444445
+  },
+  {
+   "steps": 786432,
+   "multiplier": 15.105901043401033,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 0.0
+  },
+  {
+   "steps": 794624,
+   "multiplier": 15.289234376734367,
+   "episodes": 12,
+   "failure_rate": 0.4166666666666667,
+   "mean_cost": 14.666666666666666
+  },
+  {
+   "steps": 802816,
+   "multiplier": 15.414234376734367,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 12.4
+  },
+  {
+   "steps": 811008,
+   "multiplier": 15.389234376734366,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 2.7777777777777777
+  },
+  {
+   "steps": 819200,
+   "multiplier": 15.475345487845477,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 7.888888888888889
+  },
+  {
+   "steps": 827392,
+   "multiplier": 15.575345487845476,
+   "episodes": 8,
+   "failure_rate": 0.25,
+   "mean_cost": 8.25
+  },
+  {
+   "steps": 835584,
+   "multiplier": 15.605901043401031,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 8.555555555555555
+  },
+  {
+   "steps": 843776,
+   "multiplier": 15.80817377067376,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 11.818181818181818
+  },
+  {
+   "steps": 851968,
+   "multiplier": 15.84567377067376,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 8.25
+  },
+  {
+   "steps": 860160,
+   "multiplier": 15.820673770673759,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.0
+  },
+  {
+   "steps": 868352,
+   "multiplier": 15.858173770673758,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 5.5
+  },
+  {
+   "steps": 876544,
+   "multiplier": 15.833173770673758,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 0.0
+  },
+  {
+   "steps": 884736,
+   "multiplier": 15.870673770673758,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 6.125
+  },
+  {
+   "steps": 892928,
+   "multiplier": 15.845673770673757,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 1.5555555555555556
+  },
+  {
+   "steps": 901120,
+   "multiplier": 15.820673770673757,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 0.0
+  },
+  {
+   "steps": 909312,
+   "multiplier": 15.906784881784867,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 8.222222222222221
+  },
+  {
+   "steps": 917504,
+   "multiplier": 16.131784881784867,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 13.0
+  },
+  {
+   "steps": 925696,
+   "multiplier": 16.28860306360305,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 12.727272727272727
+  },
+  {
+   "steps": 933888,
+   "multiplier": 16.38860306360305,
+   "episodes": 8,
+   "failure_rate": 0.25,
+   "mean_cost": 7.875
+  },
+  {
+   "steps": 942080,
+   "multiplier": 16.42610306360305,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 7.875
+  },
+  {
+   "steps": 950272,
+   "multiplier": 16.512214174714163,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 13.555555555555555
+  },
+  {
+   "steps": 958464,
+   "multiplier": 16.598325285825275,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 7.222222222222222
+  },
+  {
+   "steps": 966656,
+   "multiplier": 16.723325285825275,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 8.1
+  },
+  {
+   "steps": 974848,
+   "multiplier": 16.848325285825275,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 7.8
+  },
+  {
+   "steps": 983040,
+   "multiplier": 16.923325285825275,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 8.0
+  },
+  {
+   "steps": 991232,
+   "multiplier": 16.898325285825276,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 4.375
+  },
+  {
+   "steps": 999424,
+   "multiplier": 16.92888084138083,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 5.666666666666667
+  },
+  {
+   "steps": 1007616,
+   "multiplier": 16.959436396936386,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 8.333333333333334
+  },
+  {
+   "steps": 1015808,
+   "multiplier": 16.934436396936388,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.375
+  },
+  {
+   "steps": 1024000,
+   "multiplier": 17.009436396936387,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 5.2
+  },
+  {
+   "steps": 1032192,
+   "multiplier": 17.0955475080475,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 5.777777777777778
+  },
+  {
+   "steps": 1040384,
+   "multiplier": 17.18165861915861,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 6.888888888888889
+  },
+  {
+   "steps": 1048576,
+   "multiplier": 17.156658619158613,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 4.5
+  },
+  {
+   "steps": 1056768,
+   "multiplier": 17.194158619158614,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 4.75
+  },
+  {
+   "steps": 1064960,
+   "multiplier": 17.169158619158615,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 4.125
+  },
+  {
+   "steps": 1073152,
+   "multiplier": 17.31082528582528,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 12.777777777777779
+  },
+  {
+   "steps": 1081344,
+   "multiplier": 17.341380841380836,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 4.777777777777778
+  },
+  {
+   "steps": 1089536,
+   "multiplier": 17.516380841380837,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 10.4
+  },
+  {
+   "steps": 1097728,
+   "multiplier": 17.49138084138084,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 0.25
+  },
+  {
+   "steps": 1105920,
+   "multiplier": 17.46638084138084,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.875
+  },
+  {
+   "steps": 1114112,
+   "multiplier": 17.49138084138084,
+   "episodes": 10,
+   "failure_rate": 0.1,
+   "mean_cost": 3.9
+  },
+  {
+   "steps": 1122304,
+   "multiplier": 17.521936396936393,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 4.222222222222222
+  },
+  {
+   "steps": 1130496,
+   "multiplier": 17.608047508047505,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 7.666666666666667
+  },
+  {
+   "steps": 1138688,
+   "multiplier": 17.63860306360306,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 4.777777777777778
+  },
+  {
+   "steps": 1146880,
+   "multiplier": 17.669158619158615,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 3.7777777777777777
+  },
+  {
+   "steps": 1155072,
+   "multiplier": 17.644158619158617,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 8.25
+  },
+  {
+   "steps": 1163264,
+   "multiplier": 17.61915861915862,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 1.7777777777777777
+  },
+  {
+   "steps": 1171456,
+   "multiplier": 17.649714174714173,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 2.888888888888889
+  },
+  {
+   "steps": 1179648,
+   "multiplier": 17.624714174714175,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 5.0
+  },
+  {
+   "steps": 1187840,
+   "multiplier": 17.599714174714176,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 2.75
+  },
+  {
+   "steps": 1196032,
+   "multiplier": 17.637214174714178,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 11.875
+  },
+  {
+   "steps": 1204224,
+   "multiplier": 17.67471417471418,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 5.5
+  },
+  {
+   "steps": 1212416,
+   "multiplier": 17.64971417471418,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 3.888888888888889
+  },
+  {
+   "steps": 1220608,
+   "multiplier": 17.624714174714182,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 5.111111111111111
+  },
+  {
+   "steps": 1228800,
+   "multiplier": 17.599714174714183,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 4.0
+  },
+  {
+   "steps": 1236992,
+   "multiplier": 17.630269730269738,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 2.888888888888889
+  },
+  {
+   "steps": 1245184,
+   "multiplier": 17.66776973026974,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 10.0
+  },
+  {
+   "steps": 1253376,
+   "multiplier": 17.64276973026974,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 3.125
+  },
+  {
+   "steps": 1261568,
+   "multiplier": 17.617769730269742,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 3.625
+  },
+  {
+   "steps": 1269760,
+   "multiplier": 17.592769730269744,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 2.75
+  },
+  {
+   "steps": 1277952,
+   "multiplier": 17.567769730269745,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 0.0
+  },
+  {
+   "steps": 1286144,
+   "multiplier": 17.667769730269747,
+   "episodes": 8,
+   "failure_rate": 0.25,
+   "mean_cost": 6.5
+  },
+  {
+   "steps": 1294336,
+   "multiplier": 17.642769730269748,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 0.0
+  },
+  {
+   "steps": 1302528,
+   "multiplier": 17.754133366633386,
+   "episodes": 11,
+   "failure_rate": 0.2727272727272727,
+   "mean_cost": 9.181818181818182
+  },
+  {
+   "steps": 1310720,
+   "multiplier": 17.791633366633388,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 8.125
+  },
+  {
+   "steps": 1318912,
+   "multiplier": 17.933300033300053,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 11.666666666666666
+  },
+  {
+   "steps": 1327104,
+   "multiplier": 17.908300033300055,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 4.333333333333333
+  },
+  {
+   "steps": 1335296,
+   "multiplier": 18.019663669663693,
+   "episodes": 11,
+   "failure_rate": 0.2727272727272727,
+   "mean_cost": 8.909090909090908
+  },
+  {
+   "steps": 1343488,
+   "multiplier": 18.057163669663694,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 5.25
+  },
+  {
+   "steps": 1351680,
+   "multiplier": 18.094663669663696,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 5.375
+  },
+  {
+   "steps": 1359872,
+   "multiplier": 18.069663669663697,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 5.5
+  },
+  {
+   "steps": 1368064,
+   "multiplier": 18.194663669663697,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 9.7
+  },
+  {
+   "steps": 1376256,
+   "multiplier": 18.225219225219252,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 3.6666666666666665
+  },
+  {
+   "steps": 1384448,
+   "multiplier": 18.311330336330364,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 6.0
+  },
+  {
+   "steps": 1392640,
+   "multiplier": 18.286330336330366,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 3.375
+  },
+  {
+   "steps": 1400832,
+   "multiplier": 18.352239427239457,
+   "episodes": 11,
+   "failure_rate": 0.18181818181818182,
+   "mean_cost": 6.363636363636363
+  },
+  {
+   "steps": 1409024,
+   "multiplier": 18.38973942723946,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 7.5
+  },
+  {
+   "steps": 1417216,
+   "multiplier": 18.36473942723946,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 2.375
+  },
+  {
+   "steps": 1425408,
+   "multiplier": 18.40223942723946,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 7.625
+  },
+  {
+   "steps": 1433600,
+   "multiplier": 18.47723942723946,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 10.8
+  },
+  {
+   "steps": 1441792,
+   "multiplier": 18.55223942723946,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 7.1
+  },
+  {
+   "steps": 1449984,
+   "multiplier": 18.67723942723946,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 10.6
+  },
+  {
+   "steps": 1458176,
+   "multiplier": 18.77723942723946,
+   "episodes": 8,
+   "failure_rate": 0.25,
+   "mean_cost": 8.5
+  },
+  {
+   "steps": 1466368,
+   "multiplier": 18.863350538350574,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 7.888888888888889
+  },
+  {
+   "steps": 1474560,
+   "multiplier": 18.89390609390613,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 6.888888888888889
+  },
+  {
+   "steps": 1482752,
+   "multiplier": 19.06890609390613,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 10.9
+  },
+  {
+   "steps": 1490944,
+   "multiplier": 19.04390609390613,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 4.25
+  },
+  {
+   "steps": 1499136,
+   "multiplier": 19.018906093906132,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 3.0
+  },
+  {
+   "steps": 1507328,
+   "multiplier": 19.049461649461687,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 5.444444444444445
+  },
+  {
+   "steps": 1515520,
+   "multiplier": 19.08696164946169,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 3.25
+  },
+  {
+   "steps": 1523712,
+   "multiplier": 19.06196164946169,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 7.0
+  },
+  {
+   "steps": 1531904,
+   "multiplier": 19.16196164946169,
+   "episodes": 8,
+   "failure_rate": 0.25,
+   "mean_cost": 7.0
+  },
+  {
+   "steps": 1540096,
+   "multiplier": 19.136961649461693,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 3.125
+  },
+  {
+   "steps": 1548288,
+   "multiplier": 19.111961649461694,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 2.25
+  },
+  {
+   "steps": 1556480,
+   "multiplier": 19.136961649461693,
+   "episodes": 10,
+   "failure_rate": 0.1,
+   "mean_cost": 3.7
+  },
+  {
+   "steps": 1564672,
+   "multiplier": 19.111961649461694,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.875
+  },
+  {
+   "steps": 1572864,
+   "multiplier": 19.186961649461693,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 9.4
+  },
+  {
+   "steps": 1581056,
+   "multiplier": 19.161961649461695,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 6.75
+  },
+  {
+   "steps": 1589248,
+   "multiplier": 19.199461649461696,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 8.875
+  },
+  {
+   "steps": 1597440,
+   "multiplier": 19.174461649461698,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 6.0
+  },
+  {
+   "steps": 1605632,
+   "multiplier": 19.1494616494617,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 0.0
+  },
+  {
+   "steps": 1613824,
+   "multiplier": 19.1244616494617,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 3.375
+  },
+  {
+   "steps": 1622016,
+   "multiplier": 19.099461649461702,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.5
+  },
+  {
+   "steps": 1630208,
+   "multiplier": 19.130017205017257,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 2.888888888888889
+  },
+  {
+   "steps": 1638400,
+   "multiplier": 19.10501720501726,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.125
+  },
+  {
+   "steps": 1646592,
+   "multiplier": 19.130017205017257,
+   "episodes": 10,
+   "failure_rate": 0.1,
+   "mean_cost": 4.6
+  },
+  {
+   "steps": 1654784,
+   "multiplier": 19.16751720501726,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 3.25
+  },
+  {
+   "steps": 1662976,
+   "multiplier": 19.14251720501726,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 2.375
+  },
+  {
+   "steps": 1671168,
+   "multiplier": 19.18001720501726,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 8.75
+  },
+  {
+   "steps": 1679360,
+   "multiplier": 19.155017205017263,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 3.25
+  },
+  {
+   "steps": 1687552,
+   "multiplier": 19.192517205017264,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 3.25
+  },
+  {
+   "steps": 1695744,
+   "multiplier": 19.167517205017266,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 1.8888888888888888
+  },
+  {
+   "steps": 1703936,
+   "multiplier": 19.19807276057282,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 8.666666666666666
+  },
+  {
+   "steps": 1712128,
+   "multiplier": 19.228628316128376,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 2.888888888888889
+  },
+  {
+   "steps": 1720320,
+   "multiplier": 19.203628316128377,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.625
+  },
+  {
+   "steps": 1728512,
+   "multiplier": 19.17862831612838,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.625
+  },
+  {
+   "steps": 1736704,
+   "multiplier": 19.21612831612838,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 6.75
+  },
+  {
+   "steps": 1744896,
+   "multiplier": 19.19112831612838,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.625
+  },
+  {
+   "steps": 1753088,
+   "multiplier": 19.26612831612838,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 8.4
+  },
+  {
+   "steps": 1761280,
+   "multiplier": 19.241128316128382,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 1.75
+  },
+  {
+   "steps": 1769472,
+   "multiplier": 19.278628316128383,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 5.0
+  },
+  {
+   "steps": 1777664,
+   "multiplier": 19.253628316128385,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 2.25
+  },
+  {
+   "steps": 1785856,
+   "multiplier": 19.28418387168394,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 4.444444444444445
+  },
+  {
+   "steps": 1794048,
+   "multiplier": 19.25918387168394,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 3.5
+  },
+  {
+   "steps": 1802240,
+   "multiplier": 19.345294982795053,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 5.777777777777778
+  },
+  {
+   "steps": 1810432,
+   "multiplier": 19.382794982795055,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 4.75
+  },
+  {
+   "steps": 1818624,
+   "multiplier": 19.357794982795056,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 4.875
+  },
+  {
+   "steps": 1826816,
+   "multiplier": 19.395294982795058,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 5.25
+  },
+  {
+   "steps": 1835008,
+   "multiplier": 19.425850538350613,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 9.222222222222221
+  },
+  {
+   "steps": 1843200,
+   "multiplier": 19.456406093906168,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 9.222222222222221
+  },
+  {
+   "steps": 1851392,
+   "multiplier": 19.43140609390617,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 2.3333333333333335
+  },
+  {
+   "steps": 1859584,
+   "multiplier": 19.461961649461724,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 2.888888888888889
+  },
+  {
+   "steps": 1867776,
+   "multiplier": 19.48241619491627,
+   "episodes": 11,
+   "failure_rate": 0.09090909090909091,
+   "mean_cost": 6.7272727272727275
+  },
+  {
+   "steps": 1875968,
+   "multiplier": 19.45741619491627,
+   "episodes": 9,
+   "failure_rate": 0.0,
+   "mean_cost": 4.444444444444445
+  },
+  {
+   "steps": 1884160,
+   "multiplier": 19.49491619491627,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 9.625
+  },
+  {
+   "steps": 1892352,
+   "multiplier": 19.525471750471826,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 7.333333333333333
+  },
+  {
+   "steps": 1900544,
+   "multiplier": 19.500471750471828,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 4.625
+  },
+  {
+   "steps": 1908736,
+   "multiplier": 19.60047175047183,
+   "episodes": 8,
+   "failure_rate": 0.25,
+   "mean_cost": 6.625
+  },
+  {
+   "steps": 1916928,
+   "multiplier": 19.631027306027384,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 3.888888888888889
+  },
+  {
+   "steps": 1925120,
+   "multiplier": 19.606027306027386,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 4.0
+  },
+  {
+   "steps": 1933312,
+   "multiplier": 19.692138417138498,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 5.777777777777778
+  },
+  {
+   "steps": 1941504,
+   "multiplier": 19.77824952824961,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 5.777777777777778
+  },
+  {
+   "steps": 1949696,
+   "multiplier": 19.85324952824961,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 9.0
+  },
+  {
+   "steps": 1957888,
+   "multiplier": 19.82824952824961,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 3.5
+  },
+  {
+   "steps": 1966080,
+   "multiplier": 19.914360639360723,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 6.0
+  },
+  {
+   "steps": 1974272,
+   "multiplier": 19.889360639360724,
+   "episodes": 8,
+   "failure_rate": 0.0,
+   "mean_cost": 0.625
+  },
+  {
+   "steps": 1982464,
+   "multiplier": 20.014360639360724,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 9.6
+  },
+  {
+   "steps": 1990656,
+   "multiplier": 20.051860639360726,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 3.25
+  },
+  {
+   "steps": 1998848,
+   "multiplier": 20.19352730602739,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 10.444444444444445
+  },
+  {
+   "steps": 2007040,
+   "multiplier": 20.224082861582946,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 9.555555555555555
+  }
+ ],
+ "final_multiplier": 20.224082861582946,
+ "stochastic": {
+  "n": 200,
+  "exhausted": 0.105,
+  "mean_return": 8.336322479423059,
+  "mean_cost": 6.375,
+  "stopped_utility": 5.37266187020949,
+  "cost_q90": 26.0
+ },
+ "eval_wall": 192.78085475001717
+}

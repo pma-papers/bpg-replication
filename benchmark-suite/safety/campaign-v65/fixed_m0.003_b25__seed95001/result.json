@@ -1,0 +1,3254 @@
+{
+ "arm": {
+  "kind": "fixed",
+  "m": 0.003,
+  "ramp_steps": 0,
+  "budget": 25.0,
+  "beta": 0.999,
+  "task": "SafetyPointGoal1-v0",
+  "H": 1000
+ },
+ "seed": 95001,
+ "steps": 2007040,
+ "train_wall": 2234.688505708,
+ "trace": [
+  {
+   "steps": 8192,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 10.375
+  },
+  {
+   "steps": 16384,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 11.555555555555555
+  },
+  {
+   "steps": 24576,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 8.666666666666666
+  },
+  {
+   "steps": 32768,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 2.888888888888889
+  },
+  {
+   "steps": 40960,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 3.25
+  },
+  {
+   "steps": 49152,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 13.0
+  },
+  {
+   "steps": 57344,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 9.454545454545455
+  },
+  {
+   "steps": 65536,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 7.777777777777778
+  },
+  {
+   "steps": 73728,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 15.090909090909092
+  },
+  {
+   "steps": 81920,
+   "price": 0.003,
+   "episodes": 17,
+   "failure_rate": 0.7647058823529411,
+   "mean_cost": 19.88235294117647
+  },
+  {
+   "steps": 90112,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 10.1
+  },
+  {
+   "steps": 98304,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 7.555555555555555
+  },
+  {
+   "steps": 106496,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 9.2
+  },
+  {
+   "steps": 114688,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 9.454545454545455
+  },
+  {
+   "steps": 122880,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.25,
+   "mean_cost": 6.5
+  },
+  {
+   "steps": 131072,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6153846153846154,
+   "mean_cost": 16.0
+  },
+  {
+   "steps": 139264,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.4166666666666667,
+   "mean_cost": 14.416666666666666
+  },
+  {
+   "steps": 147456,
+   "price": 0.003,
+   "episodes": 17,
+   "failure_rate": 0.5294117647058824,
+   "mean_cost": 15.588235294117647
+  },
+  {
+   "steps": 155648,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 14.4
+  },
+  {
+   "steps": 163840,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 12.818181818181818
+  },
+  {
+   "steps": 172032,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.5555555555555556,
+   "mean_cost": 18.22222222222222
+  },
+  {
+   "steps": 180224,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 16.916666666666668
+  },
+  {
+   "steps": 188416,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 16.666666666666668
+  },
+  {
+   "steps": 196608,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6153846153846154,
+   "mean_cost": 20.846153846153847
+  },
+  {
+   "steps": 204800,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.6666666666666666,
+   "mean_cost": 18.666666666666668
+  },
+  {
+   "steps": 212992,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 14.818181818181818
+  },
+  {
+   "steps": 221184,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 13.0
+  },
+  {
+   "steps": 229376,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 13.8
+  },
+  {
+   "steps": 237568,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.7272727272727273,
+   "mean_cost": 20.09090909090909
+  },
+  {
+   "steps": 245760,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6923076923076923,
+   "mean_cost": 19.76923076923077
+  },
+  {
+   "steps": 253952,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 13.777777777777779
+  },
+  {
+   "steps": 262144,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 11.636363636363637
+  },
+  {
+   "steps": 270336,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 17.166666666666668
+  },
+  {
+   "steps": 278528,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 15.833333333333334
+  },
+  {
+   "steps": 286720,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 16.272727272727273
+  },
+  {
+   "steps": 294912,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 16.384615384615383
+  },
+  {
+   "steps": 303104,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 19.0
+  },
+  {
+   "steps": 311296,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.75,
+   "mean_cost": 21.25
+  },
+  {
+   "steps": 319488,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 15.083333333333334
+  },
+  {
+   "steps": 327680,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.7272727272727273,
+   "mean_cost": 23.363636363636363
+  },
+  {
+   "steps": 335872,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 16.75
+  },
+  {
+   "steps": 344064,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 12.181818181818182
+  },
+  {
+   "steps": 352256,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.5384615384615384,
+   "mean_cost": 17.923076923076923
+  },
+  {
+   "steps": 360448,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.8461538461538461,
+   "mean_cost": 23.307692307692307
+  },
+  {
+   "steps": 368640,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 19.916666666666668
+  },
+  {
+   "steps": 376832,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6153846153846154,
+   "mean_cost": 21.53846153846154
+  },
+  {
+   "steps": 385024,
+   "price": 0.003,
+   "episodes": 14,
+   "failure_rate": 0.5,
+   "mean_cost": 15.642857142857142
+  },
+  {
+   "steps": 393216,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 16.833333333333332
+  },
+  {
+   "steps": 401408,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6923076923076923,
+   "mean_cost": 20.307692307692307
+  },
+  {
+   "steps": 409600,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.5384615384615384,
+   "mean_cost": 15.384615384615385
+  },
+  {
+   "steps": 417792,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 16.25
+  },
+  {
+   "steps": 425984,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 15.2
+  },
+  {
+   "steps": 434176,
+   "price": 0.003,
+   "episodes": 15,
+   "failure_rate": 0.8666666666666667,
+   "mean_cost": 22.533333333333335
+  },
+  {
+   "steps": 442368,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.6666666666666666,
+   "mean_cost": 17.333333333333332
+  },
+  {
+   "steps": 450560,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.5384615384615384,
+   "mean_cost": 15.923076923076923
+  },
+  {
+   "steps": 458752,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 17.09090909090909
+  },
+  {
+   "steps": 466944,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 17.916666666666668
+  },
+  {
+   "steps": 475136,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 18.818181818181817
+  },
+  {
+   "steps": 483328,
+   "price": 0.003,
+   "episodes": 14,
+   "failure_rate": 0.7857142857142857,
+   "mean_cost": 21.714285714285715
+  },
+  {
+   "steps": 491520,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 11.88888888888889
+  },
+  {
+   "steps": 499712,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 13.272727272727273
+  },
+  {
+   "steps": 507904,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 18.166666666666668
+  },
+  {
+   "steps": 516096,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6153846153846154,
+   "mean_cost": 18.923076923076923
+  },
+  {
+   "steps": 524288,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 11.0
+  },
+  {
+   "steps": 532480,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 7.444444444444445
+  },
+  {
+   "steps": 540672,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 16.083333333333332
+  },
+  {
+   "steps": 548864,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.7,
+   "mean_cost": 19.7
+  },
+  {
+   "steps": 557056,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 17.22222222222222
+  },
+  {
+   "steps": 565248,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 15.666666666666666
+  },
+  {
+   "steps": 573440,
+   "price": 0.003,
+   "episodes": 14,
+   "failure_rate": 0.5,
+   "mean_cost": 15.285714285714286
+  },
+  {
+   "steps": 581632,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6923076923076923,
+   "mean_cost": 20.615384615384617
+  },
+  {
+   "steps": 589824,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 17.90909090909091
+  },
+  {
+   "steps": 598016,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 16.5
+  },
+  {
+   "steps": 606208,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 10.88888888888889
+  },
+  {
+   "steps": 614400,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 18.636363636363637
+  },
+  {
+   "steps": 622592,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.6666666666666666,
+   "mean_cost": 20.75
+  },
+  {
+   "steps": 630784,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.5384615384615384,
+   "mean_cost": 18.076923076923077
+  },
+  {
+   "steps": 638976,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 14.916666666666666
+  },
+  {
+   "steps": 647168,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 12.2
+  },
+  {
+   "steps": 655360,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.5555555555555556,
+   "mean_cost": 19.11111111111111
+  },
+  {
+   "steps": 663552,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 11.727272727272727
+  },
+  {
+   "steps": 671744,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 12.444444444444445
+  },
+  {
+   "steps": 679936,
+   "price": 0.003,
+   "episodes": 15,
+   "failure_rate": 0.5333333333333333,
+   "mean_cost": 17.533333333333335
+  },
+  {
+   "steps": 688128,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 13.0
+  },
+  {
+   "steps": 696320,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.6666666666666666,
+   "mean_cost": 20.166666666666668
+  },
+  {
+   "steps": 704512,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.7,
+   "mean_cost": 23.7
+  },
+  {
+   "steps": 712704,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 19.666666666666668
+  },
+  {
+   "steps": 720896,
+   "price": 0.003,
+   "episodes": 14,
+   "failure_rate": 0.5714285714285714,
+   "mean_cost": 17.285714285714285
+  },
+  {
+   "steps": 729088,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 17.1
+  },
+  {
+   "steps": 737280,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 21.0
+  },
+  {
+   "steps": 745472,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 9.818181818181818
+  },
+  {
+   "steps": 753664,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 15.0
+  },
+  {
+   "steps": 761856,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 19.7
+  },
+  {
+   "steps": 770048,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 14.615384615384615
+  },
+  {
+   "steps": 778240,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 14.1
+  },
+  {
+   "steps": 786432,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.6,
+   "mean_cost": 17.5
+  },
+  {
+   "steps": 794624,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 18.545454545454547
+  },
+  {
+   "steps": 802816,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6153846153846154,
+   "mean_cost": 17.846153846153847
+  },
+  {
+   "steps": 811008,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.2727272727272727,
+   "mean_cost": 13.909090909090908
+  },
+  {
+   "steps": 819200,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6153846153846154,
+   "mean_cost": 16.53846153846154
+  },
+  {
+   "steps": 827392,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 17.0
+  },
+  {
+   "steps": 835584,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 18.833333333333332
+  },
+  {
+   "steps": 843776,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 11.5
+  },
+  {
+   "steps": 851968,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.8333333333333334,
+   "mean_cost": 21.666666666666668
+  },
+  {
+   "steps": 860160,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 13.818181818181818
+  },
+  {
+   "steps": 868352,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 13.444444444444445
+  },
+  {
+   "steps": 876544,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.7272727272727273,
+   "mean_cost": 20.727272727272727
+  },
+  {
+   "steps": 884736,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 16.545454545454547
+  },
+  {
+   "steps": 892928,
+   "price": 0.003,
+   "episodes": 14,
+   "failure_rate": 0.6428571428571429,
+   "mean_cost": 20.928571428571427
+  },
+  {
+   "steps": 901120,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 20.6
+  },
+  {
+   "steps": 909312,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 20.77777777777778
+  },
+  {
+   "steps": 917504,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 18.916666666666668
+  },
+  {
+   "steps": 925696,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 17.363636363636363
+  },
+  {
+   "steps": 933888,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 16.727272727272727
+  },
+  {
+   "steps": 942080,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.4166666666666667,
+   "mean_cost": 16.083333333333332
+  },
+  {
+   "steps": 950272,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 11.4
+  },
+  {
+   "steps": 958464,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6923076923076923,
+   "mean_cost": 21.153846153846153
+  },
+  {
+   "steps": 966656,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 9.75
+  },
+  {
+   "steps": 974848,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 17.4
+  },
+  {
+   "steps": 983040,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 16.454545454545453
+  },
+  {
+   "steps": 991232,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 11.375
+  },
+  {
+   "steps": 999424,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.2727272727272727,
+   "mean_cost": 14.909090909090908
+  },
+  {
+   "steps": 1007616,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 16.333333333333332
+  },
+  {
+   "steps": 1015808,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 18.545454545454547
+  },
+  {
+   "steps": 1024000,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 12.625
+  },
+  {
+   "steps": 1032192,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 16.727272727272727
+  },
+  {
+   "steps": 1040384,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 19.666666666666668
+  },
+  {
+   "steps": 1048576,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 12.727272727272727
+  },
+  {
+   "steps": 1056768,
+   "price": 0.003,
+   "episodes": 17,
+   "failure_rate": 0.8235294117647058,
+   "mean_cost": 21.823529411764707
+  },
+  {
+   "steps": 1064960,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 17.333333333333332
+  },
+  {
+   "steps": 1073152,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 13.0
+  },
+  {
+   "steps": 1081344,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 17.0
+  },
+  {
+   "steps": 1089536,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 17.272727272727273
+  },
+  {
+   "steps": 1097728,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 11.6
+  },
+  {
+   "steps": 1105920,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.1111111111111111,
+   "mean_cost": 5.444444444444445
+  },
+  {
+   "steps": 1114112,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 18.636363636363637
+  },
+  {
+   "steps": 1122304,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 10.444444444444445
+  },
+  {
+   "steps": 1130496,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 17.88888888888889
+  },
+  {
+   "steps": 1138688,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 13.7
+  },
+  {
+   "steps": 1146880,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 15.75
+  },
+  {
+   "steps": 1155072,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 15.666666666666666
+  },
+  {
+   "steps": 1163264,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 18.818181818181817
+  },
+  {
+   "steps": 1171456,
+   "price": 0.003,
+   "episodes": 14,
+   "failure_rate": 0.6428571428571429,
+   "mean_cost": 17.714285714285715
+  },
+  {
+   "steps": 1179648,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 16.833333333333332
+  },
+  {
+   "steps": 1187840,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 12.444444444444445
+  },
+  {
+   "steps": 1196032,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 13.909090909090908
+  },
+  {
+   "steps": 1204224,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 14.0
+  },
+  {
+   "steps": 1212416,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 17.1
+  },
+  {
+   "steps": 1220608,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 18.1
+  },
+  {
+   "steps": 1228800,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 9.5
+  },
+  {
+   "steps": 1236992,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 14.9
+  },
+  {
+   "steps": 1245184,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 20.0
+  },
+  {
+   "steps": 1253376,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 12.2
+  },
+  {
+   "steps": 1261568,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 13.0
+  },
+  {
+   "steps": 1269760,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 16.833333333333332
+  },
+  {
+   "steps": 1277952,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.2,
+   "mean_cost": 8.6
+  },
+  {
+   "steps": 1286144,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.4166666666666667,
+   "mean_cost": 13.166666666666666
+  },
+  {
+   "steps": 1294336,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 13.0
+  },
+  {
+   "steps": 1302528,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 20.727272727272727
+  },
+  {
+   "steps": 1310720,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 6.375
+  },
+  {
+   "steps": 1318912,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.5384615384615384,
+   "mean_cost": 15.76923076923077
+  },
+  {
+   "steps": 1327104,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 15.818181818181818
+  },
+  {
+   "steps": 1335296,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.5384615384615384,
+   "mean_cost": 18.307692307692307
+  },
+  {
+   "steps": 1343488,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.625,
+   "mean_cost": 20.375
+  },
+  {
+   "steps": 1351680,
+   "price": 0.003,
+   "episodes": 14,
+   "failure_rate": 0.7142857142857143,
+   "mean_cost": 21.214285714285715
+  },
+  {
+   "steps": 1359872,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 17.666666666666668
+  },
+  {
+   "steps": 1368064,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 19.545454545454547
+  },
+  {
+   "steps": 1376256,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 15.7
+  },
+  {
+   "steps": 1384448,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 13.7
+  },
+  {
+   "steps": 1392640,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 14.1
+  },
+  {
+   "steps": 1400832,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 15.555555555555555
+  },
+  {
+   "steps": 1409024,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 17.0
+  },
+  {
+   "steps": 1417216,
+   "price": 0.003,
+   "episodes": 15,
+   "failure_rate": 0.6666666666666666,
+   "mean_cost": 22.666666666666668
+  },
+  {
+   "steps": 1425408,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.6666666666666666,
+   "mean_cost": 19.555555555555557
+  },
+  {
+   "steps": 1433600,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 17.0
+  },
+  {
+   "steps": 1441792,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 21.363636363636363
+  },
+  {
+   "steps": 1449984,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 10.777777777777779
+  },
+  {
+   "steps": 1458176,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 14.0
+  },
+  {
+   "steps": 1466368,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.125,
+   "mean_cost": 3.75
+  },
+  {
+   "steps": 1474560,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 12.333333333333334
+  },
+  {
+   "steps": 1482752,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.5454545454545454,
+   "mean_cost": 18.363636363636363
+  },
+  {
+   "steps": 1490944,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 14.666666666666666
+  },
+  {
+   "steps": 1499136,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 17.166666666666668
+  },
+  {
+   "steps": 1507328,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 16.2
+  },
+  {
+   "steps": 1515520,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 9.75
+  },
+  {
+   "steps": 1523712,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 14.923076923076923
+  },
+  {
+   "steps": 1531904,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 14.2
+  },
+  {
+   "steps": 1540096,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.6666666666666666,
+   "mean_cost": 19.75
+  },
+  {
+   "steps": 1548288,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 17.53846153846154
+  },
+  {
+   "steps": 1556480,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 17.6
+  },
+  {
+   "steps": 1564672,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.7272727272727273,
+   "mean_cost": 24.454545454545453
+  },
+  {
+   "steps": 1572864,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.6923076923076923,
+   "mean_cost": 19.846153846153847
+  },
+  {
+   "steps": 1581056,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 17.09090909090909
+  },
+  {
+   "steps": 1589248,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 17.416666666666668
+  },
+  {
+   "steps": 1597440,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 18.545454545454547
+  },
+  {
+   "steps": 1605632,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 21.363636363636363
+  },
+  {
+   "steps": 1613824,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 13.454545454545455
+  },
+  {
+   "steps": 1622016,
+   "price": 0.003,
+   "episodes": 14,
+   "failure_rate": 0.6428571428571429,
+   "mean_cost": 17.857142857142858
+  },
+  {
+   "steps": 1630208,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 12.0
+  },
+  {
+   "steps": 1638400,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 11.75
+  },
+  {
+   "steps": 1646592,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 19.7
+  },
+  {
+   "steps": 1654784,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.4166666666666667,
+   "mean_cost": 12.25
+  },
+  {
+   "steps": 1662976,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 17.09090909090909
+  },
+  {
+   "steps": 1671168,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 17.375
+  },
+  {
+   "steps": 1679360,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 15.076923076923077
+  },
+  {
+   "steps": 1687552,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 6.888888888888889
+  },
+  {
+   "steps": 1695744,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 11.0
+  },
+  {
+   "steps": 1703936,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 12.1
+  },
+  {
+   "steps": 1712128,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 17.666666666666668
+  },
+  {
+   "steps": 1720320,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.4,
+   "mean_cost": 14.3
+  },
+  {
+   "steps": 1728512,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.2222222222222222,
+   "mean_cost": 9.222222222222221
+  },
+  {
+   "steps": 1736704,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.7272727272727273,
+   "mean_cost": 21.545454545454547
+  },
+  {
+   "steps": 1744896,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 14.454545454545455
+  },
+  {
+   "steps": 1753088,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.6,
+   "mean_cost": 22.0
+  },
+  {
+   "steps": 1761280,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 10.0
+  },
+  {
+   "steps": 1769472,
+   "price": 0.003,
+   "episodes": 8,
+   "failure_rate": 0.375,
+   "mean_cost": 14.5
+  },
+  {
+   "steps": 1777664,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 19.2
+  },
+  {
+   "steps": 1785856,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 19.666666666666668
+  },
+  {
+   "steps": 1794048,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.6,
+   "mean_cost": 17.5
+  },
+  {
+   "steps": 1802240,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 18.8
+  },
+  {
+   "steps": 1810432,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.46153846153846156,
+   "mean_cost": 17.615384615384617
+  },
+  {
+   "steps": 1818624,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5,
+   "mean_cost": 14.75
+  },
+  {
+   "steps": 1826816,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 21.545454545454547
+  },
+  {
+   "steps": 1835008,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.6,
+   "mean_cost": 19.3
+  },
+  {
+   "steps": 1843200,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 20.083333333333332
+  },
+  {
+   "steps": 1851392,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 20.555555555555557
+  },
+  {
+   "steps": 1859584,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 15.090909090909092
+  },
+  {
+   "steps": 1867776,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 11.9
+  },
+  {
+   "steps": 1875968,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 18.444444444444443
+  },
+  {
+   "steps": 1884160,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 14.666666666666666
+  },
+  {
+   "steps": 1892352,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.3,
+   "mean_cost": 17.8
+  },
+  {
+   "steps": 1900544,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 17.09090909090909
+  },
+  {
+   "steps": 1908736,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.4166666666666667,
+   "mean_cost": 19.666666666666668
+  },
+  {
+   "steps": 1916928,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.5555555555555556,
+   "mean_cost": 21.333333333333332
+  },
+  {
+   "steps": 1925120,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.5,
+   "mean_cost": 17.5
+  },
+  {
+   "steps": 1933312,
+   "price": 0.003,
+   "episodes": 9,
+   "failure_rate": 0.4444444444444444,
+   "mean_cost": 16.11111111111111
+  },
+  {
+   "steps": 1941504,
+   "price": 0.003,
+   "episodes": 13,
+   "failure_rate": 0.5384615384615384,
+   "mean_cost": 17.615384615384617
+  },
+  {
+   "steps": 1949696,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 19.545454545454547
+  },
+  {
+   "steps": 1957888,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.3333333333333333,
+   "mean_cost": 12.583333333333334
+  },
+  {
+   "steps": 1966080,
+   "price": 0.003,
+   "episodes": 16,
+   "failure_rate": 0.625,
+   "mean_cost": 19.625
+  },
+  {
+   "steps": 1974272,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.6363636363636364,
+   "mean_cost": 18.272727272727273
+  },
+  {
+   "steps": 1982464,
+   "price": 0.003,
+   "episodes": 12,
+   "failure_rate": 0.5833333333333334,
+   "mean_cost": 18.166666666666668
+  },
+  {
+   "steps": 1990656,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.45454545454545453,
+   "mean_cost": 13.636363636363637
+  },
+  {
+   "steps": 1998848,
+   "price": 0.003,
+   "episodes": 11,
+   "failure_rate": 0.36363636363636365,
+   "mean_cost": 9.909090909090908
+  },
+  {
+   "steps": 2007040,
+   "price": 0.003,
+   "episodes": 10,
+   "failure_rate": 0.6,
+   "mean_cost": 17.1
+  }
+ ],
+ "stochastic": {
+  "n": 200,
+  "exhausted": 0.54,
+  "mean_return": 15.452038261443695,
+  "mean_cost": 18.195,
+  "stopped_utility": 10.390328953423934,
+  "cost_q90": 26.0,
+  "q_tilde": 0.1234019198823678,
+  "q_beta": 0.32195744925868824,
+  "failure_steps": [
+   954,
+   381,
+   659,
+   626,
+   373,
+   553,
+   448,
+   219,
+   543,
+   171,
+   238,
+   459,
+   312,
+   611,
+   716,
+   127,
+   585,
+   472,
+   944,
+   935,
+   636,
+   822,
+   447,
+   249,
+   554,
+   205,
+   956,
+   230,
+   581,
+   312,
+   462,
+   479,
+   478,
+   912,
+   595,
+   579,
+   672,
+   412,
+   939,
+   922,
+   555,
+   289,
+   568,
+   335,
+   903,
+   200,
+   257,
+   962,
+   858,
+   804,
+   430,
+   419,
+   363,
+   923,
+   972,
+   780,
+   605,
+   554,
+   736,
+   957,
+   447,
+   507,
+   264,
+   346,
+   367,
+   689,
+   732,
+   279,
+   770,
+   489,
+   489,
+   408,
+   931,
+   494,
+   346,
+   168,
+   701,
+   153,
+   478,
+   650,
+   620,
+   116,
+   504,
+   458,
+   822,
+   703,
+   627,
+   262,
+   821,
+   194,
+   467,
+   854,
+   994,
+   471,
+   872,
+   74,
+   164,
+   760,
+   773,
+   459,
+   297,
+   264,
+   550,
+   499,
+   141,
+   962,
+   851,
+   583
+  ],
+  "episodes": [
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.865839076717723,
+    "cost": 14.0,
+    "U": 13.928543056929081
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.56206600368371,
+    "cost": 20.0,
+    "U": 13.896518722851054
+   },
+   {
+    "failed": true,
+    "tau": 954,
+    "ret": 23.783805145870936,
+    "cost": 26.0,
+    "U": 15.005048675690093
+   },
+   {
+    "failed": true,
+    "tau": 381,
+    "ret": 7.404347272825297,
+    "cost": 26.0,
+    "U": 6.327267116546564
+   },
+   {
+    "failed": true,
+    "tau": 659,
+    "ret": 11.802272513343876,
+    "cost": 26.0,
+    "U": 8.802547546838262
+   },
+   {
+    "failed": true,
+    "tau": 626,
+    "ret": 13.748621223883422,
+    "cost": 26.0,
+    "U": 10.326341572875988
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.084243029594965,
+    "cost": 17.0,
+    "U": 14.449019323401767
+   },
+   {
+    "failed": true,
+    "tau": 373,
+    "ret": 6.229905506043631,
+    "cost": 26.0,
+    "U": 5.23330528552449
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.42459573047611,
+    "cost": 24.0,
+    "U": 14.597545539215941
+   },
+   {
+    "failed": true,
+    "tau": 553,
+    "ret": 11.255886525750602,
+    "cost": 26.0,
+    "U": 8.614153570857027
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 10.359367571895763,
+    "cost": 15.0,
+    "U": 5.684513789248657
+   },
+   {
+    "failed": true,
+    "tau": 448,
+    "ret": 10.689253881533755,
+    "cost": 26.0,
+    "U": 8.828890918936416
+   },
+   {
+    "failed": true,
+    "tau": 219,
+    "ret": 4.8662646197882395,
+    "cost": 26.0,
+    "U": 4.430979782955799
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 24.129677605428583,
+    "cost": 0.0,
+    "U": 14.497576555495831
+   },
+   {
+    "failed": true,
+    "tau": 543,
+    "ret": 8.399786091085694,
+    "cost": 26.0,
+    "U": 6.630687331992652
+   },
+   {
+    "failed": true,
+    "tau": 171,
+    "ret": 2.8077139940936586,
+    "cost": 26.0,
+    "U": 2.5701376685193638
+   },
+   {
+    "failed": true,
+    "tau": 238,
+    "ret": 5.146870731067203,
+    "cost": 26.0,
+    "U": 4.5735605232683865
+   },
+   {
+    "failed": true,
+    "tau": 459,
+    "ret": 10.911905112775282,
+    "cost": 26.0,
+    "U": 8.832884444678385
+   },
+   {
+    "failed": true,
+    "tau": 312,
+    "ret": 6.066920103321926,
+    "cost": 26.0,
+    "U": 5.214362259171145
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 16.62469979475519,
+    "cost": 10.0,
+    "U": 9.172483104281334
+   },
+   {
+    "failed": true,
+    "tau": 611,
+    "ret": 12.806104734971834,
+    "cost": 26.0,
+    "U": 9.668605159389784
+   },
+   {
+    "failed": true,
+    "tau": 716,
+    "ret": 13.754077743883498,
+    "cost": 26.0,
+    "U": 9.5500680417465
+   },
+   {
+    "failed": true,
+    "tau": 127,
+    "ret": 2.618373522311554,
+    "cost": 26.0,
+    "U": 2.443671072419016
+   },
+   {
+    "failed": true,
+    "tau": 585,
+    "ret": 13.234766735479978,
+    "cost": 26.0,
+    "U": 9.948611341798411
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 20.64110364986911,
+    "cost": 0.0,
+    "U": 13.733857427558807
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.61680580411315,
+    "cost": 24.0,
+    "U": 13.908715819852873
+   },
+   {
+    "failed": true,
+    "tau": 472,
+    "ret": 10.718618168569513,
+    "cost": 26.0,
+    "U": 8.404928840825505
+   },
+   {
+    "failed": true,
+    "tau": 944,
+    "ret": 19.632756037667953,
+    "cost": 26.0,
+    "U": 12.108749472124275
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 24.45830344669861,
+    "cost": 17.0,
+    "U": 15.285598438436548
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 18.870146291945385,
+    "cost": 2.0,
+    "U": 11.919443875456855
+   },
+   {
+    "failed": true,
+    "tau": 935,
+    "ret": 18.78204689437431,
+    "cost": 26.0,
+    "U": 12.154256586325692
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 12.089077688675465,
+    "cost": 0.0,
+    "U": 6.697235701955082
+   },
+   {
+    "failed": true,
+    "tau": 636,
+    "ret": 14.154513480060018,
+    "cost": 26.0,
+    "U": 9.895103818939642
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 25.649277010073046,
+    "cost": 12.0,
+    "U": 15.931111903926668
+   },
+   {
+    "failed": true,
+    "tau": 822,
+    "ret": 16.351764444602086,
+    "cost": 26.0,
+    "U": 11.19163605834878
+   },
+   {
+    "failed": true,
+    "tau": 447,
+    "ret": 9.79465333942154,
+    "cost": 26.0,
+    "U": 7.848776508172758
+   },
+   {
+    "failed": true,
+    "tau": 249,
+    "ret": 3.8794864624763195,
+    "cost": 26.0,
+    "U": 3.4567478059732935
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 20.277230156140387,
+    "cost": 10.0,
+    "U": 13.234250176399586
+   },
+   {
+    "failed": true,
+    "tau": 554,
+    "ret": 9.428677062906448,
+    "cost": 26.0,
+    "U": 7.210076958937873
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.584996858718558,
+    "cost": 0.0,
+    "U": 13.337611001210686
+   },
+   {
+    "failed": true,
+    "tau": 205,
+    "ret": 4.53108183576401,
+    "cost": 26.0,
+    "U": 4.028487253552611
+   },
+   {
+    "failed": true,
+    "tau": 956,
+    "ret": 18.72736816635999,
+    "cost": 26.0,
+    "U": 11.725369029842094
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 19.964543390532768,
+    "cost": 0.0,
+    "U": 12.205590092650208
+   },
+   {
+    "failed": true,
+    "tau": 230,
+    "ret": 5.132036721512175,
+    "cost": 26.0,
+    "U": 4.604555248696508
+   },
+   {
+    "failed": true,
+    "tau": 581,
+    "ret": 10.386627498079964,
+    "cost": 26.0,
+    "U": 8.050936274480526
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.438939743262505,
+    "cost": 20.0,
+    "U": 13.725567095786639
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.881818934693214,
+    "cost": 0.0,
+    "U": 14.014169221959289
+   },
+   {
+    "failed": true,
+    "tau": 312,
+    "ret": 4.448004937058578,
+    "cost": 26.0,
+    "U": 3.7007917595170357
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 26.346834259535942,
+    "cost": 0.0,
+    "U": 16.64455082961619
+   },
+   {
+    "failed": true,
+    "tau": 462,
+    "ret": 7.4357759705512745,
+    "cost": 26.0,
+    "U": 6.23097165745562
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.903175299864397,
+    "cost": 18.0,
+    "U": 15.157689146355183
+   },
+   {
+    "failed": true,
+    "tau": 479,
+    "ret": 10.431019627196864,
+    "cost": 26.0,
+    "U": 8.317896012125773
+   },
+   {
+    "failed": true,
+    "tau": 478,
+    "ret": 8.859286694735381,
+    "cost": 26.0,
+    "U": 6.990174696706501
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.329274375545605,
+    "cost": 16.0,
+    "U": 13.58834104327483
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.023997464493878,
+    "cost": 20.0,
+    "U": 13.203516645431138
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.622133951638297,
+    "cost": 7.0,
+    "U": 14.012999045583387
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 16.806311604943915,
+    "cost": 11.0,
+    "U": 10.66143112979779
+   },
+   {
+    "failed": true,
+    "tau": 912,
+    "ret": 13.59118769892268,
+    "cost": 26.0,
+    "U": 8.71356063900576
+   },
+   {
+    "failed": true,
+    "tau": 595,
+    "ret": 9.613705625591825,
+    "cost": 26.0,
+    "U": 7.531043363112522
+   },
+   {
+    "failed": true,
+    "tau": 579,
+    "ret": 13.02871570463736,
+    "cost": 26.0,
+    "U": 9.810929357716896
+   },
+   {
+    "failed": true,
+    "tau": 672,
+    "ret": 14.219190688730436,
+    "cost": 26.0,
+    "U": 10.323889149666138
+   },
+   {
+    "failed": true,
+    "tau": 412,
+    "ret": 9.213170296665263,
+    "cost": 26.0,
+    "U": 7.669986740073444
+   },
+   {
+    "failed": true,
+    "tau": 939,
+    "ret": 17.525238201078363,
+    "cost": 26.0,
+    "U": 11.66671912244881
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 14.62978847048373,
+    "cost": 13.0,
+    "U": 9.45863981815382
+   },
+   {
+    "failed": true,
+    "tau": 922,
+    "ret": 16.39001095787637,
+    "cost": 26.0,
+    "U": 10.814839305315207
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 25.39381804938318,
+    "cost": 0.0,
+    "U": 15.374498167441667
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.848229967527512,
+    "cost": 0.0,
+    "U": 14.85549418663535
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 16.085064667089966,
+    "cost": 7.0,
+    "U": 11.150225947946181
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 17.7953545284661,
+    "cost": 12.0,
+    "U": 11.447585987038574
+   },
+   {
+    "failed": true,
+    "tau": 555,
+    "ret": 7.88385019411475,
+    "cost": 26.0,
+    "U": 6.128205182583836
+   },
+   {
+    "failed": true,
+    "tau": 289,
+    "ret": 6.60853756076886,
+    "cost": 26.0,
+    "U": 5.722060312736796
+   },
+   {
+    "failed": true,
+    "tau": 568,
+    "ret": 12.064145388840974,
+    "cost": 26.0,
+    "U": 9.234357321370851
+   },
+   {
+    "failed": true,
+    "tau": 335,
+    "ret": 8.026577182067065,
+    "cost": 26.0,
+    "U": 6.854701130288153
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 12.906045385411572,
+    "cost": 19.0,
+    "U": 6.428437056297254
+   },
+   {
+    "failed": true,
+    "tau": 903,
+    "ret": 18.694275350142085,
+    "cost": 26.0,
+    "U": 12.647138746336756
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 24.040028749836985,
+    "cost": 0.0,
+    "U": 15.028550808339283
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.259565814604706,
+    "cost": 0.0,
+    "U": 13.641212683669512
+   },
+   {
+    "failed": true,
+    "tau": 200,
+    "ret": 4.407205047752757,
+    "cost": 26.0,
+    "U": 3.9870199474383563
+   },
+   {
+    "failed": true,
+    "tau": 257,
+    "ret": 2.5828203925492605,
+    "cost": 26.0,
+    "U": 2.2239804640953644
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 17.479940143479386,
+    "cost": 13.0,
+    "U": 9.751909067868658
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 18.945437637555756,
+    "cost": 12.0,
+    "U": 11.87133873616845
+   },
+   {
+    "failed": true,
+    "tau": 962,
+    "ret": 17.75095096578472,
+    "cost": 26.0,
+    "U": 11.577326798504693
+   },
+   {
+    "failed": true,
+    "tau": 858,
+    "ret": 14.974697939078231,
+    "cost": 26.0,
+    "U": 9.757625620556123
+   },
+   {
+    "failed": true,
+    "tau": 804,
+    "ret": 15.453892637562529,
+    "cost": 26.0,
+    "U": 10.03378401812641
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.03985336598899,
+    "cost": 15.0,
+    "U": 14.537250866607488
+   },
+   {
+    "failed": true,
+    "tau": 430,
+    "ret": 8.484224617035645,
+    "cost": 26.0,
+    "U": 6.834914682712742
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 17.838562145616734,
+    "cost": 0.0,
+    "U": 11.63569197042762
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 20.70515527679786,
+    "cost": 23.0,
+    "U": 12.545430651782848
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 15.574942365922583,
+    "cost": 0.0,
+    "U": 11.072892497882448
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 12.71172414187697,
+    "cost": 0.0,
+    "U": 7.928783791118928
+   },
+   {
+    "failed": true,
+    "tau": 419,
+    "ret": 7.129575927470732,
+    "cost": 26.0,
+    "U": 5.6886077105125725
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 25.738438832590294,
+    "cost": 0.0,
+    "U": 16.374977412119765
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 25.47071604071225,
+    "cost": 14.0,
+    "U": 15.514175792741161
+   },
+   {
+    "failed": true,
+    "tau": 363,
+    "ret": 3.699886317118358,
+    "cost": 26.0,
+    "U": 3.1464253989373754
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 24.648488672330572,
+    "cost": 17.0,
+    "U": 15.368487483676223
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 20.96984137217979,
+    "cost": 24.0,
+    "U": 12.675110810171857
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 24.439135080026663,
+    "cost": 22.0,
+    "U": 15.445396357121256
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 20.43109071973847,
+    "cost": 2.0,
+    "U": 12.850397436100625
+   },
+   {
+    "failed": true,
+    "tau": 923,
+    "ret": 16.735825979645607,
+    "cost": 26.0,
+    "U": 10.766777941652443
+   },
+   {
+    "failed": true,
+    "tau": 972,
+    "ret": 20.30953497374565,
+    "cost": 26.0,
+    "U": 13.14048851247978
+   },
+   {
+    "failed": true,
+    "tau": 780,
+    "ret": 9.736551539042779,
+    "cost": 26.0,
+    "U": 6.344817798489936
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.170398590358225,
+    "cost": 12.0,
+    "U": 15.339752591582807
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.613433709749096,
+    "cost": 0.0,
+    "U": 14.269903595156022
+   },
+   {
+    "failed": true,
+    "tau": 605,
+    "ret": 16.76534589221713,
+    "cost": 26.0,
+    "U": 12.670374465274051
+   },
+   {
+    "failed": true,
+    "tau": 554,
+    "ret": 12.138569709024122,
+    "cost": 26.0,
+    "U": 9.395755684232814
+   },
+   {
+    "failed": true,
+    "tau": 736,
+    "ret": 16.72528650294572,
+    "cost": 26.0,
+    "U": 12.360628286951659
+   },
+   {
+    "failed": true,
+    "tau": 957,
+    "ret": 20.317393321046794,
+    "cost": 26.0,
+    "U": 13.89659568361603
+   },
+   {
+    "failed": true,
+    "tau": 447,
+    "ret": 8.316307110621581,
+    "cost": 26.0,
+    "U": 6.554352498466423
+   },
+   {
+    "failed": true,
+    "tau": 507,
+    "ret": 12.361191120993299,
+    "cost": 26.0,
+    "U": 9.809382505535341
+   },
+   {
+    "failed": true,
+    "tau": 264,
+    "ret": 3.8718693941750715,
+    "cost": 26.0,
+    "U": 3.3680354907911507
+   },
+   {
+    "failed": true,
+    "tau": 346,
+    "ret": 8.138654971278664,
+    "cost": 26.0,
+    "U": 6.858042199677105
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 15.926321574614121,
+    "cost": 0.0,
+    "U": 11.383440451641038
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 24.17944087494385,
+    "cost": 23.0,
+    "U": 15.573170014377943
+   },
+   {
+    "failed": true,
+    "tau": 367,
+    "ret": 4.138336496264132,
+    "cost": 26.0,
+    "U": 3.421898579660187
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.473942081129117,
+    "cost": 10.0,
+    "U": 13.688120627759313
+   },
+   {
+    "failed": true,
+    "tau": 689,
+    "ret": 13.742396022825005,
+    "cost": 26.0,
+    "U": 10.036570705338427
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 24.027452861318288,
+    "cost": 0.0,
+    "U": 15.266257650966422
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 25.07984905956772,
+    "cost": 21.0,
+    "U": 15.550361961666141
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.15757038626178,
+    "cost": 18.0,
+    "U": 13.969075898761645
+   },
+   {
+    "failed": true,
+    "tau": 732,
+    "ret": 14.997620410549711,
+    "cost": 26.0,
+    "U": 10.961525572124508
+   },
+   {
+    "failed": true,
+    "tau": 279,
+    "ret": 5.979456678610966,
+    "cost": 26.0,
+    "U": 5.233665402781325
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.706953393283587,
+    "cost": 0.0,
+    "U": 13.350155160010935
+   },
+   {
+    "failed": true,
+    "tau": 770,
+    "ret": 15.842973663448712,
+    "cost": 26.0,
+    "U": 11.659264918150193
+   },
+   {
+    "failed": true,
+    "tau": 489,
+    "ret": 11.61908379882042,
+    "cost": 26.0,
+    "U": 9.105465047901992
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 24.43004389388221,
+    "cost": 10.0,
+    "U": 14.917436121444345
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.45284335150611,
+    "cost": 0.0,
+    "U": 14.085602720121155
+   },
+   {
+    "failed": true,
+    "tau": 489,
+    "ret": 10.34684083768951,
+    "cost": 26.0,
+    "U": 7.998011018065318
+   },
+   {
+    "failed": true,
+    "tau": 408,
+    "ret": 9.54448612588416,
+    "cost": 26.0,
+    "U": 7.7629399303154125
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 18.909725232719506,
+    "cost": 0.0,
+    "U": 12.390289695873237
+   },
+   {
+    "failed": true,
+    "tau": 931,
+    "ret": 20.338090265531775,
+    "cost": 26.0,
+    "U": 13.057698491963055
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.0850125897395,
+    "cost": 0.0,
+    "U": 13.051185047135027
+   },
+   {
+    "failed": true,
+    "tau": 494,
+    "ret": 8.656033597746955,
+    "cost": 26.0,
+    "U": 6.538828822579624
+   },
+   {
+    "failed": true,
+    "tau": 346,
+    "ret": 6.16087604630061,
+    "cost": 26.0,
+    "U": 5.167184794546991
+   },
+   {
+    "failed": true,
+    "tau": 168,
+    "ret": 4.424633330967193,
+    "cost": 26.0,
+    "U": 4.033620178852308
+   },
+   {
+    "failed": true,
+    "tau": 701,
+    "ret": 15.928752655040737,
+    "cost": 26.0,
+    "U": 11.288202535838662
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 6.755476423740473,
+    "cost": 0.0,
+    "U": 5.803244993259313
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.632770070494267,
+    "cost": 17.0,
+    "U": 15.193438905403571
+   },
+   {
+    "failed": true,
+    "tau": 153,
+    "ret": 2.9455305696403915,
+    "cost": 26.0,
+    "U": 2.7111538597120264
+   },
+   {
+    "failed": true,
+    "tau": 478,
+    "ret": 11.00792768139487,
+    "cost": 26.0,
+    "U": 8.780651972252361
+   },
+   {
+    "failed": true,
+    "tau": 650,
+    "ret": 8.973759425923912,
+    "cost": 26.0,
+    "U": 7.145498462504989
+   },
+   {
+    "failed": true,
+    "tau": 620,
+    "ret": 13.056802277866115,
+    "cost": 26.0,
+    "U": 9.943652220566394
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 12.260029414047493,
+    "cost": 0.0,
+    "U": 8.222146209336172
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.350515557729185,
+    "cost": 0.0,
+    "U": 15.042928919865034
+   },
+   {
+    "failed": true,
+    "tau": 116,
+    "ret": 2.540741317368136,
+    "cost": 26.0,
+    "U": 2.4028854782385536
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.058314528142077,
+    "cost": 16.0,
+    "U": 14.153771845319897
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.745716303423073,
+    "cost": 0.0,
+    "U": 15.428011060424762
+   },
+   {
+    "failed": true,
+    "tau": 504,
+    "ret": 11.472001064821004,
+    "cost": 26.0,
+    "U": 9.02266724894306
+   },
+   {
+    "failed": true,
+    "tau": 458,
+    "ret": 7.055059237449571,
+    "cost": 26.0,
+    "U": 5.449006536782726
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 9.784030755667786,
+    "cost": 14.0,
+    "U": 7.549019357476062
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 20.707433000724308,
+    "cost": 19.0,
+    "U": 12.394600004626957
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 17.809958095638883,
+    "cost": 22.0,
+    "U": 11.112151617120084
+   },
+   {
+    "failed": true,
+    "tau": 822,
+    "ret": 16.988819622637966,
+    "cost": 26.0,
+    "U": 11.460840259220562
+   },
+   {
+    "failed": true,
+    "tau": 703,
+    "ret": 13.465548059920811,
+    "cost": 26.0,
+    "U": 9.557484562090387
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 17.707186062827667,
+    "cost": 0.0,
+    "U": 11.852681853953134
+   },
+   {
+    "failed": true,
+    "tau": 627,
+    "ret": 15.33934549005269,
+    "cost": 26.0,
+    "U": 11.490812268888615
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.081635972904774,
+    "cost": 0.0,
+    "U": 14.747500492980832
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.58392400721731,
+    "cost": 0.0,
+    "U": 14.197138833466017
+   },
+   {
+    "failed": true,
+    "tau": 262,
+    "ret": 5.270134680065309,
+    "cost": 26.0,
+    "U": 4.640862915300557
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.203370511659905,
+    "cost": 21.0,
+    "U": 14.37214425664598
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 20.156837631950243,
+    "cost": 23.0,
+    "U": 12.138305059886523
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 17.345362287829865,
+    "cost": 0.0,
+    "U": 11.655133463202596
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 7.98978723776397,
+    "cost": 18.0,
+    "U": 6.565919321770249
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.266136557949324,
+    "cost": 0.0,
+    "U": 14.134350324207235
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 24.3955415108081,
+    "cost": 0.0,
+    "U": 15.539407081401716
+   },
+   {
+    "failed": true,
+    "tau": 821,
+    "ret": 17.873643943167956,
+    "cost": 26.0,
+    "U": 12.472785974130703
+   },
+   {
+    "failed": true,
+    "tau": 194,
+    "ret": 3.5096721591811333,
+    "cost": 26.0,
+    "U": 3.1689042126145135
+   },
+   {
+    "failed": true,
+    "tau": 467,
+    "ret": 12.20427598509631,
+    "cost": 26.0,
+    "U": 9.712543958557015
+   },
+   {
+    "failed": true,
+    "tau": 854,
+    "ret": 18.72150130887227,
+    "cost": 26.0,
+    "U": 12.719636595574602
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 19.970051898449125,
+    "cost": 1.0,
+    "U": 12.896206501227041
+   },
+   {
+    "failed": true,
+    "tau": 994,
+    "ret": 22.572056976993615,
+    "cost": 26.0,
+    "U": 14.213531740778464
+   },
+   {
+    "failed": true,
+    "tau": 471,
+    "ret": 9.997495521908686,
+    "cost": 26.0,
+    "U": 7.99185712182445
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.498660669727702,
+    "cost": 11.0,
+    "U": 14.21752297249949
+   },
+   {
+    "failed": true,
+    "tau": 872,
+    "ret": 18.389860486807873,
+    "cost": 26.0,
+    "U": 11.790372568654192
+   },
+   {
+    "failed": true,
+    "tau": 74,
+    "ret": 1.2469310353550247,
+    "cost": 26.0,
+    "U": 1.1922782567523575
+   },
+   {
+    "failed": true,
+    "tau": 164,
+    "ret": 2.997932839830622,
+    "cost": 26.0,
+    "U": 2.7401945412102107
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 25.360033691647782,
+    "cost": 12.0,
+    "U": 16.120559888639278
+   },
+   {
+    "failed": true,
+    "tau": 760,
+    "ret": 15.275478932622658,
+    "cost": 26.0,
+    "U": 10.537595362267025
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.554915490559477,
+    "cost": 12.0,
+    "U": 14.692536798488154
+   },
+   {
+    "failed": true,
+    "tau": 773,
+    "ret": 10.253125525725984,
+    "cost": 26.0,
+    "U": 7.099070986991538
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.163957104850333,
+    "cost": 13.0,
+    "U": 12.193482957540796
+   },
+   {
+    "failed": true,
+    "tau": 459,
+    "ret": 9.918256238281971,
+    "cost": 26.0,
+    "U": 7.877300330676295
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 19.36279267167088,
+    "cost": 9.0,
+    "U": 13.09964794481311
+   },
+   {
+    "failed": true,
+    "tau": 297,
+    "ret": 5.126547997461903,
+    "cost": 26.0,
+    "U": 4.459237494690827
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.341574773288063,
+    "cost": 0.0,
+    "U": 13.61539144436963
+   },
+   {
+    "failed": true,
+    "tau": 264,
+    "ret": 4.540078154326363,
+    "cost": 26.0,
+    "U": 4.0981190665885405
+   },
+   {
+    "failed": true,
+    "tau": 550,
+    "ret": 12.602850157849195,
+    "cost": 26.0,
+    "U": 9.73489421784939
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 25.591989944665766,
+    "cost": 8.0,
+    "U": 15.579868245262327
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 20.235172834978556,
+    "cost": 0.0,
+    "U": 13.52203008640068
+   },
+   {
+    "failed": true,
+    "tau": 499,
+    "ret": 11.507862705107573,
+    "cost": 26.0,
+    "U": 8.875057228101067
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.448379385682944,
+    "cost": 0.0,
+    "U": 14.164940837422352
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.17878295331129,
+    "cost": 21.0,
+    "U": 14.405986818071552
+   },
+   {
+    "failed": true,
+    "tau": 141,
+    "ret": 2.478751692796597,
+    "cost": 26.0,
+    "U": 2.312860497427138
+   },
+   {
+    "failed": true,
+    "tau": 962,
+    "ret": 23.370048297580123,
+    "cost": 26.0,
+    "U": 14.82184251437261
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 19.026756817086707,
+    "cost": 0.0,
+    "U": 12.556292179753191
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 21.013976859186368,
+    "cost": 19.0,
+    "U": 13.29249006772197
+   },
+   {
+    "failed": true,
+    "tau": 851,
+    "ret": 21.225538514751413,
+    "cost": 26.0,
+    "U": 14.406525930974118
+   },
+   {
+    "failed": true,
+    "tau": 583,
+    "ret": 13.664385824898165,
+    "cost": 26.0,
+    "U": 10.41124401618387
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 23.682459393068726,
+    "cost": 24.0,
+    "U": 14.858556499511078
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 13.29995530720282,
+    "cost": 7.0,
+    "U": 9.081270352027888
+   },
+   {
+    "failed": false,
+    "tau": null,
+    "ret": 22.83497312952679,
+    "cost": 0.0,
+    "U": 14.428804965436386
+   }
+  ]
+ },
+ "eval_wall": 164.53624079200017
+}

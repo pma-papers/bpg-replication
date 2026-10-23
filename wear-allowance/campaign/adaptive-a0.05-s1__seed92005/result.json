@@ -1,0 +1,5980 @@
+{
+ "arm": {
+  "kind": "adaptive",
+  "alpha": 0.05,
+  "dual_step": 1.0,
+  "multiplier0": 0.0,
+  "model": {
+   "wear_shape": 0.5
+  }
+ },
+ "seed": 92005,
+ "steps": 8003584,
+ "train_wall": 312.4282132079825,
+ "log_std": -3.1483404636383057,
+ "final_multiplier": 3.8003119992284526,
+ "trace": [
+  {
+   "steps": 8192,
+   "multiplier": 0.30453100158982516,
+   "episodes": 629,
+   "failure_rate": 0.35453100158982515
+  },
+  {
+   "steps": 16384,
+   "multiplier": 0.6472178060413355,
+   "episodes": 629,
+   "failure_rate": 0.39268680445151033
+  },
+  {
+   "steps": 24576,
+   "multiplier": 0.9873867768554676,
+   "episodes": 651,
+   "failure_rate": 0.3901689708141321
+  },
+  {
+   "steps": 32768,
+   "multiplier": 1.3330254061389568,
+   "episodes": 642,
+   "failure_rate": 0.3956386292834891
+  },
+  {
+   "steps": 40960,
+   "multiplier": 1.6540945885288938,
+   "episodes": 636,
+   "failure_rate": 0.3710691823899371
+  },
+  {
+   "steps": 49152,
+   "multiplier": 2.03559065152102,
+   "episodes": 635,
+   "failure_rate": 0.431496062992126
+  },
+  {
+   "steps": 57344,
+   "multiplier": 2.4241871427490898,
+   "episodes": 627,
+   "failure_rate": 0.43859649122807015
+  },
+  {
+   "steps": 65536,
+   "multiplier": 2.802316972733634,
+   "episodes": 647,
+   "failure_rate": 0.4281298299845441
+  },
+  {
+   "steps": 73728,
+   "multiplier": 3.1457595956844537,
+   "episodes": 671,
+   "failure_rate": 0.39344262295081966
+  },
+  {
+   "steps": 81920,
+   "multiplier": 3.508315649496113,
+   "episodes": 669,
+   "failure_rate": 0.4125560538116592
+  },
+  {
+   "steps": 90112,
+   "multiplier": 3.870518030448494,
+   "episodes": 672,
+   "failure_rate": 0.41220238095238093
+  },
+  {
+   "steps": 98304,
+   "multiplier": 4.175939717195482,
+   "episodes": 664,
+   "failure_rate": 0.35542168674698793
+  },
+  {
+   "steps": 106496,
+   "multiplier": 4.5457128128194695,
+   "episodes": 617,
+   "failure_rate": 0.419773095623987
+  },
+  {
+   "steps": 114688,
+   "multiplier": 4.844010026441761,
+   "episodes": 646,
+   "failure_rate": 0.34829721362229105
+  },
+  {
+   "steps": 122880,
+   "multiplier": 5.168602860317982,
+   "episodes": 614,
+   "failure_rate": 0.3745928338762215
+  },
+  {
+   "steps": 131072,
+   "multiplier": 5.462890810239735,
+   "episodes": 639,
+   "failure_rate": 0.3442879499217527
+  },
+  {
+   "steps": 139264,
+   "multiplier": 5.753515810239735,
+   "episodes": 640,
+   "failure_rate": 0.340625
+  },
+  {
+   "steps": 147456,
+   "multiplier": 6.0501611776518756,
+   "episodes": 626,
+   "failure_rate": 0.3466453674121406
+  },
+  {
+   "steps": 155648,
+   "multiplier": 6.337257951845424,
+   "episodes": 620,
+   "failure_rate": 0.3370967741935484
+  },
+  {
+   "steps": 163840,
+   "multiplier": 6.622700989820108,
+   "episodes": 632,
+   "failure_rate": 0.33544303797468356
+  },
+  {
+   "steps": 172032,
+   "multiplier": 6.920668469494904,
+   "episodes": 615,
+   "failure_rate": 0.34796747967479674
+  },
+  {
+   "steps": 180224,
+   "multiplier": 7.1743841399310915,
+   "episodes": 619,
+   "failure_rate": 0.3037156704361874
+  },
+  {
+   "steps": 188416,
+   "multiplier": 7.475078584375536,
+   "episodes": 576,
+   "failure_rate": 0.3506944444444444
+  },
+  {
+   "steps": 196608,
+   "multiplier": 7.7243617384974,
+   "episodes": 558,
+   "failure_rate": 0.2992831541218638
+  },
+  {
+   "steps": 204800,
+   "multiplier": 7.9678591022935334,
+   "episodes": 569,
+   "failure_rate": 0.29349736379613356
+  },
+  {
+   "steps": 212992,
+   "multiplier": 8.219392322055032,
+   "episodes": 587,
+   "failure_rate": 0.30153321976149916
+  },
+  {
+   "steps": 221184,
+   "multiplier": 8.457465716550445,
+   "episodes": 545,
+   "failure_rate": 0.28807339449541286
+  },
+  {
+   "steps": 229376,
+   "multiplier": 8.713234947319675,
+   "episodes": 520,
+   "failure_rate": 0.3057692307692308
+  },
+  {
+   "steps": 237568,
+   "multiplier": 8.892255926340654,
+   "episodes": 572,
+   "failure_rate": 0.229020979020979
+  },
+  {
+   "steps": 245760,
+   "multiplier": 9.080617192634882,
+   "episodes": 537,
+   "failure_rate": 0.2383612662942272
+  },
+  {
+   "steps": 253952,
+   "multiplier": 9.231396919730399,
+   "episodes": 513,
+   "failure_rate": 0.20077972709551656
+  },
+  {
+   "steps": 262144,
+   "multiplier": 9.385942374275853,
+   "episodes": 528,
+   "failure_rate": 0.20454545454545456
+  },
+  {
+   "steps": 270336,
+   "multiplier": 9.510184798518278,
+   "episodes": 528,
+   "failure_rate": 0.17424242424242425
+  },
+  {
+   "steps": 278528,
+   "multiplier": 9.65530674973779,
+   "episodes": 492,
+   "failure_rate": 0.1951219512195122
+  },
+  {
+   "steps": 286720,
+   "multiplier": 9.75130674973779,
+   "episodes": 500,
+   "failure_rate": 0.146
+  },
+  {
+   "steps": 294912,
+   "multiplier": 9.832454290721396,
+   "episodes": 488,
+   "failure_rate": 0.13114754098360656
+  },
+  {
+   "steps": 303104,
+   "multiplier": 9.897517052227672,
+   "episodes": 478,
+   "failure_rate": 0.11506276150627615
+  },
+  {
+   "steps": 311296,
+   "multiplier": 9.95735686916131,
+   "episodes": 437,
+   "failure_rate": 0.10983981693363844
+  },
+  {
+   "steps": 319488,
+   "multiplier": 9.986756010792211,
+   "episodes": 466,
+   "failure_rate": 0.07939914163090128
+  },
+  {
+   "steps": 327680,
+   "multiplier": 10.01384380522476,
+   "episodes": 467,
+   "failure_rate": 0.07708779443254818
+  },
+  {
+   "steps": 335872,
+   "multiplier": 10.040420381801336,
+   "episodes": 444,
+   "failure_rate": 0.07657657657657657
+  },
+  {
+   "steps": 344064,
+   "multiplier": 10.057705764631963,
+   "episodes": 431,
+   "failure_rate": 0.06728538283062645
+  },
+  {
+   "steps": 352256,
+   "multiplier": 10.065205764631964,
+   "episodes": 400,
+   "failure_rate": 0.0575
+  },
+  {
+   "steps": 360448,
+   "multiplier": 10.03456060334164,
+   "episodes": 465,
+   "failure_rate": 0.01935483870967742
+  },
+  {
+   "steps": 368640,
+   "multiplier": 10.025230459800971,
+   "episodes": 418,
+   "failure_rate": 0.04066985645933014
+  },
+  {
+   "steps": 376832,
+   "multiplier": 9.988446318831809,
+   "episodes": 454,
+   "failure_rate": 0.013215859030837005
+  },
+  {
+   "steps": 385024,
+   "multiplier": 9.96874934913484,
+   "episodes": 429,
+   "failure_rate": 0.030303030303030304
+  },
+  {
+   "steps": 393216,
+   "multiplier": 9.934094617677038,
+   "episodes": 391,
+   "failure_rate": 0.015345268542199489
+  },
+  {
+   "steps": 401408,
+   "multiplier": 9.901677035259455,
+   "episodes": 455,
+   "failure_rate": 0.017582417582417582
+  },
+  {
+   "steps": 409600,
+   "multiplier": 9.884671959117323,
+   "episodes": 394,
+   "failure_rate": 0.03299492385786802
+  },
+  {
+   "steps": 417792,
+   "multiplier": 9.84171421263845,
+   "episodes": 426,
+   "failure_rate": 0.007042253521126761
+  },
+  {
+   "steps": 425984,
+   "multiplier": 9.808704503900586,
+   "episodes": 412,
+   "failure_rate": 0.01699029126213592
+  },
+  {
+   "steps": 434176,
+   "multiplier": 9.775292181625705,
+   "episodes": 422,
+   "failure_rate": 0.016587677725118485
+  },
+  {
+   "steps": 442368,
+   "multiplier": 9.740254775141915,
+   "episodes": 401,
+   "failure_rate": 0.014962593516209476
+  },
+  {
+   "steps": 450560,
+   "multiplier": 9.702245182815776,
+   "episodes": 417,
+   "failure_rate": 0.011990407673860911
+  },
+  {
+   "steps": 458752,
+   "multiplier": 9.661017112640337,
+   "episodes": 456,
+   "failure_rate": 0.008771929824561403
+  },
+  {
+   "steps": 466944,
+   "multiplier": 9.629035130658355,
+   "episodes": 444,
+   "failure_rate": 0.018018018018018018
+  },
+  {
+   "steps": 475136,
+   "multiplier": 9.60021160124659,
+   "episodes": 425,
+   "failure_rate": 0.021176470588235293
+  },
+  {
+   "steps": 483328,
+   "multiplier": 9.578851219385015,
+   "episodes": 419,
+   "failure_rate": 0.028639618138424822
+  },
+  {
+   "steps": 491520,
+   "multiplier": 9.550964241498038,
+   "episodes": 407,
+   "failure_rate": 0.022113022113022112
+  },
+  {
+   "steps": 499712,
+   "multiplier": 9.513558699936326,
+   "episodes": 397,
+   "failure_rate": 0.012594458438287154
+  },
+  {
+   "steps": 507904,
+   "multiplier": 9.484586737319503,
+   "episodes": 428,
+   "failure_rate": 0.02102803738317757
+  },
+  {
+   "steps": 516096,
+   "multiplier": 9.451333148802757,
+   "episodes": 418,
+   "failure_rate": 0.01674641148325359
+  },
+  {
+   "steps": 524288,
+   "multiplier": 9.425941649921326,
+   "episodes": 447,
+   "failure_rate": 0.024608501118568233
+  },
+  {
+   "steps": 532480,
+   "multiplier": 9.400694125168851,
+   "episodes": 404,
+   "failure_rate": 0.024752475247524754
+  },
+  {
+   "steps": 540672,
+   "multiplier": 9.386579292632966,
+   "episodes": 418,
+   "failure_rate": 0.03588516746411483
+  },
+  {
+   "steps": 548864,
+   "multiplier": 9.348316381834843,
+   "episodes": 426,
+   "failure_rate": 0.011737089201877934
+  },
+  {
+   "steps": 557056,
+   "multiplier": 9.313241754969171,
+   "episodes": 402,
+   "failure_rate": 0.014925373134328358
+  },
+  {
+   "steps": 565248,
+   "multiplier": 9.300624932539264,
+   "episodes": 428,
+   "failure_rate": 0.037383177570093455
+  },
+  {
+   "steps": 573440,
+   "multiplier": 9.287747902376852,
+   "episodes": 431,
+   "failure_rate": 0.037122969837587005
+  },
+  {
+   "steps": 581632,
+   "multiplier": 9.25507463505012,
+   "episodes": 404,
+   "failure_rate": 0.017326732673267328
+  },
+  {
+   "steps": 589824,
+   "multiplier": 9.22558745556294,
+   "episodes": 390,
+   "failure_rate": 0.020512820512820513
+  },
+  {
+   "steps": 598016,
+   "multiplier": 9.191177656008374,
+   "episodes": 449,
+   "failure_rate": 0.015590200445434299
+  },
+  {
+   "steps": 606208,
+   "multiplier": 9.163904928735647,
+   "episodes": 440,
+   "failure_rate": 0.022727272727272728
+  },
+  {
+   "steps": 614400,
+   "multiplier": 9.13400543124821,
+   "episodes": 398,
+   "failure_rate": 0.020100502512562814
+  },
+  {
+   "steps": 622592,
+   "multiplier": 9.108264191356028,
+   "episodes": 371,
+   "failure_rate": 0.02425876010781671
+  },
+  {
+   "steps": 630784,
+   "multiplier": 9.081282094169326,
+   "episodes": 391,
+   "failure_rate": 0.023017902813299233
+  },
+  {
+   "steps": 638976,
+   "multiplier": 9.043359388855317,
+   "episodes": 414,
+   "failure_rate": 0.012077294685990338
+  },
+  {
+   "steps": 647168,
+   "multiplier": 9.000536422348139,
+   "episodes": 418,
+   "failure_rate": 0.007177033492822967
+  },
+  {
+   "steps": 655360,
+   "multiplier": 8.962882101360485,
+   "episodes": 405,
+   "failure_rate": 0.012345679012345678
+  },
+  {
+   "steps": 663552,
+   "multiplier": 8.927100110839158,
+   "episodes": 422,
+   "failure_rate": 0.014218009478672985
+  },
+  {
+   "steps": 671744,
+   "multiplier": 8.897353275396119,
+   "episodes": 395,
+   "failure_rate": 0.020253164556962026
+  },
+  {
+   "steps": 679936,
+   "multiplier": 8.868858651740204,
+   "episodes": 372,
+   "failure_rate": 0.021505376344086023
+  },
+  {
+   "steps": 688128,
+   "multiplier": 8.844434099310536,
+   "episodes": 391,
+   "failure_rate": 0.02557544757033248
+  },
+  {
+   "steps": 696320,
+   "multiplier": 8.828663928161392,
+   "episodes": 409,
+   "failure_rate": 0.034229828850855744
+  },
+  {
+   "steps": 704512,
+   "multiplier": 8.814463450834422,
+   "episodes": 419,
+   "failure_rate": 0.03579952267303103
+  },
+  {
+   "steps": 712704,
+   "multiplier": 8.776932278764598,
+   "episodes": 401,
+   "failure_rate": 0.012468827930174564
+  },
+  {
+   "steps": 720896,
+   "multiplier": 8.759190343280727,
+   "episodes": 403,
+   "failure_rate": 0.03225806451612903
+  },
+  {
+   "steps": 729088,
+   "multiplier": 8.73970677520561,
+   "episodes": 426,
+   "failure_rate": 0.03051643192488263
+  },
+  {
+   "steps": 737280,
+   "multiplier": 8.709508755403629,
+   "episodes": 404,
+   "failure_rate": 0.019801980198019802
+  },
+  {
+   "steps": 745472,
+   "multiplier": 8.682885378780252,
+   "episodes": 385,
+   "failure_rate": 0.023376623376623377
+  },
+  {
+   "steps": 753664,
+   "multiplier": 8.64872248285265,
+   "episodes": 442,
+   "failure_rate": 0.01583710407239819
+  },
+  {
+   "steps": 761856,
+   "multiplier": 8.61899275312292,
+   "episodes": 444,
+   "failure_rate": 0.02027027027027027
+  },
+  {
+   "steps": 770048,
+   "multiplier": 8.588457473317566,
+   "episodes": 411,
+   "failure_rate": 0.019464720194647202
+  },
+  {
+   "steps": 778240,
+   "multiplier": 8.569557951786466,
+   "episodes": 418,
+   "failure_rate": 0.03110047846889952
+  },
+  {
+   "steps": 786432,
+   "multiplier": 8.547942231262448,
+   "episodes": 458,
+   "failure_rate": 0.028384279475982533
+  },
+  {
+   "steps": 794624,
+   "multiplier": 8.529961935695946,
+   "episodes": 406,
+   "failure_rate": 0.03201970443349754
+  },
+  {
+   "steps": 802816,
+   "multiplier": 8.50065159086836,
+   "episodes": 435,
+   "failure_rate": 0.020689655172413793
+  },
+  {
+   "steps": 811008,
+   "multiplier": 8.468195450517483,
+   "episodes": 399,
+   "failure_rate": 0.017543859649122806
+  },
+  {
+   "steps": 819200,
+   "multiplier": 8.446692859843907,
+   "episodes": 386,
+   "failure_rate": 0.02849740932642487
+  },
+  {
+   "steps": 827392,
+   "multiplier": 8.423391888970121,
+   "episodes": 412,
+   "failure_rate": 0.02669902912621359
+  },
+  {
+   "steps": 835584,
+   "multiplier": 8.40839188897012,
+   "episodes": 400,
+   "failure_rate": 0.035
+  },
+  {
+   "steps": 843776,
+   "multiplier": 8.385687174329922,
+   "episodes": 403,
+   "failure_rate": 0.02729528535980149
+  },
+  {
+   "steps": 851968,
+   "multiplier": 8.344967916789319,
+   "episodes": 431,
+   "failure_rate": 0.009280742459396751
+  },
+  {
+   "steps": 860160,
+   "multiplier": 8.321813554373211,
+   "episodes": 447,
+   "failure_rate": 0.026845637583892617
+  },
+  {
+   "steps": 868352,
+   "multiplier": 8.29590993991538,
+   "episodes": 415,
+   "failure_rate": 0.024096385542168676
+  },
+  {
+   "steps": 876544,
+   "multiplier": 8.270123014975912,
+   "episodes": 413,
+   "failure_rate": 0.024213075060532687
+  },
+  {
+   "steps": 884736,
+   "multiplier": 8.236478155162828,
+   "episodes": 428,
+   "failure_rate": 0.016355140186915886
+  },
+  {
+   "steps": 892928,
+   "multiplier": 8.211048179732853,
+   "episodes": 407,
+   "failure_rate": 0.02457002457002457
+  },
+  {
+   "steps": 901120,
+   "multiplier": 8.180704199388872,
+   "episodes": 407,
+   "failure_rate": 0.019656019656019656
+  },
+  {
+   "steps": 909312,
+   "multiplier": 8.170016238700912,
+   "episodes": 407,
+   "failure_rate": 0.03931203931203931
+  },
+  {
+   "steps": 917504,
+   "multiplier": 8.147654429655686,
+   "episodes": 398,
+   "failure_rate": 0.02763819095477387
+  },
+  {
+   "steps": 925696,
+   "multiplier": 8.119044803987236,
+   "episodes": 374,
+   "failure_rate": 0.0213903743315508
+  },
+  {
+   "steps": 933888,
+   "multiplier": 8.087393427840448,
+   "episodes": 436,
+   "failure_rate": 0.01834862385321101
+  },
+  {
+   "steps": 942080,
+   "multiplier": 8.064092456966662,
+   "episodes": 412,
+   "failure_rate": 0.02669902912621359
+  },
+  {
+   "steps": 950272,
+   "multiplier": 8.04266388553809,
+   "episodes": 420,
+   "failure_rate": 0.02857142857142857
+  },
+  {
+   "steps": 958464,
+   "multiplier": 8.010887120162236,
+   "episodes": 439,
+   "failure_rate": 0.018223234624145785
+  },
+  {
+   "steps": 966656,
+   "multiplier": 7.986769473103412,
+   "episodes": 425,
+   "failure_rate": 0.02588235294117647
+  },
+  {
+   "steps": 974848,
+   "multiplier": 7.974505322160016,
+   "episodes": 424,
+   "failure_rate": 0.03773584905660377
+  },
+  {
+   "steps": 983040,
+   "multiplier": 7.962874626716371,
+   "episodes": 417,
+   "failure_rate": 0.03836930455635491
+  },
+  {
+   "steps": 991232,
+   "multiplier": 7.948504080398081,
+   "episodes": 421,
+   "failure_rate": 0.035629453681710214
+  },
+  {
+   "steps": 999424,
+   "multiplier": 7.924447476624496,
+   "episodes": 424,
+   "failure_rate": 0.025943396226415096
+  },
+  {
+   "steps": 1007616,
+   "multiplier": 7.906567390971391,
+   "episodes": 467,
+   "failure_rate": 0.032119914346895075
+  },
+  {
+   "steps": 1015808,
+   "multiplier": 7.873115854328365,
+   "episodes": 423,
+   "failure_rate": 0.016548463356973995
+  },
+  {
+   "steps": 1024000,
+   "multiplier": 7.846425877638388,
+   "episodes": 429,
+   "failure_rate": 0.023310023310023312
+  },
+  {
+   "steps": 1032192,
+   "multiplier": 7.8390799060744065,
+   "episodes": 422,
+   "failure_rate": 0.04265402843601896
+  },
+  {
+   "steps": 1040384,
+   "multiplier": 7.810766653062358,
+   "episodes": 415,
+   "failure_rate": 0.021686746987951807
+  },
+  {
+   "steps": 1048576,
+   "multiplier": 7.79717442005265,
+   "episodes": 412,
+   "failure_rate": 0.03640776699029126
+  },
+  {
+   "steps": 1056768,
+   "multiplier": 7.760718438111341,
+   "episodes": 443,
+   "failure_rate": 0.013544018058690745
+  },
+  {
+   "steps": 1064960,
+   "multiplier": 7.745544308758107,
+   "episodes": 402,
+   "failure_rate": 0.03482587064676617
+  },
+  {
+   "steps": 1073152,
+   "multiplier": 7.739700152913951,
+   "episodes": 385,
+   "failure_rate": 0.04415584415584416
+  },
+  {
+   "steps": 1081344,
+   "multiplier": 7.724098187311985,
+   "episodes": 407,
+   "failure_rate": 0.0343980343980344
+  },
+  {
+   "steps": 1089536,
+   "multiplier": 7.699561150274948,
+   "episodes": 432,
+   "failure_rate": 0.02546296296296296
+  },
+  {
+   "steps": 1097728,
+   "multiplier": 7.670073970787769,
+   "episodes": 390,
+   "failure_rate": 0.020512820512820513
+  },
+  {
+   "steps": 1105920,
+   "multiplier": 7.658448688620726,
+   "episodes": 443,
+   "failure_rate": 0.03837471783295711
+  },
+  {
+   "steps": 1114112,
+   "multiplier": 7.637727967900005,
+   "episodes": 444,
+   "failure_rate": 0.02927927927927928
+  },
+  {
+   "steps": 1122304,
+   "multiplier": 7.633646335246945,
+   "episodes": 392,
+   "failure_rate": 0.04591836734693878
+  },
+  {
+   "steps": 1130496,
+   "multiplier": 7.613531392718209,
+   "episodes": 435,
+   "failure_rate": 0.029885057471264367
+  },
+  {
+   "steps": 1138688,
+   "multiplier": 7.592377546564363,
+   "episodes": 416,
+   "failure_rate": 0.028846153846153848
+  },
+  {
+   "steps": 1146880,
+   "multiplier": 7.56838227469675,
+   "episodes": 423,
+   "failure_rate": 0.026004728132387706
+  },
+  {
+   "steps": 1155072,
+   "multiplier": 7.552198699817524,
+   "episodes": 414,
+   "failure_rate": 0.033816425120772944
+  },
+  {
+   "steps": 1163264,
+   "multiplier": 7.529286735934905,
+   "episodes": 443,
+   "failure_rate": 0.02708803611738149
+  },
+  {
+   "steps": 1171456,
+   "multiplier": 7.510135064983748,
+   "episodes": 389,
+   "failure_rate": 0.030848329048843187
+  },
+  {
+   "steps": 1179648,
+   "multiplier": 7.478112593073636,
+   "episodes": 445,
+   "failure_rate": 0.017977528089887642
+  },
+  {
+   "steps": 1187840,
+   "multiplier": 7.450389820796408,
+   "episodes": 404,
+   "failure_rate": 0.022277227722772276
+  },
+  {
+   "steps": 1196032,
+   "multiplier": 7.431709731310949,
+   "episodes": 447,
+   "failure_rate": 0.03131991051454139
+  },
+  {
+   "steps": 1204224,
+   "multiplier": 7.413312440114561,
+   "episodes": 443,
+   "failure_rate": 0.03160270880361174
+  },
+  {
+   "steps": 1212416,
+   "multiplier": 7.387235885090638,
+   "episodes": 418,
+   "failure_rate": 0.023923444976076555
+  },
+  {
+   "steps": 1220608,
+   "multiplier": 7.370130621932743,
+   "episodes": 456,
+   "failure_rate": 0.03289473684210526
+  },
+  {
+   "steps": 1228800,
+   "multiplier": 7.346037357684039,
+   "episodes": 386,
+   "failure_rate": 0.025906735751295335
+  },
+  {
+   "steps": 1236992,
+   "multiplier": 7.3452984414278815,
+   "episodes": 406,
+   "failure_rate": 0.04926108374384237
+  },
+  {
+   "steps": 1245184,
+   "multiplier": 7.336677751772709,
+   "episodes": 435,
+   "failure_rate": 0.041379310344827586
+  },
+  {
+   "steps": 1253376,
+   "multiplier": 7.325139290234247,
+   "episodes": 416,
+   "failure_rate": 0.038461538461538464
+  },
+  {
+   "steps": 1261568,
+   "multiplier": 7.303242334730735,
+   "episodes": 427,
+   "failure_rate": 0.02810304449648712
+  },
+  {
+   "steps": 1269760,
+   "multiplier": 7.281939906474664,
+   "episodes": 453,
+   "failure_rate": 0.02869757174392936
+  },
+  {
+   "steps": 1277952,
+   "multiplier": 7.27855995309471,
+   "episodes": 429,
+   "failure_rate": 0.046620046620046623
+  },
+  {
+   "steps": 1286144,
+   "multiplier": 7.255389221387393,
+   "episodes": 410,
+   "failure_rate": 0.026829268292682926
+  },
+  {
+   "steps": 1294336,
+   "multiplier": 7.241446913695086,
+   "episodes": 416,
+   "failure_rate": 0.036057692307692304
+  },
+  {
+   "steps": 1302528,
+   "multiplier": 7.225003960674951,
+   "episodes": 447,
+   "failure_rate": 0.03355704697986577
+  },
+  {
+   "steps": 1310720,
+   "multiplier": 7.221407672971935,
+   "episodes": 431,
+   "failure_rate": 0.04640371229698376
+  },
+  {
+   "steps": 1318912,
+   "multiplier": 7.215186474815253,
+   "episodes": 434,
+   "failure_rate": 0.04377880184331797
+  },
+  {
+   "steps": 1327104,
+   "multiplier": 7.232471857645879,
+   "episodes": 431,
+   "failure_rate": 0.06728538283062645
+  },
+  {
+   "steps": 1335296,
+   "multiplier": 7.230451655625677,
+   "episodes": 396,
+   "failure_rate": 0.047979797979797977
+  },
+  {
+   "steps": 1343488,
+   "multiplier": 7.207346521151349,
+   "episodes": 409,
+   "failure_rate": 0.02689486552567237
+  },
+  {
+   "steps": 1351680,
+   "multiplier": 7.200924502802725,
+   "episodes": 436,
+   "failure_rate": 0.04357798165137615
+  },
+  {
+   "steps": 1359872,
+   "multiplier": 7.211020656648879,
+   "episodes": 416,
+   "failure_rate": 0.06009615384615385
+  },
+  {
+   "steps": 1368064,
+   "multiplier": 7.199680450463312,
+   "episodes": 388,
+   "failure_rate": 0.03865979381443299
+  },
+  {
+   "steps": 1376256,
+   "multiplier": 7.18085551041535,
+   "episodes": 417,
+   "failure_rate": 0.03117505995203837
+  },
+  {
+   "steps": 1384448,
+   "multiplier": 7.158441717311902,
+   "episodes": 435,
+   "failure_rate": 0.027586206896551724
+  },
+  {
+   "steps": 1392640,
+   "multiplier": 7.147089060307072,
+   "episodes": 414,
+   "failure_rate": 0.03864734299516908
+  },
+  {
+   "steps": 1400832,
+   "multiplier": 7.143385356603368,
+   "episodes": 432,
+   "failure_rate": 0.046296296296296294
+  },
+  {
+   "steps": 1409024,
+   "multiplier": 7.128649840230572,
+   "episodes": 397,
+   "failure_rate": 0.03526448362720403
+  },
+  {
+   "steps": 1417216,
+   "multiplier": 7.110280010546873,
+   "episodes": 411,
+   "failure_rate": 0.031630170316301706
+  },
+  {
+   "steps": 1425408,
+   "multiplier": 7.096177446444309,
+   "episodes": 390,
+   "failure_rate": 0.035897435897435895
+  },
+  {
+   "steps": 1433600,
+   "multiplier": 7.081142481409344,
+   "episodes": 429,
+   "failure_rate": 0.03496503496503497
+  },
+  {
+   "steps": 1441792,
+   "multiplier": 7.06596835205611,
+   "episodes": 402,
+   "failure_rate": 0.03482587064676617
+  },
+  {
+   "steps": 1449984,
+   "multiplier": 7.038695624783383,
+   "episodes": 396,
+   "failure_rate": 0.022727272727272728
+  },
+  {
+   "steps": 1458176,
+   "multiplier": 7.029365481242713,
+   "episodes": 418,
+   "failure_rate": 0.04066985645933014
+  },
+  {
+   "steps": 1466368,
+   "multiplier": 7.010202485647999,
+   "episodes": 454,
+   "failure_rate": 0.030837004405286344
+  },
+  {
+   "steps": 1474560,
+   "multiplier": 6.98675115821437,
+   "episodes": 452,
+   "failure_rate": 0.02654867256637168
+  },
+  {
+   "steps": 1482752,
+   "multiplier": 6.96736340311233,
+   "episodes": 392,
+   "failure_rate": 0.030612244897959183
+  },
+  {
+   "steps": 1490944,
+   "multiplier": 6.9508455459694725,
+   "episodes": 448,
+   "failure_rate": 0.033482142857142856
+  },
+  {
+   "steps": 1499136,
+   "multiplier": 6.942512212636139,
+   "episodes": 432,
+   "failure_rate": 0.041666666666666664
+  },
+  {
+   "steps": 1507328,
+   "multiplier": 6.926005035602646,
+   "episodes": 418,
+   "failure_rate": 0.03349282296650718
+  },
+  {
+   "steps": 1515520,
+   "multiplier": 6.916577827965415,
+   "episodes": 419,
+   "failure_rate": 0.0405727923627685
+  },
+  {
+   "steps": 1523712,
+   "multiplier": 6.899596695889943,
+   "episodes": 424,
+   "failure_rate": 0.0330188679245283
+  },
+  {
+   "steps": 1531904,
+   "multiplier": 6.884684415188189,
+   "episodes": 399,
+   "failure_rate": 0.03508771929824561
+  },
+  {
+   "steps": 1540096,
+   "multiplier": 6.865296660086148,
+   "episodes": 392,
+   "failure_rate": 0.030612244897959183
+  },
+  {
+   "steps": 1548288,
+   "multiplier": 6.857993289299632,
+   "episodes": 445,
+   "failure_rate": 0.04269662921348315
+  },
+  {
+   "steps": 1556480,
+   "multiplier": 6.841809714420405,
+   "episodes": 414,
+   "failure_rate": 0.033816425120772944
+  },
+  {
+   "steps": 1564672,
+   "multiplier": 6.810994366698583,
+   "episodes": 417,
+   "failure_rate": 0.019184652278177457
+  },
+  {
+   "steps": 1572864,
+   "multiplier": 6.7952409420410484,
+   "episodes": 438,
+   "failure_rate": 0.03424657534246575
+  },
+  {
+   "steps": 1581056,
+   "multiplier": 6.786503077963379,
+   "episodes": 412,
+   "failure_rate": 0.0412621359223301
+  },
+  {
+   "steps": 1589248,
+   "multiplier": 6.768835641473771,
+   "episodes": 433,
+   "failure_rate": 0.03233256351039261
+  },
+  {
+   "steps": 1597440,
+   "multiplier": 6.746046525827513,
+   "episodes": 441,
+   "failure_rate": 0.027210884353741496
+  },
+  {
+   "steps": 1605632,
+   "multiplier": 6.729700371981359,
+   "episodes": 416,
+   "failure_rate": 0.03365384615384615
+  },
+  {
+   "steps": 1613824,
+   "multiplier": 6.715782846208163,
+   "episodes": 388,
+   "failure_rate": 0.03608247422680412
+  },
+  {
+   "steps": 1622016,
+   "multiplier": 6.711134320131065,
+   "episodes": 441,
+   "failure_rate": 0.045351473922902494
+  },
+  {
+   "steps": 1630208,
+   "multiplier": 6.714532378383493,
+   "episodes": 412,
+   "failure_rate": 0.05339805825242718
+  },
+  {
+   "steps": 1638400,
+   "multiplier": 6.710537220998505,
+   "episodes": 413,
+   "failure_rate": 0.04600484261501211
+  },
+  {
+   "steps": 1646592,
+   "multiplier": 6.682808935920554,
+   "episodes": 449,
+   "failure_rate": 0.022271714922048998
+  },
+  {
+   "steps": 1654784,
+   "multiplier": 6.67720145928504,
+   "episodes": 428,
+   "failure_rate": 0.04439252336448598
+  },
+  {
+   "steps": 1662976,
+   "multiplier": 6.661264719625673,
+   "episodes": 411,
+   "failure_rate": 0.0340632603406326
+  },
+  {
+   "steps": 1671168,
+   "multiplier": 6.645747478246363,
+   "episodes": 377,
+   "failure_rate": 0.034482758620689655
+  },
+  {
+   "steps": 1679360,
+   "multiplier": 6.653490260398594,
+   "episodes": 381,
+   "failure_rate": 0.05774278215223097
+  },
+  {
+   "steps": 1687552,
+   "multiplier": 6.627826543584435,
+   "episodes": 452,
+   "failure_rate": 0.024336283185840708
+  },
+  {
+   "steps": 1695744,
+   "multiplier": 6.615122580880472,
+   "episodes": 429,
+   "failure_rate": 0.037296037296037296
+  },
+  {
+   "steps": 1703936,
+   "multiplier": 6.612628519122753,
+   "episodes": 421,
+   "failure_rate": 0.047505938242280284
+  },
+  {
+   "steps": 1712128,
+   "multiplier": 6.589963371058971,
+   "episodes": 439,
+   "failure_rate": 0.02733485193621868
+  },
+  {
+   "steps": 1720320,
+   "multiplier": 6.570800375464257,
+   "episodes": 454,
+   "failure_rate": 0.030837004405286344
+  },
+  {
+   "steps": 1728512,
+   "multiplier": 6.55021214017014,
+   "episodes": 442,
+   "failure_rate": 0.029411764705882353
+  },
+  {
+   "steps": 1736704,
+   "multiplier": 6.523306828391848,
+   "episodes": 433,
+   "failure_rate": 0.023094688221709007
+  },
+  {
+   "steps": 1744896,
+   "multiplier": 6.5041551574406915,
+   "episodes": 389,
+   "failure_rate": 0.030848329048843187
+  },
+  {
+   "steps": 1753088,
+   "multiplier": 6.485162909378676,
+   "episodes": 387,
+   "failure_rate": 0.031007751937984496
+  },
+  {
+   "steps": 1761280,
+   "multiplier": 6.45943475403887,
+   "episodes": 412,
+   "failure_rate": 0.024271844660194174
+  },
+  {
+   "steps": 1769472,
+   "multiplier": 6.443498014379503,
+   "episodes": 411,
+   "failure_rate": 0.0340632603406326
+  },
+  {
+   "steps": 1777664,
+   "multiplier": 6.424014446304385,
+   "episodes": 426,
+   "failure_rate": 0.03051643192488263
+  },
+  {
+   "steps": 1785856,
+   "multiplier": 6.397091369381308,
+   "episodes": 390,
+   "failure_rate": 0.023076923076923078
+  },
+  {
+   "steps": 1794048,
+   "multiplier": 6.3832670799756235,
+   "episodes": 387,
+   "failure_rate": 0.03617571059431524
+  },
+  {
+   "steps": 1802240,
+   "multiplier": 6.36410408438091,
+   "episodes": 454,
+   "failure_rate": 0.030837004405286344
+  },
+  {
+   "steps": 1810432,
+   "multiplier": 6.354388444570483,
+   "episodes": 422,
+   "failure_rate": 0.04028436018957346
+  },
+  {
+   "steps": 1818624,
+   "multiplier": 6.3371340365100295,
+   "episodes": 397,
+   "failure_rate": 0.0327455919395466
+  },
+  {
+   "steps": 1826816,
+   "multiplier": 6.340872354267039,
+   "episodes": 428,
+   "failure_rate": 0.053738317757009345
+  },
+  {
+   "steps": 1835008,
+   "multiplier": 6.33096669388968,
+   "episodes": 424,
+   "failure_rate": 0.04009433962264151
+  },
+  {
+   "steps": 1843200,
+   "multiplier": 6.331541406533359,
+   "episodes": 435,
+   "failure_rate": 0.05057471264367816
+  },
+  {
+   "steps": 1851392,
+   "multiplier": 6.309041406533359,
+   "episodes": 400,
+   "failure_rate": 0.0275
+  },
+  {
+   "steps": 1859584,
+   "multiplier": 6.291299471049488,
+   "episodes": 403,
+   "failure_rate": 0.03225806451612903
+  },
+  {
+   "steps": 1867776,
+   "multiplier": 6.270777929099374,
+   "episodes": 441,
+   "failure_rate": 0.02947845804988662
+  },
+  {
+   "steps": 1875968,
+   "multiplier": 6.283277929099374,
+   "episodes": 416,
+   "failure_rate": 0.0625
+  },
+  {
+   "steps": 1884160,
+   "multiplier": 6.255175739318353,
+   "episodes": 411,
+   "failure_rate": 0.021897810218978103
+  },
+  {
+   "steps": 1892352,
+   "multiplier": 6.245899721218805,
+   "episodes": 442,
+   "failure_rate": 0.04072398190045249
+  },
+  {
+   "steps": 1900544,
+   "multiplier": 6.2410125031736925,
+   "episodes": 399,
+   "failure_rate": 0.045112781954887216
+  },
+  {
+   "steps": 1908736,
+   "multiplier": 6.231921594082784,
+   "episodes": 440,
+   "failure_rate": 0.04090909090909091
+  },
+  {
+   "steps": 1916928,
+   "multiplier": 6.21565653384182,
+   "episodes": 415,
+   "failure_rate": 0.033734939759036145
+  },
+  {
+   "steps": 1925120,
+   "multiplier": 6.203215219287829,
+   "episodes": 426,
+   "failure_rate": 0.03755868544600939
+  },
+  {
+   "steps": 1933312,
+   "multiplier": 6.1961445122171215,
+   "episodes": 396,
+   "failure_rate": 0.04292929292929293
+  },
+  {
+   "steps": 1941504,
+   "multiplier": 6.162499652404037,
+   "episodes": 428,
+   "failure_rate": 0.016355140186915886
+  },
+  {
+   "steps": 1949696,
+   "multiplier": 6.1297410317143814,
+   "episodes": 406,
+   "failure_rate": 0.017241379310344827
+  },
+  {
+   "steps": 1957888,
+   "multiplier": 6.130903822412056,
+   "episodes": 430,
+   "failure_rate": 0.05116279069767442
+  },
+  {
+   "steps": 1966080,
+   "multiplier": 6.10721961188574,
+   "episodes": 418,
+   "failure_rate": 0.02631578947368421
+  },
+  {
+   "steps": 1974272,
+   "multiplier": 6.093894428511657,
+   "episodes": 409,
+   "failure_rate": 0.03667481662591687
+  },
+  {
+   "steps": 1982464,
+   "multiplier": 6.099584501150882,
+   "episodes": 413,
+   "failure_rate": 0.05569007263922518
+  },
+  {
+   "steps": 1990656,
+   "multiplier": 6.0855557241724645,
+   "episodes": 417,
+   "failure_rate": 0.03597122302158273
+  },
+  {
+   "steps": 1998848,
+   "multiplier": 6.062190106739051,
+   "episodes": 413,
+   "failure_rate": 0.026634382566585957
+  },
+  {
+   "steps": 2007040,
+   "multiplier": 6.04974879218506,
+   "episodes": 426,
+   "failure_rate": 0.03755868544600939
+  },
+  {
+   "steps": 2015232,
+   "multiplier": 6.020390994019922,
+   "episodes": 436,
+   "failure_rate": 0.020642201834862386
+  },
+  {
+   "steps": 2023424,
+   "multiplier": 6.006448686327615,
+   "episodes": 416,
+   "failure_rate": 0.036057692307692304
+  },
+  {
+   "steps": 2031616,
+   "multiplier": 5.9916245657245994,
+   "episodes": 398,
+   "failure_rate": 0.035175879396984924
+  },
+  {
+   "steps": 2039808,
+   "multiplier": 5.975278411878445,
+   "episodes": 416,
+   "failure_rate": 0.03365384615384615
+  },
+  {
+   "steps": 2048000,
+   "multiplier": 5.9646872788735195,
+   "episodes": 406,
+   "failure_rate": 0.03940886699507389
+  },
+  {
+   "steps": 2056192,
+   "multiplier": 5.951724315910557,
+   "episodes": 459,
+   "failure_rate": 0.037037037037037035
+  },
+  {
+   "steps": 2064384,
+   "multiplier": 5.959140583853141,
+   "episodes": 418,
+   "failure_rate": 0.05741626794258373
+  },
+  {
+   "steps": 2072576,
+   "multiplier": 5.9483562701276504,
+   "episodes": 408,
+   "failure_rate": 0.0392156862745098
+  },
+  {
+   "steps": 2080768,
+   "multiplier": 5.9228007145720944,
+   "episodes": 450,
+   "failure_rate": 0.024444444444444446
+  },
+  {
+   "steps": 2088960,
+   "multiplier": 5.924370221298552,
+   "episodes": 446,
+   "failure_rate": 0.0515695067264574
+  },
+  {
+   "steps": 2097152,
+   "multiplier": 5.898524810670533,
+   "episodes": 414,
+   "failure_rate": 0.024154589371980676
+  },
+  {
+   "steps": 2105344,
+   "multiplier": 5.882461462254243,
+   "episodes": 442,
+   "failure_rate": 0.033936651583710405
+  },
+  {
+   "steps": 2113536,
+   "multiplier": 5.8609650251996115,
+   "episodes": 421,
+   "failure_rate": 0.028503562945368172
+  },
+  {
+   "steps": 2121728,
+   "multiplier": 5.8696557701206045,
+   "episodes": 443,
+   "failure_rate": 0.05869074492099323
+  },
+  {
+   "steps": 2129920,
+   "multiplier": 5.846290152687191,
+   "episodes": 413,
+   "failure_rate": 0.026634382566585957
+  },
+  {
+   "steps": 2138112,
+   "multiplier": 5.834294903281015,
+   "episodes": 421,
+   "failure_rate": 0.03800475059382423
+  },
+  {
+   "steps": 2146304,
+   "multiplier": 5.810547886574572,
+   "episodes": 419,
+   "failure_rate": 0.026252983293556086
+  },
+  {
+   "steps": 2154496,
+   "multiplier": 5.804665533633395,
+   "episodes": 408,
+   "failure_rate": 0.04411764705882353
+  },
+  {
+   "steps": 2162688,
+   "multiplier": 5.778194945398101,
+   "episodes": 425,
+   "failure_rate": 0.023529411764705882
+  },
+  {
+   "steps": 2170880,
+   "multiplier": 5.763548480751637,
+   "episodes": 396,
+   "failure_rate": 0.03535353535353535
+  },
+  {
+   "steps": 2179072,
+   "multiplier": 5.748513515716672,
+   "episodes": 429,
+   "failure_rate": 0.03496503496503497
+  },
+  {
+   "steps": 2187264,
+   "multiplier": 5.7369750541782105,
+   "episodes": 416,
+   "failure_rate": 0.038461538461538464
+  },
+  {
+   "steps": 2195456,
+   "multiplier": 5.731367577542697,
+   "episodes": 428,
+   "failure_rate": 0.04439252336448598
+  },
+  {
+   "steps": 2203648,
+   "multiplier": 5.72165193773227,
+   "episodes": 422,
+   "failure_rate": 0.04028436018957346
+  },
+  {
+   "steps": 2211840,
+   "multiplier": 5.725441668783615,
+   "episodes": 409,
+   "failure_rate": 0.05378973105134474
+  },
+  {
+   "steps": 2220032,
+   "multiplier": 5.705122034080419,
+   "episodes": 438,
+   "failure_rate": 0.02968036529680365
+  },
+  {
+   "steps": 2228224,
+   "multiplier": 5.690655029004277,
+   "episodes": 394,
+   "failure_rate": 0.03553299492385787
+  },
+  {
+   "steps": 2236416,
+   "multiplier": 5.703155029004277,
+   "episodes": 416,
+   "failure_rate": 0.0625
+  },
+  {
+   "steps": 2244608,
+   "multiplier": 5.682804624691609,
+   "episodes": 371,
+   "failure_rate": 0.029649595687331536
+  },
+  {
+   "steps": 2252800,
+   "multiplier": 5.676707063715999,
+   "episodes": 410,
+   "failure_rate": 0.04390243902439024
+  },
+  {
+   "steps": 2260992,
+   "multiplier": 5.6777274718792645,
+   "episodes": 392,
+   "failure_rate": 0.05102040816326531
+  },
+  {
+   "steps": 2269184,
+   "multiplier": 5.665913629397164,
+   "episodes": 419,
+   "failure_rate": 0.03818615751789976
+  },
+  {
+   "steps": 2277376,
+   "multiplier": 5.668545208344533,
+   "episodes": 399,
+   "failure_rate": 0.05263157894736842
+  },
+  {
+   "steps": 2285568,
+   "multiplier": 5.646045208344533,
+   "episodes": 400,
+   "failure_rate": 0.0275
+  },
+  {
+   "steps": 2293760,
+   "multiplier": 5.617731955332484,
+   "episodes": 415,
+   "failure_rate": 0.021686746987951807
+  },
+  {
+   "steps": 2301952,
+   "multiplier": 5.604941257658066,
+   "episodes": 430,
+   "failure_rate": 0.037209302325581395
+  },
+  {
+   "steps": 2310144,
+   "multiplier": 5.596916566300041,
+   "episodes": 405,
+   "failure_rate": 0.04197530864197531
+  },
+  {
+   "steps": 2318336,
+   "multiplier": 5.5810851312203145,
+   "episodes": 439,
+   "failure_rate": 0.03416856492027335
+  },
+  {
+   "steps": 2326528,
+   "multiplier": 5.567284226242939,
+   "episodes": 442,
+   "failure_rate": 0.03619909502262444
+  },
+  {
+   "steps": 2334720,
+   "multiplier": 5.5489143965592405,
+   "episodes": 411,
+   "failure_rate": 0.031630170316301706
+  },
+  {
+   "steps": 2342912,
+   "multiplier": 5.529842231610787,
+   "episodes": 388,
+   "failure_rate": 0.030927835051546393
+  },
+  {
+   "steps": 2351104,
+   "multiplier": 5.50530519457375,
+   "episodes": 432,
+   "failure_rate": 0.02546296296296296
+  },
+  {
+   "steps": 2359296,
+   "multiplier": 5.477726719237427,
+   "episodes": 446,
+   "failure_rate": 0.02242152466367713
+  },
+  {
+   "steps": 2367488,
+   "multiplier": 5.465641411180554,
+   "episodes": 422,
+   "failure_rate": 0.037914691943127965
+  },
+  {
+   "steps": 2375680,
+   "multiplier": 5.453047894971078,
+   "episodes": 401,
+   "failure_rate": 0.03740648379052369
+  },
+  {
+   "steps": 2383872,
+   "multiplier": 5.4476488339382145,
+   "episodes": 426,
+   "failure_rate": 0.04460093896713615
+  },
+  {
+   "steps": 2392064,
+   "multiplier": 5.433448356611246,
+   "episodes": 419,
+   "failure_rate": 0.03579952267303103
+  },
+  {
+   "steps": 2400256,
+   "multiplier": 5.428706977300901,
+   "episodes": 464,
+   "failure_rate": 0.04525862068965517
+  },
+  {
+   "steps": 2408448,
+   "multiplier": 5.41096504181703,
+   "episodes": 403,
+   "failure_rate": 0.03225806451612903
+  },
+  {
+   "steps": 2416640,
+   "multiplier": 5.4067316322060455,
+   "episodes": 437,
+   "failure_rate": 0.04576659038901602
+  },
+  {
+   "steps": 2424832,
+   "multiplier": 5.406970866655806,
+   "episodes": 418,
+   "failure_rate": 0.050239234449760764
+  },
+  {
+   "steps": 2433024,
+   "multiplier": 5.380390070402878,
+   "episodes": 427,
+   "failure_rate": 0.0234192037470726
+  },
+  {
+   "steps": 2441216,
+   "multiplier": 5.363486997116826,
+   "episodes": 423,
+   "failure_rate": 0.03309692671394799
+  },
+  {
+   "steps": 2449408,
+   "multiplier": 5.362782771764714,
+   "episodes": 426,
+   "failure_rate": 0.04929577464788732
+  },
+  {
+   "steps": 2457600,
+   "multiplier": 5.357488654117655,
+   "episodes": 425,
+   "failure_rate": 0.04470588235294118
+  },
+  {
+   "steps": 2465792,
+   "multiplier": 5.3386637140696935,
+   "episodes": 417,
+   "failure_rate": 0.03117505995203837
+  },
+  {
+   "steps": 2473984,
+   "multiplier": 5.326780305997945,
+   "episodes": 446,
+   "failure_rate": 0.03811659192825112
+  },
+  {
+   "steps": 2482176,
+   "multiplier": 5.309338445532829,
+   "episodes": 430,
+   "failure_rate": 0.03255813953488372
+  },
+  {
+   "steps": 2490368,
+   "multiplier": 5.292166728361112,
+   "episodes": 396,
+   "failure_rate": 0.03282828282828283
+  },
+  {
+   "steps": 2498560,
+   "multiplier": 5.2762818669538625,
+   "episodes": 469,
+   "failure_rate": 0.03411513859275053
+  },
+  {
+   "steps": 2506752,
+   "multiplier": 5.266001493122086,
+   "episodes": 428,
+   "failure_rate": 0.0397196261682243
+  },
+  {
+   "steps": 2514944,
+   "multiplier": 5.257132598520544,
+   "episodes": 389,
+   "failure_rate": 0.04113110539845758
+  },
+  {
+   "steps": 2523136,
+   "multiplier": 5.247311169949115,
+   "episodes": 448,
+   "failure_rate": 0.04017857142857143
+  },
+  {
+   "steps": 2531328,
+   "multiplier": 5.22095183188765,
+   "episodes": 423,
+   "failure_rate": 0.02364066193853428
+  },
+  {
+   "steps": 2539520,
+   "multiplier": 5.200905748938341,
+   "episodes": 434,
+   "failure_rate": 0.029953917050691243
+  },
+  {
+   "steps": 2547712,
+   "multiplier": 5.2027925413911715,
+   "episodes": 424,
+   "failure_rate": 0.05188679245283019
+  },
+  {
+   "steps": 2555904,
+   "multiplier": 5.194848616157526,
+   "episodes": 428,
+   "failure_rate": 0.04205607476635514
+  },
+  {
+   "steps": 2564096,
+   "multiplier": 5.179977421778135,
+   "episodes": 427,
+   "failure_rate": 0.0351288056206089
+  },
+  {
+   "steps": 2572288,
+   "multiplier": 5.168968247466209,
+   "episodes": 436,
+   "failure_rate": 0.0389908256880734
+  },
+  {
+   "steps": 2580480,
+   "multiplier": 5.157517000300676,
+   "episodes": 441,
+   "failure_rate": 0.03854875283446712
+  },
+  {
+   "steps": 2588672,
+   "multiplier": 5.15021362951416,
+   "episodes": 445,
+   "failure_rate": 0.04269662921348315
+  },
+  {
+   "steps": 2596864,
+   "multiplier": 5.158184644006914,
+   "episodes": 483,
+   "failure_rate": 0.057971014492753624
+  },
+  {
+   "steps": 2605056,
+   "multiplier": 5.1539512343959295,
+   "episodes": 437,
+   "failure_rate": 0.04576659038901602
+  },
+  {
+   "steps": 2613248,
+   "multiplier": 5.128521258965954,
+   "episodes": 407,
+   "failure_rate": 0.02457002457002457
+  },
+  {
+   "steps": 2621440,
+   "multiplier": 5.108693672759057,
+   "episodes": 464,
+   "failure_rate": 0.03017241379310345
+  },
+  {
+   "steps": 2629632,
+   "multiplier": 5.0958166425966445,
+   "episodes": 431,
+   "failure_rate": 0.037122969837587005
+  },
+  {
+   "steps": 2637824,
+   "multiplier": 5.076477019955135,
+   "episodes": 424,
+   "failure_rate": 0.030660377358490566
+  },
+  {
+   "steps": 2646016,
+   "multiplier": 5.058513633227446,
+   "episodes": 437,
+   "failure_rate": 0.032036613272311214
+  },
+  {
+   "steps": 2654208,
+   "multiplier": 5.046428325170574,
+   "episodes": 422,
+   "failure_rate": 0.037914691943127965
+  },
+  {
+   "steps": 2662400,
+   "multiplier": 5.023154383077032,
+   "episodes": 449,
+   "failure_rate": 0.026726057906458798
+  },
+  {
+   "steps": 2670592,
+   "multiplier": 4.999703055643404,
+   "episodes": 452,
+   "failure_rate": 0.02654867256637168
+  },
+  {
+   "steps": 2678784,
+   "multiplier": 4.97504867776322,
+   "episodes": 434,
+   "failure_rate": 0.02534562211981567
+  },
+  {
+   "steps": 2686976,
+   "multiplier": 4.980604233318775,
+   "episodes": 432,
+   "failure_rate": 0.05555555555555555
+  },
+  {
+   "steps": 2695168,
+   "multiplier": 4.967012000309067,
+   "episodes": 412,
+   "failure_rate": 0.03640776699029126
+  },
+  {
+   "steps": 2703360,
+   "multiplier": 4.9703114926948535,
+   "episodes": 394,
+   "failure_rate": 0.0532994923857868
+  },
+  {
+   "steps": 2711552,
+   "multiplier": 4.950334587383075,
+   "episodes": 433,
+   "failure_rate": 0.03002309468822171
+  },
+  {
+   "steps": 2719744,
+   "multiplier": 4.938536834574086,
+   "episodes": 445,
+   "failure_rate": 0.038202247191011236
+  },
+  {
+   "steps": 2727936,
+   "multiplier": 4.9275993345740865,
+   "episodes": 384,
+   "failure_rate": 0.0390625
+  },
+  {
+   "steps": 2736128,
+   "multiplier": 4.934471372488779,
+   "episodes": 422,
+   "failure_rate": 0.05687203791469194
+  },
+  {
+   "steps": 2744320,
+   "multiplier": 4.922502692399293,
+   "episodes": 447,
+   "failure_rate": 0.03803131991051454
+  },
+  {
+   "steps": 2752512,
+   "multiplier": 4.90468660044527,
+   "episodes": 435,
+   "failure_rate": 0.03218390804597701
+  },
+  {
+   "steps": 2760704,
+   "multiplier": 4.899497921199988,
+   "episodes": 424,
+   "failure_rate": 0.04481132075471698
+  },
+  {
+   "steps": 2768896,
+   "multiplier": 4.895449781156224,
+   "episodes": 457,
+   "failure_rate": 0.045951859956236324
+  },
+  {
+   "steps": 2777088,
+   "multiplier": 4.8786130464623465,
+   "episodes": 392,
+   "failure_rate": 0.03316326530612245
+  },
+  {
+   "steps": 2785280,
+   "multiplier": 4.874275146918968,
+   "episodes": 438,
+   "failure_rate": 0.045662100456621
+  },
+  {
+   "steps": 2793472,
+   "multiplier": 4.873226195870017,
+   "episodes": 429,
+   "failure_rate": 0.04895104895104895
+  },
+  {
+   "steps": 2801664,
+   "multiplier": 4.873226195870017,
+   "episodes": 400,
+   "failure_rate": 0.05
+  },
+  {
+   "steps": 2809856,
+   "multiplier": 4.867128634894407,
+   "episodes": 410,
+   "failure_rate": 0.04390243902439024
+  },
+  {
+   "steps": 2818048,
+   "multiplier": 4.857604825370598,
+   "episodes": 420,
+   "failure_rate": 0.04047619047619048
+  },
+  {
+   "steps": 2826240,
+   "multiplier": 4.859665562897713,
+   "episodes": 461,
+   "failure_rate": 0.052060737527114966
+  },
+  {
+   "steps": 2834432,
+   "multiplier": 4.860550518649926,
+   "episodes": 452,
+   "failure_rate": 0.05088495575221239
+  },
+  {
+   "steps": 2842624,
+   "multiplier": 4.866604330309118,
+   "episodes": 446,
+   "failure_rate": 0.05605381165919283
+  },
+  {
+   "steps": 2850816,
+   "multiplier": 4.857700220720077,
+   "episodes": 438,
+   "failure_rate": 0.0410958904109589
+  },
+  {
+   "steps": 2859008,
+   "multiplier": 4.859832922141878,
+   "episodes": 422,
+   "failure_rate": 0.052132701421800945
+  },
+  {
+   "steps": 2867200,
+   "multiplier": 4.849552548310102,
+   "episodes": 428,
+   "failure_rate": 0.0397196261682243
+  },
+  {
+   "steps": 2875392,
+   "multiplier": 4.828820840993029,
+   "episodes": 410,
+   "failure_rate": 0.02926829268292683
+  },
+  {
+   "steps": 2883584,
+   "multiplier": 4.849275386447575,
+   "episodes": 440,
+   "failure_rate": 0.07045454545454545
+  },
+  {
+   "steps": 2891776,
+   "multiplier": 4.857414921331296,
+   "episodes": 430,
+   "failure_rate": 0.05813953488372093
+  },
+  {
+   "steps": 2899968,
+   "multiplier": 4.851193723174614,
+   "episodes": 434,
+   "failure_rate": 0.04377880184331797
+  },
+  {
+   "steps": 2908160,
+   "multiplier": 4.878456416331347,
+   "episodes": 453,
+   "failure_rate": 0.0772626931567329
+  },
+  {
+   "steps": 2916352,
+   "multiplier": 4.881451808036416,
+   "episodes": 434,
+   "failure_rate": 0.052995391705069124
+  },
+  {
+   "steps": 2924544,
+   "multiplier": 4.872454085940744,
+   "episodes": 439,
+   "failure_rate": 0.04100227790432802
+  },
+  {
+   "steps": 2932736,
+   "multiplier": 4.86391750057489,
+   "episodes": 410,
+   "failure_rate": 0.041463414634146344
+  },
+  {
+   "steps": 2940928,
+   "multiplier": 4.851388226570206,
+   "episodes": 427,
+   "failure_rate": 0.03747072599531616
+  },
+  {
+   "steps": 2949120,
+   "multiplier": 4.838858952565523,
+   "episodes": 427,
+   "failure_rate": 0.03747072599531616
+  },
+  {
+   "steps": 2957312,
+   "multiplier": 4.820721697663561,
+   "episodes": 408,
+   "failure_rate": 0.031862745098039214
+  },
+  {
+   "steps": 2965504,
+   "multiplier": 4.829689756631621,
+   "episodes": 407,
+   "failure_rate": 0.05896805896805897
+  },
+  {
+   "steps": 2973696,
+   "multiplier": 4.838513286043385,
+   "episodes": 408,
+   "failure_rate": 0.058823529411764705
+  },
+  {
+   "steps": 2981888,
+   "multiplier": 4.841493418493716,
+   "episodes": 453,
+   "failure_rate": 0.052980132450331126
+  },
+  {
+   "steps": 2990080,
+   "multiplier": 4.854273687552012,
+   "episodes": 446,
+   "failure_rate": 0.06278026905829596
+  },
+  {
+   "steps": 2998272,
+   "multiplier": 4.855870739149063,
+   "episodes": 407,
+   "failure_rate": 0.051597051597051594
+  },
+  {
+   "steps": 3006464,
+   "multiplier": 4.852709146643209,
+   "episodes": 427,
+   "failure_rate": 0.0468384074941452
+  },
+  {
+   "steps": 3014656,
+   "multiplier": 4.848761778222156,
+   "episodes": 456,
+   "failure_rate": 0.046052631578947366
+  },
+  {
+   "steps": 3022848,
+   "multiplier": 4.8375967296784665,
+   "episodes": 412,
+   "failure_rate": 0.038834951456310676
+  },
+  {
+   "steps": 3031040,
+   "multiplier": 4.836496485179689,
+   "episodes": 409,
+   "failure_rate": 0.0488997555012225
+  },
+  {
+   "steps": 3039232,
+   "multiplier": 4.8261440622722,
+   "episodes": 454,
+   "failure_rate": 0.039647577092511016
+  },
+  {
+   "steps": 3047424,
+   "multiplier": 4.809111095239233,
+   "episodes": 455,
+   "failure_rate": 0.03296703296703297
+  },
+  {
+   "steps": 3055616,
+   "multiplier": 4.800686587580589,
+   "episodes": 457,
+   "failure_rate": 0.04157549234135667
+  },
+  {
+   "steps": 3063808,
+   "multiplier": 4.793080602543183,
+   "episodes": 401,
+   "failure_rate": 0.04239401496259352
+  },
+  {
+   "steps": 3072000,
+   "multiplier": 4.789851203879486,
+   "episodes": 449,
+   "failure_rate": 0.0467706013363029
+  },
+  {
+   "steps": 3080192,
+   "multiplier": 4.778037361397386,
+   "episodes": 419,
+   "failure_rate": 0.03818615751789976
+  },
+  {
+   "steps": 3088384,
+   "multiplier": 4.756406155723627,
+   "episodes": 423,
+   "failure_rate": 0.028368794326241134
+  },
+  {
+   "steps": 3096576,
+   "multiplier": 4.748628377945849,
+   "episodes": 450,
+   "failure_rate": 0.042222222222222223
+  },
+  {
+   "steps": 3104768,
+   "multiplier": 4.746590008641292,
+   "episodes": 417,
+   "failure_rate": 0.047961630695443645
+  },
+  {
+   "steps": 3112960,
+   "multiplier": 4.715369351364297,
+   "episodes": 426,
+   "failure_rate": 0.018779342723004695
+  },
+  {
+   "steps": 3121152,
+   "multiplier": 4.70822649422144,
+   "episodes": 420,
+   "failure_rate": 0.04285714285714286
+  },
+  {
+   "steps": 3129344,
+   "multiplier": 4.681811399881817,
+   "episodes": 424,
+   "failure_rate": 0.02358490566037736
+  },
+  {
+   "steps": 3137536,
+   "multiplier": 4.674417916172544,
+   "episodes": 399,
+   "failure_rate": 0.042606516290726815
+  },
+  {
+   "steps": 3145728,
+   "multiplier": 4.680102370928925,
+   "episodes": 431,
+   "failure_rate": 0.05568445475638051
+  },
+  {
+   "steps": 3153920,
+   "multiplier": 4.674913691683642,
+   "episodes": 424,
+   "failure_rate": 0.04481132075471698
+  },
+  {
+   "steps": 3162112,
+   "multiplier": 4.677022872825082,
+   "episodes": 403,
+   "failure_rate": 0.052109181141439205
+  },
+  {
+   "steps": 3170304,
+   "multiplier": 4.6809647815387745,
+   "episodes": 482,
+   "failure_rate": 0.05394190871369295
+  },
+  {
+   "steps": 3178496,
+   "multiplier": 4.689927045689718,
+   "episodes": 424,
+   "failure_rate": 0.0589622641509434
+  },
+  {
+   "steps": 3186688,
+   "multiplier": 4.687238873646707,
+   "episodes": 465,
+   "failure_rate": 0.047311827956989246
+  },
+  {
+   "steps": 3194880,
+   "multiplier": 4.687930117886338,
+   "episodes": 434,
+   "failure_rate": 0.05069124423963134
+  },
+  {
+   "steps": 3203072,
+   "multiplier": 4.681014018113095,
+   "episodes": 441,
+   "failure_rate": 0.04308390022675737
+  },
+  {
+   "steps": 3211264,
+   "multiplier": 4.678072841642507,
+   "episodes": 425,
+   "failure_rate": 0.047058823529411764
+  },
+  {
+   "steps": 3219456,
+   "multiplier": 4.6600925460760045,
+   "episodes": 406,
+   "failure_rate": 0.03201970443349754
+  },
+  {
+   "steps": 3227648,
+   "multiplier": 4.661979338528835,
+   "episodes": 424,
+   "failure_rate": 0.05188679245283019
+  },
+  {
+   "steps": 3235840,
+   "multiplier": 4.665969948857473,
+   "episodes": 426,
+   "failure_rate": 0.0539906103286385
+  },
+  {
+   "steps": 3244032,
+   "multiplier": 4.6738403192278435,
+   "episodes": 432,
+   "failure_rate": 0.05787037037037037
+  },
+  {
+   "steps": 3252224,
+   "multiplier": 4.673409284745085,
+   "episodes": 464,
+   "failure_rate": 0.04956896551724138
+  },
+  {
+   "steps": 3260416,
+   "multiplier": 4.672360333696134,
+   "episodes": 429,
+   "failure_rate": 0.04895104895104895
+  },
+  {
+   "steps": 3268608,
+   "multiplier": 4.673973236921941,
+   "episodes": 465,
+   "failure_rate": 0.05161290322580645
+  },
+  {
+   "steps": 3276800,
+   "multiplier": 4.6797871904103125,
+   "episodes": 430,
+   "failure_rate": 0.05581395348837209
+  },
+  {
+   "steps": 3284992,
+   "multiplier": 4.680165024163461,
+   "episodes": 397,
+   "failure_rate": 0.05037783375314862
+  },
+  {
+   "steps": 3293184,
+   "multiplier": 4.6674457259178475,
+   "episodes": 456,
+   "failure_rate": 0.03728070175438596
+  },
+  {
+   "steps": 3301376,
+   "multiplier": 4.648906400075151,
+   "episodes": 445,
+   "failure_rate": 0.03146067415730337
+  },
+  {
+   "steps": 3309568,
+   "multiplier": 4.654590854831532,
+   "episodes": 431,
+   "failure_rate": 0.05568445475638051
+  },
+  {
+   "steps": 3317760,
+   "multiplier": 4.652323551728906,
+   "episodes": 419,
+   "failure_rate": 0.0477326968973747
+  },
+  {
+   "steps": 3325952,
+   "multiplier": 4.657323551728906,
+   "episodes": 400,
+   "failure_rate": 0.055
+  },
+  {
+   "steps": 3334144,
+   "multiplier": 4.636880201975211,
+   "episodes": 406,
+   "failure_rate": 0.029556650246305417
+  },
+  {
+   "steps": 3342336,
+   "multiplier": 4.624089504300793,
+   "episodes": 430,
+   "failure_rate": 0.037209302325581395
+  },
+  {
+   "steps": 3350528,
+   "multiplier": 4.605200615411904,
+   "episodes": 450,
+   "failure_rate": 0.03111111111111111
+  },
+  {
+   "steps": 3358720,
+   "multiplier": 4.599697102531342,
+   "episodes": 427,
+   "failure_rate": 0.04449648711943794
+  },
+  {
+   "steps": 3366912,
+   "multiplier": 4.599342492602264,
+   "episodes": 423,
+   "failure_rate": 0.04964539007092199
+  },
+  {
+   "steps": 3375104,
+   "multiplier": 4.594085221908752,
+   "episodes": 447,
+   "failure_rate": 0.0447427293064877
+  },
+  {
+   "steps": 3383296,
+   "multiplier": 4.57702639837934,
+   "episodes": 425,
+   "failure_rate": 0.03294117647058824
+  },
+  {
+   "steps": 3391488,
+   "multiplier": 4.570982442335384,
+   "episodes": 455,
+   "failure_rate": 0.04395604395604396
+  },
+  {
+   "steps": 3399680,
+   "multiplier": 4.576796395823756,
+   "episodes": 430,
+   "failure_rate": 0.05581395348837209
+  },
+  {
+   "steps": 3407872,
+   "multiplier": 4.581466099696193,
+   "episodes": 439,
+   "failure_rate": 0.05466970387243736
+  },
+  {
+   "steps": 3416064,
+   "multiplier": 4.577501905322792,
+   "episodes": 391,
+   "failure_rate": 0.04603580562659847
+  },
+  {
+   "steps": 3424256,
+   "multiplier": 4.5693623704390705,
+   "episodes": 430,
+   "failure_rate": 0.04186046511627907
+  },
+  {
+   "steps": 3432448,
+   "multiplier": 4.580631517047386,
+   "episodes": 457,
+   "failure_rate": 0.061269146608315096
+  },
+  {
+   "steps": 3440640,
+   "multiplier": 4.577429546604036,
+   "episodes": 406,
+   "failure_rate": 0.046798029556650245
+  },
+  {
+   "steps": 3448832,
+   "multiplier": 4.566935719443542,
+   "episodes": 405,
+   "failure_rate": 0.03950617283950617
+  },
+  {
+   "steps": 3457024,
+   "multiplier": 4.562082446305845,
+   "episodes": 443,
+   "failure_rate": 0.045146726862302484
+  },
+  {
+   "steps": 3465216,
+   "multiplier": 4.548578796670808,
+   "episodes": 411,
+   "failure_rate": 0.0364963503649635
+  },
+  {
+   "steps": 3473408,
+   "multiplier": 4.533491514875297,
+   "episodes": 401,
+   "failure_rate": 0.034912718204488775
+  },
+  {
+   "steps": 3481600,
+   "multiplier": 4.532442563826346,
+   "episodes": 429,
+   "failure_rate": 0.04895104895104895
+  },
+  {
+   "steps": 3489792,
+   "multiplier": 4.55249087300509,
+   "episodes": 414,
+   "failure_rate": 0.07004830917874397
+  },
+  {
+   "steps": 3497984,
+   "multiplier": 4.5628156989911695,
+   "episodes": 431,
+   "failure_rate": 0.060324825986078884
+  },
+  {
+   "steps": 3506176,
+   "multiplier": 4.560662588943322,
+   "episodes": 418,
+   "failure_rate": 0.04784688995215311
+  },
+  {
+   "steps": 3514368,
+   "multiplier": 4.552697987173411,
+   "episodes": 452,
+   "failure_rate": 0.0420353982300885
+  },
+  {
+   "steps": 3522560,
+   "multiplier": 4.542887112468919,
+   "episodes": 423,
+   "failure_rate": 0.04018912529550828
+  },
+  {
+   "steps": 3530752,
+   "multiplier": 4.538341657923464,
+   "episodes": 462,
+   "failure_rate": 0.045454545454545456
+  },
+  {
+   "steps": 3538944,
+   "multiplier": 4.5275121648359065,
+   "episodes": 434,
+   "failure_rate": 0.03917050691244239
+  },
+  {
+   "steps": 3547136,
+   "multiplier": 4.5228522152137405,
+   "episodes": 397,
+   "failure_rate": 0.04534005037783375
+  },
+  {
+   "steps": 3555328,
+   "multiplier": 4.51245617560978,
+   "episodes": 404,
+   "failure_rate": 0.039603960396039604
+  },
+  {
+   "steps": 3563520,
+   "multiplier": 4.501231685813862,
+   "episodes": 490,
+   "failure_rate": 0.03877551020408163
+  },
+  {
+   "steps": 3571712,
+   "multiplier": 4.4961995658995155,
+   "episodes": 467,
+   "failure_rate": 0.044967880085653104
+  },
+  {
+   "steps": 3579904,
+   "multiplier": 4.483145378707397,
+   "episodes": 406,
+   "failure_rate": 0.03694581280788178
+  },
+  {
+   "steps": 3588096,
+   "multiplier": 4.467236287798307,
+   "episodes": 440,
+   "failure_rate": 0.03409090909090909
+  },
+  {
+   "steps": 3596288,
+   "multiplier": 4.466276799525386,
+   "episodes": 469,
+   "failure_rate": 0.04904051172707889
+  },
+  {
+   "steps": 3604480,
+   "multiplier": 4.46462285550503,
+   "episodes": 393,
+   "failure_rate": 0.04834605597964377
+  },
+  {
+   "steps": 3612672,
+   "multiplier": 4.454723106131596,
+   "episodes": 399,
+   "failure_rate": 0.040100250626566414
+  },
+  {
+   "steps": 3620864,
+   "multiplier": 4.419685699647806,
+   "episodes": 401,
+   "failure_rate": 0.014962593516209476
+  },
+  {
+   "steps": 3629056,
+   "multiplier": 4.40940532581603,
+   "episodes": 428,
+   "failure_rate": 0.0397196261682243
+  },
+  {
+   "steps": 3637248,
+   "multiplier": 4.4012657909323085,
+   "episodes": 430,
+   "failure_rate": 0.04186046511627907
+  },
+  {
+   "steps": 3645440,
+   "multiplier": 4.3850007306913446,
+   "episodes": 415,
+   "failure_rate": 0.033734939759036145
+  },
+  {
+   "steps": 3653632,
+   "multiplier": 4.40556034139694,
+   "episodes": 411,
+   "failure_rate": 0.0705596107055961
+  },
+  {
+   "steps": 3661824,
+   "multiplier": 4.4062849790781,
+   "episodes": 414,
+   "failure_rate": 0.050724637681159424
+  },
+  {
+   "steps": 3670016,
+   "multiplier": 4.39022163066181,
+   "episodes": 442,
+   "failure_rate": 0.033936651583710405
+  },
+  {
+   "steps": 3678208,
+   "multiplier": 4.387280454191222,
+   "episodes": 425,
+   "failure_rate": 0.047058823529411764
+  },
+  {
+   "steps": 3686400,
+   "multiplier": 4.392173055623203,
+   "episodes": 419,
+   "failure_rate": 0.05489260143198091
+  },
+  {
+   "steps": 3694592,
+   "multiplier": 4.393392567818324,
+   "episodes": 410,
+   "failure_rate": 0.05121951219512195
+  },
+  {
+   "steps": 3702784,
+   "multiplier": 4.383112193986548,
+   "episodes": 428,
+   "failure_rate": 0.0397196261682243
+  },
+  {
+   "steps": 3710976,
+   "multiplier": 4.3832260892029495,
+   "episodes": 439,
+   "failure_rate": 0.05011389521640091
+  },
+  {
+   "steps": 3719168,
+   "multiplier": 4.372216914891023,
+   "episodes": 436,
+   "failure_rate": 0.0389908256880734
+  },
+  {
+   "steps": 3727360,
+   "multiplier": 4.3664877482243565,
+   "episodes": 384,
+   "failure_rate": 0.044270833333333336
+  },
+  {
+   "steps": 3735552,
+   "multiplier": 4.368084799821408,
+   "episodes": 407,
+   "failure_rate": 0.051597051597051594
+  },
+  {
+   "steps": 3743744,
+   "multiplier": 4.374290888814382,
+   "episodes": 427,
+   "failure_rate": 0.05620608899297424
+  },
+  {
+   "steps": 3751936,
+   "multiplier": 4.379428733425911,
+   "episodes": 399,
+   "failure_rate": 0.05513784461152882
+  },
+  {
+   "steps": 3760128,
+   "multiplier": 4.37208276186193,
+   "episodes": 422,
+   "failure_rate": 0.04265402843601896
+  },
+  {
+   "steps": 3768320,
+   "multiplier": 4.375222858480288,
+   "episodes": 414,
+   "failure_rate": 0.05314009661835749
+  },
+  {
+   "steps": 3776512,
+   "multiplier": 4.3843137675711965,
+   "episodes": 440,
+   "failure_rate": 0.05909090909090909
+  },
+  {
+   "steps": 3784704,
+   "multiplier": 4.381398969364919,
+   "episodes": 446,
+   "failure_rate": 0.04708520179372197
+  },
+  {
+   "steps": 3792896,
+   "multiplier": 4.375999908332055,
+   "episodes": 426,
+   "failure_rate": 0.04460093896713615
+  },
+  {
+   "steps": 3801088,
+   "multiplier": 4.369778710175373,
+   "episodes": 434,
+   "failure_rate": 0.04377880184331797
+  },
+  {
+   "steps": 3809280,
+   "multiplier": 4.366727066982885,
+   "episodes": 426,
+   "failure_rate": 0.046948356807511735
+  },
+  {
+   "steps": 3817472,
+   "multiplier": 4.368296573709342,
+   "episodes": 446,
+   "failure_rate": 0.0515695067264574
+  },
+  {
+   "steps": 3825664,
+   "multiplier": 4.352779332330032,
+   "episodes": 406,
+   "failure_rate": 0.034482758620689655
+  },
+  {
+   "steps": 3833856,
+   "multiplier": 4.334799036763529,
+   "episodes": 406,
+   "failure_rate": 0.03201970443349754
+  },
+  {
+   "steps": 3842048,
+   "multiplier": 4.324100346807198,
+   "episodes": 458,
+   "failure_rate": 0.039301310043668124
+  },
+  {
+   "steps": 3850240,
+   "multiplier": 4.338320530293436,
+   "episodes": 436,
+   "failure_rate": 0.06422018348623854
+  },
+  {
+   "steps": 3858432,
+   "multiplier": 4.313842572056777,
+   "episodes": 431,
+   "failure_rate": 0.025522041763341066
+  },
+  {
+   "steps": 3866624,
+   "multiplier": 4.301620349834555,
+   "episodes": 450,
+   "failure_rate": 0.03777777777777778
+  },
+  {
+   "steps": 3874816,
+   "multiplier": 4.300685770395303,
+   "episodes": 428,
+   "failure_rate": 0.04906542056074766
+  },
+  {
+   "steps": 3883008,
+   "multiplier": 4.288068947965396,
+   "episodes": 428,
+   "failure_rate": 0.037383177570093455
+  },
+  {
+   "steps": 3891200,
+   "multiplier": 4.270487900583849,
+   "episodes": 401,
+   "failure_rate": 0.032418952618453865
+  },
+  {
+   "steps": 3899392,
+   "multiplier": 4.280789408121538,
+   "episodes": 398,
+   "failure_rate": 0.06030150753768844
+  },
+  {
+   "steps": 3907584,
+   "multiplier": 4.2784084557405855,
+   "episodes": 441,
+   "failure_rate": 0.047619047619047616
+  },
+  {
+   "steps": 3915776,
+   "multiplier": 4.273754517793091,
+   "episodes": 419,
+   "failure_rate": 0.045346062052505964
+  },
+  {
+   "steps": 3923968,
+   "multiplier": 4.255539358868886,
+   "episodes": 409,
+   "failure_rate": 0.03178484107579462
+  },
+  {
+   "steps": 3932160,
+   "multiplier": 4.27107333945141,
+   "episodes": 412,
+   "failure_rate": 0.06553398058252427
+  },
+  {
+   "steps": 3940352,
+   "multiplier": 4.278627296285943,
+   "episodes": 417,
+   "failure_rate": 0.05755395683453238
+  },
+  {
+   "steps": 3948544,
+   "multiplier": 4.29346520152285,
+   "episodes": 401,
+   "failure_rate": 0.06483790523690773
+  },
+  {
+   "steps": 3956736,
+   "multiplier": 4.293356741653002,
+   "episodes": 461,
+   "failure_rate": 0.049891540130151846
+  },
+  {
+   "steps": 3964928,
+   "multiplier": 4.287152362090959,
+   "episodes": 411,
+   "failure_rate": 0.043795620437956206
+  },
+  {
+   "steps": 3973120,
+   "multiplier": 4.297617478370029,
+   "episodes": 430,
+   "failure_rate": 0.06046511627906977
+  },
+  {
+   "steps": 3981312,
+   "multiplier": 4.301230531983082,
+   "episodes": 429,
+   "failure_rate": 0.053613053613053616
+  },
+  {
+   "steps": 3989504,
+   "multiplier": 4.300613248032465,
+   "episodes": 405,
+   "failure_rate": 0.04938271604938271
+  },
+  {
+   "steps": 3997696,
+   "multiplier": 4.28201421421604,
+   "episodes": 414,
+   "failure_rate": 0.03140096618357488
+  },
+  {
+   "steps": 4005888,
+   "multiplier": 4.283560605968617,
+   "episodes": 485,
+   "failure_rate": 0.05154639175257732
+  },
+  {
+   "steps": 4014080,
+   "multiplier": 4.285693307390418,
+   "episodes": 422,
+   "failure_rate": 0.052132701421800945
+  },
+  {
+   "steps": 4022272,
+   "multiplier": 4.2938046875356966,
+   "episodes": 413,
+   "failure_rate": 0.05811138014527845
+  },
+  {
+   "steps": 4030464,
+   "multiplier": 4.285148356786342,
+   "episodes": 387,
+   "failure_rate": 0.041343669250646
+  },
+  {
+   "steps": 4038656,
+   "multiplier": 4.275597794988589,
+   "episodes": 445,
+   "failure_rate": 0.04044943820224719
+  },
+  {
+   "steps": 4046848,
+   "multiplier": 4.260456182788153,
+   "episodes": 459,
+   "failure_rate": 0.034858387799564274
+  },
+  {
+   "steps": 4055040,
+   "multiplier": 4.260936952018922,
+   "episodes": 416,
+   "failure_rate": 0.05048076923076923
+  },
+  {
+   "steps": 4063232,
+   "multiplier": 4.255020478701057,
+   "episodes": 431,
+   "failure_rate": 0.04408352668213457
+  },
+  {
+   "steps": 4071424,
+   "multiplier": 4.27044103944872,
+   "episodes": 428,
+   "failure_rate": 0.06542056074766354
+  },
+  {
+   "steps": 4079616,
+   "multiplier": 4.259560843849698,
+   "episodes": 409,
+   "failure_rate": 0.039119804400977995
+  },
+  {
+   "steps": 4087808,
+   "multiplier": 4.270785333645616,
+   "episodes": 441,
+   "failure_rate": 0.061224489795918366
+  },
+  {
+   "steps": 4096000,
+   "multiplier": 4.262890596803511,
+   "episodes": 380,
+   "failure_rate": 0.042105263157894736
+  },
+  {
+   "steps": 4104192,
+   "multiplier": 4.250418190622495,
+   "episodes": 453,
+   "failure_rate": 0.037527593818984545
+  },
+  {
+   "steps": 4112384,
+   "multiplier": 4.256540639602087,
+   "episodes": 392,
+   "failure_rate": 0.05612244897959184
+  },
+  {
+   "steps": 4120576,
+   "multiplier": 4.265988622616949,
+   "episodes": 471,
+   "failure_rate": 0.059447983014861996
+  },
+  {
+   "steps": 4128768,
+   "multiplier": 4.267390491775828,
+   "episodes": 428,
+   "failure_rate": 0.0514018691588785
+  },
+  {
+   "steps": 4136960,
+   "multiplier": 4.266170979580706,
+   "episodes": 410,
+   "failure_rate": 0.04878048780487805
+  },
+  {
+   "steps": 4145152,
+   "multiplier": 4.277445489384628,
+   "episodes": 408,
+   "failure_rate": 0.061274509803921566
+  },
+  {
+   "steps": 4153344,
+   "multiplier": 4.304728861749967,
+   "episodes": 427,
+   "failure_rate": 0.07728337236533958
+  },
+  {
+   "steps": 4161536,
+   "multiplier": 4.3122509856437725,
+   "episodes": 452,
+   "failure_rate": 0.05752212389380531
+  },
+  {
+   "steps": 4169728,
+   "multiplier": 4.328612541707845,
+   "episodes": 437,
+   "failure_rate": 0.06636155606407322
+  },
+  {
+   "steps": 4177920,
+   "multiplier": 4.33621622834379,
+   "episodes": 434,
+   "failure_rate": 0.0576036866359447
+  },
+  {
+   "steps": 4186112,
+   "multiplier": 4.343088266258483,
+   "episodes": 422,
+   "failure_rate": 0.05687203791469194
+  },
+  {
+   "steps": 4194304,
+   "multiplier": 4.347264338493246,
+   "episodes": 443,
+   "failure_rate": 0.05417607223476298
+  },
+  {
+   "steps": 4202496,
+   "multiplier": 4.354659481981105,
+   "episodes": 453,
+   "failure_rate": 0.05739514348785872
+  },
+  {
+   "steps": 4210688,
+   "multiplier": 4.359579390447924,
+   "episodes": 437,
+   "failure_rate": 0.05491990846681922
+  },
+  {
+   "steps": 4218880,
+   "multiplier": 4.36552344639198,
+   "episodes": 429,
+   "failure_rate": 0.055944055944055944
+  },
+  {
+   "steps": 4227072,
+   "multiplier": 4.380338261206795,
+   "episodes": 432,
+   "failure_rate": 0.06481481481481481
+  },
+  {
+   "steps": 4235264,
+   "multiplier": 4.384568196130873,
+   "episodes": 461,
+   "failure_rate": 0.05422993492407809
+  },
+  {
+   "steps": 4243456,
+   "multiplier": 4.370625888438566,
+   "episodes": 416,
+   "failure_rate": 0.036057692307692304
+  },
+  {
+   "steps": 4251648,
+   "multiplier": 4.362780455183296,
+   "episodes": 427,
+   "failure_rate": 0.04215456674473068
+  },
+  {
+   "steps": 4259840,
+   "multiplier": 4.363441248134838,
+   "episodes": 454,
+   "failure_rate": 0.05066079295154185
+  },
+  {
+   "steps": 4268032,
+   "multiplier": 4.377271035368881,
+   "episodes": 376,
+   "failure_rate": 0.06382978723404255
+  },
+  {
+   "steps": 4276224,
+   "multiplier": 4.398002742685954,
+   "episodes": 410,
+   "failure_rate": 0.07073170731707316
+  },
+  {
+   "steps": 4284416,
+   "multiplier": 4.400502742685954,
+   "episodes": 400,
+   "failure_rate": 0.0525
+  },
+  {
+   "steps": 4292608,
+   "multiplier": 4.41794460315107,
+   "episodes": 430,
+   "failure_rate": 0.06744186046511629
+  },
+  {
+   "steps": 4300800,
+   "multiplier": 4.409106830753975,
+   "episodes": 413,
+   "failure_rate": 0.04116222760290557
+  },
+  {
+   "steps": 4308992,
+   "multiplier": 4.417111471125205,
+   "episodes": 431,
+   "failure_rate": 0.058004640371229696
+  },
+  {
+   "steps": 4317184,
+   "multiplier": 4.411654900969303,
+   "episodes": 449,
+   "failure_rate": 0.044543429844097995
+  },
+  {
+   "steps": 4325376,
+   "multiplier": 4.430375280116222,
+   "episodes": 422,
+   "failure_rate": 0.06872037914691943
+  },
+  {
+   "steps": 4333568,
+   "multiplier": 4.445986139844729,
+   "episodes": 442,
+   "failure_rate": 0.06561085972850679
+  },
+  {
+   "steps": 4341760,
+   "multiplier": 4.453194377830999,
+   "episodes": 437,
+   "failure_rate": 0.057208237986270026
+  },
+  {
+   "steps": 4349952,
+   "multiplier": 4.4477953167981354,
+   "episodes": 426,
+   "failure_rate": 0.04460093896713615
+  },
+  {
+   "steps": 4358144,
+   "multiplier": 4.435866382787983,
+   "episodes": 394,
+   "failure_rate": 0.03807106598984772
+  },
+  {
+   "steps": 4366336,
+   "multiplier": 4.4307094321153375,
+   "episodes": 446,
+   "failure_rate": 0.04484304932735426
+  },
+  {
+   "steps": 4374528,
+   "multiplier": 4.43758147003003,
+   "episodes": 422,
+   "failure_rate": 0.05687203791469194
+  },
+  {
+   "steps": 4382720,
+   "multiplier": 4.428644271962397,
+   "episodes": 414,
+   "failure_rate": 0.04106280193236715
+  },
+  {
+   "steps": 4390912,
+   "multiplier": 4.426809409577076,
+   "episodes": 436,
+   "failure_rate": 0.0481651376146789
+  },
+  {
+   "steps": 4399104,
+   "multiplier": 4.416898496436764,
+   "episodes": 449,
+   "failure_rate": 0.0400890868596882
+  },
+  {
+   "steps": 4407296,
+   "multiplier": 4.422582951193145,
+   "episodes": 431,
+   "failure_rate": 0.05568445475638051
+  },
+  {
+   "steps": 4415488,
+   "multiplier": 4.436656177737768,
+   "episodes": 437,
+   "failure_rate": 0.06407322654462243
+  },
+  {
+   "steps": 4423680,
+   "multiplier": 4.436884488240051,
+   "episodes": 438,
+   "failure_rate": 0.0502283105022831
+  },
+  {
+   "steps": 4431872,
+   "multiplier": 4.437123722689812,
+   "episodes": 418,
+   "failure_rate": 0.050239234449760764
+  },
+  {
+   "steps": 4440064,
+   "multiplier": 4.443768602864104,
+   "episodes": 459,
+   "failure_rate": 0.05664488017429194
+  },
+  {
+   "steps": 4448256,
+   "multiplier": 4.446025134930612,
+   "episodes": 421,
+   "failure_rate": 0.052256532066508314
+  },
+  {
+   "steps": 4456448,
+   "multiplier": 4.464007591070963,
+   "episodes": 456,
+   "failure_rate": 0.06798245614035088
+  },
+  {
+   "steps": 4464640,
+   "multiplier": 4.474755254622365,
+   "episodes": 428,
+   "failure_rate": 0.06074766355140187
+  },
+  {
+   "steps": 4472832,
+   "multiplier": 4.452186676068749,
+   "episodes": 401,
+   "failure_rate": 0.02743142144638404
+  },
+  {
+   "steps": 4481024,
+   "multiplier": 4.445248877025686,
+   "episodes": 418,
+   "failure_rate": 0.0430622009569378
+  },
+  {
+   "steps": 4489216,
+   "multiplier": 4.435972858926139,
+   "episodes": 442,
+   "failure_rate": 0.04072398190045249
+  },
+  {
+   "steps": 4497408,
+   "multiplier": 4.438604437873507,
+   "episodes": 437,
+   "failure_rate": 0.05263157894736842
+  },
+  {
+   "steps": 4505600,
+   "multiplier": 4.4343875704036275,
+   "episodes": 415,
+   "failure_rate": 0.04578313253012048
+  },
+  {
+   "steps": 4513792,
+   "multiplier": 4.429945656963992,
+   "episodes": 439,
+   "failure_rate": 0.04555808656036447
+  },
+  {
+   "steps": 4521984,
+   "multiplier": 4.4391873631251295,
+   "episodes": 422,
+   "failure_rate": 0.05924170616113744
+  },
+  {
+   "steps": 4530176,
+   "multiplier": 4.459362801721621,
+   "episodes": 456,
+   "failure_rate": 0.07017543859649122
+  },
+  {
+   "steps": 4538368,
+   "multiplier": 4.464255403153602,
+   "episodes": 419,
+   "failure_rate": 0.05489260143198091
+  },
+  {
+   "steps": 4546560,
+   "multiplier": 4.462235201133399,
+   "episodes": 396,
+   "failure_rate": 0.047979797979797977
+  },
+  {
+   "steps": 4554752,
+   "multiplier": 4.456836140100536,
+   "episodes": 426,
+   "failure_rate": 0.04460093896713615
+  },
+  {
+   "steps": 4562944,
+   "multiplier": 4.457294855696866,
+   "episodes": 436,
+   "failure_rate": 0.05045871559633028
+  },
+  {
+   "steps": 4571136,
+   "multiplier": 4.46652036822534,
+   "episodes": 439,
+   "failure_rate": 0.05922551252847381
+  },
+  {
+   "steps": 4579328,
+   "multiplier": 4.449695723675577,
+   "episodes": 422,
+   "failure_rate": 0.03317535545023697
+  },
+  {
+   "steps": 4587520,
+   "multiplier": 4.4432792587845364,
+   "episodes": 413,
+   "failure_rate": 0.043583535108958835
+  },
+  {
+   "steps": 4595712,
+   "multiplier": 4.444205184710462,
+   "episodes": 432,
+   "failure_rate": 0.05092592592592592
+  },
+  {
+   "steps": 4603904,
+   "multiplier": 4.442929082622295,
+   "episodes": 431,
+   "failure_rate": 0.048723897911832945
+  },
+  {
+   "steps": 4612096,
+   "multiplier": 4.4279290826222955,
+   "episodes": 400,
+   "failure_rate": 0.035
+  },
+  {
+   "steps": 4620288,
+   "multiplier": 4.438819012364684,
+   "episodes": 427,
+   "failure_rate": 0.06088992974238876
+  },
+  {
+   "steps": 4628480,
+   "multiplier": 4.433315499484122,
+   "episodes": 427,
+   "failure_rate": 0.04449648711943794
+  },
+  {
+   "steps": 4636672,
+   "multiplier": 4.42798051189107,
+   "episodes": 403,
+   "failure_rate": 0.04466501240694789
+  },
+  {
+   "steps": 4644864,
+   "multiplier": 4.411313845224403,
+   "episodes": 420,
+   "failure_rate": 0.03333333333333333
+  },
+  {
+   "steps": 4653056,
+   "multiplier": 4.392633755738944,
+   "episodes": 447,
+   "failure_rate": 0.03131991051454139
+  },
+  {
+   "steps": 4661248,
+   "multiplier": 4.393442069826704,
+   "episodes": 433,
+   "failure_rate": 0.050808314087759814
+  },
+  {
+   "steps": 4669440,
+   "multiplier": 4.403143562364018,
+   "episodes": 402,
+   "failure_rate": 0.05970149253731343
+  },
+  {
+   "steps": 4677632,
+   "multiplier": 4.4018674602758505,
+   "episodes": 431,
+   "failure_rate": 0.048723897911832945
+  },
+  {
+   "steps": 4685824,
+   "multiplier": 4.3995947330031235,
+   "episodes": 440,
+   "failure_rate": 0.04772727272727273
+  },
+  {
+   "steps": 4694016,
+   "multiplier": 4.414110862035382,
+   "episodes": 403,
+   "failure_rate": 0.06451612903225806
+  },
+  {
+   "steps": 4702208,
+   "multiplier": 4.415997654488212,
+   "episodes": 424,
+   "failure_rate": 0.05188679245283019
+  },
+  {
+   "steps": 4710400,
+   "multiplier": 4.405717280656436,
+   "episodes": 428,
+   "failure_rate": 0.0397196261682243
+  },
+  {
+   "steps": 4718592,
+   "multiplier": 4.413454001210709,
+   "episodes": 433,
+   "failure_rate": 0.057736720554272515
+  },
+  {
+   "steps": 4726784,
+   "multiplier": 4.419603733831029,
+   "episodes": 374,
+   "failure_rate": 0.05614973262032086
+  },
+  {
+   "steps": 4734976,
+   "multiplier": 4.429560907278566,
+   "episodes": 467,
+   "failure_rate": 0.059957173447537475
+  },
+  {
+   "steps": 4743168,
+   "multiplier": 4.436508515479022,
+   "episodes": 439,
+   "failure_rate": 0.05694760820045558
+  },
+  {
+   "steps": 4751360,
+   "multiplier": 4.432066602039386,
+   "episodes": 439,
+   "failure_rate": 0.04555808656036447
+  },
+  {
+   "steps": 4759552,
+   "multiplier": 4.437880555527758,
+   "episodes": 430,
+   "failure_rate": 0.05581395348837209
+  },
+  {
+   "steps": 4767744,
+   "multiplier": 4.451559800810776,
+   "episodes": 424,
+   "failure_rate": 0.06367924528301887
+  },
+  {
+   "steps": 4775936,
+   "multiplier": 4.439474492753904,
+   "episodes": 422,
+   "failure_rate": 0.037914691943127965
+  },
+  {
+   "steps": 4784128,
+   "multiplier": 4.452706342871,
+   "episodes": 427,
+   "failure_rate": 0.06323185011709602
+  },
+  {
+   "steps": 4792320,
+   "multiplier": 4.448160888325545,
+   "episodes": 440,
+   "failure_rate": 0.045454545454545456
+  },
+  {
+   "steps": 4800512,
+   "multiplier": 4.440814916761564,
+   "episodes": 422,
+   "failure_rate": 0.04265402843601896
+  },
+  {
+   "steps": 4808704,
+   "multiplier": 4.420154770062298,
+   "episodes": 409,
+   "failure_rate": 0.029339853300733496
+  },
+  {
+   "steps": 4816896,
+   "multiplier": 4.411439173732022,
+   "episodes": 436,
+   "failure_rate": 0.04128440366972477
+  },
+  {
+   "steps": 4825088,
+   "multiplier": 4.413475372827045,
+   "episodes": 442,
+   "failure_rate": 0.05203619909502263
+  },
+  {
+   "steps": 4833280,
+   "multiplier": 4.415608074248846,
+   "episodes": 422,
+   "failure_rate": 0.052132701421800945
+  },
+  {
+   "steps": 4841472,
+   "multiplier": 4.426832564044764,
+   "episodes": 441,
+   "failure_rate": 0.061224489795918366
+  },
+  {
+   "steps": 4849664,
+   "multiplier": 4.428303152280058,
+   "episodes": 408,
+   "failure_rate": 0.051470588235294115
+  },
+  {
+   "steps": 4857856,
+   "multiplier": 4.427368572840806,
+   "episodes": 428,
+   "failure_rate": 0.04906542056074766
+  },
+  {
+   "steps": 4866048,
+   "multiplier": 4.436192102252571,
+   "episodes": 425,
+   "failure_rate": 0.058823529411764705
+  },
+  {
+   "steps": 4874240,
+   "multiplier": 4.421075823182804,
+   "episodes": 430,
+   "failure_rate": 0.03488372093023256
+  },
+  {
+   "steps": 4882432,
+   "multiplier": 4.408520757103509,
+   "episodes": 454,
+   "failure_rate": 0.037444933920704845
+  },
+  {
+   "steps": 4890624,
+   "multiplier": 4.401904705042772,
+   "episodes": 461,
+   "failure_rate": 0.04338394793926247
+  },
+  {
+   "steps": 4898816,
+   "multiplier": 4.400180567111737,
+   "episodes": 435,
+   "failure_rate": 0.04827586206896552
+  },
+  {
+   "steps": 4907008,
+   "multiplier": 4.386855383737654,
+   "episodes": 409,
+   "failure_rate": 0.03667481662591687
+  },
+  {
+   "steps": 4915200,
+   "multiplier": 4.393227932757262,
+   "episodes": 408,
+   "failure_rate": 0.056372549019607844
+  },
+  {
+   "steps": 4923392,
+   "multiplier": 4.377011716541046,
+   "episodes": 444,
+   "failure_rate": 0.033783783783783786
+  },
+  {
+   "steps": 4931584,
+   "multiplier": 4.392739416071562,
+   "episodes": 426,
+   "failure_rate": 0.06572769953051644
+  },
+  {
+   "steps": 4939776,
+   "multiplier": 4.394382608559825,
+   "episodes": 426,
+   "failure_rate": 0.051643192488262914
+  },
+  {
+   "steps": 4947968,
+   "multiplier": 4.384762656065763,
+   "episodes": 421,
+   "failure_rate": 0.040380047505938245
+  },
+  {
+   "steps": 4956160,
+   "multiplier": 4.376199120154161,
+   "episodes": 362,
+   "failure_rate": 0.04143646408839779
+  },
+  {
+   "steps": 4964352,
+   "multiplier": 4.37704657778128,
+   "episodes": 413,
+   "failure_rate": 0.05084745762711865
+  },
+  {
+   "steps": 4972544,
+   "multiplier": 4.371130104463414,
+   "episodes": 431,
+   "failure_rate": 0.04408352668213457
+  },
+  {
+   "steps": 4980736,
+   "multiplier": 4.351646536388296,
+   "episodes": 426,
+   "failure_rate": 0.03051643192488263
+  },
+  {
+   "steps": 4988928,
+   "multiplier": 4.347222943894999,
+   "episodes": 373,
+   "failure_rate": 0.045576407506702415
+  },
+  {
+   "steps": 4997120,
+   "multiplier": 4.332106664825232,
+   "episodes": 430,
+   "failure_rate": 0.03488372093023256
+  },
+  {
+   "steps": 5005312,
+   "multiplier": 4.334980228043623,
+   "episodes": 435,
+   "failure_rate": 0.052873563218390804
+  },
+  {
+   "steps": 5013504,
+   "multiplier": 4.336704365974658,
+   "episodes": 464,
+   "failure_rate": 0.05172413793103448
+  },
+  {
+   "steps": 5021696,
+   "multiplier": 4.3364556097557525,
+   "episodes": 402,
+   "failure_rate": 0.04975124378109453
+  },
+  {
+   "steps": 5029888,
+   "multiplier": 4.345003619123434,
+   "episodes": 427,
+   "failure_rate": 0.0585480093676815
+  },
+  {
+   "steps": 5038080,
+   "multiplier": 4.347750871870686,
+   "episodes": 455,
+   "failure_rate": 0.05274725274725275
+  },
+  {
+   "steps": 5046272,
+   "multiplier": 4.3405062162887385,
+   "episodes": 421,
+   "failure_rate": 0.04275534441805225
+  },
+  {
+   "steps": 5054464,
+   "multiplier": 4.339457265239788,
+   "episodes": 429,
+   "failure_rate": 0.04895104895104895
+  },
+  {
+   "steps": 5062656,
+   "multiplier": 4.334194107345051,
+   "episodes": 380,
+   "failure_rate": 0.04473684210526316
+  },
+  {
+   "steps": 5070848,
+   "multiplier": 4.345370577933286,
+   "episodes": 425,
+   "failure_rate": 0.0611764705882353
+  },
+  {
+   "steps": 5079040,
+   "multiplier": 4.344898879820079,
+   "episodes": 424,
+   "failure_rate": 0.049528301886792456
+  },
+  {
+   "steps": 5087232,
+   "multiplier": 4.336463671996118,
+   "episodes": 409,
+   "failure_rate": 0.04156479217603912
+  },
+  {
+   "steps": 5095424,
+   "multiplier": 4.34333570991081,
+   "episodes": 422,
+   "failure_rate": 0.05687203791469194
+  },
+  {
+   "steps": 5103616,
+   "multiplier": 4.341761860031875,
+   "episodes": 413,
+   "failure_rate": 0.048426150121065374
+  },
+  {
+   "steps": 5111808,
+   "multiplier": 4.351502119772134,
+   "episodes": 385,
+   "failure_rate": 0.05974025974025974
+  },
+  {
+   "steps": 5120000,
+   "multiplier": 4.344586019998892,
+   "episodes": 441,
+   "failure_rate": 0.04308390022675737
+  },
+  {
+   "steps": 5128192,
+   "multiplier": 4.351794257985162,
+   "episodes": 437,
+   "failure_rate": 0.057208237986270026
+  },
+  {
+   "steps": 5136384,
+   "multiplier": 4.33489118469911,
+   "episodes": 423,
+   "failure_rate": 0.03309692671394799
+  },
+  {
+   "steps": 5144576,
+   "multiplier": 4.350425165281634,
+   "episodes": 412,
+   "failure_rate": 0.06553398058252427
+  },
+  {
+   "steps": 5152768,
+   "multiplier": 4.359104871883101,
+   "episodes": 409,
+   "failure_rate": 0.05867970660146699
+  },
+  {
+   "steps": 5160960,
+   "multiplier": 4.366882649660879,
+   "episodes": 450,
+   "failure_rate": 0.057777777777777775
+  },
+  {
+   "steps": 5169152,
+   "multiplier": 4.340523311599414,
+   "episodes": 423,
+   "failure_rate": 0.02364066193853428
+  },
+  {
+   "steps": 5177344,
+   "multiplier": 4.343407926984029,
+   "episodes": 416,
+   "failure_rate": 0.052884615384615384
+  },
+  {
+   "steps": 5185536,
+   "multiplier": 4.358063099397822,
+   "episodes": 464,
+   "failure_rate": 0.06465517241379311
+  },
+  {
+   "steps": 5193728,
+   "multiplier": 4.379811978321589,
+   "episodes": 446,
+   "failure_rate": 0.07174887892376682
+  },
+  {
+   "steps": 5201920,
+   "multiplier": 4.382099560020936,
+   "episodes": 459,
+   "failure_rate": 0.05228758169934641
+  },
+  {
+   "steps": 5210112,
+   "multiplier": 4.396914374835751,
+   "episodes": 432,
+   "failure_rate": 0.06481481481481481
+  },
+  {
+   "steps": 5218304,
+   "multiplier": 4.407588532139122,
+   "episodes": 445,
+   "failure_rate": 0.060674157303370786
+  },
+  {
+   "steps": 5226496,
+   "multiplier": 4.41058392384419,
+   "episodes": 434,
+   "failure_rate": 0.052995391705069124
+  },
+  {
+   "steps": 5234688,
+   "multiplier": 4.40374939147009,
+   "episodes": 417,
+   "failure_rate": 0.04316546762589928
+  },
+  {
+   "steps": 5242880,
+   "multiplier": 4.409693447414146,
+   "episodes": 429,
+   "failure_rate": 0.055944055944055944
+  },
+  {
+   "steps": 5251072,
+   "multiplier": 4.415747259073338,
+   "episodes": 446,
+   "failure_rate": 0.05605381165919283
+  },
+  {
+   "steps": 5259264,
+   "multiplier": 4.4330326419039645,
+   "episodes": 431,
+   "failure_rate": 0.06728538283062645
+  },
+  {
+   "steps": 5267456,
+   "multiplier": 4.438836213332536,
+   "episodes": 448,
+   "failure_rate": 0.05580357142857143
+  },
+  {
+   "steps": 5275648,
+   "multiplier": 4.451943009449041,
+   "episodes": 412,
+   "failure_rate": 0.06310679611650485
+  },
+  {
+   "steps": 5283840,
+   "multiplier": 4.450019932525963,
+   "episodes": 416,
+   "failure_rate": 0.04807692307692308
+  },
+  {
+   "steps": 5292032,
+   "multiplier": 4.430608167820081,
+   "episodes": 425,
+   "failure_rate": 0.03058823529411765
+  },
+  {
+   "steps": 5300224,
+   "multiplier": 4.439689130620956,
+   "episodes": 457,
+   "failure_rate": 0.05908096280087528
+  },
+  {
+   "steps": 5308416,
+   "multiplier": 4.447381438313264,
+   "episodes": 416,
+   "failure_rate": 0.057692307692307696
+  },
+  {
+   "steps": 5316608,
+   "multiplier": 4.450745707454796,
+   "episodes": 431,
+   "failure_rate": 0.05336426914153132
+  },
+  {
+   "steps": 5324800,
+   "multiplier": 4.450632328769989,
+   "episodes": 441,
+   "failure_rate": 0.049886621315192746
+  },
+  {
+   "steps": 5332992,
+   "multiplier": 4.450632328769989,
+   "episodes": 420,
+   "failure_rate": 0.05
+  },
+  {
+   "steps": 5341184,
+   "multiplier": 4.4700767732144335,
+   "episodes": 432,
+   "failure_rate": 0.06944444444444445
+  },
+  {
+   "steps": 5349376,
+   "multiplier": 4.4923115361941175,
+   "episodes": 443,
+   "failure_rate": 0.07223476297968397
+  },
+  {
+   "steps": 5357568,
+   "multiplier": 4.484817129035281,
+   "episodes": 447,
+   "failure_rate": 0.042505592841163314
+  },
+  {
+   "steps": 5365760,
+   "multiplier": 4.479313616154719,
+   "episodes": 427,
+   "failure_rate": 0.04449648711943794
+  },
+  {
+   "steps": 5373952,
+   "multiplier": 4.474185411026514,
+   "episodes": 468,
+   "failure_rate": 0.04487179487179487
+  },
+  {
+   "steps": 5382144,
+   "multiplier": 4.471244234555925,
+   "episodes": 425,
+   "failure_rate": 0.047058823529411764
+  },
+  {
+   "steps": 5390336,
+   "multiplier": 4.469224032535723,
+   "episodes": 396,
+   "failure_rate": 0.047979797979797977
+  },
+  {
+   "steps": 5398528,
+   "multiplier": 4.4558619635702055,
+   "episodes": 464,
+   "failure_rate": 0.036637931034482756
+  },
+  {
+   "steps": 5406720,
+   "multiplier": 4.4414069872668875,
+   "episodes": 422,
+   "failure_rate": 0.035545023696682464
+  },
+  {
+   "steps": 5414912,
+   "multiplier": 4.434061015702906,
+   "episodes": 422,
+   "failure_rate": 0.04265402843601896
+  },
+  {
+   "steps": 5423104,
+   "multiplier": 4.432654366086538,
+   "episodes": 391,
+   "failure_rate": 0.04859335038363171
+  },
+  {
+   "steps": 5431296,
+   "multiplier": 4.443119482365608,
+   "episodes": 430,
+   "failure_rate": 0.06046511627906977
+  },
+  {
+   "steps": 5439488,
+   "multiplier": 4.443927796453368,
+   "episodes": 433,
+   "failure_rate": 0.050808314087759814
+  },
+  {
+   "steps": 5447680,
+   "multiplier": 4.440439424360345,
+   "episodes": 430,
+   "failure_rate": 0.046511627906976744
+  },
+  {
+   "steps": 5455872,
+   "multiplier": 4.457977550722,
+   "episodes": 459,
+   "failure_rate": 0.06753812636165578
+  },
+  {
+   "steps": 5464064,
+   "multiplier": 4.453215645960095,
+   "episodes": 420,
+   "failure_rate": 0.04523809523809524
+  },
+  {
+   "steps": 5472256,
+   "multiplier": 4.463821706566156,
+   "episodes": 396,
+   "failure_rate": 0.06060606060606061
+  },
+  {
+   "steps": 5480448,
+   "multiplier": 4.471471373971921,
+   "episodes": 451,
+   "failure_rate": 0.057649667405764965
+  },
+  {
+   "steps": 5488640,
+   "multiplier": 4.474890177390725,
+   "episodes": 468,
+   "failure_rate": 0.053418803418803416
+  },
+  {
+   "steps": 5496832,
+   "multiplier": 4.468846221346769,
+   "episodes": 455,
+   "failure_rate": 0.04395604395604396
+  },
+  {
+   "steps": 5505024,
+   "multiplier": 4.456941459442007,
+   "episodes": 420,
+   "failure_rate": 0.0380952380952381
+  },
+  {
+   "steps": 5513216,
+   "multiplier": 4.447417649918197,
+   "episodes": 420,
+   "failure_rate": 0.04047619047619048
+  },
+  {
+   "steps": 5521408,
+   "multiplier": 4.479822995129778,
+   "episodes": 449,
+   "failure_rate": 0.08240534521158129
+  },
+  {
+   "steps": 5529600,
+   "multiplier": 4.492183796911515,
+   "episodes": 449,
+   "failure_rate": 0.062360801781737196
+  },
+  {
+   "steps": 5537792,
+   "multiplier": 4.485562792345306,
+   "episodes": 438,
+   "failure_rate": 0.04337899543378995
+  },
+  {
+   "steps": 5545984,
+   "multiplier": 4.491491203978415,
+   "episodes": 447,
+   "failure_rate": 0.05592841163310962
+  },
+  {
+   "steps": 5554176,
+   "multiplier": 4.4862673233814006,
+   "episodes": 402,
+   "failure_rate": 0.04477611940298507
+  },
+  {
+   "steps": 5562368,
+   "multiplier": 4.485104532683726,
+   "episodes": 430,
+   "failure_rate": 0.04883720930232558
+  },
+  {
+   "steps": 5570560,
+   "multiplier": 4.485563248280057,
+   "episodes": 436,
+   "failure_rate": 0.05045871559633028
+  },
+  {
+   "steps": 5578752,
+   "multiplier": 4.468350133525958,
+   "episodes": 427,
+   "failure_rate": 0.03278688524590164
+  },
+  {
+   "steps": 5586944,
+   "multiplier": 4.471213569649306,
+   "episodes": 454,
+   "failure_rate": 0.05286343612334802
+  },
+  {
+   "steps": 5595136,
+   "multiplier": 4.467668337375468,
+   "episodes": 409,
+   "failure_rate": 0.04645476772616137
+  },
+  {
+   "steps": 5603328,
+   "multiplier": 4.483747632529653,
+   "episodes": 454,
+   "failure_rate": 0.06607929515418502
+  },
+  {
+   "steps": 5611520,
+   "multiplier": 4.4936554666310355,
+   "episodes": 434,
+   "failure_rate": 0.059907834101382486
+  },
+  {
+   "steps": 5619712,
+   "multiplier": 4.497935216109115,
+   "episodes": 479,
+   "failure_rate": 0.054279749478079335
+  },
+  {
+   "steps": 5627904,
+   "multiplier": 4.495216539986183,
+   "episodes": 423,
+   "failure_rate": 0.04728132387706856
+  },
+  {
+   "steps": 5636096,
+   "multiplier": 4.50508350229217,
+   "episodes": 451,
+   "failure_rate": 0.0598669623059867
+  },
+  {
+   "steps": 5644288,
+   "multiplier": 4.51023937759193,
+   "episodes": 417,
+   "failure_rate": 0.05515587529976019
+  },
+  {
+   "steps": 5652480,
+   "multiplier": 4.5462122282706625,
+   "episodes": 442,
+   "failure_rate": 0.08597285067873303
+  },
+  {
+   "steps": 5660672,
+   "multiplier": 4.560589910674096,
+   "episodes": 466,
+   "failure_rate": 0.06437768240343347
+  },
+  {
+   "steps": 5668864,
+   "multiplier": 4.5592624770457775,
+   "episodes": 452,
+   "failure_rate": 0.048672566371681415
+  },
+  {
+   "steps": 5677056,
+   "multiplier": 4.551484699267999,
+   "episodes": 450,
+   "failure_rate": 0.042222222222222223
+  },
+  {
+   "steps": 5685248,
+   "multiplier": 4.548796527224988,
+   "episodes": 465,
+   "failure_rate": 0.047311827956989246
+  },
+  {
+   "steps": 5693440,
+   "multiplier": 4.5357480283797225,
+   "episodes": 433,
+   "failure_rate": 0.03695150115473441
+  },
+  {
+   "steps": 5701632,
+   "multiplier": 4.535009112123565,
+   "episodes": 406,
+   "failure_rate": 0.04926108374384237
+  },
+  {
+   "steps": 5709824,
+   "multiplier": 4.540436363855667,
+   "episodes": 433,
+   "failure_rate": 0.05542725173210162
+  },
+  {
+   "steps": 5718016,
+   "multiplier": 4.522081933475921,
+   "episodes": 474,
+   "failure_rate": 0.03164556962025317
+  },
+  {
+   "steps": 5726208,
+   "multiplier": 4.507626957172603,
+   "episodes": 422,
+   "failure_rate": 0.035545023696682464
+  },
+  {
+   "steps": 5734400,
+   "multiplier": 4.511744604231426,
+   "episodes": 425,
+   "failure_rate": 0.05411764705882353
+  },
+  {
+   "steps": 5742592,
+   "multiplier": 4.507199149685971,
+   "episodes": 418,
+   "failure_rate": 0.045454545454545456
+  },
+  {
+   "steps": 5750784,
+   "multiplier": 4.500056292543114,
+   "episodes": 420,
+   "failure_rate": 0.04285714285714286
+  },
+  {
+   "steps": 5758976,
+   "multiplier": 4.507199149685971,
+   "episodes": 455,
+   "failure_rate": 0.05714285714285714
+  },
+  {
+   "steps": 5767168,
+   "multiplier": 4.515747159053652,
+   "episodes": 427,
+   "failure_rate": 0.0585480093676815
+  },
+  {
+   "steps": 5775360,
+   "multiplier": 4.501302714609208,
+   "episodes": 450,
+   "failure_rate": 0.035555555555555556
+  },
+  {
+   "steps": 5783552,
+   "multiplier": 4.496648776661714,
+   "episodes": 419,
+   "failure_rate": 0.045346062052505964
+  },
+  {
+   "steps": 5791744,
+   "multiplier": 4.493973879542373,
+   "episodes": 486,
+   "failure_rate": 0.047325102880658436
+  },
+  {
+   "steps": 5799936,
+   "multiplier": 4.497586933155426,
+   "episodes": 429,
+   "failure_rate": 0.053613053613053616
+  },
+  {
+   "steps": 5808128,
+   "multiplier": 4.514851507146457,
+   "episodes": 446,
+   "failure_rate": 0.06726457399103139
+  },
+  {
+   "steps": 5816320,
+   "multiplier": 4.504664153516481,
+   "episodes": 427,
+   "failure_rate": 0.03981264637002342
+  },
+  {
+   "steps": 5824512,
+   "multiplier": 4.516338162327054,
+   "episodes": 454,
+   "failure_rate": 0.06167400881057269
+  },
+  {
+   "steps": 5832704,
+   "multiplier": 4.534630845253884,
+   "episodes": 410,
+   "failure_rate": 0.06829268292682927
+  },
+  {
+   "steps": 5840896,
+   "multiplier": 4.5150758101250785,
+   "episodes": 427,
+   "failure_rate": 0.03044496487119438
+  },
+  {
+   "steps": 5849088,
+   "multiplier": 4.521636896097929,
+   "episodes": 442,
+   "failure_rate": 0.05656108597285068
+  },
+  {
+   "steps": 5857280,
+   "multiplier": 4.52977643098165,
+   "episodes": 430,
+   "failure_rate": 0.05813953488372093
+  },
+  {
+   "steps": 5865472,
+   "multiplier": 4.526048924554916,
+   "episodes": 389,
+   "failure_rate": 0.04627249357326478
+  },
+  {
+   "steps": 5873664,
+   "multiplier": 4.545978994484986,
+   "episodes": 429,
+   "failure_rate": 0.06993006993006994
+  },
+  {
+   "steps": 5881856,
+   "multiplier": 4.533714843541589,
+   "episodes": 424,
+   "failure_rate": 0.03773584905660377
+  },
+  {
+   "steps": 5890048,
+   "multiplier": 4.538738766986565,
+   "episodes": 418,
+   "failure_rate": 0.05502392344497608
+  },
+  {
+   "steps": 5898240,
+   "multiplier": 4.536574757874948,
+   "episodes": 439,
+   "failure_rate": 0.04783599088838269
+  },
+  {
+   "steps": 5906432,
+   "multiplier": 4.535463646763836,
+   "episodes": 450,
+   "failure_rate": 0.04888888888888889
+  },
+  {
+   "steps": 5914624,
+   "multiplier": 4.534680649000973,
+   "episodes": 447,
+   "failure_rate": 0.049217002237136466
+  },
+  {
+   "steps": 5922816,
+   "multiplier": 4.524123804453409,
+   "episodes": 431,
+   "failure_rate": 0.03944315545243619
+  },
+  {
+   "steps": 5931008,
+   "multiplier": 4.519995364086436,
+   "episodes": 436,
+   "failure_rate": 0.045871559633027525
+  },
+  {
+   "steps": 5939200,
+   "multiplier": 4.505456356994237,
+   "episodes": 423,
+   "failure_rate": 0.03546099290780142
+  },
+  {
+   "steps": 5947392,
+   "multiplier": 4.486706356994238,
+   "episodes": 416,
+   "failure_rate": 0.03125
+  },
+  {
+   "steps": 5955584,
+   "multiplier": 4.4925315997126845,
+   "episodes": 412,
+   "failure_rate": 0.055825242718446605
+  },
+  {
+   "steps": 5963776,
+   "multiplier": 4.505333532079834,
+   "episodes": 414,
+   "failure_rate": 0.06280193236714976
+  },
+  {
+   "steps": 5971968,
+   "multiplier": 4.496696062493459,
+   "episodes": 411,
+   "failure_rate": 0.0413625304136253
+  },
+  {
+   "steps": 5980160,
+   "multiplier": 4.499207478018573,
+   "episodes": 438,
+   "failure_rate": 0.05251141552511415
+  },
+  {
+   "steps": 5988352,
+   "multiplier": 4.505151533962629,
+   "episodes": 429,
+   "failure_rate": 0.055944055944055944
+  },
+  {
+   "steps": 5996544,
+   "multiplier": 4.4966149485967755,
+   "episodes": 410,
+   "failure_rate": 0.041463414634146344
+  },
+  {
+   "steps": 6004736,
+   "multiplier": 4.505874207856035,
+   "episodes": 405,
+   "failure_rate": 0.05925925925925926
+  },
+  {
+   "steps": 6012928,
+   "multiplier": 4.505312410103226,
+   "episodes": 445,
+   "failure_rate": 0.04943820224719101
+  },
+  {
+   "steps": 6021120,
+   "multiplier": 4.508840390638506,
+   "episodes": 411,
+   "failure_rate": 0.0535279805352798
+  },
+  {
+   "steps": 6029312,
+   "multiplier": 4.512204659780037,
+   "episodes": 431,
+   "failure_rate": 0.05336426914153132
+  },
+  {
+   "steps": 6037504,
+   "multiplier": 4.503064874833801,
+   "episodes": 465,
+   "failure_rate": 0.04086021505376344
+  },
+  {
+   "steps": 6045696,
+   "multiplier": 4.514489936258863,
+   "episodes": 407,
+   "failure_rate": 0.06142506142506143
+  },
+  {
+   "steps": 6053888,
+   "multiplier": 4.511403516505776,
+   "episodes": 405,
+   "failure_rate": 0.04691358024691358
+  },
+  {
+   "steps": 6062080,
+   "multiplier": 4.502707864331863,
+   "episodes": 460,
+   "failure_rate": 0.041304347826086954
+  },
+  {
+   "steps": 6070272,
+   "multiplier": 4.525624530998529,
+   "episodes": 480,
+   "failure_rate": 0.07291666666666667
+  },
+  {
+   "steps": 6078464,
+   "multiplier": 4.525624530998529,
+   "episodes": 380,
+   "failure_rate": 0.05
+  },
+  {
+   "steps": 6086656,
+   "multiplier": 4.5395514716377985,
+   "episodes": 438,
+   "failure_rate": 0.0639269406392694
+  },
+  {
+   "steps": 6094848,
+   "multiplier": 4.532537896977165,
+   "episodes": 442,
+   "failure_rate": 0.042986425339366516
+  },
+  {
+   "steps": 6103040,
+   "multiplier": 4.532537896977165,
+   "episodes": 420,
+   "failure_rate": 0.05
+  },
+  {
+   "steps": 6111232,
+   "multiplier": 4.530043835219446,
+   "episodes": 421,
+   "failure_rate": 0.047505938242280284
+  },
+  {
+   "steps": 6119424,
+   "multiplier": 4.528587524539834,
+   "episodes": 412,
+   "failure_rate": 0.04854368932038835
+  },
+  {
+   "steps": 6127616,
+   "multiplier": 4.534567168305737,
+   "episodes": 393,
+   "failure_rate": 0.05597964376590331
+  },
+  {
+   "steps": 6135808,
+   "multiplier": 4.535849219587789,
+   "episodes": 390,
+   "failure_rate": 0.05128205128205128
+  },
+  {
+   "steps": 6144000,
+   "multiplier": 4.5416744623062355,
+   "episodes": 412,
+   "failure_rate": 0.055825242718446605
+  },
+  {
+   "steps": 6152192,
+   "multiplier": 4.557556815247412,
+   "episodes": 425,
+   "failure_rate": 0.06588235294117648
+  },
+  {
+   "steps": 6160384,
+   "multiplier": 4.557796049697172,
+   "episodes": 418,
+   "failure_rate": 0.050239234449760764
+  },
+  {
+   "steps": 6168576,
+   "multiplier": 4.564614231515354,
+   "episodes": 440,
+   "failure_rate": 0.056818181818181816
+  },
+  {
+   "steps": 6176768,
+   "multiplier": 4.581945902338297,
+   "episodes": 401,
+   "failure_rate": 0.06733167082294264
+  },
+  {
+   "steps": 6184960,
+   "multiplier": 4.586969825783273,
+   "episodes": 418,
+   "failure_rate": 0.05502392344497608
+  },
+  {
+   "steps": 6193152,
+   "multiplier": 4.582752958313393,
+   "episodes": 415,
+   "failure_rate": 0.04578313253012048
+  },
+  {
+   "steps": 6201344,
+   "multiplier": 4.5625401923559465,
+   "episodes": 470,
+   "failure_rate": 0.029787234042553193
+  },
+  {
+   "steps": 6209536,
+   "multiplier": 4.557670833686113,
+   "episodes": 421,
+   "failure_rate": 0.04513064133016627
+  },
+  {
+   "steps": 6217728,
+   "multiplier": 4.553787338540482,
+   "episodes": 412,
+   "failure_rate": 0.04611650485436893
+  },
+  {
+   "steps": 6225920,
+   "multiplier": 4.545166648885309,
+   "episodes": 435,
+   "failure_rate": 0.041379310344827586
+  },
+  {
+   "steps": 6234112,
+   "multiplier": 4.543884597603258,
+   "episodes": 390,
+   "failure_rate": 0.04871794871794872
+  },
+  {
+   "steps": 6242304,
+   "multiplier": 4.540396225510235,
+   "episodes": 430,
+   "failure_rate": 0.046511627906976744
+  },
+  {
+   "steps": 6250496,
+   "multiplier": 4.525607493115869,
+   "episodes": 426,
+   "failure_rate": 0.035211267605633804
+  },
+  {
+   "steps": 6258688,
+   "multiplier": 4.5121371734811655,
+   "episodes": 438,
+   "failure_rate": 0.0365296803652968
+  },
+  {
+   "steps": 6266880,
+   "multiplier": 4.519462014245497,
+   "episodes": 471,
+   "failure_rate": 0.05732484076433121
+  },
+  {
+   "steps": 6275072,
+   "multiplier": 4.516030641696477,
+   "episodes": 408,
+   "failure_rate": 0.04656862745098039
+  },
+  {
+   "steps": 6283264,
+   "multiplier": 4.5122861483044066,
+   "episodes": 454,
+   "failure_rate": 0.046255506607929514
+  },
+  {
+   "steps": 6291456,
+   "multiplier": 4.511305756147544,
+   "episodes": 408,
+   "failure_rate": 0.049019607843137254
+  },
+  {
+   "steps": 6299648,
+   "multiplier": 4.504471223773443,
+   "episodes": 417,
+   "failure_rate": 0.04316546762589928
+  },
+  {
+   "steps": 6307840,
+   "multiplier": 4.490442446795026,
+   "episodes": 417,
+   "failure_rate": 0.03597122302158273
+  },
+  {
+   "steps": 6316032,
+   "multiplier": 4.481704582717356,
+   "episodes": 412,
+   "failure_rate": 0.0412621359223301
+  },
+  {
+   "steps": 6324224,
+   "multiplier": 4.4759936270064005,
+   "episodes": 429,
+   "failure_rate": 0.04428904428904429
+  },
+  {
+   "steps": 6332416,
+   "multiplier": 4.47494467595745,
+   "episodes": 429,
+   "failure_rate": 0.04895104895104895
+  },
+  {
+   "steps": 6340608,
+   "multiplier": 4.460032395255696,
+   "episodes": 399,
+   "failure_rate": 0.03508771929824561
+  },
+  {
+   "steps": 6348800,
+   "multiplier": 4.474625696691103,
+   "episodes": 418,
+   "failure_rate": 0.0645933014354067
+  },
+  {
+   "steps": 6356992,
+   "multiplier": 4.475434010778862,
+   "episodes": 433,
+   "failure_rate": 0.050808314087759814
+  },
+  {
+   "steps": 6365184,
+   "multiplier": 4.47443178360737,
+   "episodes": 449,
+   "failure_rate": 0.04899777282850779
+  },
+  {
+   "steps": 6373376,
+   "multiplier": 4.464254792456928,
+   "episodes": 452,
+   "failure_rate": 0.03982300884955752
+  },
+  {
+   "steps": 6381568,
+   "multiplier": 4.457241217796295,
+   "episodes": 442,
+   "failure_rate": 0.042986425339366516
+  },
+  {
+   "steps": 6389760,
+   "multiplier": 4.475617286172363,
+   "episodes": 468,
+   "failure_rate": 0.06837606837606838
+  },
+  {
+   "steps": 6397952,
+   "multiplier": 4.47073006812725,
+   "episodes": 399,
+   "failure_rate": 0.045112781954887216
+  },
+  {
+   "steps": 6406144,
+   "multiplier": 4.457675880935132,
+   "episodes": 406,
+   "failure_rate": 0.03694581280788178
+  },
+  {
+   "steps": 6414336,
+   "multiplier": 4.462877579448932,
+   "episodes": 471,
+   "failure_rate": 0.055201698513800426
+  },
+  {
+   "steps": 6422528,
+   "multiplier": 4.470469202485582,
+   "episodes": 382,
+   "failure_rate": 0.05759162303664921
+  },
+  {
+   "steps": 6430720,
+   "multiplier": 4.480377036586964,
+   "episodes": 434,
+   "failure_rate": 0.059907834101382486
+  },
+  {
+   "steps": 6438912,
+   "multiplier": 4.503940254977769,
+   "episodes": 435,
+   "failure_rate": 0.0735632183908046
+  },
+  {
+   "steps": 6447104,
+   "multiplier": 4.5212048289688,
+   "episodes": 446,
+   "failure_rate": 0.06726457399103139
+  },
+  {
+   "steps": 6455296,
+   "multiplier": 4.517665005959951,
+   "episodes": 452,
+   "failure_rate": 0.046460176991150445
+  },
+  {
+   "steps": 6463488,
+   "multiplier": 4.5278153818998,
+   "episodes": 399,
+   "failure_rate": 0.06015037593984962
+  },
+  {
+   "steps": 6471680,
+   "multiplier": 4.5191946922446276,
+   "episodes": 435,
+   "failure_rate": 0.041379310344827586
+  },
+  {
+   "steps": 6479872,
+   "multiplier": 4.515654869235778,
+   "episodes": 452,
+   "failure_rate": 0.046460176991150445
+  },
+  {
+   "steps": 6488064,
+   "multiplier": 4.498318185818692,
+   "episodes": 398,
+   "failure_rate": 0.032663316582914576
+  },
+  {
+   "steps": 6496256,
+   "multiplier": 4.477586478501619,
+   "episodes": 410,
+   "failure_rate": 0.02926829268292683
+  },
+  {
+   "steps": 6504448,
+   "multiplier": 4.489936598405696,
+   "episodes": 417,
+   "failure_rate": 0.06235011990407674
+  },
+  {
+   "steps": 6512640,
+   "multiplier": 4.508021704788675,
+   "episodes": 470,
+   "failure_rate": 0.06808510638297872
+  },
+  {
+   "steps": 6520832,
+   "multiplier": 4.501618435033906,
+   "episodes": 367,
+   "failure_rate": 0.043596730245231606
+  },
+  {
+   "steps": 6529024,
+   "multiplier": 4.4970729804884515,
+   "episodes": 396,
+   "failure_rate": 0.045454545454545456
+  },
+  {
+   "steps": 6537216,
+   "multiplier": 4.484543706483768,
+   "episodes": 427,
+   "failure_rate": 0.03747072599531616
+  },
+  {
+   "steps": 6545408,
+   "multiplier": 4.470907342847404,
+   "episodes": 440,
+   "failure_rate": 0.03636363636363636
+  },
+  {
+   "steps": 6553600,
+   "multiplier": 4.489714682296945,
+   "episodes": 436,
+   "failure_rate": 0.06880733944954129
+  },
+  {
+   "steps": 6561792,
+   "multiplier": 4.480531008827557,
+   "episodes": 392,
+   "failure_rate": 0.04081632653061224
+  },
+  {
+   "steps": 6569984,
+   "multiplier": 4.475504553801103,
+   "episodes": 378,
+   "failure_rate": 0.04497354497354497
+  },
+  {
+   "steps": 6578176,
+   "multiplier": 4.450693470677677,
+   "episodes": 397,
+   "failure_rate": 0.02518891687657431
+  },
+  {
+   "steps": 6586368,
+   "multiplier": 4.447376517360723,
+   "episodes": 407,
+   "failure_rate": 0.04668304668304668
+  },
+  {
+   "steps": 6594560,
+   "multiplier": 4.423692306834408,
+   "episodes": 418,
+   "failure_rate": 0.02631578947368421
+  },
+  {
+   "steps": 6602752,
+   "multiplier": 4.445285840321706,
+   "episodes": 433,
+   "failure_rate": 0.07159353348729793
+  },
+  {
+   "steps": 6610944,
+   "multiplier": 4.436629509572351,
+   "episodes": 387,
+   "failure_rate": 0.041343669250646
+  },
+  {
+   "steps": 6619136,
+   "multiplier": 4.433609375344163,
+   "episodes": 447,
+   "failure_rate": 0.04697986577181208
+  },
+  {
+   "steps": 6627328,
+   "multiplier": 4.4162180709963375,
+   "episodes": 460,
+   "failure_rate": 0.03260869565217391
+  },
+  {
+   "steps": 6635520,
+   "multiplier": 4.4301566899221685,
+   "episodes": 391,
+   "failure_rate": 0.0639386189258312
+  },
+  {
+   "steps": 6643712,
+   "multiplier": 4.415121724887204,
+   "episodes": 429,
+   "failure_rate": 0.03496503496503497
+  },
+  {
+   "steps": 6651904,
+   "multiplier": 4.421387709541935,
+   "episodes": 391,
+   "failure_rate": 0.056265984654731455
+  },
+  {
+   "steps": 6660096,
+   "multiplier": 4.42633276448699,
+   "episodes": 455,
+   "failure_rate": 0.054945054945054944
+  },
+  {
+   "steps": 6668288,
+   "multiplier": 4.404972382625415,
+   "episodes": 419,
+   "failure_rate": 0.028639618138424822
+  },
+  {
+   "steps": 6676480,
+   "multiplier": 4.394599422252455,
+   "episodes": 429,
+   "failure_rate": 0.039627039627039624
+  },
+  {
+   "steps": 6684672,
+   "multiplier": 4.385415748783067,
+   "episodes": 441,
+   "failure_rate": 0.04081632653061224
+  },
+  {
+   "steps": 6692864,
+   "multiplier": 4.395185863725596,
+   "episodes": 435,
+   "failure_rate": 0.059770114942528735
+  },
+  {
+   "steps": 6701056,
+   "multiplier": 4.391640631451757,
+   "episodes": 409,
+   "failure_rate": 0.04645476772616137
+  },
+  {
+   "steps": 6709248,
+   "multiplier": 4.384627056791124,
+   "episodes": 442,
+   "failure_rate": 0.042986425339366516
+  },
+  {
+   "steps": 6717440,
+   "multiplier": 4.379570877015843,
+   "episodes": 445,
+   "failure_rate": 0.0449438202247191
+  },
+  {
+   "steps": 6725632,
+   "multiplier": 4.375912340430477,
+   "episodes": 410,
+   "failure_rate": 0.046341463414634146
+  },
+  {
+   "steps": 6733824,
+   "multiplier": 4.389144190547573,
+   "episodes": 427,
+   "failure_rate": 0.06323185011709602
+  },
+  {
+   "steps": 6742016,
+   "multiplier": 4.38293981098553,
+   "episodes": 411,
+   "failure_rate": 0.043795620437956206
+  },
+  {
+   "steps": 6750208,
+   "multiplier": 4.361042855482017,
+   "episodes": 427,
+   "failure_rate": 0.02810304449648712
+  },
+  {
+   "steps": 6758400,
+   "multiplier": 4.357125804790773,
+   "episodes": 434,
+   "failure_rate": 0.04608294930875576
+  },
+  {
+   "steps": 6766592,
+   "multiplier": 4.335629367736141,
+   "episodes": 421,
+   "failure_rate": 0.028503562945368172
+  },
+  {
+   "steps": 6774784,
+   "multiplier": 4.349997183828095,
+   "episodes": 435,
+   "failure_rate": 0.06436781609195402
+  },
+  {
+   "steps": 6782976,
+   "multiplier": 4.347616231447143,
+   "episodes": 420,
+   "failure_rate": 0.047619047619047616
+  },
+  {
+   "steps": 6791168,
+   "multiplier": 4.337918498449661,
+   "episodes": 397,
+   "failure_rate": 0.04030226700251889
+  },
+  {
+   "steps": 6799360,
+   "multiplier": 4.340429913974775,
+   "episodes": 438,
+   "failure_rate": 0.05251141552511415
+  },
+  {
+   "steps": 6807552,
+   "multiplier": 4.347377522175231,
+   "episodes": 439,
+   "failure_rate": 0.05694760820045558
+  },
+  {
+   "steps": 6815744,
+   "multiplier": 4.367325708703729,
+   "episodes": 386,
+   "failure_rate": 0.06994818652849741
+  },
+  {
+   "steps": 6823936,
+   "multiplier": 4.354000525329646,
+   "episodes": 409,
+   "failure_rate": 0.03667481662591687
+  },
+  {
+   "steps": 6832128,
+   "multiplier": 4.339165360494481,
+   "episodes": 455,
+   "failure_rate": 0.035164835164835165
+  },
+  {
+   "steps": 6840320,
+   "multiplier": 4.338345688363333,
+   "episodes": 427,
+   "failure_rate": 0.04918032786885246
+  },
+  {
+   "steps": 6848512,
+   "multiplier": 4.337296737314382,
+   "episodes": 429,
+   "failure_rate": 0.04895104895104895
+  },
+  {
+   "steps": 6856704,
+   "multiplier": 4.3384078484254935,
+   "episodes": 450,
+   "failure_rate": 0.051111111111111114
+  },
+  {
+   "steps": 6864896,
+   "multiplier": 4.323454577397456,
+   "episodes": 428,
+   "failure_rate": 0.035046728971962614
+  },
+  {
+   "steps": 6873088,
+   "multiplier": 4.318692672635551,
+   "episodes": 420,
+   "failure_rate": 0.04523809523809524
+  },
+  {
+   "steps": 6881280,
+   "multiplier": 4.318931907085312,
+   "episodes": 418,
+   "failure_rate": 0.050239234449760764
+  },
+  {
+   "steps": 6889472,
+   "multiplier": 4.312201137854543,
+   "episodes": 416,
+   "failure_rate": 0.04326923076923077
+  },
+  {
+   "steps": 6897664,
+   "multiplier": 4.316622906562026,
+   "episodes": 441,
+   "failure_rate": 0.05442176870748299
+  },
+  {
+   "steps": 6905856,
+   "multiplier": 4.315284707048644,
+   "episodes": 411,
+   "failure_rate": 0.04866180048661801
+  },
+  {
+   "steps": 6914048,
+   "multiplier": 4.318553472181816,
+   "episodes": 413,
+   "failure_rate": 0.053268765133171914
+  },
+  {
+   "steps": 6922240,
+   "multiplier": 4.294134867530653,
+   "episodes": 430,
+   "failure_rate": 0.02558139534883721
+  },
+  {
+   "steps": 6930432,
+   "multiplier": 4.296515819911606,
+   "episodes": 420,
+   "failure_rate": 0.05238095238095238
+  },
+  {
+   "steps": 6938624,
+   "multiplier": 4.2886994427403895,
+   "episodes": 403,
+   "failure_rate": 0.04218362282878412
+  },
+  {
+   "steps": 6946816,
+   "multiplier": 4.289918954935511,
+   "episodes": 410,
+   "failure_rate": 0.05121951219512195
+  },
+  {
+   "steps": 6955008,
+   "multiplier": 4.289800190089905,
+   "episodes": 421,
+   "failure_rate": 0.0498812351543943
+  },
+  {
+   "steps": 6963200,
+   "multiplier": 4.306466856756572,
+   "episodes": 435,
+   "failure_rate": 0.06666666666666667
+  },
+  {
+   "steps": 6971392,
+   "multiplier": 4.30909843570394,
+   "episodes": 418,
+   "failure_rate": 0.05263157894736842
+  },
+  {
+   "steps": 6979584,
+   "multiplier": 4.315836024356423,
+   "episodes": 423,
+   "failure_rate": 0.05673758865248227
+  },
+  {
+   "steps": 6987776,
+   "multiplier": 4.326663274964695,
+   "episodes": 411,
+   "failure_rate": 0.06082725060827251
+  },
+  {
+   "steps": 6995968,
+   "multiplier": 4.3445789658312055,
+   "episodes": 427,
+   "failure_rate": 0.06791569086651054
+  },
+  {
+   "steps": 7004160,
+   "multiplier": 4.354429339896043,
+   "episodes": 401,
+   "failure_rate": 0.059850374064837904
+  },
+  {
+   "steps": 7012352,
+   "multiplier": 4.335906337474736,
+   "episodes": 413,
+   "failure_rate": 0.031476997578692496
+  },
+  {
+   "steps": 7020544,
+   "multiplier": 4.343406337474736,
+   "episodes": 400,
+   "failure_rate": 0.0575
+  },
+  {
+   "steps": 7028736,
+   "multiplier": 4.36596869575138,
+   "episodes": 441,
+   "failure_rate": 0.07256235827664399
+  },
+  {
+   "steps": 7036928,
+   "multiplier": 4.360885953434595,
+   "episodes": 423,
+   "failure_rate": 0.04491725768321513
+  },
+  {
+   "steps": 7045120,
+   "multiplier": 4.36464939429481,
+   "episodes": 465,
+   "failure_rate": 0.053763440860215055
+  },
+  {
+   "steps": 7053312,
+   "multiplier": 4.358232929403769,
+   "episodes": 413,
+   "failure_rate": 0.043583535108958835
+  },
+  {
+   "steps": 7061504,
+   "multiplier": 4.350093394520048,
+   "episodes": 430,
+   "failure_rate": 0.04186046511627907
+  },
+  {
+   "steps": 7069696,
+   "multiplier": 4.351375445802099,
+   "episodes": 429,
+   "failure_rate": 0.05128205128205128
+  },
+  {
+   "steps": 7077888,
+   "multiplier": 4.332254305659581,
+   "episodes": 421,
+   "failure_rate": 0.030878859857482184
+  },
+  {
+   "steps": 7086080,
+   "multiplier": 4.324212347617623,
+   "episodes": 429,
+   "failure_rate": 0.04195804195804196
+  },
+  {
+   "steps": 7094272,
+   "multiplier": 4.326221803882398,
+   "episodes": 423,
+   "failure_rate": 0.05200945626477541
+  },
+  {
+   "steps": 7102464,
+   "multiplier": 4.320407850394027,
+   "episodes": 430,
+   "failure_rate": 0.044186046511627906
+  },
+  {
+   "steps": 7110656,
+   "multiplier": 4.315050707536884,
+   "episodes": 448,
+   "failure_rate": 0.044642857142857144
+  },
+  {
+   "steps": 7118848,
+   "multiplier": 4.327550707536884,
+   "episodes": 432,
+   "failure_rate": 0.0625
+  },
+  {
+   "steps": 7127040,
+   "multiplier": 4.3403647778886425,
+   "episodes": 398,
+   "failure_rate": 0.06281407035175879
+  },
+  {
+   "steps": 7135232,
+   "multiplier": 4.33351198601047,
+   "episodes": 394,
+   "failure_rate": 0.04314720812182741
+  },
+  {
+   "steps": 7143424,
+   "multiplier": 4.327662096385747,
+   "episodes": 453,
+   "failure_rate": 0.04415011037527594
+  },
+  {
+   "steps": 7151616,
+   "multiplier": 4.32562372708119,
+   "episodes": 417,
+   "failure_rate": 0.047961630695443645
+  },
+  {
+   "steps": 7159808,
+   "multiplier": 4.333401504858968,
+   "episodes": 450,
+   "failure_rate": 0.057777777777777775
+  },
+  {
+   "steps": 7168000,
+   "multiplier": 4.327357548815012,
+   "episodes": 455,
+   "failure_rate": 0.04395604395604396
+  },
+  {
+   "steps": 7176192,
+   "multiplier": 4.312902572511694,
+   "episodes": 422,
+   "failure_rate": 0.035545023696682464
+  },
+  {
+   "steps": 7184384,
+   "multiplier": 4.306486107620653,
+   "episodes": 413,
+   "failure_rate": 0.043583535108958835
+  },
+  {
+   "steps": 7192576,
+   "multiplier": 4.284721401738301,
+   "episodes": 425,
+   "failure_rate": 0.02823529411764706
+  },
+  {
+   "steps": 7200768,
+   "multiplier": 4.275630492647392,
+   "episodes": 440,
+   "failure_rate": 0.04090909090909091
+  },
+  {
+   "steps": 7208960,
+   "multiplier": 4.280425013195337,
+   "episodes": 438,
+   "failure_rate": 0.0547945205479452
+  },
+  {
+   "steps": 7217152,
+   "multiplier": 4.289381929295111,
+   "episodes": 441,
+   "failure_rate": 0.05895691609977324
+  },
+  {
+   "steps": 7225344,
+   "multiplier": 4.290726672571394,
+   "episodes": 409,
+   "failure_rate": 0.05134474327628362
+  },
+  {
+   "steps": 7233536,
+   "multiplier": 4.280078524423247,
+   "episodes": 432,
+   "failure_rate": 0.03935185185185185
+  },
+  {
+   "steps": 7241728,
+   "multiplier": 4.274854643826232,
+   "episodes": 402,
+   "failure_rate": 0.04477611940298507
+  },
+  {
+   "steps": 7249920,
+   "multiplier": 4.263223948382587,
+   "episodes": 417,
+   "failure_rate": 0.03836930455635491
+  },
+  {
+   "steps": 7258112,
+   "multiplier": 4.251512236670875,
+   "episodes": 444,
+   "failure_rate": 0.038288288288288286
+  },
+  {
+   "steps": 7266304,
+   "multiplier": 4.2534602886189266,
+   "episodes": 462,
+   "failure_rate": 0.05194805194805195
+  },
+  {
+   "steps": 7274496,
+   "multiplier": 4.237606630082341,
+   "episodes": 410,
+   "failure_rate": 0.03414634146341464
+  },
+  {
+   "steps": 7282688,
+   "multiplier": 4.230710078358204,
+   "episodes": 464,
+   "failure_rate": 0.04310344827586207
+  },
+  {
+   "steps": 7290880,
+   "multiplier": 4.2160041960052625,
+   "episodes": 425,
+   "failure_rate": 0.03529411764705882
+  },
+  {
+   "steps": 7299072,
+   "multiplier": 4.211981207499515,
+   "episodes": 435,
+   "failure_rate": 0.04597701149425287
+  },
+  {
+   "steps": 7307264,
+   "multiplier": 4.204060415420307,
+   "episodes": 404,
+   "failure_rate": 0.04207920792079208
+  },
+  {
+   "steps": 7315456,
+   "multiplier": 4.204519131016638,
+   "episodes": 436,
+   "failure_rate": 0.05045871559633028
+  },
+  {
+   "steps": 7323648,
+   "multiplier": 4.211661988159495,
+   "episodes": 420,
+   "failure_rate": 0.05714285714285714
+  },
+  {
+   "steps": 7331840,
+   "multiplier": 4.224161988159495,
+   "episodes": 416,
+   "failure_rate": 0.0625
+  },
+  {
+   "steps": 7340032,
+   "multiplier": 4.225381500354617,
+   "episodes": 410,
+   "failure_rate": 0.05121951219512195
+  },
+  {
+   "steps": 7348224,
+   "multiplier": 4.217241965470896,
+   "episodes": 430,
+   "failure_rate": 0.04186046511627907
+  },
+  {
+   "steps": 7356416,
+   "multiplier": 4.198090294519739,
+   "episodes": 389,
+   "failure_rate": 0.030848329048843187
+  },
+  {
+   "steps": 7364608,
+   "multiplier": 4.180918577348022,
+   "episodes": 396,
+   "failure_rate": 0.03282828282828283
+  },
+  {
+   "steps": 7372800,
+   "multiplier": 4.195220129454452,
+   "episodes": 451,
+   "failure_rate": 0.06430155210643015
+  },
+  {
+   "steps": 7380992,
+   "multiplier": 4.205564957040659,
+   "episodes": 464,
+   "failure_rate": 0.0603448275862069
+  },
+  {
+   "steps": 7389184,
+   "multiplier": 4.197853514254589,
+   "episodes": 402,
+   "failure_rate": 0.04228855721393035
+  },
+  {
+   "steps": 7397376,
+   "multiplier": 4.193308059709135,
+   "episodes": 462,
+   "failure_rate": 0.045454545454545456
+  },
+  {
+   "steps": 7405568,
+   "multiplier": 4.206392171858667,
+   "episodes": 428,
+   "failure_rate": 0.0630841121495327
+  },
+  {
+   "steps": 7413760,
+   "multiplier": 4.211458251153821,
+   "episodes": 454,
+   "failure_rate": 0.05506607929515418
+  },
+  {
+   "steps": 7421952,
+   "multiplier": 4.192337111011303,
+   "episodes": 421,
+   "failure_rate": 0.030878859857482184
+  },
+  {
+   "steps": 7430144,
+   "multiplier": 4.18542101123806,
+   "episodes": 441,
+   "failure_rate": 0.04308390022675737
+  },
+  {
+   "steps": 7438336,
+   "multiplier": 4.18849956750133,
+   "episodes": 471,
+   "failure_rate": 0.05307855626326964
+  },
+  {
+   "steps": 7446528,
+   "multiplier": 4.19910562810739,
+   "episodes": 462,
+   "failure_rate": 0.06060606060606061
+  },
+  {
+   "steps": 7454720,
+   "multiplier": 4.1872222200356415,
+   "episodes": 446,
+   "failure_rate": 0.03811659192825112
+  },
+  {
+   "steps": 7462912,
+   "multiplier": 4.167738651960524,
+   "episodes": 426,
+   "failure_rate": 0.03051643192488263
+  },
+  {
+   "steps": 7471104,
+   "multiplier": 4.143142809004404,
+   "episodes": 433,
+   "failure_rate": 0.025404157043879907
+  },
+  {
+   "steps": 7479296,
+   "multiplier": 4.1293419040270285,
+   "episodes": 442,
+   "failure_rate": 0.03619909502262444
+  },
+  {
+   "steps": 7487488,
+   "multiplier": 4.1331316350783736,
+   "episodes": 409,
+   "failure_rate": 0.05378973105134474
+  },
+  {
+   "steps": 7495680,
+   "multiplier": 4.119997994525378,
+   "episodes": 434,
+   "failure_rate": 0.03686635944700461
+  },
+  {
+   "steps": 7503872,
+   "multiplier": 4.124243277544246,
+   "episodes": 424,
+   "failure_rate": 0.054245283018867926
+  },
+  {
+   "steps": 7512064,
+   "multiplier": 4.106184309485278,
+   "episodes": 407,
+   "failure_rate": 0.03194103194103194
+  },
+  {
+   "steps": 7520256,
+   "multiplier": 4.108423115455428,
+   "episodes": 402,
+   "failure_rate": 0.05223880597014925
+  },
+  {
+   "steps": 7528448,
+   "multiplier": 4.093065147787991,
+   "episodes": 433,
+   "failure_rate": 0.03464203233256351
+  },
+  {
+   "steps": 7536640,
+   "multiplier": 4.086444143221781,
+   "episodes": 438,
+   "failure_rate": 0.04337899543378995
+  },
+  {
+   "steps": 7544832,
+   "multiplier": 4.081898688676326,
+   "episodes": 418,
+   "failure_rate": 0.045454545454545456
+  },
+  {
+   "steps": 7553024,
+   "multiplier": 4.077136783914422,
+   "episodes": 420,
+   "failure_rate": 0.04523809523809524
+  },
+  {
+   "steps": 7561216,
+   "multiplier": 4.074540847119839,
+   "episodes": 443,
+   "failure_rate": 0.04740406320541761
+  },
+  {
+   "steps": 7569408,
+   "multiplier": 4.064014531330366,
+   "episodes": 456,
+   "failure_rate": 0.039473684210526314
+  },
+  {
+   "steps": 7577600,
+   "multiplier": 4.066050730425388,
+   "episodes": 442,
+   "failure_rate": 0.05203619909502263
+  },
+  {
+   "steps": 7585792,
+   "multiplier": 4.052580410790685,
+   "episodes": 438,
+   "failure_rate": 0.0365296803652968
+  },
+  {
+   "steps": 7593984,
+   "multiplier": 4.046590190741785,
+   "episodes": 409,
+   "failure_rate": 0.044009779951100246
+  },
+  {
+   "steps": 7602176,
+   "multiplier": 4.044416277698307,
+   "episodes": 460,
+   "failure_rate": 0.04782608695652174
+  },
+  {
+   "steps": 7610368,
+   "multiplier": 4.0625980958801255,
+   "episodes": 440,
+   "failure_rate": 0.06818181818181818
+  },
+  {
+   "steps": 7618560,
+   "multiplier": 4.053977406224953,
+   "episodes": 435,
+   "failure_rate": 0.041379310344827586
+  },
+  {
+   "steps": 7626752,
+   "multiplier": 4.042613769861316,
+   "episodes": 440,
+   "failure_rate": 0.038636363636363635
+  },
+  {
+   "steps": 7634944,
+   "multiplier": 4.02869624408812,
+   "episodes": 388,
+   "failure_rate": 0.03608247422680412
+  },
+  {
+   "steps": 7643136,
+   "multiplier": 4.022985288377165,
+   "episodes": 429,
+   "failure_rate": 0.04428904428904429
+  },
+  {
+   "steps": 7651328,
+   "multiplier": 4.0103479257398025,
+   "episodes": 455,
+   "failure_rate": 0.03736263736263736
+  },
+  {
+   "steps": 7659520,
+   "multiplier": 3.998172984841457,
+   "episodes": 423,
+   "failure_rate": 0.037825059101654845
+  },
+  {
+   "steps": 7667712,
+   "multiplier": 3.9857316702874663,
+   "episodes": 426,
+   "failure_rate": 0.03755868544600939
+  },
+  {
+   "steps": 7675904,
+   "multiplier": 3.9776035914697325,
+   "episodes": 406,
+   "failure_rate": 0.04187192118226601
+  },
+  {
+   "steps": 7684096,
+   "multiplier": 3.9548763187424596,
+   "episodes": 440,
+   "failure_rate": 0.02727272727272727
+  },
+  {
+   "steps": 7692288,
+   "multiplier": 3.953227967094108,
+   "episodes": 455,
+   "failure_rate": 0.04835164835164835
+  },
+  {
+   "steps": 7700480,
+   "multiplier": 3.9563457500040387,
+   "episodes": 433,
+   "failure_rate": 0.053117782909930716
+  },
+  {
+   "steps": 7708672,
+   "multiplier": 3.960084067761048,
+   "episodes": 428,
+   "failure_rate": 0.053738317757009345
+  },
+  {
+   "steps": 7716864,
+   "multiplier": 3.9403870980640785,
+   "episodes": 396,
+   "failure_rate": 0.030303030303030304
+  },
+  {
+   "steps": 7725056,
+   "multiplier": 3.9362038311318077,
+   "episodes": 502,
+   "failure_rate": 0.045816733067729085
+  },
+  {
+   "steps": 7733248,
+   "multiplier": 3.9264722875076465,
+   "episodes": 447,
+   "failure_rate": 0.040268456375838924
+  },
+  {
+   "steps": 7741440,
+   "multiplier": 3.9183442086899127,
+   "episodes": 406,
+   "failure_rate": 0.04187192118226601
+  },
+  {
+   "steps": 7749632,
+   "multiplier": 3.8960578345559633,
+   "episodes": 433,
+   "failure_rate": 0.02771362586605081
+  },
+  {
+   "steps": 7757824,
+   "multiplier": 3.9004313570145923,
+   "episodes": 423,
+   "failure_rate": 0.054373522458628844
+  },
+  {
+   "steps": 7766016,
+   "multiplier": 3.911934773871084,
+   "episodes": 439,
+   "failure_rate": 0.06150341685649203
+  },
+  {
+   "steps": 7774208,
+   "multiplier": 3.9011052807835265,
+   "episodes": 434,
+   "failure_rate": 0.03917050691244239
+  },
+  {
+   "steps": 7782400,
+   "multiplier": 3.88308822321423,
+   "episodes": 469,
+   "failure_rate": 0.031982942430703626
+  },
+  {
+   "steps": 7790592,
+   "multiplier": 3.875046265172272,
+   "episodes": 429,
+   "failure_rate": 0.04195804195804196
+  },
+  {
+   "steps": 7798784,
+   "multiplier": 3.8744580298781544,
+   "episodes": 425,
+   "failure_rate": 0.04941176470588235
+  },
+  {
+   "steps": 7806976,
+   "multiplier": 3.861043395731813,
+   "episodes": 410,
+   "failure_rate": 0.036585365853658534
+  },
+  {
+   "steps": 7815168,
+   "multiplier": 3.8612826301815737,
+   "episodes": 418,
+   "failure_rate": 0.050239234449760764
+  },
+  {
+   "steps": 7823360,
+   "multiplier": 3.8674887191745477,
+   "episodes": 427,
+   "failure_rate": 0.05620608899297424
+  },
+  {
+   "steps": 7831552,
+   "multiplier": 3.8713528877928147,
+   "episodes": 427,
+   "failure_rate": 0.053864168618266976
+  },
+  {
+   "steps": 7839744,
+   "multiplier": 3.853610952308944,
+   "episodes": 434,
+   "failure_rate": 0.03225806451612903
+  },
+  {
+   "steps": 7847936,
+   "multiplier": 3.8554127541107457,
+   "episodes": 444,
+   "failure_rate": 0.0518018018018018
+  },
+  {
+   "steps": 7856128,
+   "multiplier": 3.8562210681985056,
+   "episodes": 433,
+   "failure_rate": 0.050808314087759814
+  },
+  {
+   "steps": 7864320,
+   "multiplier": 3.8523040175072616,
+   "episodes": 434,
+   "failure_rate": 0.04608294930875576
+  },
+  {
+   "steps": 7872512,
+   "multiplier": 3.8585387363336676,
+   "episodes": 409,
+   "failure_rate": 0.05623471882640587
+  },
+  {
+   "steps": 7880704,
+   "multiplier": 3.85164218460953,
+   "episodes": 464,
+   "failure_rate": 0.04310344827586207
+  },
+  {
+   "steps": 7888896,
+   "multiplier": 3.8470967300640755,
+   "episodes": 418,
+   "failure_rate": 0.045454545454545456
+  },
+  {
+   "steps": 7897088,
+   "multiplier": 3.831899514286813,
+   "episodes": 431,
+   "failure_rate": 0.03480278422273782
+  },
+  {
+   "steps": 7905280,
+   "multiplier": 3.8361981568207497,
+   "episodes": 442,
+   "failure_rate": 0.05429864253393665
+  },
+  {
+   "steps": 7913472,
+   "multiplier": 3.8389559505857376,
+   "episodes": 417,
+   "failure_rate": 0.05275779376498801
+  },
+  {
+   "steps": 7921664,
+   "multiplier": 3.824761577184203,
+   "episodes": 391,
+   "failure_rate": 0.03580562659846547
+  },
+  {
+   "steps": 7929856,
+   "multiplier": 3.8252423464149725,
+   "episodes": 416,
+   "failure_rate": 0.05048076923076923
+  },
+  {
+   "steps": 7938048,
+   "multiplier": 3.8078238000490576,
+   "episodes": 399,
+   "failure_rate": 0.03258145363408521
+  },
+  {
+   "steps": 7946240,
+   "multiplier": 3.819467635665496,
+   "episodes": 438,
+   "failure_rate": 0.06164383561643835
+  },
+  {
+   "steps": 7954432,
+   "multiplier": 3.811721156792257,
+   "episodes": 426,
+   "failure_rate": 0.04225352112676056
+  },
+  {
+   "steps": 7962624,
+   "multiplier": 3.813607949245087,
+   "episodes": 424,
+   "failure_rate": 0.05188679245283019
+  },
+  {
+   "steps": 7970816,
+   "multiplier": 3.8143325869262465,
+   "episodes": 414,
+   "failure_rate": 0.050724637681159424
+  },
+  {
+   "steps": 7979008,
+   "multiplier": 3.8012783997341284,
+   "episodes": 406,
+   "failure_rate": 0.03694581280788178
+  },
+  {
+   "steps": 7987200,
+   "multiplier": 3.8110129130084647,
+   "episodes": 452,
+   "failure_rate": 0.059734513274336286
+  },
+  {
+   "steps": 7995392,
+   "multiplier": 3.7997372865847745,
+   "episodes": 439,
+   "failure_rate": 0.0387243735763098
+  },
+  {
+   "steps": 8003584,
+   "multiplier": 3.8003119992284526,
+   "episodes": 435,
+   "failure_rate": 0.05057471264367816
+  }
+ ],
+ "stochastic": {
+  "n": 20000,
+  "seed": 102005,
+  "m": 0.0,
+  "horizon": null,
+  "budget_scale": 1.0,
+  "risk": 0.04965,
+  "failures": 993,
+  "U": 4.803997309996991,
+  "U_se": 0.01796867652372229,
+  "I": 1.3673554744777228,
+  "steps": 385899,
+  "min_reserve_q": [
+   -0.14666752573948,
+   0.0002681085924711191,
+   0.03290834335670967,
+   0.1268605880438759
+  ],
+  "near": {
+   "0.02": 0.14075,
+   "0.05": 0.34595,
+   "0.1": 0.46275,
+   "0.2": 0.5724
+  }
+ },
+ "mean_action": {
+  "n": 20000,
+  "seed": 112005,
+  "m": 0.0,
+  "horizon": null,
+  "budget_scale": 1.0,
+  "risk": 0.0422,
+  "failures": 844,
+  "U": 4.768137608421348,
+  "U_se": 0.017676232434683345,
+  "I": 1.3474130440337737,
+  "steps": 383526,
+  "min_reserve_q": [
+   -0.15073322690400887,
+   0.010770285504792818,
+   0.035544035500556376,
+   0.13033276034238966
+  ],
+  "near": {
+   "0.02": 0.06035,
+   "0.05": 0.34305,
+   "0.1": 0.4569,
+   "0.2": 0.571
+  }
+ },
+ "robust90": {
+  "n": 20000,
+  "seed": 122005,
+  "m": 0.0,
+  "horizon": null,
+  "budget_scale": 0.9,
+  "risk": 0.4638,
+  "failures": 9276,
+  "U": 4.6106647757888055,
+  "U_se": 0.017494826114576943,
+  "I": 1.199058561550998,
+  "steps": 224498,
+  "min_reserve_q": [
+   -0.25833002749348205,
+   -0.08895791849576426,
+   -0.013909122290685139,
+   0.027240551545167357
+  ],
+  "near": {
+   "0.02": 0.49065,
+   "0.05": 0.52665,
+   "0.1": 0.5724,
+   "0.2": 0.6454
+  }
+ },
+ "robust80": {
+  "n": 20000,
+  "seed": 132005,
+  "m": 0.0,
+  "horizon": null,
+  "budget_scale": 0.8,
+  "risk": 0.56945,
+  "failures": 11389,
+  "U": 4.323120557782988,
+  "U_se": 0.016625040733615537,
+  "I": 0.9260474074420938,
+  "steps": 183158,
+  "min_reserve_q": [
+   -0.3446313914604721,
+   -0.16754540515538238,
+   -0.04367553962070972,
+   -0.0053823765946927615
+  ],
+  "near": {
+   "0.02": 0.5849,
+   "0.05": 0.60545,
+   "0.1": 0.63945,
+   "0.2": 0.69665
+  }
+ }
+}

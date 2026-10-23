@@ -1,0 +1,122 @@
+{
+ "params": {
+  "beta": 0.9,
+  "gamma": 0.5,
+  "eps": 0.2,
+  "m": 1.0,
+  "omega": 1.0,
+  "L": 8.0,
+  "N": 800,
+  "ubar": 1.0,
+  "lambda_W": 1.0
+ },
+ "n": 2000,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "dt_factor": 0.02,
+ "configs": [
+  {
+   "name": "K",
+   "kappa1": 0.1,
+   "kappa2": 0.0,
+   "final_V_m_mean": -1.9644450943686462,
+   "final_V_m_sd": 0.002661050974819251,
+   "final_spread_mean": 2.2877618708699776,
+   "final_q_mean": 0.08171036829715092,
+   "l_max": 400.0
+  },
+  {
+   "name": "K",
+   "kappa1": 1.0,
+   "kappa2": 0.0,
+   "final_V_m_mean": -2.2176039612390213,
+   "final_V_m_sd": 0.0021931796095699223,
+   "final_spread_mean": 1.0709074610694234,
+   "final_q_mean": 0.09768941151346595,
+   "l_max": 40.0
+  },
+  {
+   "name": "P",
+   "kappa1": 0.0,
+   "kappa2": 1.0,
+   "final_V_m_mean": -2.253269450469755,
+   "final_V_m_sd": 0.0,
+   "final_spread_mean": 8.089322930966864e-19,
+   "final_q_mean": 0.10000000000000002,
+   "l_max": 40.0
+  },
+  {
+   "name": "P",
+   "kappa1": 0.0,
+   "kappa2": 10.0,
+   "final_V_m_mean": -2.253269450469755,
+   "final_V_m_sd": 0.0,
+   "final_spread_mean": 8.089322930943633e-19,
+   "final_q_mean": 0.10000000000000002,
+   "l_max": 4.0
+  },
+  {
+   "name": "K+P",
+   "kappa1": 0.1,
+   "kappa2": 1.0,
+   "final_V_m_mean": -2.253269450469755,
+   "final_V_m_sd": 0.0,
+   "final_spread_mean": 0.30426152543038276,
+   "final_q_mean": 0.10000000000000002,
+   "l_max": 36.36363636363636
+  },
+  {
+   "name": "K+P",
+   "kappa1": 0.1,
+   "kappa2": 10.0,
+   "final_V_m_mean": -2.253269450469755,
+   "final_V_m_sd": 0.0,
+   "final_spread_mean": 0.10041115189895566,
+   "final_q_mean": 0.10000000000000002,
+   "l_max": 3.9603960396039604
+  }
+ ],
+ "sweep": [
+  {
+   "kappa1": 0.01,
+   "kappa2": 1.0,
+   "final_V_m_mean": -2.253269450469755,
+   "final_V_m_sd": 0.0,
+   "final_spread_mean": 0.10041115189895347
+  },
+  {
+   "kappa1": 0.03,
+   "kappa2": 1.0,
+   "final_V_m_mean": -2.253269450469755,
+   "final_V_m_sd": 0.0,
+   "final_spread_mean": 0.17222042282678274
+  },
+  {
+   "kappa1": 0.1,
+   "kappa2": 1.0,
+   "final_V_m_mean": -2.253269450469755,
+   "final_V_m_sd": 0.0,
+   "final_spread_mean": 0.30426152543038276
+  },
+  {
+   "kappa1": 0.3,
+   "kappa2": 1.0,
+   "final_V_m_mean": -2.253093823325269,
+   "final_V_m_sd": 7.311460669846171e-05,
+   "final_spread_mean": 0.4862212458700981
+  },
+  {
+   "kappa1": 1.0,
+   "kappa2": 1.0,
+   "final_V_m_mean": -2.248235120386849,
+   "final_V_m_sd": 0.00055755883699968,
+   "final_spread_mean": 0.7249535456429937
+  }
+ ],
+ "plateau_V_m": -2.253269450469755
+}
