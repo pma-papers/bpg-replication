@@ -6,7 +6,7 @@ Changes against fuel-tank/lunar_analyze.py (review findings):
    design: every configuration of a seed starts from the same no-tank controller); seed means as large markers;
    tanks 22/21/20 in distinct hues; no line across the untested prices for tanks 21 and 20;
  * panel (b): the five prices in distinct hues; the adaptive configurations with dual step 5 (added after the
-   campaign) and dual step 100 (fixed before the campaign) with distinct markers;
+   campaign) and dual step 100 (fixed before the runs) with distinct markers;
  * panel (c): legend entries name both dual steps;
  * paired per-seed differences of the exhaustion probability (lunar-paired-v41.json/.tex); caption numbers
    (lunar-caption-v41.json); post-registration rows marked in the table (lunar-table-v41.tex).
@@ -235,7 +235,7 @@ def figure(protocol, runs, summary):
         n = min(len(t) for t in traces)
         steps = traces[0][:n, 0] / 1e6; M = np.array([t[:n, 1] for t in traces]); arrs += [steps, M]
         ax.plot(steps, np.maximum(M.mean(0), 1.0), color=col, ls=ls, marker=mk, markevery=(0.1, 0.25), ms=4, mec="white", mew=0.5,
-                label=f"$\\alpha={s['cfg']['alpha']:g}$, dual step ${s['cfg']['dual_step']:g}$" + (" (added after the campaign)" if s["cfg"]["dual_step"] < 50 else ""))
+                label=f"$\\alpha={s['cfg']['alpha']:g}$, dual step ${s['cfg']['dual_step']:g}$" + (" (added after the runs)" if s["cfg"]["dual_step"] < 50 else ""))
         ax.fill_between(steps, np.maximum(M.min(0), 1.0), np.maximum(M.max(0), 1.0), color=col, alpha=0.18, lw=0)
     d = digest(*arrs); DIGESTS["lunar/c multiplier traces"] = dict(before=d, after=d, changed=False)
     ax.set_yscale("log"); ax.set_xticks([0, 1, 2, 3])
