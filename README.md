@@ -8,7 +8,8 @@ that each table and figure of the paper can be regenerated from the records, and
 It is separate from the toolbox. The toolbox, [`barrierpg`](https://github.com/pma-papers/barrierpg), is for applying
 clipped barrier policy gradients to a new problem; this repository is for checking the paper. Results are named by the
 titles the paper gives them, not by statement, section or table numbers, which change between revisions. The tables
-the scripts generate were checked against revision 73 of the paper.
+the scripts generate were checked against revision 75 of the paper, the revision submitted to the journal; revisions 74
+and 75 changed the paper's wording, not its numbers.
 
 ## Studies
 
@@ -53,7 +54,7 @@ each output corresponds to is named in the last column.
 
 `collect_figures.py <folder>` copies every figure above into a manuscript figure folder under the manuscript's
 names. The figures are drawn at the journal's print width with sans-serif lettering (`lib/plotstyle.py`). The
-generated tables reproduce the manuscript's table files of revision 73 byte for byte, except the table of the roles
+generated tables reproduce the manuscript's table files of revision 75 byte for byte, except the table of the roles
 of the regularizers on the solvable flow, which was assembled by hand from `solvable-flow/roles-flow-v59.json`. Three
 scripts carry the corrections the paper made in revision 70: the reference spread of injected noise under the pull is
 `sqrt(kappa_1/kappa_2)` (`analyze_noise_v60.py`; the protocol's design values stay in its check (R1)), the
@@ -107,12 +108,12 @@ The code is under the MIT licence ([`LICENSE`](LICENSE)); the protocols, reports
 tables and figures are under CC BY 4.0 ([`LICENSE-records.md`](LICENSE-records.md)). Cite the paper and this
 repository as in [`CITATION.cff`](CITATION.cff). The repository is archived on Zenodo:
 [10.5281/zenodo.23597426](https://doi.org/10.5281/zenodo.23597426) for all versions,
-[10.5281/zenodo.23597427](https://doi.org/10.5281/zenodo.23597427) for the release of revision 73.
+[10.5281/zenodo.23597427](https://doi.org/10.5281/zenodo.23597427) for the release of revision 73, whose records and numbers are those of revision 75.
 
 ## Observations of the paper and the protocols
 
 The paper reports its findings as observations, labelled (O1)–(O24) in the order of its experiments (the labels of
-revision 73). An observation that a result of the paper implies names that result. Where the result's conditions
+revisions 73 to 75). An observation that a result of the paper implies names that result. Where the result's conditions
 hold in the experiment, as for the bounds and rates computed on the exact benchmark and on the solvable flow, the
 observation shows the slack of the bound. Where the result needs an assumption about the learner, such as a small
 optimization error, the observation names that assumption. The table gives, for each observation, the protocol

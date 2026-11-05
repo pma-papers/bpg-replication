@@ -209,7 +209,7 @@ def main():
             lines.append(row("Action regularization" if i == 0 else "", f"$\\eta={eta:g}$", rows))
     if unanch:
         lines.append(row("No anchor", "$m=0.03$", [dict(stochastic=r["stochastic"], action_kl=dict(A=float("nan")), log_std=r["log_std"]) for r in unanch]))
-    note = "\\multicolumn{7}{@{}l@{}}{Matched prior: prior policy equal to the action reference (incumbent rule, dispersion $0.1$); other rows: earlier campaigns.} \\\\"
+    note = "\\multicolumn{7}{@{}l@{}}{Matched prior: prior policy equal to the action reference (incumbent rule, dispersion $0.1$); other rows: earlier sets of runs.} \\\\"
     tex = ("\\setlength{\\tabcolsep}{4pt}\\begin{tabular}{llrrrrr}\n\\toprule\n"
            "Configuration & Setting & $q_\\beta$ (\\%) & $U$ & $\\mathcal A$ & $\\|\\theta-\\theta_0\\|$ & $\\sigma_a$ \\\\\n\\midrule\n" + "\n".join(lines) + "\n\\bottomrule\n" + note + "\n\\end{tabular}\n")
     (ROOT / "wear-anchor-table-v41.tex").write_text(tex)

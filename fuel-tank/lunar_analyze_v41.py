@@ -106,7 +106,7 @@ def table(summary):
            "\\cmidrule(lr){3-7}\\cmidrule(lr){8-9}\n"
            "Tank & Setting & exhausted (\\%) & landed (\\%) & crashed (\\%) & $U$ & fuel & exh.\\ (\\%) & landed (\\%) \\\\\n\\midrule\n"
            + body + "\n\\bottomrule\n"
-           "\\multicolumn{9}{@{}l@{}}{\\textsuperscript{$\\dagger$}added after the campaign (protocol note).} \\\\\n\\end{tabular}\n")
+           "\\multicolumn{9}{@{}l@{}}{\\textsuperscript{$\\dagger$}added after the runs (protocol note).} \\\\\n\\end{tabular}\n")
     (ROOT / "lunar-table-v41.tex").write_text(tex)
 
 
@@ -140,7 +140,7 @@ def paired(runs):
            "Tank & Configuration & mean difference (pp) & SD (pp) & $t$ & positive \\\\\n\\midrule\n" + "\n".join(lines) + "\n\\bottomrule\n"
            "\\multicolumn{6}{@{}p{0.92\\linewidth}@{}}{Per-seed difference of the exhaustion probability, $m=0$ minus the configuration, "
            "in percentage points over the five seeds; $t$ is the paired $t$ statistic ($n-1$ degrees of freedom); positive counts the seeds "
-           "whose exhaustion probability fell. \\textsuperscript{$\\dagger$}added after the campaign (protocol note).} \\\\\n\\end{tabular}\n")
+           "whose exhaustion probability fell. \\textsuperscript{$\\dagger$}added after the runs (protocol note).} \\\\\n\\end{tabular}\n")
     (ROOT / "lunar-paired-v41.tex").write_text(tex)
     (ROOT / "lunar-paired-v41.json").write_text(json.dumps(out, indent=1) + "\n")
     return out
