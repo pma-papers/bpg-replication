@@ -212,7 +212,7 @@ def figure(protocol, runs, summary):
     if "lunar-unlimited" in summary:
         U0 = summary["lunar-unlimited"]["stochastic"]["U"]["mean"]
         ax.axhline(U0, color=TEXT2, lw=0.8, ls="--")
-        ax.annotate("no tank", (0.01, U0), textcoords="offset points", xytext=(0, 3), fontsize=9, color=TEXT2, ha="left")
+        ax.annotate("no fuel limit", (0.01, U0), textcoords="offset points", xytext=(0, 3), fontsize=9, color=TEXT2, ha="left")
     series = [(s, PRICE_COL.get(s["cfg"]["m"], PAL[0]), MK[i], f"$m={s['cfg']['m']:g}$") for i, s in enumerate(fixed[22])]
     series += [(s, ALPHA_COL[s["cfg"]["alpha"]], "^", f"$\\alpha={s['cfg']['alpha']:g}$, dual step 5") for s in adapt_slow]
     series += [(s, ALPHA_COL[s["cfg"]["alpha"]], "D", f"$\\alpha={s['cfg']['alpha']:g}$, dual step 100") for s in adapt_fast]
@@ -239,7 +239,7 @@ def figure(protocol, runs, summary):
         ax.fill_between(steps, np.maximum(M.min(0), 1.0), np.maximum(M.max(0), 1.0), color=col, alpha=0.18, lw=0)
     d = digest(*arrs); DIGESTS["lunar/c multiplier traces"] = dict(before=d, after=d, changed=False)
     ax.set_yscale("log"); ax.set_xticks([0, 1, 2, 3])
-    ax.set_xlabel("training steps ($10^6$)"); ax.set_ylabel("multiplier $\\nu$"); panel_label(ax, "c")
+    ax.set_xlabel("training steps ($10^6$)"); ax.set_ylabel("multiplier $m/(1-\\beta)$"); panel_label(ax, "c")
     handles_c = ax.get_legend_handles_labels()[0]
     legend_below(fig, handles_a + handles_b + handles_c, ncol=3)
     save(fig, "lunar-campaign-v41", ROOT)

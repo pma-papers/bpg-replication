@@ -343,7 +343,7 @@ def fig_dual(summary, runs, protocol, inc=None):
         ax.plot(steps, tr.mean(0), color=col, ls=ls, label=lab)
         ax.fill_between(steps, tr.min(0), tr.max(0), color=col, alpha=0.18, lw=0)
     d = digest(*arrs); DIGESTS["wear-dual/a multiplier traces"] = dict(before=d, after=d, changed=False, note="y-label changed to (1-beta)nu")
-    ax.set_yscale("log"); ax.set_xlabel("environment steps (millions)"); ax.set_ylabel("multiplier in price units, $(1-\\beta)\\nu$")
+    ax.set_yscale("log"); ax.set_xlabel("environment steps (millions)"); ax.set_ylabel("multiplier in price units, $m$")
     legend_below(fig, *ax.get_legend_handles_labels(), ncol=1, axes=[ax]); ax.set_ylim(2e-2, 8); panel_label(ax, "a")
     ax = axes[1]
     anchored = {a: s for a, s in summary.items() if s["kind"] == "anchored"}

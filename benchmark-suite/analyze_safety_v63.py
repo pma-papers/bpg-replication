@@ -83,7 +83,7 @@ def traces(k):
 ax = axes[2]
 for k, col, ls, lab2 in ((("adaptive", 0.05), PAL[1], "-", "$\\alpha=0.05$"), (("adaptive", 0.2), PAL[3], "--", "$\\alpha=0.2$")):
     st_, T = traces(k); ax.plot(st_, T.mean(0), color=col, lw=1.0, ls=ls, label=lab2); ax.fill_between(st_, T.min(0), T.max(0), color=col, alpha=0.15, lw=0)
-ax.set_xlabel("steps (millions)"); ax.set_ylabel("adaptive multiplier $\\nu$")
+ax.set_xlabel("steps (millions)"); ax.set_ylabel("adaptive multiplier $m/(1-\\beta)$")
 ax = axes[3]
 cm = [(("cmdp_s0.5", 25.0), PAL[2], "-", "step $0.5$")] + ([(("cmdp_s0.01", 25.0), PAL[4], "--", "step $0.01$")] if c2 else [])
 for k, col, ls, lab2 in cm:
