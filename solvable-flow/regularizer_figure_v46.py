@@ -7,7 +7,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "solvable-flow"))
 import regularizer_figure_v41 as m  # noqa: E402
 m.LABEL = {"KL": "relative entropy", "r1.5": "rel. entropy $+\\,\\omega G$, $r=3/2$",
-           "r2": "rel. entropy $+\\,\\omega G$, $r=2$", "r3": "rel. entropy $+\\,\\omega G$, $r=3$"}
+           "r2": "rel. entropy $+\\,\\omega\\chi^2$ ($r=2$)", "r3": "rel. entropy $+\\,\\omega G$, $r=3$"}
 m.ROOT = HERE
 if __name__ == "__main__":
     m.main()

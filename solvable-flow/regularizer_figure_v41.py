@@ -89,7 +89,7 @@ def main():
     ax = axes[0]
     arrs = panel_decay(ax, "cert", f"$\\kappa={D['kappa_cert']:.0f}$, above the threshold", 0.004, C_sharp=K["C_sharp"])
     d = digest(*arrs); DIGESTS["regularizer/a flow curves"] = dict(before=d, after=d, changed=False, note="sharp envelope added; y-label changed")
-    ax.set_ylabel("objective gap"); panel_label(ax, "a")
+    ax.set_ylabel("objective gap, relative to $E_0$"); panel_label(ax, "a")
     handles_a, labels_a = ax.get_legend_handles_labels()
     ax = axes[1]
     arrs = panel_decay(ax, "k1", "$\\kappa=1$, below the threshold", 8.0); panel_label(ax, "b")
