@@ -88,7 +88,7 @@ def main():
         ax.plot(m.KAPPAS, np.maximum(dev, 1e-6), marker=PMK[prior], ms=3.5, mec="white", mew=0.5, color=m.COL[prior])
     digests["prior/c deviations"] = digest(m.KAPPAS, *arrs)
     R = P["ubar"] / (1 - P["beta"]) - m.runs_of((0.0, 1.0))[0]["prior"]["V_m"]
-    ax.plot(m.KAPPAS, [m.slack(k, R) for k in m.KAPPAS], color=TEXT2, ls="--", label="risk slack bound")
+    ax.plot(m.KAPPAS, [m.slack(k, R) for k in m.KAPPAS], color=TEXT2, ls="--", label="bound")
     ax.axhline(1.0, color=MUTED, lw=0.7, ls=":")
     ax.set_xscale("log"); ax.set_yscale("log"); ax.set_ylim(1e-6, 30)
     ax.set_xlabel("$\\kappa$"); ax.set_ylabel("$|q_\\beta(\\mu^*)-q_\\beta(\\pi_\\Gamma)|$")

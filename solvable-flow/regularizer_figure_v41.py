@@ -87,7 +87,7 @@ def main():
     (ROOT / "flow-constants-v41.json").write_text(json.dumps(K, indent=1) + "\n")
     fig, axes = plt.subplots(1, 3, figsize=(TEXTW, 2.2), gridspec_kw=dict(wspace=0.5))
     ax = axes[0]
-    arrs = panel_decay(ax, "cert", f"certified $\\kappa={D['kappa_cert']:.0f}$", 0.004, C_sharp=K["C_sharp"])
+    arrs = panel_decay(ax, "cert", f"$\\kappa={D['kappa_cert']:.0f}$, above the threshold", 0.004, C_sharp=K["C_sharp"])
     d = digest(*arrs); DIGESTS["regularizer/a flow curves"] = dict(before=d, after=d, changed=False, note="sharp envelope added; y-label changed")
     ax.set_ylabel("objective gap"); panel_label(ax, "a")
     handles_a, labels_a = ax.get_legend_handles_labels()
@@ -105,7 +105,7 @@ def main():
     ax.axhline(D["sup_V_m"] - VG, color=TEXT2, ls="-", lw=0.8)
     ax.annotate("$\\sup V_m-V_m(\\Gamma)$", (ks[1], D["sup_V_m"] - VG), textcoords="offset points", xytext=(0, 3), fontsize=FS, color=TEXT2, ha="center")
     ax.axvline(D["kappa_cert"], color=MUTED, lw=0.7, ls=":")
-    ax.annotate("certified", (D["kappa_cert"], 3e-7), textcoords="offset points", xytext=(-3, 0), fontsize=FS, color=TEXT2, ha="right")
+    ax.annotate("threshold", (D["kappa_cert"], 3e-7), textcoords="offset points", xytext=(-3, 0), fontsize=FS, color=TEXT2, ha="right")
     ax.set_xscale("log"); ax.set_yscale("log"); ax.set_ylim(1e-7, 2)
     ax.set_xlabel("$\\kappa$"); ax.set_ylabel("$V_m(\\mu^*)-V_m(\\Gamma)$")
     panel_label(ax, "c")
@@ -127,10 +127,10 @@ def main():
                         f"${r['final']['V_m']:.4f}$ & ${100 * r['final']['q']:.2f}$ & {sci(r['final']['H'])} & {lp} & {lo} \\\\")
     body = "\n".join(rows)
     note = (f"\\multicolumn{{10}}{{@{{}}p{{0.95\\linewidth}}@{{}}}}{{Constants of the example: $L_1={K['L1']:.3f}$, $L_2={K['L2']:.3f}$, "
-            f"$C_m={K['C_m']:.0f}$, so the certified threshold is ${K['C_m'] / K['lambda_W']:.0f}$, and at the certified strength $\\kappa={K['kappa_cert']:.0f}$ used here $2\\Lambda_m={K['certified_rate']:.0f}$. "
+            f"$C_m={K['C_m']:.0f}$, so the threshold is ${K['C_m'] / K['lambda_W']:.0f}$, and at the strength $\\kappa={K['kappa_cert']:.0f}$ used here, five percent above it, $2\\Lambda_m={K['certified_rate']:.0f}$. "
             f"The finite-difference curvature estimate of this example, $C_\\sharp=\\max|V_m''|\\,L_1^2+\\max|V_m'|\\,L_2={K['C_sharp']:.2f}$ "
             f"($\\max|V_m'|={K['max_abs_V1']:.3f}$, $\\max|V_m''|={K['max_abs_V2']:.3f}$ along the stored curve), gives the estimated envelope rate "
-            f"$2(\\kappa\\lambda_W-C_\\sharp)={K['sharp_rate_by_kappa']['cert']:.0f}$ at the certified $\\kappa$.}} \\\\")
+            f"$2(\\kappa\\lambda_W-C_\\sharp)={K['sharp_rate_by_kappa']['cert']:.0f}$ at that $\\kappa$.}} \\\\")
     tex = ("\\setlength{\\tabcolsep}{4pt}\\begin{tabular}{llrrrrrrrr}\n\\toprule\n"
            "$\\kappa$ & regularizer & rate of the gap & $2\\Lambda_m$ & rate of $W_2$ & $V_m(\\mu^*)$ & $q_\\beta$ (\\%) & $\\mathcal H(\\mu^*)$ & $\\ell_{\\rm bd}$ & $\\ell_{\\rm obs}$ \\\\\n\\midrule\n"
            + body + "\n\\bottomrule\n" + note + "\n\\end{tabular}\n")
