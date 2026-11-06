@@ -3,7 +3,7 @@ revision-39 campaign (fuel-tank/lunar/campaign/*/result.json, lunar-protocol.jso
 
 Changes against fuel-tank/lunar_analyze.py (review findings):
  * panel (a): price on a symlog axis; per-seed lines connect the configurations of one seed at tank 22 (paired
-   design: every configuration of a seed starts from the same no-tank controller); seed means as large markers;
+   design: every configuration of a seed starts from the same unconstrained controller); seed means as large markers;
    tanks 22/21/20 in distinct hues; no line across the untested prices for tanks 21 and 20;
  * panel (b): the five prices in distinct hues; the adaptive configurations with dual step 5 (added after the
    campaign) and dual step 100 (fixed before the runs) with distinct markers;
@@ -86,7 +86,7 @@ def table(summary):
                 f"${100 * ma['risk']['mean']:.1f}$ & ${100 * ma['landed']['mean']:.1f}$ \\\\")
     lines = []
     if "lunar-unlimited" in summary:
-        lines.append(row("No tank", "--", summary["lunar-unlimited"]))
+        lines.append(row("No fuel limit", "--", summary["lunar-unlimited"]))
     for b, label in ((22, "Tank $b=22$"), (21, "Tank $b=21$"), (20, "Tank $b=20$")):
         first = True
         group = [s for s in summary.values() if s["cfg"]["budget"] == b]

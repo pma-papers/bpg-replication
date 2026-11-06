@@ -145,13 +145,13 @@ toolbox's tests check that the wrapper reproduces the paper's fuel-tank environm
 ### The campaign and what came out
 
 Training with the tank from scratch never discovers landing, because random exploration exhausts the tank within
-about a hundred frames. Each configuration therefore continues the training of a controller trained without a tank
+about a hundred frames. Each configuration therefore continues the training of a controller trained without a fuel limit
 (`5 x 10^6` steps, then `3 x 10^6` with the tank and the price), which is also how a budget is typically imposed on an
 existing controller. Five seeds; every configuration of a seed starts from the same controller.
 
 | Tank 22 units | exhausted (%) | landed (%) | crashed (%) | `U` |
 |---|---|---|---|---|
-| no tank | 0.0 | 96.2 | 3.7 | 237 |
+| no fuel limit | 0.0 | 96.2 | 3.7 | 237 |
 | `m = 0` | 11.4 | 82.0 | 6.7 | 220 |
 | `m = 0.5` | 5.7 | 77.9 | 16.5 | 205 |
 | `m = 2` | 10.9 | 40.8 | 48.3 | 123 |
@@ -202,9 +202,9 @@ from barrierpg.examples.plateau import PlateauModel, simulate_particles
 run = simulate_particles(PlateauModel(), kappa1=0.1, kappa2=1.0, n=2000, seed=1)
 ```
 
-The same flow tests the convergence theorem (*Fixed-stage population convergence*): `C_m = 1940`, certified strength `kappa = 2037`
+The same flow tests the convergence theorem (*Fixed-stage population convergence*): `C_m = 1940`, the strength `kappa = 2037` five percent above the threshold
 (`convergence.curvature_budget`), every flow converging exponentially far below that threshold, and the minimizer at
-the certified strength essentially the prior.
+that strength essentially the prior.
 
 ### On a learned controller
 
