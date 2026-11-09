@@ -209,7 +209,7 @@ def figure(protocol, runs, summary):
     ax.set_xticks(prices); ax.set_xticklabels([f"{m:g}" for m in prices], rotation=45, ha="right", rotation_mode="anchor"); ax.xaxis.set_minor_locator(NullLocator())
     ax.set_xlim(-0.015, 3.3)
     ax.set_xlabel("price of failure risk $m$"); ax.set_ylabel("fuel-exhaustion probability"); ax.set_ylim(-0.01, 0.5)
-    handles = [Line2D([], [], marker=TANK_MK[b], ms=5, mec="white", mew=0.6, color=TANK_COL[b], ls="none", label=f"tank $b={b}$, mean and range over seeds") for b in (22, 21, 20) if fixed[b]]
+    handles = [Line2D([], [], marker=TANK_MK[b], ms=5, mec="white", mew=0.6, color=TANK_COL[b], ls="none", label=f"tank $b={b}$") for b in (22, 21, 20) if fixed[b]]
     handles_a = handles; panel_label(ax, "a")
     # (b) stopped utility against exhaustion probability, tank 22: seeds (small) and means (large)
     ax = axes[1]
