@@ -69,7 +69,9 @@ locations and widths (`tables/prior-sweep`, `figures/prior-sweep`), the regulari
 (`tables/prior-paths`) and the learning-error bound along the flow (`figures/corollary-bound`). The figure of the
 noise-and-pull check on the solvable flow (`figures/roles-flow`) is printed in the Online Resource since the same day. The same revision
 writes the parameter of a unit as `x`, the anchor as `x_0` and the feature of the solvable flow as `varphi`, and the
-labels of the tables and figures follow.
+labels of the tables and figures follow. Since the night of 9 November the paper calls the solvable flow the
+*analytical example* (Sect. 6.3 and Appendix E of Online Resource 1); the folder `solvable-flow/` and the script
+names keep the old name.
 
 ## Running the campaigns again
 
@@ -122,9 +124,9 @@ repository as in [`CITATION.cff`](CITATION.cff). The repository is archived on Z
 ## Observations of the paper and the protocols
 
 The paper reports its findings as observations, labelled (O1)–(O24) in the order of its experiments (the labels of
-revision 75 since 9 November 2026, when the noise-and-pull check on the solvable flow joined the other checks on that
+revision 75 since 9 November 2026, when the noise-and-pull check on the analytical example (the solvable flow) joined the other checks on that
 flow: the former (O15) is now (O13), and the former (O13) and (O14) are (O14) and (O15)). An observation that a result of the paper implies names that result. Where the result's conditions
-hold in the experiment, as for the bounds and rates computed on the exact benchmark and on the solvable flow, the
+hold in the experiment, as for the bounds and rates computed on the exact benchmark and on the analytical example, the
 observation shows the slack of the bound. Where the result needs an assumption about the learner, such as a small
 optimization error, the observation names that assumption. The table gives, for each observation, the protocol
 statement that covered the same finding.
@@ -140,9 +142,9 @@ statement that covered the same finding.
 | (O7) | `wear-allowance/PROTOCOL.md` | P5 |
 | (O8) | `fuel-tank/lunar-protocol.json` | none; the protocol holds no text of the statement |
 | (O9) | `fuel-tank/lunar-protocol.json` | none; the protocol holds no text of the statement |
-| (O10) | none (the solvable flow has no protocol file) | none |
-| (O11) | none (the solvable flow has no protocol file) | none |
-| (O12) | none (the solvable flow has no protocol file) | none |
+| (O10) | none (the analytical example has no protocol file) | none |
+| (O11) | none (the analytical example has no protocol file) | none |
+| (O12) | none (the analytical example has no protocol file) | none |
 | (O13) | none | none |
 | (O14) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P12') and (P12'') |
 | (O15) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P13') |

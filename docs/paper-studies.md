@@ -175,12 +175,12 @@ existing controller. Five seeds; every configuration of a seed starts from the s
 
 ## 4. The roles of the regularizers
 
-The paper reports the first part with its other checks on the solvable flow and the second part as *Noise and pull on
-a learned controller*.
+The paper reports the first part with its other checks on the analytical example (Sect. 6.3, called the solvable flow
+until 9 November 2026) and the second part as *Noise and pull on a learned controller*.
 
-### On the solvable flow
+### On the analytical example
 
-The paper's solvable flow (`barrierpg.examples.plateau`) has one parameter per unit and a feature that is flat on
+The paper's analytical example (`barrierpg.examples.plateau`, the solvable flow of the folder names) has one parameter per unit and a feature that is flat on
 `[-1, 1]`. From the plateau initial law the value gradient vanishes, so only the regularizers move the units. With the
 prior `N(0, 1)`: relative entropy with strength `kappa1` (pull and noise tied), the quadratic potential with strength
 `kappa2` (pull only), and their sum.
