@@ -15,9 +15,9 @@ and 75 changed the paper's wording, not its numbers.
 
 | Folder | Study in the paper | What it tests |
 |---|---|---|
-| [`wear-allowance/`](wear-allowance) | An asset operated under a wear allowance; the prior on a learned controller; the roles of the regularizers on PPO | The price against an exact benchmark, the adaptive multiplier, the interior barrier under a misjudged allowance, the action anchor, the parameter anchor and parameter noise |
+| [`wear-allowance/`](wear-allowance) | An asset operated under a wear allowance; the prior on a learned controller; noise and pull on a learned controller | The price against an exact benchmark, the adaptive multiplier, the interior barrier under a misjudged allowance, the action anchor, the parameter anchor and parameter noise |
 | [`fuel-tank/`](fuel-tank) | A learned controller with a fuel tank | The price on a learned controller (LunarLander with a fuel tank), the dual step of an adaptive multiplier |
-| [`solvable-flow/`](solvable-flow) | The convergence theorem and the prior on a solvable flow; the roles of the regularizers | The slack of the curvature threshold, the prior policy, noise, pull and spread, the particle form |
+| [`solvable-flow/`](solvable-flow) | The convergence theorem and the regularizers on the solvable flow | The slack of the curvature threshold, the prior policy, noise, pull and spread, the particle form |
 | [`benchmark-suite/`](benchmark-suite) | A task of a benchmark suite (details in Online Resource 1) | A Safety-Gymnasium navigation task: the price, the adaptive multiplier and the expected-cost formulation |
 | [`lib/`](lib) | shared modules | plotting style, density flow, digest helpers |
 
@@ -66,7 +66,8 @@ the measured optimization error, computed per seed in `wear-allowance/analyze_v4
 Four outputs are records that the paper no longer prints. The Online Resource was shortened on 9 November 2026 and
 now points to this repository for them: the exact optima on the grid (`tables/wear-benchmark`), the runs over prior
 locations and widths (`tables/prior-sweep`, `figures/prior-sweep`), the regularization paths as a table
-(`tables/prior-paths`) and the learning-error bound along the flow (`figures/corollary-bound`). The same revision
+(`tables/prior-paths`) and the learning-error bound along the flow (`figures/corollary-bound`). The figure of the
+noise-and-pull check on the solvable flow (`figures/roles-flow`) is printed in the Online Resource since the same day. The same revision
 writes the parameter of a unit as `x`, the anchor as `x_0` and the feature of the solvable flow as `varphi`, and the
 labels of the tables and figures follow.
 
@@ -121,7 +122,8 @@ repository as in [`CITATION.cff`](CITATION.cff). The repository is archived on Z
 ## Observations of the paper and the protocols
 
 The paper reports its findings as observations, labelled (O1)–(O24) in the order of its experiments (the labels of
-revisions 73 to 75). An observation that a result of the paper implies names that result. Where the result's conditions
+revision 75 since 9 November 2026, when the noise-and-pull check on the solvable flow joined the other checks on that
+flow: the former (O15) is now (O13), and the former (O13) and (O14) are (O14) and (O15)). An observation that a result of the paper implies names that result. Where the result's conditions
 hold in the experiment, as for the bounds and rates computed on the exact benchmark and on the solvable flow, the
 observation shows the slack of the bound. Where the result needs an assumption about the learner, such as a small
 optimization error, the observation names that assumption. The table gives, for each observation, the protocol
@@ -141,9 +143,9 @@ statement that covered the same finding.
 | (O10) | none (the solvable flow has no protocol file) | none |
 | (O11) | none (the solvable flow has no protocol file) | none |
 | (O12) | none (the solvable flow has no protocol file) | none |
-| (O13) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P12') and (P12'') |
-| (O14) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P13') |
-| (O15) | none | none |
+| (O13) | none | none |
+| (O14) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P12') and (P12'') |
+| (O15) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P13') |
 | (O16) | `wear-allowance/PROTOCOL-noise-v60.md` | (R1), the same quantity |
 | (O17) | `wear-allowance/PROTOCOL-noise-v60.md` | (R2), the same quantity |
 | (O18) | `wear-allowance/PROTOCOL-noise-v60.md` | (R3), the same quantity |

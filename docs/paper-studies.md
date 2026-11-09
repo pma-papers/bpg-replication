@@ -175,6 +175,9 @@ existing controller. Five seeds; every configuration of a seed starts from the s
 
 ## 4. The roles of the regularizers
 
+The paper reports the first part with its other checks on the solvable flow and the second part as *Noise and pull on
+a learned controller*.
+
 ### On the solvable flow
 
 The paper's solvable flow (`barrierpg.examples.plateau`) has one parameter per unit and a feature that is flat on
