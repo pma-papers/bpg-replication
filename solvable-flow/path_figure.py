@@ -40,7 +40,7 @@ def main():
     c_sup = D["curve"]["c"][int(np.argmax(D["curve"]["V_m"]))]
     ax.axhline(c_sup, color=TEXT2, lw=0.8, ls="--")
     ax.annotate("unregularized optimum", (KAPPAS[-1], c_sup), textcoords="offset points", xytext=(0, -9), fontsize=6.5, color=TEXT2, ha="left")
-    ax.set_xscale("log"); ax.set_xlabel("$\\kappa$"); ax.set_ylabel("tilt $\\int\\chi\\,d\\mu^*$ of the minimizer")
+    ax.set_xscale("log"); ax.set_xlabel("$\\kappa$"); ax.set_ylabel("tilt $\\int\\varphi\\,d\\mu^*$ of the minimizer")
     ax.legend(loc="upper right", bbox_to_anchor=(1.0, 0.93), fontsize=6.0, borderaxespad=0.2, labelspacing=0.3, title="prior (dotted: its tilt)", title_fontsize=6.0); panel_label(ax, "a")
     # (b) the (q, U) plane: the class curve, prior policies and the paths of minimizers
     ax = axes[1]

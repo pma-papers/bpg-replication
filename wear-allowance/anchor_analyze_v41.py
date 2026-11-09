@@ -187,7 +187,7 @@ def main():
         return [dict(stochastic=r["prior_policy"]["stochastic"], action_kl=r["prior_policy"]["action_kl"], log_std=logstd) for r in rows]
     summary = dict(counts=counts, exact_m003=exact)
     if rows_full:
-        lines.append(row("Prior policy", "$\\theta_0$, $\\sigma_a=0.37$", prior_rows(rows_full, -1.0)))
+        lines.append(row("Prior policy", "$x_0$, $\\sigma_a=0.37$", prior_rows(rows_full, -1.0)))
         for i, k in enumerate(ks_full):
             lines.append(row("Parameter anchor" if i == 0 else "", f"$\\kappa_p={k:g}$", full[k]))
         summary["prior_full"] = prior_full
@@ -196,7 +196,7 @@ def main():
     for k, rows in meanonly.items():
         lines.append(row("Mean-only prior", f"$\\kappa_p={k:g}$", rows))
     if rows_matched:
-        lines.append(row("Prior policy, matched", "$\\theta_0$, $\\sigma_a=0.1$ (incumbent)", prior_rows(rows_matched, rows_matched[0]["arm"]["prior_logstd"])))
+        lines.append(row("Prior policy, matched", "$x_0$, $\\sigma_a=0.1$ (incumbent)", prior_rows(rows_matched, rows_matched[0]["arm"]["prior_logstd"])))
         for i, k in enumerate(ks_matched):
             setting = f"$\\kappa_p={k:g}$" + (" (unanchored control)" if k == 0 else "")
             lines.append(row("Matched prior" if i == 0 else "", setting, matched[k]))
@@ -211,7 +211,7 @@ def main():
         lines.append(row("No anchor", "$m=0.03$", [dict(stochastic=r["stochastic"], action_kl=dict(A=float("nan")), log_std=r["log_std"]) for r in unanch]))
     note = "\\multicolumn{7}{@{}l@{}}{Matched prior: prior policy equal to the action reference (incumbent rule, dispersion $0.1$); other rows: earlier sets of runs.} \\\\"
     tex = ("\\setlength{\\tabcolsep}{4pt}\\begin{tabular}{llrrrrr}\n\\toprule\n"
-           "Configuration & Setting & $q_\\beta$ (\\%) & $U$ & $\\mathcal A$ & $\\|\\theta-\\theta_0\\|$ & $\\sigma_a$ \\\\\n\\midrule\n" + "\n".join(lines) + "\n\\bottomrule\n" + note + "\n\\end{tabular}\n")
+           "Configuration & Setting & $q_\\beta$ (\\%) & $U$ & $\\mathcal A$ & $\\|x-x_0\\|$ & $\\sigma_a$ \\\\\n\\midrule\n" + "\n".join(lines) + "\n\\bottomrule\n" + note + "\n\\end{tabular}\n")
     (ROOT / "wear-anchor-table-v41.tex").write_text(tex)
     (ROOT / "wear-anchor-summary-v41.json").write_text(json.dumps(summary, indent=1, default=float) + "\n")
     if prior_full:

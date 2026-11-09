@@ -63,6 +63,13 @@ the solvable flow's curvature constant is called a finite-difference estimate (`
 The wear-allowance table carries the column "bound": the price–risk law with the idle policy as comparison and
 the measured optimization error, computed per seed in `wear-allowance/analyze_v41.py`.
 
+Four outputs are records that the paper no longer prints. The Online Resource was shortened on 9 November 2026 and
+now points to this repository for them: the exact optima on the grid (`tables/wear-benchmark`), the runs over prior
+locations and widths (`tables/prior-sweep`, `figures/prior-sweep`), the regularization paths as a table
+(`tables/prior-paths`) and the learning-error bound along the flow (`figures/corollary-bound`). The same revision
+writes the parameter of a unit as `x`, the anchor as `x_0` and the feature of the solvable flow as `varphi`, and the
+labels of the tables and figures follow.
+
 ## Running the campaigns again
 
 The launch scripts (`*campaign*.sh`, `*run_one*.sh`, `launch.py`) run the campaigns with the seeds of the protocols;

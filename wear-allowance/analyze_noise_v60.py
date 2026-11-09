@@ -115,7 +115,7 @@ def main():
     x0 = 1e-4   # position of kappa_1 = 0 (pull alone) on the log axis
     def seeds(rows, key):
         return [r["stochastic"][key] for r in rows]
-    for ax, key, lab, scale in [(axes[0], "risk", "breakdown probability $q_\\beta$ (\\%)", 100.0), (axes[1], "U", "stopped utility $U$", 1.0)]:
+    for ax, key, lab, scale in [(axes[0], "risk", "breakdown probability $q_\\beta$ (%)", 100.0), (axes[1], "U", "stopped utility $U$", 1.0)]:
         xs = [x0] + [s["kappa1"] for s in sums]; ys = [summ["pull"][key][0] * scale] + [s[key][0] * scale for s in sums]
         ax.plot(xs, ys, color=PAL[0], marker="D", ms=3.5, lw=1.0, label="pull $\\kappa_2=10$ with noise $\\kappa_1$, mean")
         for x, rows in [(x0, pull)] + [(k1, configs[("sum", k1)]) for k1 in SWEEP]:

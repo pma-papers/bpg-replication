@@ -64,8 +64,8 @@ def main():
         ax.plot(th, r["density"]["phi"], color=col, ls=":", lw=0.9)
         ax.plot(th, r["density"]["p_final"], color=col, marker=mk, markevery=(len(th) // 20, len(th) // 10), ms=3.5, mec="white", mew=0.4, label=f"$\\sigma={sigma:g}$")
     ax.axvspan(-1, 1, color=MUTED, alpha=0.12, lw=0)
-    ax.annotate("$\\chi=0$", (0, 0.72), fontsize=FS, color=TEXT2, ha="center")
-    ax.set_xlim(-5, 5); ax.set_xlabel("$\\theta$"); ax.set_ylabel("density")
+    ax.annotate("$\\varphi=0$", (0, 0.72), fontsize=FS, color=TEXT2, ha="center")
+    ax.set_xlim(-5, 5); ax.set_xlabel("$x$"); ax.set_ylabel("density")
     legend_below(fig, *ax.get_legend_handles_labels(), ncol=1, axes=[ax]); panel_label(ax, "c")
     save(fig, "prior-flow", ROOT)
     # table
