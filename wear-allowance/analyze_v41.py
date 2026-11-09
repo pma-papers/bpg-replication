@@ -180,41 +180,43 @@ def incumbent_stats(summary):
 
 
 def table(summary, inc=None):
-    def price(c):
+    """The campaign table of the paper (revision 75, 2026-11-09): one group row per configuration family instead of a
+    configuration column, the settings written as m, alpha (tolerance) and eta (strength at the price m = 0.03),
+    probabilities in percent as the caption states, no mean-action column (the summary keeps mean_action_q)."""
+    def setting(c):
         if c["kind"] == "adaptive":
-            return f"tolerance ${c['alpha']:g}$" + (f", step ${c['dual_step']:g}$" if c["dual_step"] != 5 else "")
+            return f"$\\alpha={c['alpha']:g}$" + (f", step ${c['dual_step']:g}$" if c["dual_step"] != 5 else "")
         if c["kind"] == "anchored":
-            return f"$m=0.03$, $\\eta={c['eta']:g}$"
+            return f"$\\eta={c['eta']:g}$"
         return f"$m={c['m']:g}$"
-    names = {"fixed": "Fixed price", "barrier": "Fixed price, barrier", "adaptive": "Adaptive multiplier", "anchored": "Action-regularized"}
+    names = {"fixed": "Fixed price", "barrier": "Fixed price with the interior barrier", "adaptive": "Adaptive multiplier",
+             "anchored": "Action-regularized, $m=0.03$"}
     lines = []
     last = None
     for arm, s in summary.items():
         if arm.startswith("_"):
             continue
         kind = s["kind"]
-        label = names[kind] if kind != last else ""
-        if kind != last and last is not None:
-            lines.append("\\addlinespace")
+        if kind != last:
+            if last is not None:
+                lines.append("\\addlinespace")
+            lines.append(f"\\multicolumn{{10}}{{@{{}}l}}{{{names[kind]}}} \\\\")
         last = kind
-        setting = price(s["cfg"])
+        st = setting(s["cfg"])
         if kind == "fixed" and s["cfg"]["m"] == 0.1:
-            setting += "\\textsuperscript{$\\dagger$}"
+            st += "\\textsuperscript{$\\dagger$}"
         A = f"${s['A_mean']:.3g}$" if "A_mean" in s else "--"
         bound = f"${100*s['bound_mean']:.1f}$" if "bound_mean" in s else "--"
-        lines.append(f"{label} & {setting} & ${100*s['q_mean']:.2f}\\pm{100*s['q_sd']:.2f}$ & {bound} & ${s['U_mean']:.2f}\\pm{s['U_sd']:.2f}$ & "
+        lines.append(f"{st} & ${100*s['q_mean']:.2f}\\pm{100*s['q_sd']:.2f}$ & {bound} & ${s['U_mean']:.2f}\\pm{s['U_sd']:.2f}$ & "
                      f"${s['I_mean']:.2f}$ & ${100*s['gap_reeval_mean']:.1f}$ (${100*s['gap_reeval_max']:.1f}$) & ${s['pass05']}/{s['seeds']}$ & "
                      f"${100*s['near05']:.1f}$ & ${100*s['q90']:.1f}$ & {A} \\\\")
     if inc:
-        lines += ["\\midrule", f"Incumbent rule & $a=\\min\\{{1,z/({inc['span']:g}b)\\}}$ & ${100*inc['q']:.2f}$ & -- & ${inc['U']:.2f}$ & -- & -- & -- & -- & -- & $0$ \\\\"]
-    note = ("\\multicolumn{11}{@{}l@{}}{\\textsuperscript{$\\dagger$}three seeds remained at the unpriced optimum ($q_\\beta=0.59$), "
+        lines += ["\\midrule", f"Incumbent rule & ${100*inc['q']:.2f}$ & -- & ${inc['U']:.2f}$ & -- & -- & -- & -- & -- & $0$ \\\\"]
+    note = ("\\multicolumn{10}{@{}l@{}}{\\textsuperscript{$\\dagger$}three seeds remained at the unpriced optimum ($q_\\beta=0.59$), "
             "four reached $0.11$ to $0.17$ and one $0.33$; the mean is of a two-cluster sample.} \\\\")
-    # The breakdown probability of the mean-action policy (summary key mean_action_q) stays in wear-summary-v41.json
-    # and the log line below; revision 75 dropped it from the paper's table, since the mean-action policy is a different
-    # candidate that the main text does not define.
     (ROOT / "wear-campaign-table-v41.tex").write_text(
-        "\\setlength{\\tabcolsep}{4pt}\\begin{tabular}{llrrrrrrrrr}\n\\toprule\n"
-        "Configuration & Setting & $q_\\beta$ (\\%) & bound (\\%) & $U$ & $\\mathcal I_m$ & gap (\\%) & pass & near (\\%) & at $0.9b$ (\\%) & $\\mathcal A$ \\\\\n\\midrule\n"
+        "\\setlength{\\tabcolsep}{3pt}\\begin{tabular}{@{}lrrrrrrrrr@{}}\n\\toprule\n"
+        "Setting & $q_\\beta$ & bound & $U$ & $\\mathcal I_m$ & gap & pass & near & at $0.9b$ & $\\mathcal A$ \\\\\n\\midrule\n"
         + "\n".join(lines) + "\n\\bottomrule\n" + note + "\n\\end{tabular}\n")
 
 
