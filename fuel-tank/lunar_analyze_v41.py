@@ -7,6 +7,7 @@ Changes against fuel-tank/lunar_analyze.py (review findings):
    tanks 22/21/20 in distinct hues; no line across the untested prices for tanks 21 and 20;
  * panel (b): the five prices in distinct hues; the adaptive configurations with dual step 5 (added after the
    campaign) and dual step 100 (fixed before the runs) with distinct markers;
+ * panel (a): seed means with bars spanning the seeds (revision 75, 2026-11-09; the per-seed points and lines were dropped);
  * panel (c): legend entries name both dual steps;
  * paired per-seed differences of the exhaustion probability (lunar-paired-v41.json/.tex); caption numbers
    (lunar-caption-v41.json); post-registration rows marked in the table (lunar-table-v41.tex).
@@ -192,11 +193,15 @@ def figure(protocol, runs, summary):
         for seed, pts in sorted(by_seed.items()):
             pts.sort()
             xs = [p[0] for p in pts]; ys = [p[1] for p in pts]; arrs += [xs, ys]
-            if b == 22:   # tested at every price: connect the configurations of one seed
-                ax.plot(xs, ys, color=col, lw=0.6, alpha=0.4, marker=".", ms=2.5, transform=tr, zorder=2)
-            else:         # only m = 0 and m = 0.5: no line across the untested prices
-                ax.plot(xs, ys, color=col, ls="none", marker=".", ms=2.5, alpha=0.5, transform=tr, zorder=2)
-        ax.plot([s["cfg"]["m"] for s in group], [s["stochastic"]["risk"]["mean"] for s in group], marker=TANK_MK[b], ms=5, mec="white", mew=0.6, color=col, ls="none", transform=tr, zorder=3)
+        # revision 75 (2026-11-09): the per-seed points and the lines joining one seed's configurations are no longer drawn;
+        # each configuration shows its seed mean with a bar spanning the seeds (the digest below is still that of the
+        # per-seed data, which is unchanged)
+        ms_ = [s["cfg"]["m"] for s in group]
+        means = [s["stochastic"]["risk"]["mean"] for s in group]
+        lo = [s["stochastic"]["risk"]["mean"] - min(r["stochastic"]["risk"] for r in runs[s["arm"]]) for s in group]
+        hi = [max(r["stochastic"]["risk"] for r in runs[s["arm"]]) - s["stochastic"]["risk"]["mean"] for s in group]
+        ax.errorbar(ms_, means, yerr=[lo, hi], fmt="none", ecolor=col, elinewidth=0.8, capsize=2, alpha=0.8, transform=tr, zorder=2)
+        ax.plot(ms_, means, marker=TANK_MK[b], ms=5, mec="white", mew=0.6, color=col, ls="none", transform=tr, zorder=3)
     for a_ in adapt_slow:
         ax.axhline(a_["cfg"]["alpha"], color=MUTED, lw=0.7, ls=":")
     DIGESTS["lunar/a per-seed exhaustion probabilities"] = dict(after=digest(*arrs))
@@ -204,8 +209,7 @@ def figure(protocol, runs, summary):
     ax.set_xticks(prices); ax.set_xticklabels([f"{m:g}" for m in prices], rotation=45, ha="right", rotation_mode="anchor"); ax.xaxis.set_minor_locator(NullLocator())
     ax.set_xlim(-0.015, 3.3)
     ax.set_xlabel("price of failure risk $m$"); ax.set_ylabel("fuel-exhaustion probability"); ax.set_ylim(-0.01, 0.5)
-    handles = [Line2D([], [], marker=TANK_MK[b], ms=5, mec="white", mew=0.6, color=TANK_COL[b], ls="none", label=f"tank $b={b}$, seed mean") for b in (22, 21, 20) if fixed[b]]
-    handles.append(Line2D([], [], color=TANK_COL[22], lw=0.6, alpha=0.6, marker=".", ms=2.5, label="one seed, $b=22$"))
+    handles = [Line2D([], [], marker=TANK_MK[b], ms=5, mec="white", mew=0.6, color=TANK_COL[b], ls="none", label=f"tank $b={b}$, mean and range over seeds") for b in (22, 21, 20) if fixed[b]]
     handles_a = handles; panel_label(ax, "a")
     # (b) stopped utility against exhaustion probability, tank 22: seeds (small) and means (large)
     ax = axes[1]
