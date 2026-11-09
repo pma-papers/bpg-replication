@@ -185,7 +185,7 @@ def table(summary, inc=None):
     probabilities in percent as the caption states, no mean-action column (the summary keeps mean_action_q)."""
     def setting(c):
         if c["kind"] == "adaptive":
-            return f"$\\alpha={c['alpha']:g}$" + (f", step ${c['dual_step']:g}$" if c["dual_step"] != 5 else "")
+            return f"$\\alpha={c['alpha']:g}$" + ("\\textsuperscript{$\\ddagger$}" if c["dual_step"] != 5 else "")
         if c["kind"] == "anchored":
             return f"$\\eta={c['eta']:g}$"
         return f"$m={c['m']:g}$"
@@ -212,10 +212,11 @@ def table(summary, inc=None):
                      f"${100*s['near05']:.1f}$ & ${100*s['q90']:.1f}$ & {A} \\\\")
     if inc:
         lines += ["\\midrule", f"Incumbent rule & ${100*inc['q']:.2f}$ & -- & ${inc['U']:.2f}$ & -- & -- & -- & -- & -- & $0$ \\\\"]
-    note = ("\\multicolumn{10}{@{}l@{}}{\\textsuperscript{$\\dagger$}three seeds remained at the unpriced optimum ($q_\\beta=0.59$), "
-            "four reached $0.11$ to $0.17$ and one $0.33$; the mean is of a two-cluster sample.} \\\\")
+    note = ("\\multicolumn{10}{@{}p{\\linewidth}@{}}{\\textsuperscript{$\\dagger$}three seeds remained at the unpriced optimum ($q_\\beta=0.59$), "
+            "four reached $0.11$ to $0.17$ and one $0.33$; the mean is of a two-cluster sample. "
+            "\\textsuperscript{$\\ddagger$}dual step $1$ instead of $5$.} \\\\")
     (ROOT / "wear-campaign-table-v41.tex").write_text(
-        "\\setlength{\\tabcolsep}{3pt}\\begin{tabular}{@{}lrrrrrrrrr@{}}\n\\toprule\n"
+        "\\setlength{\\tabcolsep}{2.5pt}\\begin{tabular}{@{}lrrrrrrrrr@{}}\n\\toprule\n"
         "Setting & $q_\\beta$ & bound & $U$ & $\\mathcal I_m$ & gap & pass & near & at $0.9b$ & $\\mathcal A$ \\\\\n\\midrule\n"
         + "\n".join(lines) + "\n\\bottomrule\n" + note + "\n\\end{tabular}\n")
 
