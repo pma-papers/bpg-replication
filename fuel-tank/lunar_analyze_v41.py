@@ -35,7 +35,9 @@ from digest_v41 import digest  # noqa: E402
 
 STAGE = "campaign"
 TANK_COL = {22: PAL[0], 21: PAL[2], 20: PAL[3]}
-PRICE_COL = {0.0: PAL[0], 0.05: PAL[2], 0.15: PAL[4], 0.5: PAL[6], 2.0: PAL[7]}
+PRICE_COL = {0.0: MUTED, 0.05: PAL[2], 0.15: PAL[4], 0.5: PAL[6], 2.0: PAL[7]}   # m = 0 in grey: the tanks of panel (a) own the hues of PAL[0], PAL[2], PAL[3]
+PRICE_MK = {0.0: "P", 0.05: "X", 0.15: "*", 0.5: "D", 2.0: "v"}                  # no marker shared with the tanks (o, s, ^) of panel (a)
+ADAPT_MK = {"slow": "h", "fast": "p"}                                             # the adaptive configurations in panels (b) and (c)
 ALPHA_COL = {0.05: PAL[1], 0.02: PAL[3]}
 QUANTILES = [0.1, 0.25, 0.5, 0.75, 0.9]   # fuel_quantiles in fuel-tank/lunar.py
 DIGESTS = {}
@@ -217,13 +219,13 @@ def figure(protocol, runs, summary):
         U0 = summary["lunar-unlimited"]["stochastic"]["U"]["mean"]
         ax.axhline(U0, color=TEXT2, lw=0.8, ls="--")
         ax.annotate("no fuel limit", (0.01, U0), textcoords="offset points", xytext=(0, 3), fontsize=9, color=TEXT2, ha="left")
-    series = [(s, PRICE_COL.get(s["cfg"]["m"], PAL[0]), MK[i], f"$m={s['cfg']['m']:g}$") for i, s in enumerate(fixed[22])]
-    series += [(s, ALPHA_COL[s["cfg"]["alpha"]], "^", f"$\\alpha={s['cfg']['alpha']:g}$, dual step 5") for s in adapt_slow]
-    series += [(s, ALPHA_COL[s["cfg"]["alpha"]], "D", f"$\\alpha={s['cfg']['alpha']:g}$, dual step 100") for s in adapt_fast]
+    series = [(s, PRICE_COL.get(s["cfg"]["m"], MUTED), PRICE_MK.get(s["cfg"]["m"], MK[3 + i]), f"$m={s['cfg']['m']:g}$") for i, s in enumerate(fixed[22])]
+    series += [(s, ALPHA_COL[s["cfg"]["alpha"]], ADAPT_MK["slow"], f"$\\alpha={s['cfg']['alpha']:g}$, dual step 5") for s in adapt_slow]
+    series += [(s, ALPHA_COL[s["cfg"]["alpha"]], ADAPT_MK["fast"], f"$\\alpha={s['cfg']['alpha']:g}$, dual step 100") for s in adapt_fast]
     arrs = []
     for s, col, mk, lab in series:
         xs = [r["stochastic"]["risk"] for r in runs[s["arm"]]]; ys = [r["stochastic"]["U"] for r in runs[s["arm"]]]; arrs += [xs, ys]
-        small, big = (2.4, 5.0) if mk == "D" else (2.8, 5.5)
+        small, big = (2.4, 5.0) if mk in ("D", "h", "p") else (2.8, 5.5)
         ax.plot(xs, ys, marker=mk, ms=small, color=col, alpha=0.5, ls="none")
         ax.plot([s["stochastic"]["risk"]["mean"]], [s["stochastic"]["U"]["mean"]], marker=mk, ms=big, mec="white", mew=0.7, color=col, ls="none", label=lab)
     DIGESTS["lunar/b per-seed (risk, U) at tank 22"] = dict(after=digest(*arrs))
@@ -234,7 +236,7 @@ def figure(protocol, runs, summary):
     ax = axes[2]
     arrs = []
     for s, col, ls in zip(sorted(adapt22, key=lambda s: (s["cfg"]["dual_step"], -s["cfg"]["alpha"])), (PAL[1], PAL[3], PAL[4], PAL[5]), ("-", "--", "-.", ":")):
-        col = ALPHA_COL[s["cfg"]["alpha"]]; mk = "^" if s["cfg"]["dual_step"] < 50 else "D"
+        col = ALPHA_COL[s["cfg"]["alpha"]]; mk = ADAPT_MK["slow"] if s["cfg"]["dual_step"] < 50 else ADAPT_MK["fast"]
         traces = [np.array([(t["steps"], t["multiplier"]) for t in r["trace"]]) for r in runs[s["arm"]]]
         n = min(len(t) for t in traces)
         steps = traces[0][:n, 0] / 1e6; M = np.array([t[:n, 1] for t in traces]); arrs += [steps, M]
