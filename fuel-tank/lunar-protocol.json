@@ -134,6 +134,36 @@
    "dual_step": 5.0,
    "multiplier0": 0.0,
    "budget": 22.0
+  },
+  "lunar-b21-m0.05": {
+   "kind": "fixed",
+   "m": 0.05,
+   "budget": 21.0
+  },
+  "lunar-b21-m0.15": {
+   "kind": "fixed",
+   "m": 0.15,
+   "budget": 21.0
+  },
+  "lunar-b21-m2": {
+   "kind": "fixed",
+   "m": 2.0,
+   "budget": 21.0
+  },
+  "lunar-b20-m0.05": {
+   "kind": "fixed",
+   "m": 0.05,
+   "budget": 20.0
+  },
+  "lunar-b20-m0.15": {
+   "kind": "fixed",
+   "m": 0.15,
+   "budget": 20.0
+  },
+  "lunar-b20-m2": {
+   "kind": "fixed",
+   "m": 2.0,
+   "budget": 20.0
   }
  },
  "stages": {
@@ -170,14 +200,46 @@
     "lunar-b22-adaptive-a0.05-s5",
     "lunar-b22-adaptive-a0.02-s5",
     "lunar-b20-m0",
-    "lunar-b20-m0.5"
+    "lunar-b20-m0.5",
+    "lunar-b21-m0.05",
+    "lunar-b21-m0.15",
+    "lunar-b21-m2",
+    "lunar-b20-m0.05",
+    "lunar-b20-m0.15",
+    "lunar-b20-m2",
+    "lunar-b23-m0",
+    "lunar-b23-m0.5",
+    "lunar-b24-m0",
+    "lunar-b24-m0.5"
    ],
    "ppo": {
     "normalize": false,
     "ent_coef": 0.0,
     "gae_lambda": 0.95
    },
-   "protocol_note": "Adaptive arms with dual step 5 were added on 2026-10-03 after the pre-registered step 100 ran away (failure rate 1 in the first rollouts, multiplier past 10^4); the step-100 runs are reported as well. Tank-20 arms (prices 0 and 0.5) were added after the tank-21 arms turned out to be respected by most campaign controllers, so that (P7) is tested at a tank the controller cannot respect, as in the pilots."
+   "protocol_note": "Adaptive arms with dual step 5 were added on 2026-10-03 after the pre-registered step 100 ran away (failure rate 1 in the first rollouts, multiplier past 10^4); the step-100 runs are reported as well. Tank-20 arms (prices 0 and 0.5) were added after the tank-21 arms turned out to be respected by most campaign controllers, so that (P7) is tested at a tank the controller cannot respect, as in the pilots.",
+   "additions_2026_11_10": {
+    "arms": [
+     "lunar-b21-m0.05",
+     "lunar-b21-m0.15",
+     "lunar-b21-m2",
+     "lunar-b20-m0.05",
+     "lunar-b20-m0.15",
+     "lunar-b20-m2",
+     "lunar-b23-m0",
+     "lunar-b23-m0.5",
+     "lunar-b24-m0",
+     "lunar-b24-m0.5"
+    ],
+    "seeds": [
+     72001,
+     72002,
+     72003,
+     72004,
+     72005
+    ],
+    "note": "Added on 2026-11-10, after the results of the stored runs, to examine one reading of them: a fixed price changes the returned policy only when the price times the risk without a price, m q_{beta,H}(pi_0)/(1-beta), exceeds what the learner resolves (the return varies between seeds by about 17), and a charge above the return of an episode (m above about 0.48) degrades the policy. Stated before these runs: at tanks 21 and 20 the price 0.05 puts about 5 and 7 units of return at stake and no order of the exhaustion probabilities is expected; the price 0.15 puts about 15 and 20 at stake, at the spread; the price 2 is expected to degrade the policies as at tank 22. At tanks 23 and 24 the risk without a price is expected to be small (2 percent in the one pilot seed at tank 24), so that the price 0.5 puts less than the spread at stake and no systematic fall of exhaustion is expected. All other settings are those of the stage: continued training for warm_steps from the unconstrained controller of the same seed, the same learner settings, 1000 evaluation episodes."
+   }
   },
   "pilot2m": {
    "steps": 2000000,
