@@ -11,7 +11,12 @@ Four facts come first.
   when they were fixed is the date each protocol states.
 - The fuel-tank protocol (`fuel-tank/lunar-protocol.json`) lists the configurations, with a note on the arms added
   during the campaign. The fuel-tank records hold no text of the study's predictions, which appear only in the
-  manuscript.
+  manuscript. On 2026-11-10 the file gained ten configurations and the entry `additions_2026_11_10`, which states
+  what was expected of the fifty added runs. That change is commit ae98047 of this repository (09:18), and the first
+  result of the added runs was written at 09:22. Both commits were pushed together afterwards, so the order is
+  recorded by the commit times alone. The SHA-256 of the file is
+  626d071972943d3a6a580d93b865eb40f6d807f0f41de4ae74267b1c8459d509 since that change; the table below gives the
+  hash of the earlier version, which is the private original.
 - The solvable flow has no protocol file. Its first records appear in the private commit 46fd3f2 (2026-10-03 19:43).
 - This repository was assembled on 2026-10-15 and is published as one snapshot of 2026-10-23; its working history is
   kept in the authors' records. The commit hashes below refer to the authors' private repository, except for the
@@ -58,7 +63,7 @@ SHA-256 of the private originals.
 |---|---|---|
 | `wear-allowance/PROTOCOL.md` | 535fec4c45c1604fc5692504a383e2d7f46307f162fa37cf373bb2fa8c1cea48 | identical |
 | `wear-allowance/protocol.json` | aca70b250be09f91ec0396bd8583c03508333a75a8b82635cd63eb430334d136 | identical |
-| `fuel-tank/lunar-protocol.json` | ca89738c6fb934b7baac805409956ade085e8795a17d44880c0b598f0313cba3 | identical |
+| `fuel-tank/lunar-protocol.json` | ca89738c6fb934b7baac805409956ade085e8795a17d44880c0b598f0313cba3 | identical until 2026-11-10; extended then as described above |
 | `wear-allowance/PROTOCOL-anchor-v41.md` | 023f656a22b70af10d4908548b70d2b071cafdc3ef846946660c729918ffb4ee | identical |
 | `wear-allowance/PROTOCOL-noise-v60.md` | d26c07a0bfbc305ac989093b45eb15e28bed71e12049eea6cd64d671d7e5c893 | identical |
 | `benchmark-suite/PROTOCOL-safety-v63.md` | 11d4a4e55f338fff95fd5e75c05395a4247f3259416ceb7cf7cb77decf230c70 | identical |

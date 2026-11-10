@@ -42,7 +42,8 @@ each output corresponds to is named in the last column.
 | Roles of the regularizers on PPO: table and figure | `wear-allowance/analyze_noise_v60.py` | `constrained-rl` | `tables/wear-noise`, `figures/wear-noise` |
 | Roles of the regularizers on PPO, the pull decoupled from Adam (2026-10-20, after revision 68) | `wear-allowance/analyze_decoupled_v68.py` | `constrained-rl` | no table of its own; `wear-allowance/REPORT-decoupled-v68.md` |
 | Roles of the regularizers on PPO under three optimizers, with the amendment's rows (2026-10-20, after revision 68) | `wear-allowance/analyze_optimizers_v68.py` (per-coordinate records: `coordinate_diagnostic_v68.py`, `constrained-rl-numerics`) | `constrained-rl` | no table of its own; `wear-allowance/REPORT-optimizers-v68.md`, `wear-allowance/wear-optimizers-v68.tex` |
-| Fuel tank: tables and figure | `fuel-tank/lunar_analyze_v41.py` | `constrained-rl` | `tables/fuel-tank`, `tables/fuel-tank-paired`, `figures/fuel-tank` |
+| Fuel tank: tables and figure | `fuel-tank/lunar_analyze_v41.py` | `constrained-rl` | `tables/fuel-tank`, `tables/fuel-tank-paired`, `tables/fuel-tank-price-risk`, `tables/fuel-tank-amount`, `figures/fuel-tank` |
+| Fuel tank: priced risk of the stored fixed-price policies (the exhaustion frames of a second evaluation on the same episodes; `priced-risk.json` in each run folder) | `fuel-tank/lunar_reeval.py` | `constrained-rl-numerics` | read by `lunar_analyze_v41.py` |
 | Solvable flow: convergence test | `solvable-flow/regularizer_figure_v46.py` | `constrained-rl` | `tables/flow-test`, `figures/flow-test` |
 | Solvable flow: prior strength | `solvable-flow/prior_figure.py` | `constrained-rl` | `tables/prior-sweep`, `figures/prior-sweep` |
 | Solvable flow: regularization paths | `solvable-flow/prior_figure_v47.py`, `prior_path_table_v41.py` | `constrained-rl` | `figures/prior`, `tables/prior-paths` |
@@ -110,7 +111,8 @@ reported an emissions application, which revision 72 removed. Its folder is not 
 three-optimizer and decoupled-pull protocols and reports of 2026-10-20 also describe runs on that application; those
 records are not here either, and `analyze_optimizers_v68.py` skips them. Before publication, the home folder of the
 authors' working tree was replaced by `<project>` in the run records and logs that recorded it (65 fuel-tank result
-files and nine logs); nothing else in them changed.
+files and nine logs); nothing else in them changed. The same replacement was made in the fifty result files and the log
+of the fuel-tank runs added on 2026-11-10.
 
 ## Licence and citation
 
@@ -140,7 +142,7 @@ statement that covered the same finding.
 | (O5) | `wear-allowance/PROTOCOL.md` | P4, the utility cost of the barrier |
 | (O6) | `wear-allowance/PROTOCOL.md` | P4, the effect of the barrier |
 | (O7) | `wear-allowance/PROTOCOL.md` | P5 |
-| (O8) | `fuel-tank/lunar-protocol.json` | none; the protocol holds no text of the statement |
+| (O8) | `fuel-tank/lunar-protocol.json` | none for the first runs; the entry `additions_2026_11_10` states what was expected of the fifty runs added on 2026-11-10, and Appendix F.2 of Online Resource 1 reports the outcome |
 | (O9) | `fuel-tank/lunar-protocol.json` | none; the protocol holds no text of the statement |
 | (O10) | none (the analytical example has no protocol file) | none |
 | (O11) | none (the analytical example has no protocol file) | none |
