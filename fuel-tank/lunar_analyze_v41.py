@@ -10,11 +10,12 @@ Changes against fuel-tank/lunar_analyze.py (review findings):
  * panel (a): seed means with bars spanning the seeds (revision 75, 2026-11-09; the per-seed points and lines were dropped);
  * panel (c): legend entries name both dual steps;
  * revision 75 (2026-11-10), after the fifty added runs (lunar-protocol.json, additions_2026_11_10): the figure has two
-   rows. Top row, the fixed prices: (a) tank 22 alone, (b) exhaustion without a price and at the price 0.5 at the five
-   tanks, (c) the fall in exhaustion of every pair of a priced and an unpriced run against the price times the priced
-   risk of the unpriced run, m q_{beta,H}(pi_0)/(1-beta) (the priced risks are those of lunar_reeval.py, files
-   priced-risk.json). Bottom row, tank 22: (d) utility against exhaustion and (e) the multipliers, the former panels
-   (b) and (c). A price has one colour and one marker in every panel;
+   rows. Top row, the fixed prices: (a) exhaustion without a price and at the price 0.5 at the five tanks, (b) the
+   fall in exhaustion of every pair of a priced and an unpriced run against the price times the priced risk of the
+   unpriced run, m q_{beta,H}(pi_0)/(1-beta) (the priced risks are those of lunar_reeval.py, files priced-risk.json).
+   Bottom row, tank 22: (c) utility against exhaustion and (d) the multipliers, the former panels (b) and (c). A
+   price has one colour and one marker in every panel. The former panel (a), exhaustion against the price at tank 22
+   alone, is not drawn: its values are the tank-22 rows of the tables;
  * tables of the price times the risk without a price (lunar-price-risk-v41.tex, by tank and price;
    lunar-amount-v41.tex, pair by pair); the two existing tables list the added configurations;
  * paired per-seed differences of the exhaustion probability (lunar-paired-v41.json/.tex); caption numbers
@@ -47,7 +48,7 @@ TANKS = (24, 23, 22, 21, 20)
 BETA = 0.999
 PRICE_COL = {0.0: MUTED, 0.05: PAL[2], 0.15: PAL[4], 0.5: PAL[6], 2.0: PAL[7]}   # one colour and one marker per price in every panel; m = 0 in grey
 PRICE_MK = {0.0: "P", 0.05: "X", 0.15: "*", 0.5: "D", 2.0: "v"}
-ADAPT_MK = {"slow": "h", "fast": "p"}                                             # the adaptive configurations in panels (d) and (e)
+ADAPT_MK = {"slow": "h", "fast": "p"}                                             # the adaptive configurations in panels (c) and (d)
 ALPHA_COL = {0.05: PAL[1], 0.02: PAL[3]}
 QUANTILES = [0.1, 0.25, 0.5, 0.75, 0.9]   # fuel_quantiles in fuel-tank/lunar.py
 DIGESTS = {}
@@ -293,41 +294,25 @@ def caption_numbers(summary):
 
 def figure(protocol, runs, summary, pr):
     fig = plt.figure(figsize=(TEXTW, 4.45))
-    gs = fig.add_gridspec(2, 3, wspace=0.78, hspace=0.62, width_ratios=[1.0, 1.0, 1.1])
-    axes = [fig.add_subplot(gs[0, k]) for k in range(3)] + [fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[1, 1])]
+    gs = fig.add_gridspec(2, 3, wspace=0.62, hspace=0.50, width_ratios=[1.0, 1.0, 0.72])
+    axes = [fig.add_subplot(gs[0, 0]), fig.add_subplot(gs[0, 1]), fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[1, 1])]
     fixed = {b: sorted([s for s in summary.values() if s["cfg"]["kind"] == "fixed" and s["cfg"]["budget"] == b], key=lambda s: s["cfg"]["m"]) for b in TANKS}
     adapt22 = [s for s in summary.values() if s["cfg"]["kind"] == "adaptive" and s["cfg"]["budget"] == 22]
     adapt_slow = sorted([s for s in adapt22 if s["cfg"]["dual_step"] < 50], key=lambda s: -s["cfg"]["alpha"])
     adapt_fast = sorted([s for s in adapt22 if s["cfg"]["dual_step"] >= 50], key=lambda s: -s["cfg"]["alpha"])
-    # (a) tank 22 alone: exhaustion probability against the price (symlog axis), seed means with bars spanning the seeds
+    # (a) the five tanks: exhaustion without a price and at the price 0.5, seeds (small) and means (large)
     ax = axes[0]
-    ax.set_xscale("symlog", linthresh=0.05, linscale=0.5)
-    arrs = []
-    for s in fixed[22]:
-        m = s["cfg"]["m"]; x = [r["stochastic"]["risk"] for r in runs[s["arm"]]]; arrs += [[m], x]
-        mean = s["stochastic"]["risk"]["mean"]
-        ax.errorbar([m], [mean], yerr=[[mean - min(x)], [max(x) - mean]], fmt="none", ecolor=PRICE_COL[m], elinewidth=0.8, capsize=2, alpha=0.85, zorder=2)
-        ax.plot([m], [mean], marker=PRICE_MK[m], ms=7.5 if PRICE_MK[m] == "*" else 5.5, mec="white", mew=0.6, color=PRICE_COL[m], ls="none", zorder=3)
-    for a_ in adapt_slow:
-        ax.axhline(a_["cfg"]["alpha"], color=MUTED, lw=0.7, ls=":")
-    DIGESTS["lunar/a per-seed exhaustion probabilities at tank 22"] = dict(after=digest(*arrs))
-    prices = [s["cfg"]["m"] for s in fixed[22]]
-    ax.set_xticks(prices); ax.set_xticklabels([f"{m:g}" for m in prices], rotation=45, ha="right", rotation_mode="anchor"); ax.xaxis.set_minor_locator(NullLocator())
-    ax.set_xlim(-0.015, 3.3)
-    ax.set_xlabel("price $m$"); ax.set_ylabel("exhaustion probability"); ax.set_ylim(-0.01, 0.5); panel_label(ax, "a")
-    # (b) the five tanks: exhaustion without a price and at the price 0.5, seeds (small) and means (large)
-    ax = axes[1]
     arrs = []
     for b in TANKS:
         for m, dx in ((0.0, -0.17), (0.5, 0.17)):
             s = summary[f"lunar-b{b}-m{m:g}"]; x = [r["stochastic"]["risk"] for r in runs[s["arm"]]]; arrs += [[b, m], x]
             ax.plot([b - dx] * len(x), x, marker=PRICE_MK[m], ms=2.6, color=PRICE_COL[m], alpha=0.55, ls="none")
             ax.plot([b - dx], [s["stochastic"]["risk"]["mean"]], marker=PRICE_MK[m], ms=5.5, mec="white", mew=0.6, color=PRICE_COL[m], ls="none", zorder=3)
-    DIGESTS["lunar/b per-seed exhaustion probabilities at the five tanks, prices 0 and 0.5"] = dict(after=digest(*arrs))
+    DIGESTS["lunar/a per-seed exhaustion probabilities at the five tanks, prices 0 and 0.5"] = dict(after=digest(*arrs))
     ax.set_xticks(list(TANKS)); ax.set_xlim(24.6, 19.4)
-    ax.set_xlabel("tank $b$"); ax.set_ylabel("exhaustion probability"); ax.set_ylim(-0.01, 0.5); panel_label(ax, "b")
-    # (c) every pair of a priced and an unpriced run: fall in exhaustion against the price times the risk without a price
-    ax = axes[2]
+    ax.set_xlabel("tank $b$"); ax.set_ylabel("exhaustion probability"); ax.set_ylim(-0.01, 0.5); panel_label(ax, "a")
+    # (b) every pair of a priced and an unpriced run: fall in exhaustion against the price times the risk without a price
+    ax = axes[1]
     spread = pr["spread_of_return_without_price"]
     ax.axvspan(min(spread.values()), max(spread.values()), color=MUTED, alpha=0.30, lw=0)
     ax.axhline(0, color=TEXT2, lw=0.6)
@@ -338,12 +323,12 @@ def figure(protocol, runs, summary, pr):
         x = [q["amount"] for q in g]; y = [q["fall"] for q in g]; arrs += [x, y]
         clipped += [q for q in g if q["fall"] < FLOOR]
         ax.plot(x, np.maximum(y, FLOOR), marker=PRICE_MK[m], ms=3.6 if PRICE_MK[m] != "*" else 5.0, mec="white", mew=0.3, color=PRICE_COL[m], alpha=0.9, ls="none", clip_on=False)
-    DIGESTS["lunar/c pairs (price times risk without a price, fall in exhaustion)"] = dict(after=digest(*arrs))
-    pr["pairs_drawn_at_the_lower_edge_of_panel_c"] = [dict(tank=q["tank"], m=q["m"], seed=q["seed"], fall=q["fall"]) for q in clipped]
+    DIGESTS["lunar/b pairs (price times risk without a price, fall in exhaustion)"] = dict(after=digest(*arrs))
+    pr["pairs_drawn_at_the_lower_edge_of_panel_b"] = [dict(tank=q["tank"], m=q["m"], seed=q["seed"], fall=q["fall"]) for q in clipped]
     ax.set_xscale("log"); ax.set_xlim(0.8, 700); ax.set_ylim(FLOOR - 0.015, 0.33)
-    ax.set_xlabel("$m\\,q_{\\beta,H}(\\pi_0)/(1-\\beta)$"); ax.set_ylabel("fall in exhaustion"); ax.set_xticks([1, 10, 100]); panel_label(ax, "c")
-    # (d) stopped utility against exhaustion probability, tank 22: seeds (small) and means (large)
-    ax = axes[3]
+    ax.set_xlabel("$m\\,q_{\\beta,H}(\\pi_0)/(1-\\beta)$"); ax.set_ylabel("fall in exhaustion probability"); ax.set_xticks([1, 10, 100]); panel_label(ax, "b")
+    # (c) stopped utility against exhaustion probability, tank 22: seeds (small) and means (large)
+    ax = axes[2]
     if "lunar-unlimited" in summary:
         U0 = summary["lunar-unlimited"]["stochastic"]["U"]["mean"]
         ax.axhline(U0, color=TEXT2, lw=0.8, ls="--")
@@ -357,12 +342,12 @@ def figure(protocol, runs, summary, pr):
         small, big = (2.4, 5.0) if mk in ("D", "h", "p") else (2.8, 5.5)
         ax.plot(xs, ys, marker=mk, ms=small, color=col, alpha=0.5, ls="none")
         ax.plot([s["stochastic"]["risk"]["mean"]], [s["stochastic"]["U"]["mean"]], marker=mk, ms=big, mec="white", mew=0.7, color=col, ls="none", label=lab)
-    DIGESTS["lunar/d per-seed (risk, U) at tank 22"] = dict(after=digest(*arrs))
+    DIGESTS["lunar/c per-seed (risk, U) at tank 22"] = dict(after=digest(*arrs))
     handles_price = [Line2D([], [], marker=mk, ms=5, mec="white", mew=0.6, color=col, ls="none", label=lab) for s, col, mk, lab in series if s["cfg"]["kind"] == "fixed"]
     ax.set_xlim(0, 1.03); ax.set_ylim(0, 260)
-    ax.set_xlabel("exhaustion probability"); ax.set_ylabel("stopped utility $U$"); panel_label(ax, "d")
-    # (e) multipliers of the adaptive configurations during training
-    ax = axes[4]
+    ax.set_xlabel("exhaustion probability"); ax.set_ylabel("stopped utility $U$"); panel_label(ax, "c")
+    # (d) multipliers of the adaptive configurations during training
+    ax = axes[3]
     arrs = []
     for s, ls in zip(sorted(adapt22, key=lambda s: (s["cfg"]["dual_step"], -s["cfg"]["alpha"])), ("-", "--", "-.", ":")):
         col = ALPHA_COL[s["cfg"]["alpha"]]; mk = ADAPT_MK["slow"] if s["cfg"]["dual_step"] < 50 else ADAPT_MK["fast"]
@@ -372,13 +357,13 @@ def figure(protocol, runs, summary, pr):
         ax.plot(steps, np.maximum(M.mean(0), 1.0), color=col, ls=ls, marker=mk, markevery=(0.1, 0.25), ms=4, mec="white", mew=0.5,
                 label=f"$\\alpha={s['cfg']['alpha']:g}$, dual step ${s['cfg']['dual_step']:g}$")
         ax.fill_between(steps, np.maximum(M.min(0), 1.0), np.maximum(M.max(0), 1.0), color=col, alpha=0.18, lw=0)
-    d = digest(*arrs); DIGESTS["lunar/e multiplier traces"] = dict(before=d, after=d, changed=False)
+    d = digest(*arrs); DIGESTS["lunar/d multiplier traces"] = dict(before=d, after=d, changed=False)
     ax.set_yscale("log"); ax.set_xticks([0, 1, 2, 3])
-    ax.set_xlabel("training steps ($10^6$)"); ax.set_ylabel("multiplier $m/(1-\\beta)$"); panel_label(ax, "e")
+    ax.set_xlabel("training steps ($10^6$)"); ax.set_ylabel("multiplier $m/(1-\\beta)$"); panel_label(ax, "d")
     handles_adapt = ax.get_legend_handles_labels()[0]
-    # one legend for the five panels, in the free cell of the second row
-    box = gs[1, 2].get_position(fig)
-    fig.legend(handles_price + handles_adapt, [h.get_label() for h in handles_price + handles_adapt], loc="center left", bbox_to_anchor=(box.x0 - 0.045, (box.y0 + box.y1) / 2),
+    # one legend for the four panels, in the free third column
+    box = gs[:, 2].get_position(fig)
+    fig.legend(handles_price + handles_adapt, [h.get_label() for h in handles_price + handles_adapt], loc="center left", bbox_to_anchor=(box.x0 - 0.06, (box.y0 + box.y1) / 2),
                frameon=False, fontsize=FS, handlelength=1.8, labelspacing=0.45, handletextpad=0.5)
     save(fig, "lunar-campaign-v41", ROOT)
 
