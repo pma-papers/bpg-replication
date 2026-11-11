@@ -70,7 +70,7 @@ for c, ls in ((0.0, ":"), (1.0, "-.")):
     dens = np.exp(c * a) * (c / np.expm1(c) if c > 0 else 1.0)
     ax.plot(a, dens, color=PAL[0], lw=1.0, ls=ls, label=f"action density, $c={c:g}$")
 ax.set_xlabel("first action $a$"); ax.set_ylim(0, 1.7); ax.set_xlim(0, 1)
-ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.32), fontsize=FS - 1.5, ncol=1, handlelength=1.6)
+ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.32), fontsize=FS, ncol=1, handlelength=1.6)
 panel_label(ax, "a")
 
 # (b) the parametrization
@@ -88,7 +88,7 @@ for kappa, col, mk, ls in KAPPAS:
     ax.plot(x, e / np.trapezoid(np.exp(r["theta"] * FQ) * WQ, XQ), color=col, lw=1.1, ls=ls, label=f"minimizer, $\\kappa={kappa:g}$")
     marks.append((f"minimizer, $\\kappa={kappa:g}$", r["c"], col, mk))
 ax.set_xlim(-4.5, 4.5); ax.set_ylim(0, 1.12); ax.set_xlabel("parameter $x$ of a unit"); ax.set_xticks([-4, -2, 0, 2, 4])
-ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.32), fontsize=FS - 1.5, ncol=1, handlelength=1.6)
+ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.32), fontsize=FS, ncol=1, handlelength=1.6)
 panel_label(ax, "b")
 
 # (c) clipped value and risk against the tilt
@@ -104,7 +104,7 @@ for lab, c, col, mk in marks:
     ax.plot([c], [v], marker=mk, ms=5, color=col, mec="white", mew=0.6, ls="none", label=lab, zorder=4)
     out[lab] = dict(c=float(c), V_m=v, q_beta=q, U=float(np.interp(c, curve["c"], curve["U"])))
 ax.set_xlim(-0.03, 1.0)
-ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.32), fontsize=FS - 1.5, ncol=1, handlelength=1.0)
+ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.32), fontsize=FS, ncol=1, handlelength=1.0)
 panel_label(ax, "c")
 # the closed form against the final laws of the stored flows
 check = {}
