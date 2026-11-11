@@ -3,7 +3,8 @@
 For each configuration named on the command line and each of its five seeds, the stored final policy is evaluated
 again with the evaluation seed and the number of episodes of its result.json. Recorded per episode: the fuel used,
 the number of frames and how the episode ended. For the first episode of the first ten environments the fuel used
-is recorded frame by frame. The run stops if the exhaustion probability of the new evaluation differs from the
+and the position of the lander (the first two coordinates of the observation: the pad is at height zero between
+-0.2 and 0.2) are recorded frame by frame. The run stops if the exhaustion probability of the new evaluation differs from the
 stored one, so the record belongs to the same thousand episodes.
 
 Usage:  python lunar_setup_eval.py lunar-unlimited lunar-b20-m0 lunar-b20-m0.5
@@ -36,20 +37,24 @@ def evaluate(model, budget, n, seed):
     obs = envs.reset()
     done, episodes = 0, []
     used = [[] for _ in range(N_ENVS)]
+    xy = [[(float(obs[i][0]), float(obs[i][1]))] for i in range(N_ENVS)]
     paths = [None] * N_PATHS
     while done < n:
         act, _ = model.predict(obs, deterministic=False)
         obs, _, dones, infos = envs.step(act)
         for i in range(N_ENVS):
             used[i].append(float(infos[i]["used"]))
+            last = infos[i]["terminal_observation"] if dones[i] else obs[i]
+            xy[i].append((float(last[0]), float(last[1])))
             if dones[i]:
                 end = "exhausted" if infos[i]["failure"] else ("landed" if infos[i]["landed"] else ("crashed" if infos[i]["crashed"] else "other"))
                 if done < n:
                     episodes.append(dict(used=used[i][-1], frames=len(used[i]), end=end))
                 if i < N_PATHS and paths[i] is None:
-                    paths[i] = dict(used=[round(x, 4) for x in used[i]], end=end)
+                    paths[i] = dict(used=[round(x, 4) for x in used[i]], end=end, x=[round(p[0], 4) for p in xy[i]], y=[round(p[1], 4) for p in xy[i]])
                 done += 1
                 used[i] = []
+                xy[i] = [(float(obs[i][0]), float(obs[i][1]))]
     envs.close()
     return episodes, paths
 
