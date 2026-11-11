@@ -29,7 +29,7 @@ A, N, HS = 0.15, 100_000, (50, 100, 200)
 PRICES = np.sort(np.r_[np.geomspace(0.03, 30, 24), 1.0])
 # The legends print equation numbers of the paper (M-) and of its Online Resource (O-). They are recorded in the
 # JSON output under "cited", and the manuscript's build compares them with the numbers of the typeset documents.
-CITED = {"M-eq:validation-resolution-floor": "39"}
+CITED = {"M-eq:validation-resolution-floor": "37"}
 N_F = CITED["M-eq:validation-resolution-floor"]
 
 
