@@ -27,6 +27,10 @@ import matplotlib.pyplot as plt  # noqa: E402
 BETA, THETA_B, UBAR, T, ZETA = 0.95, 0.1, 1.0, 10, 0.05
 A, N, HS = 0.15, 100_000, (50, 100, 200)
 PRICES = np.sort(np.r_[np.geomspace(0.03, 30, 24), 1.0])
+# The legends print equation numbers of the paper (M-) and of its Online Resource (O-). They are recorded in the
+# JSON output under "cited", and the manuscript's build compares them with the numbers of the typeset documents.
+CITED = {"M-eq:validation-resolution-floor": "39"}
+N_F = CITED["M-eq:validation-resolution-floor"]
 
 
 def rewards(a, n, H, seed, m):
@@ -74,7 +78,7 @@ fig, axes = plt.subplots(2, 2, figsize=(TEXTW, 4.6), gridspec_kw=dict(wspace=0.4
 LG = dict(fontsize=FS - 1.5, handlelength=1.8, labelspacing=0.3, loc="upper center", bbox_to_anchor=(0.5, -0.30))
 ax = axes[0, 0]
 ax.stackplot(Ngrid, P[:, 2], P[:, 1], P[:, 0], colors=[MUTED, PAL[3], PAL[0]], alpha=0.55, labels=["truncation tail", "sampling error", "policy term"])
-ax.plot(Ngrid, floor(100, Ngrid), color="k", lw=1.1, ls="--", label="floor")
+ax.plot(Ngrid, floor(100, Ngrid), color="k", lw=1.1, ls="--", label=f"left side of ({N_F})")
 ax.set_xscale("log"); ax.set_yscale("log"); ax.set_ylim(1e-3, 3); ax.set_xlabel("validation episodes $N$"); ax.set_ylabel(f"bound on $p_{{{T}}}$")
 ax.legend(ncol=2, **LG); panel_label(ax, "a")
 ax = axes[0, 1]
@@ -103,14 +107,14 @@ ax = axes[1, 0]
 bins = np.linspace(0, D.max() * 1.02, 60)
 ax.hist(D[tau2 > T], bins=bins, color=PAL[2], alpha=0.6, lw=0, label="paths that survive $T$")
 ax.hist(D[tau2 <= T], bins=bins, color=PAL[7], alpha=0.6, lw=0, label="paths that fail by $T$")
-ax.axvline(thr, color="k", lw=1.1, ls="--", label="threshold")
-ax.set_xlabel("discounted shortfall of the return"); ax.set_ylabel("paths"); ax.legend(ncol=1, **LG); panel_label(ax, "c")
+ax.axvline(thr, color="k", lw=1.1, ls="--", label="$(m+\\bar u)\\beta^T(1-\\beta^{H-T})/(1-\\beta)$")
+ax.set_xlabel("$\\sum_{t<H}\\beta^t(\\bar u-r_m)$"); ax.set_ylabel("paths"); ax.legend(ncol=1, **{**LG, "bbox_to_anchor": (0.5, -0.38)}); panel_label(ax, "c")
 ax = axes[1, 1]
 for m, c, ls in zip(MS, (PAL[2], PAL[0], PAL[7]), ("-", "--", "-.")):
     ax.plot(HG, bound[m], color=c, lw=1.2, ls=ls, label=f"$m={m:g}$")
 ax.axhline(pT2, color="k", lw=0.9, label=f"$p_{{{T}}}$ of the policy")
 ax.set_ylim(0, 1.02); ax.set_xlabel("task length $H$"); ax.set_ylabel(f"bound on $p_{{{T}}}$"); ax.legend(ncol=2, **LG); panel_label(ax, "d")
-out = dict(rate=A, episodes=N, T=T, zeta=ZETA, p_T=pT, q_beta=q, bound_at_m1_H100={str(int(n)): float(s) for n, s in zip(Ngrid[[0, len(Ngrid) // 2, -1]], P.sum(1)[[0, len(Ngrid) // 2, -1]])},
+out = dict(cited=CITED, rate=A, episodes=N, T=T, zeta=ZETA, p_T=pT, q_beta=q, bound_at_m1_H100={str(int(n)): float(s) for n, s in zip(Ngrid[[0, len(Ngrid) // 2, -1]], P.sum(1)[[0, len(Ngrid) // 2, -1]])},
            floor_at_10000_episodes={str(H): float(floor(H, NB)) for H in HS}, smallest_bound_over_prices={str(H): float(cert[H].min()) for H in HS},
            task_of_H_actions=dict(rate=0.8, p_T=pT2, threshold=float(thr), bound_at_H200={f"{m:g}": float(bound[m][-1]) for m in MS}, smallest_bound={f"{m:g}": float(bound[m].min()) for m in MS}))
 (ROOT / "validation-bounds-v76.json").write_text(json.dumps(out, indent=1) + "\n")

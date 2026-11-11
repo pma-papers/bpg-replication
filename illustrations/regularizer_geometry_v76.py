@@ -29,7 +29,11 @@ sys.path.insert(0, str(ROOT.parent / "lib"))
 from plotstyle import PAL, TEXT2, MUTED, TEXTW, FS, panel_label, save  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 
-out = {}
+# The legends print equation numbers of the paper (M-) and of its Online Resource (O-). They are recorded in the
+# JSON output under "cited", and the manuscript's build compares them with the numbers of the typeset documents.
+CITED = {"O-eq:geodesic-convexity": "E.3"}
+N_C = CITED["O-eq:geodesic-convexity"]
+out = {"cited": CITED}
 fig, axes = plt.subplots(2, 3, figsize=(TEXTW, 4.9), gridspec_kw=dict(wspace=0.62, hspace=1.05))
 BELOW = dict(loc="upper center", bbox_to_anchor=(0.5, -0.30))
 LG = dict(fontsize=FS - 2, handlelength=1.6, labelspacing=0.25)
@@ -62,7 +66,7 @@ H = Hk + Hc; chord = (1 - th) * H[0] + th * H[-1]; bound = chord - 0.5 * th * (1
 assert (H <= bound + 1e-12).all()
 ax = axes[0, 0]
 ax.plot(th, chord, color=MUTED, lw=1.0, ls=":", label="chord")
-ax.plot(th, bound, color=PAL[2], lw=1.2, ls="--", label="bound of $1$-convexity")
+ax.plot(th, bound, color=PAL[2], lw=1.2, ls="--", label=f"right side of ({N_C}), $\\lambda=1$")
 ax.plot(th, H, color=PAL[0], lw=1.5, label="$\\mathcal{H}_\\omega$, $\\omega=1$")
 ax.plot(th, Hc, color=PAL[3], lw=1.0, ls="-.", label="its part $\\chi^2$")
 ax.set_xlim(0, 1); ax.set_ylim(0, None); ax.set_xlabel("position $\\vartheta$"); ax.set_ylabel("$\\mathcal{H}_\\omega(\\mu_\\vartheta)$")
@@ -98,9 +102,9 @@ for t, c, ls in ((0, PAL[0], "-"), (0.5, PAL[2], "--"), (1, PAL[3], "-.")):
     ax.plot((1 - t) * Q0 + t * Q1, 1 / ((1 - t) * dQ0 + t * dQ1), color=c, lw=1.2, ls=ls, label=f"$\\mu_{{{t:g}}}$")
 ax.set_xlim(-3.5, 3.5); ax.set_xlabel("$x$"); ax.set_ylabel("density"); ax.legend(ncol=2, **BELOW, **LG); panel_label(ax, "b")
 ax = axes[0, 2]
-ax.plot(th, H2 - conv, color="k", lw=1.5, label="$\\mathcal{H}_{\\omega,G}$ less its chord")
+ax.plot(th, H2 - conv, color="k", lw=1.5, label="$\\mathcal{H}_{\\omega,G}(\\mu_\\vartheta)$ less the chord")
 ax.plot(th, K2 - kconv, color=PAL[0], lw=1.0, ls="-.", label="the same for $D_{\\mathrm{KL}}$")
-ax.plot(th, low, color=PAL[7], lw=1.2, ls="--", label="bound of $\\lambda_W$-convexity")
+ax.plot(th, low, color=PAL[7], lw=1.2, ls="--", label=f"last term of ({N_C}), $\\lambda=0.4$")
 ax.axhline(0, color=MUTED, lw=0.6, ls=":")
 ax.set_xlim(0, 1); ax.set_xlabel("position $\\vartheta$"); ax.set_ylabel("difference from the chord"); ax.legend(**BELOW, **LG); panel_label(ax, "c")
 out["bc"] = dict(lambda_W=LAM, omega=OM, r=R, W2_squared=w2, H_half=float(H2[50]), chord_half=float(conv[50]), bound_half=float((conv + low)[50]))
@@ -116,7 +120,7 @@ vv = np.linspace(0.02, 3, 400)
 ax.plot(vv, vv, color=PAL[0], lw=1.3, label="$G(v)=v^2$")
 ax.plot(vv, 2 * np.sqrt(vv), color=PAL[2], lw=1.3, ls="--", label="$G(v)=2v^{3/2}$")
 ax.plot(vv, (vv * np.log(vv) - vv + 1) / vv, color="k", lw=1.0, ls=":", label="$G(v)=v\\log v-v+1$")
-ax.set_ylim(0, 6.2); ax.set_xlabel("$v$"); ax.set_ylabel("$G(v)/v$"); ax.legend(loc="upper right", **LG); panel_label(ax, "e")
+ax.set_ylim(0, 4.2); ax.set_xlabel("$v$"); ax.set_ylabel("$G(v)/v$"); ax.legend(**BELOW, **LG); panel_label(ax, "e")
 
 # ---- (f) the Pinsker constants for Gaussian laws against the prior N(0,1)
 pts = []

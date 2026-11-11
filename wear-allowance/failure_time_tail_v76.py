@@ -25,6 +25,10 @@ from matplotlib.lines import Line2D  # noqa: E402
 BETA, N, TMAX = 0.95, 200_000, 3000
 THETA = np.log(1 / BETA)
 RATES, EPS_C, T_C = (0.1, 0.15, 0.2), 0.05, 10
+# The legends print equation numbers of the paper (M-) and of its Online Resource (O-). They are recorded in the
+# JSON output under "cited", and the manuscript's build compares them with the numbers of the typeset documents.
+CITED = {"O-eq:failure-time-bound": "E.1", "O-eq:failure-time-horizon": "E.2"}
+N_B, N_H = (CITED[k] for k in CITED)
 
 
 def failure_times(a, seed):
@@ -83,12 +87,12 @@ qs = np.geomspace(qf.min() * 0.7, 1, 200)
 ax.plot(qs, np.clip(np.log(EPS_C / qs) / THETA, 0, None), color="k", lw=1.0, ls="--")
 ax.plot(qf, Tc, "o", ms=3.2, color=PAL[0]); ax.plot(qf, from_pT, "s", ms=3, mfc="none", color=PAL[3])
 ax.set_xscale("log"); ax.set_xlabel("geometric risk $q_\\beta$"); ax.set_ylabel(f"$T_{{{EPS_C}}}$ (periods)"); panel_label(ax, "c")
-handles = [Line2D([], [], color=PAL[7], lw=1.2, label="$T_{0.1}$, mean of the earliest tenth"), Line2D([], [], color="k", lw=1.0, ls="--", label="bound $\\theta^{-1}\\log(\\varepsilon/q_\\beta)$")]
+handles = [Line2D([], [], color=PAL[7], lw=1.2, label="$T_{0.1}$, mean of the earliest tenth"), Line2D([], [], color="k", lw=1.0, ls="--", label=f"right side of ({N_B})")]
 handles += [Line2D([], [], color=c, lw=1.3, ls=ls, label=f"rate $a={a:g}$") for a, c, ls in zip(RATES, C3, LS3)]
 handles += [Line2D([], [], color=PAL[0], marker="o", ms=3.2, ls="none", label=f"$T_{{{EPS_C}}}$ of a constant rate"),
-            Line2D([], [], color=PAL[3], marker="s", mfc="none", ms=3, ls="none", label=f"bound from $p_{{{T_C}}}$ alone")]
+            Line2D([], [], color=PAL[3], marker="s", mfc="none", ms=3, ls="none", label=f"right side of ({N_H}), $T={T_C}$")]
 fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, -0.10), ncol=3, frameon=False, fontsize=FS, columnspacing=1.2, handletextpad=0.5)
-out = dict(paths=N, seeds=[2026, 2027], beta=BETA, q_beta={f"{a:g}": q[a] for a in RATES}, T_0_1={f"{a:g}": tail_mean(tau[a], 0.1) for a in RATES},
+out = dict(cited=CITED, paths=N, seeds=[2026, 2027], beta=BETA, q_beta={f"{a:g}": q[a] for a in RATES}, T_0_1={f"{a:g}": tail_mean(tau[a], 0.1) for a in RATES},
            bound_0_1={f"{a:g}": float(np.log(0.1 / q[a]) / THETA) for a in RATES}, fraction_of_panel_c=EPS_C, horizon_of_panel_c=T_C,
            family={f"{a:g}": dict(q_beta=float(x), T=float(t), p_T=float(p_), bound_from_p_T=float(g)) for a, x, t, p_, g in zip(fam, qf, Tc, pT, from_pT)})
 (ROOT / "failure-time-tail-v76.json").write_text(json.dumps(out, indent=1) + "\n")

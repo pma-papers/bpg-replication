@@ -89,18 +89,18 @@ assert (rows["EDT"] <= (T + 1) * L0 ** 2 / (2 * NS)).all()
 fig, axes = plt.subplots(2, 2, figsize=(TEXTW, 4.6), gridspec_kw=dict(wspace=0.45, hspace=0.95))
 LG = dict(fontsize=FS - 1.5, handlelength=1.8, labelspacing=0.3, loc="upper center", bbox_to_anchor=(0.5, -0.30))
 ax = axes[0, 0]
-ax.loglog(NS, rows["dq"], "o-", ms=3.5, color=PAL[0], lw=1.2, label="deviation of the geometric risk")
-ax.loglog(NS, eps_n, color=PAL[7], lw=1.1, ls="--", label="$\\varepsilon_n$ of the transfer theorem")
+ax.loglog(NS, rows["dq"], "o-", ms=3.5, color=PAL[0], lw=1.2, label="$|q_\\beta(\\pi_n)-q_\\beta(\\pi_\\mu)|$")
+ax.loglog(NS, eps_n, color=PAL[7], lw=1.1, ls="--", label="$\\varepsilon_n$")
 ax.set_xlabel("number of units $n$"); ax.set_ylabel("deviation"); ax.legend(**LG); panel_label(ax, "a")
 ax = axes[0, 1]
-for k, c, mk, lab in (("dVm", PAL[7], "o", "clipped value"), ("dV", PAL[2], "s", "continuing value"), ("dU", PAL[0], "^", "stopped utility")):
+for k, c, mk, lab in (("dVm", PAL[7], "o", "$|V_m(\\pi_n)-V_m(\\mu)|$"), ("dV", PAL[2], "s", "$|V(\\pi_n)-V(\\pi_\\mu)|$"), ("dU", PAL[0], "^", "$|U(\\pi_n)-U(\\pi_\\mu)|$")):
     ax.loglog(NS, rows[k], marker=mk, ms=3.5, color=c, lw=1.2, label=lab)
-ax.loglog(NS, (M + UBAR) / (1 - BETA) * eps_n, color=PAL[7], lw=1.1, ls="--", label="bound for the clipped value")
-ax.loglog(NS, (UMINUS + UBAR) / (1 - BETA) * eps_n, color="k", lw=1.1, ls="-.", label="bound for value and utility")
+ax.loglog(NS, (M + UBAR) / (1 - BETA) * eps_n, color=PAL[7], lw=1.1, ls="--", label="$(m+\\bar u)\\varepsilon_n/(1-\\beta)$")
+ax.loglog(NS, (UMINUS + UBAR) / (1 - BETA) * eps_n, color="k", lw=1.1, ls="-.", label="$(u_-+\\bar u)\\varepsilon_n/(1-\\beta)$")
 ax.set_xlabel("number of units $n$"); ax.set_ylabel("deviation"); ax.legend(ncol=1, **LG); panel_label(ax, "b")
 ax = axes[1, 0]
-ax.loglog(NS, rows["dpT"], "o-", ms=3.5, color=PAL[0], lw=1.2, label=f"deviation of the risk through $T={T}$")
-ax.loglog(NS, b_h, color=PAL[7], lw=1.1, ls="--", label="direct horizon bound")
+ax.loglog(NS, rows["dpT"], "o-", ms=3.5, color=PAL[0], lw=1.2, label=f"$|p_T(\\pi_n)-p_T(\\pi_\\mu)|$, $T={T}$")
+ax.loglog(NS, b_h, color=PAL[7], lw=1.1, ls="--", label="$L_0\\sqrt{T+1}/(2\\sqrt{n\\zeta})$")
 ax.set_xlabel("number of units $n$"); ax.set_ylabel("deviation"); ax.legend(**LG); panel_label(ax, "c")
 ax = axes[1, 1]
 ax.loglog(NS, rows["EDT"], "o-", ms=3.5, color=PAL[0], lw=1.2, label="mean")

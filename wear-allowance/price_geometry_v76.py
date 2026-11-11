@@ -30,6 +30,10 @@ import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 
 BETA, UBAR, N, TMAX, SEED = 0.95, 1.0, 20_000, 300, 11
+# The legends print equation numbers of the paper (M-) and of its Online Resource (O-). They are recorded in the
+# JSON output under "cited", and the manuscript's build compares them with the numbers of the typeset documents.
+CITED = {"O-eq:wear-price-risk-law": "F.2", "O-eq:wear-second-form": "F.3", "O-eq:wear-matched": "F.4"}
+N_LAW, N_LAW2, N_M = (CITED[k] for k in CITED)
 M, DELTA, PRICES3 = 0.3, 0.3, (0.1, 0.3, 1.0)
 
 
@@ -117,20 +121,20 @@ ax[4].plot(q[~dopt], gap[~dopt], "o", ms=2.6, color=MUTED, mfc="none", mew=0.6)
 ax[4].plot(q[dopt], gap[dopt], "o", ms=4, color=C_HAT)
 ax[4].plot(xs, DELTA + nu(M) * (q0 - xs), color="k", lw=1.1)
 ax[4].axhline(0, color=MUTED, lw=0.7, ls=":"); ax[4].axvline(q0, color=MUTED, lw=0.7, ls=":")
-ax[4].set_xlim(0, 1); ax[4].set_ylim(-4.5, 4.0); ax[4].set_xlabel("geometric risk $q_\\beta$ of a rule"); ax[4].set_ylabel("utility lost against\nthe comparison rule"); panel_label(ax[4], "e")
+ax[4].set_xlim(0, 1); ax[4].set_ylim(-4.5, 4.0); ax[4].set_xlabel("geometric risk $q_\\beta(\\pi)$"); ax[4].set_ylabel("$U(\\pi_0)-U(\\pi)$"); panel_label(ax[4], "e")
 handles = [Line2D([], [], color=TEXT2, marker="o", ms=2.6, lw=0.8, label="constant rates"),
            Line2D([], [], color=MUTED, marker="o", mfc="none", ms=2.6, ls="none", label="threshold rules"),
-           Line2D([], [], color=C_HAT, marker="o", mfc="none", ms=7, mew=1.4, ls="none", label="maximizer of the clipped value"),
-           Line2D([], [], color="k", marker="s", ms=5, ls="none", label="comparison rule"),
+           Line2D([], [], color=C_HAT, marker="o", mfc="none", ms=7, mew=1.4, ls="none", label="maximizer $\\widehat\\pi$ of $V_m$"),
+           Line2D([], [], color="k", marker="s", ms=5, ls="none", label="comparison rule $\\pi_0$"),
            Line2D([], [], color=C_HAT, lw=1.1, label="line of slope $\\nu=m/(1-\\beta)$"),
-           Line2D([], [], color=C_LAW, lw=1.1, ls="--", label="price$-$risk law"),
-           Line2D([], [], color=C_LAW2, lw=1.1, ls="-.", label="its second form"),
-           Line2D([], [], color=C_HAT, marker="o", ms=4, ls="none", label="rules within $\\delta$ of the maximum"),
-           Line2D([], [], color="k", lw=1.1, label="bound of Theorem 3")]
+           Line2D([], [], color=C_LAW, lw=1.1, ls="--", label=f"right side of ({N_LAW})"),
+           Line2D([], [], color=C_LAW2, lw=1.1, ls="-.", label=f"right side of ({N_LAW2})"),
+           Line2D([], [], color=C_HAT, marker="o", ms=4, ls="none", label="rules within $\\delta$ of $\\max V_m$"),
+           Line2D([], [], color="k", lw=1.1, label=f"right side of ({N_M}), $\\delta=0.3$")]
 box = gs[1, 2].get_position(fig)
 fig.legend(handles=handles, loc="center left", bbox_to_anchor=(box.x0 - 0.05, (box.y0 + box.y1) / 2), frameon=False, fontsize=FS - 0.5, handlelength=1.8, labelspacing=0.45)
 desc = lambda i: dict(kind=rules[i][0], a_hi=float(rules[i][1]), a_lo=rules[i][2], c=rules[i][3], q=float(q[i]), U=float(U[i]))
-out = dict(paths=N, seed=SEED, rules=len(rules), m=M, nu=nu(M), delta=DELTA, maximizer=desc(bh), comparison_rule=desc(i0), largest_utility=supU,
+out = dict(cited=CITED, paths=N, seed=SEED, rules=len(rules), m=M, nu=nu(M), delta=DELTA, maximizer=desc(bh), comparison_rule=desc(i0), largest_utility=supU,
            bound_price_risk_law=float(law(M)), bound_second_form=float(law2(M)),
            maximizers={f"{m:g}": desc(best(m)) for m in PRICES3}, rules_within_delta=int(dopt.sum()),
            risk_range_within_delta=[float(q[dopt].min()), float(q[dopt].max())])
