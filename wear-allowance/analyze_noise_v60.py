@@ -117,10 +117,10 @@ def main():
         return [r["stochastic"][key] for r in rows]
     for ax, key, lab, scale in [(axes[0], "risk", "breakdown probability $q_\\beta$ (%)", 100.0), (axes[1], "U", "stopped utility $U$", 1.0)]:
         xs = [x0] + [s["kappa1"] for s in sums]; ys = [summ["pull"][key][0] * scale] + [s[key][0] * scale for s in sums]
-        ax.plot(xs, ys, color=PAL[0], marker="D", ms=3.5, lw=1.0, label="pull $\\kappa_2=10$ with noise $\\kappa_1$, mean")
+        ax.plot(xs, ys, color=PAL[0], marker="D", ms=3.5, lw=1.0, label="anchor $\\kappa_2=10$ with noise $\\kappa_1$, mean")
         for x, rows in [(x0, pull)] + [(k1, configs[("sum", k1)]) for k1 in SWEEP]:
             ax.plot([x] * len(rows), [v * scale for v in seeds(rows, key)], color=PAL[0], marker=".", ms=3, lw=0, alpha=0.5)
-        ax.axhline(summ["control"][key][0] * scale, color=MUTED, ls="--", lw=0.8, label="unanchored control, mean")
+        ax.axhline(summ["control"][key][0] * scale, color=MUTED, ls="--", lw=0.8, label="no anchor, no noise, mean")
         if f"noise_{NOISE_ALONE}" in summ:
             rows = configs[("noise", NOISE_ALONE)]
             ax.plot([NOISE_ALONE] * len(rows), [v * scale for v in seeds(rows, key)], color=PAL[1], marker=".", ms=3, lw=0, alpha=0.5)
@@ -133,9 +133,9 @@ def main():
     if sums:
         k1 = np.array([s["kappa1"] for s in sums]); sp = np.array([s["spread"][0] for s in sums]); se = np.array([s["spread"][1] for s in sums])
         grid = np.geomspace(5e-4, 2.0, 100)
-        ax.plot(grid, np.sqrt(grid / K2), color=MUTED, lw=0.8, ls=":", label="$\\sqrt{\\kappa_1/\\kappa_2}$, gradient-pull reference")
-        ax.plot(grid, np.sqrt(2.0) * grid, color=MUTED, lw=0.8, ls="--", label="$\\sqrt{2}\\,\\kappa_1$, sign-drift reference")
-        ax.errorbar(k1, sp, yerr=se, color=PAL[0], marker="D", ms=3.5, lw=0, elinewidth=1.0, capsize=0, label="pull with noise")
+        ax.plot(grid, np.sqrt(grid / K2), color=MUTED, lw=0.8, ls=":", label="$\\sqrt{\\kappa_1/\\kappa_2}$, plain gradient steps")
+        ax.plot(grid, np.sqrt(2.0) * grid, color=MUTED, lw=0.8, ls="--", label="$\\sqrt{2}\\,\\kappa_1$, unit drift toward $x_0$")
+        ax.errorbar(k1, sp, yerr=se, color=PAL[0], marker="D", ms=3.5, lw=0, elinewidth=1.0, capsize=0, label="anchor with noise")
         if f"noise_{NOISE_ALONE}" in summ:
             n = summ[f"noise_{NOISE_ALONE}"]; ax.errorbar([NOISE_ALONE], [n["spread"][0]], yerr=[n["spread"][1]], color=PAL[1], marker="o", ms=4, lw=0, elinewidth=1.0, capsize=0, label="noise alone")
         ax.set_xscale("log"); ax.set_yscale("log"); ax.set_xlim(5e-4, 2.0); ax.set_ylim(5e-4, 5.0)
@@ -152,12 +152,12 @@ def main():
                 f"${100 * s['risk_mean_action'][0]:.2f}$ & ${s['U'][0]:.2f}\\pm{s['U'][1]:.2f}$ & ${sci(s['A'][0])}$ & "
                 f"${sci(s['spread'][0])}$ & ${s['sigma_a'][0]:.2f}$ \\\\")
     lines = ["\\setlength{\\tabcolsep}{4pt}\\begin{tabular}{lrrrrrrrrr}", "\\toprule",
-             "Configuration & $\\kappa_1$ & $\\kappa_2$ & nominal & $q_\\beta$ (\\%) & $q_\\beta^{\\mathrm{mean}}$ (\\%) & $U$ & $\\mathcal A$ & spread & $\\sigma_a$ \\\\",
-             "\\midrule", row("Pull alone", summ["pull"])]
-    lines += [row("Pull with noise", s) for s in sums]
+             "Configuration & $\\kappa_1$ & $\\kappa_2$ & $\\sqrt{\\kappa_1/\\kappa_2}$ & $q_\\beta$ (\\%) & $q_\\beta^{\\mathrm{mean}}$ (\\%) & $U$ & $\\mathcal A$ & spread & $\\sigma_a$ \\\\",
+             "\\midrule", row("Anchor alone", summ["pull"])]
+    lines += [row("Anchor with noise", s) for s in sums]
     if f"noise_{NOISE_ALONE}" in summ:
         lines.append(row("Noise alone", summ[f"noise_{NOISE_ALONE}"]))
-    lines += [row("Unanchored control", summ["control"]), "\\bottomrule", "\\end{tabular}"]
+    lines += [row("No anchor, no noise", summ["control"]), "\\bottomrule", "\\end{tabular}"]
     (HERE / "wear-noise-v60.tex").write_text("\n".join(lines) + "\n")
     (HERE / "wear-noise-v60.json").write_text(json.dumps(dict(summary=summ, checks=checks, d_params=d_params), indent=1))
     print("\n".join(lines))

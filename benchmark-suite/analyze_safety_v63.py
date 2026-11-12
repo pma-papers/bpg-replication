@@ -52,7 +52,7 @@ L = ["\\setlength{\\tabcolsep}{3.5pt}\\begin{tabular}{llrrrrrcc}", "\\toprule",
      "Configuration & Setting & exhausted (\\%) & return & mean cost & cost $q_{90}$ & final multiplier & pass $0.2$ & pass $0.05$ \\\\", "\\midrule"]
 def row(name, setting, s, nu):
     L.append("%s & %s & %s & %s & %s & %s & %s & %d/8 & %d/8 \\\\" % (name, setting, pm((100 * s["exhausted"][0], 100 * s["exhausted"][1])), pm(s["ret"]), pm(s["cost"]), pm(s["q90"]), nu, s["pass_020"], s["pass_005"]))
-row("Unpriced", "$m=0$", summ["fixed_0"], "--")
+row("No price", "$m=0$", summ["fixed_0"], "--")
 for m in (0.03, 0.1, 0.3, 1): row("Fixed price", "$m=%g$" % m, summ["fixed_%g" % m], "--")
 row("Adaptive multiplier", "$\\alpha=0.05$", a05, pm(a05["final_multiplier"]))
 row("Adaptive multiplier", "$\\alpha=0.2$", a2, pm(a2["final_multiplier"]))

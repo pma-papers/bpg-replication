@@ -4,8 +4,8 @@ the Online Resource; the visuals of the verification companion, redrawn).
 The policy runs at the constant rate 0.15; the requirement concerns the failure probability through T = 10; the
 error probability is zeta = 0.05; 100,000 validation episodes, truncated after H actions.
 (a) The value-based bound on p_T at the price m = 1 and H = 100 against the number of episodes, as the sum of its
-    three terms (the policy term, the sampling error and the truncation tail), with the floor that no policy can
-    pass, which is the sampling error and the truncation tail at their smallest.
+    three terms (the plug-in estimate, the sampling error and the truncation error), with the floor that no policy can
+    pass, which is the sampling error and the truncation error at their smallest.
 (b) The value-based bound from 10,000 episodes against the price for H = 50, 100 and 200, with the floors and with
     the bound that the geometric risk itself gives, beta^(-T) q_beta. No episode fails by T in the sample.
 (c) A task that ends after H = 50 actions, under the rate 0.8 and the price m = 10: the discounted shortfall of
@@ -77,7 +77,7 @@ pT = float((tau <= T).mean()); q = float(np.where(tau <= max(HS), BETA ** np.min
 fig, axes = plt.subplots(2, 2, figsize=(TEXTW, 4.6), gridspec_kw=dict(wspace=0.45, hspace=0.95))
 LG = dict(fontsize=FS - 1.5, handlelength=1.8, labelspacing=0.3, loc="upper center", bbox_to_anchor=(0.5, -0.30))
 ax = axes[0, 0]
-ax.stackplot(Ngrid, P[:, 2], P[:, 1], P[:, 0], colors=[MUTED, PAL[3], PAL[0]], alpha=0.55, labels=["truncation tail", "sampling error", "policy term"])
+ax.stackplot(Ngrid, P[:, 2], P[:, 1], P[:, 0], colors=[MUTED, PAL[3], PAL[0]], alpha=0.55, labels=["truncation error", "sampling error", "plug-in estimate"])
 ax.plot(Ngrid, floor(100, Ngrid), color="k", lw=1.1, ls="--", label=f"left side of ({N_F})")
 ax.set_xscale("log"); ax.set_yscale("log"); ax.set_ylim(1e-3, 3); ax.set_xlabel("validation episodes $N$"); ax.set_ylabel(f"bound on $p_{{{T}}}$")
 ax.legend(ncol=2, **LG); panel_label(ax, "a")

@@ -2,7 +2,7 @@
 
   logic.pdf      (revision 46; superseded by introduction_schematic.py) Figure 1: (a) one-step reward against the next reserve for an infinite barrier, the
                  bounded barrier and a failure-only price; (b) the risk-utility plane of a represented
-                 class (schematic frontier) with its risk floor, a price, a tolerance and the methods.
+                 class (schematic frontier) with its lower bound on the risk, a price, a tolerance and the methods.
   identity.pdf   (revision 46; superseded by running_example_figures.py) Section 3: the identity V_m = U - I_m - m beta^tau/(1-beta) on one trajectory.
   curvature.pdf  Section 4: the curvature budget along a generalized geodesic (toy one-dimensional
                  objective) and the minimizer's position as the regularizer's strength grows.
@@ -69,7 +69,7 @@ def logic():
     ax.axvspan(0.0, qf, color=MUTED, alpha=0.18, lw=0)
     ax.plot(q, U, color=TEXT2, lw=1.4)
     ax.text(0.40, 0.985, "frontier of the class", fontsize=9, color=TEXT2, ha="center", va="bottom")
-    ax.annotate("below the risk floor of a full-support class:\nno policy, and no multiplier settles; an\nalmost-sure requirement ($q_\\beta=0$) needs\na method that restricts the actions",
+    ax.annotate("below the lower bound on the risk of a full-support\nclass: no policy, and no multiplier converges; an\nalmost-sure requirement ($q_\\beta=0$) needs\na method that restricts the actions",
                 xy=(qf * 0.5, 0.12), xytext=(0.15, 0.06), fontsize=9, color=TEXT2, va="bottom",
                 arrowprops=dict(arrowstyle="->", color=TEXT2, lw=0.6))
     # a price: tangent with slope m/(1-beta) (scaled for the schematic)
@@ -92,7 +92,7 @@ def logic():
     ax.text((qm + alpha) / 2, Um - 0.1, "unused risk", fontsize=9, color=TEXT2, ha="center", va="top")
     ax.set_xlim(0.0, qmax); ax.set_ylim(0.0, 1.08)
     ax.set_xlabel("geometric risk $q_\\beta$"); ax.set_ylabel("utility net of interior loss, $U-\\mathcal{I}_m$")
-    ax.set_xticks([0, qf, alpha]); ax.set_xticklabels(["0", "floor", "$\\alpha$"]); ax.set_yticks([])
+    ax.set_xticks([0, qf, alpha]); ax.set_xticklabels(["0", "lower\nbound", "$\\alpha$"]); ax.set_yticks([])
     panel_label(ax, "(b)")
     save(fig, "logic", OUT)
 
@@ -133,7 +133,7 @@ def identity():
     ax.axhline(0, color=TEXT2, lw=0.6)
     ax.text(T - 0.5, 0.55, f"$U={U:.2f}$, $\\mathcal{{I}}_m={I:.2f}$,\n$m\\beta^\\tau/(1-\\beta)={tail:.2f}$,\n$V_m={Vm:.2f}$",
             fontsize=9, ha="right", va="top", color=TEXT2)
-    ax.set_xlabel("period $t$ (discounted terms; the tail continues)"); ax.set_ylabel("$\\beta^t\\times$ term")
+    ax.set_xlabel("period $t$ (discounted terms; the charges continue)"); ax.set_ylabel("$\\beta^t\\times$ term")
     ax.set_xlim(-0.8, T); ax.legend(loc="lower left", fontsize=9)
     ax.set_ylim(-1.15, 0.72)
     panel_label(ax, "(b)")

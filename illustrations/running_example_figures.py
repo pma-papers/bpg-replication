@@ -1,6 +1,6 @@
 """Figure 3 of the paper (identity.pdf): one wear realization of the running wear-allowance example and the
-exact return accounting V_m = U - I_m - m beta^tau / (1 - beta) on that path. Seed 7048; every path value is
-written to running-example-figure-checks.json. The figure is an illustration of the accounting identity; it
+exact return decomposition V_m = U - I_m - m beta^tau / (1 - beta) on that path. Seed 7048; every path value is
+written to running-example-figure-checks.json. The figure is an illustration of that identity; it
 reports no trained policy and no estimate of a failure probability. The panel descriptions are in the caption
 (the journal allows no titles inside a figure).
 Run: ~/.venvs/constrained-rl/bin/python running_example_figures.py   (writes identity.pdf/png beside this script)
@@ -46,7 +46,7 @@ fail_terms[tau:] = -PRICE * BETA ** tt[tau:]
 exact = float(np.sum(utility_terms + loss_terms + fail_terms) - PRICE * BETA ** H / (1 - BETA))
 assert abs(Vm - exact) < 1e-12
 
-fig, axs = plt.subplots(1, 3, figsize=(TEXTW, 2.3), gridspec_kw=dict(width_ratios=[1.0, 1.35, 1.0], wspace=0.55))
+fig, axs = plt.subplots(1, 3, figsize=(TEXTW, 2.3), gridspec_kw=dict(width_ratios=[1.0, 1.3, 1.15], wspace=0.55))
 # (a) the wear path
 ax = axs[0]
 ax.plot(times, zp, marker="o", ms=3, color=C_PATH); ax.axhline(0, color=TEXT2, lw=0.8)
@@ -59,15 +59,15 @@ panel_label(ax, "(a)")
 ax = axs[1]
 ax.bar(tt, utility_terms, color=C_UTIL, label="utility before breakdown")
 ax.bar(tt, loss_terms, color=C_LOSS, hatch="///", edgecolor="white", lw=0, label="interior loss")
-ax.bar(tt, fail_terms, color=C_FAIL, hatch="...", edgecolor="white", lw=0, label="downtime price")
+ax.bar(tt, fail_terms, color=C_FAIL, hatch="...", edgecolor="white", lw=0, label="price after breakdown")
 ax.axvline(tau - 0.5, color=TEXT2, ls=":", lw=1); ax.axhline(0, color=TEXT2, lw=0.8)
-ax.annotate("tail continues", xy=(H - 1, fail_terms[-1]), xytext=(H - 9.5, -0.40), fontsize=FS, color=C_FAIL,
+ax.annotate("continues", xy=(H - 1, fail_terms[-1]), xytext=(H - 9.5, -0.40), fontsize=FS, color=C_FAIL,
             arrowprops=dict(arrowstyle="->", color=C_FAIL))
 ax.set_xlabel("action index $t$"); ax.set_ylabel("discounted term"); ax.set_ylim(-0.46, 0.62)
 panel_label(ax, "(b)")
 # (c) the exact totals
 ax = axs[2]
-vals = [U_path, -I_path, -tail, Vm]; labels = ["$U_\\omega$", "$-I_\\omega$", "tail", "$V_{m,\\omega}$"]
+vals = [U_path, -I_path, -tail, Vm]; labels = ["$U_\\omega$", "$-I_\\omega$", "\nprice", "$V_{m,\\omega}$"]
 bars = ax.bar(range(4), vals, color=[C_UTIL, C_LOSS, C_FAIL, C_PATH], width=0.65)
 bars[1].set(hatch="///", edgecolor="white", lw=0); bars[2].set(hatch="...", edgecolor="white", lw=0)
 ax.axhline(0, color=TEXT2, lw=0.8)

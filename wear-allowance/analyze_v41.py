@@ -212,7 +212,7 @@ def table(summary, inc=None):
                      f"${100*s['near05']:.1f}$ & ${100*s['q90']:.1f}$ & {A} \\\\")
     if inc:
         lines += ["\\midrule", f"Incumbent rule & ${100*inc['q']:.2f}$ & -- & ${inc['U']:.2f}$ & -- & -- & -- & -- & -- & $0$ \\\\"]
-    note = ("\\multicolumn{10}{@{}p{\\linewidth}@{}}{\\textsuperscript{$\\dagger$}three seeds remained at the unpriced optimum ($q_\\beta=0.59$), "
+    note = ("\\multicolumn{10}{@{}p{\\linewidth}@{}}{\\textsuperscript{$\\dagger$}three seeds remained at the optimum without a price ($q_\\beta=0.59$), "
             "four reached $0.11$ to $0.17$ and one $0.33$; the mean is of a two-cluster sample. "
             "\\textsuperscript{$\\ddagger$}dual step $1$ instead of $5$.} \\\\")
     (ROOT / "wear-campaign-table-v41.tex").write_text(
@@ -254,7 +254,7 @@ def fig_frontier(bench, summary):
     ax = axes[0]
     z = np.array(bench["z_grid"]); mid = len(bench["s_grid"]) // 2
     arrs = []
-    for key, lab, col, ls in (("failure-m0", "unpriced", MUTED, ":"), ("failure-m1", "price $m=1$", C_FIXED, "-"), ("barrier-m1", "barrier, $m=1$", C_BARRIER, "--")):
+    for key, lab, col, ls in (("failure-m0", "no price", MUTED, ":"), ("failure-m1", "price $m=1$", C_FIXED, "-"), ("barrier-m1", "barrier, $m=1$", C_BARRIER, "--")):
         y = np.array(bench["policy_tables"][key])[mid]; arrs.append(y)
         ax.plot(z, y, color=col, ls=ls, label=lab)
     d = digest(z, *arrs); DIGESTS["wear-frontier/a policy tables"] = dict(before=d, after=d, changed=False)

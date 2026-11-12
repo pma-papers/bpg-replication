@@ -34,12 +34,12 @@ def logic():
     inf_b = U_ACT - barrier(zp)
     ax.axvspan(-0.25, 0.0, color=MUTED, alpha=0.15, lw=0)
     ax.text(-0.125, 0.85, "failure", ha="center", va="center", fontsize=9, color=TEXT2)
-    ax.plot(zp, np.maximum(inf_b, -3.5), color=MUTED, lw=1.0, ls="--", label="infinite barrier $u-B(z')$")
+    ax.plot(zp, np.maximum(inf_b, -3.5), color=MUTED, lw=1.0, ls="--", label="unclipped reward $u-B(z')$")
     ax.annotate("$\\to-\\infty$", xy=(0.004, -1.45), xytext=(0.03, -1.55), fontsize=9, color=TEXT2, va="center")
     bounded = np.where(z > 0, np.maximum(U_ACT - barrier(np.maximum(z, 1e-9)), -M_PRICE), -M_PRICE)
-    ax.plot(z, bounded, color=PAL[0], lw=1.6, label="bounded barrier $\\max\\{-m,\\,u-B(z')\\}$")
+    ax.plot(z, bounded, color=PAL[0], lw=1.6, label="clipped reward $\\max\\{-m,\\,u-B(z')\\}$")
     fo = np.where(z > 0, U_ACT, -M_PRICE)
-    ax.plot(z, fo, color=PAL[1], lw=1.1, ls=(0, (4, 2)), label="failure-only price")
+    ax.plot(z, fo, color=PAL[1], lw=1.1, ls=(0, (4, 2)), label="price without the barrier")
     ax.fill_between(z[z > 0], bounded[z > 0], U_ACT, color=PAL[0], alpha=0.12, lw=0)
     ax.text(0.33, 0.28, "interior loss", fontsize=9, color=PAL[0])
     ax.axhline(-M_PRICE, color=TEXT2, lw=0.6, ls=":")
@@ -58,7 +58,7 @@ def logic():
     ax.axvspan(0.0, qf, color=MUTED, alpha=0.18, lw=0)
     ax.plot(q, U, color=TEXT2, lw=1.4)
     ax.text(0.43, 1.04, "frontier of the class", fontsize=9, color=TEXT2, ha="center", va="bottom")
-    ax.annotate("below the floor: no policy,\nno multiplier converges",
+    ax.annotate("below the lower bound:\nno policy, no multiplier converges",
                 xy=(qf * 0.5, 0.12), xytext=(0.13, 0.05), fontsize=9, color=TEXT2, va="bottom",
                 arrowprops=dict(arrowstyle="->", color=TEXT2, lw=0.6))
     # a price: tangent with slope m/(1-beta) (scaled for the schematic)
@@ -78,10 +78,10 @@ def logic():
     ax.annotate("tolerance $\\alpha$", xy=(alpha, Ua), xytext=(alpha + 0.05, Ua - 0.14),
                 fontsize=9, color=PAL[1], arrowprops=dict(arrowstyle="->", color=PAL[1], lw=0.6))
     ax.annotate("", xy=(alpha, Um - 0.06), xytext=(qm, Um - 0.06), arrowprops=dict(arrowstyle="<->", color=TEXT2, lw=0.6))
-    ax.text((qm + alpha) / 2, Um - 0.1, "unused risk", fontsize=9, color=TEXT2, ha="center", va="top")
+    ax.text((qm + alpha) / 2, Um - 0.1, "risk left unused", fontsize=9, color=TEXT2, ha="center", va="top")
     ax.set_xlim(0.0, qmax); ax.set_ylim(0.0, 1.14)
     ax.set_xlabel("geometric risk $q_\\beta$"); ax.set_ylabel("utility net of interior loss")
-    ax.set_xticks([0, qf, alpha]); ax.set_xticklabels(["0", "floor", "$\\alpha$"]); ax.set_yticks([])
+    ax.set_xticks([0, qf, alpha]); ax.set_xticklabels(["0", "lower\nbound", "$\\alpha$"]); ax.set_yticks([])
     panel_label(ax, "(b)")
     legend_below(fig, *axes[0].get_legend_handles_labels(), ncol=1, axes=[axes[0]])
     save(fig, "logic", OUT)

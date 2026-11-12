@@ -113,8 +113,8 @@ def main():
     fig, axes = plt.subplots(1, 3, figsize=(TEXTW, 2.2), gridspec_kw=dict(wspace=0.5))
     # (a) risk and (b) utility against the anchor strength
     for ax, key, lab, panel in ((axes[0], "risk", "breakdown probability $q_\\beta$", "a"), (axes[1], "U", "stopped utility $U$", "b")):
-        for data, col, mk, big, label in ((full, C_FULL, M_FULL, 4.5, "anchor, $\\sigma_a=0.37$"),
-                                          (matched, C_MATCHED, M_MATCHED, 4.0, "matched, $\\sigma_a=0.1$")):
+        for data, col, mk, big, label in ((full, C_FULL, M_FULL, 4.5, "prior dispersion $0.37$"),
+                                          (matched, C_MATCHED, M_MATCHED, 4.0, "prior dispersion $0.1$")):
             ks = sorted(data)
             if not ks:
                 continue
@@ -125,7 +125,7 @@ def main():
         for k, rows in meanonly.items():
             for r in rows:
                 ax.plot([k], [r["stochastic"][key]], marker=M_MEANONLY, ms=3, color=C_MEANONLY, alpha=0.5, ls="none")
-            ax.plot([k], [ms(rows, lambda r: r["stochastic"][key])[0]], marker=M_MEANONLY, ms=5, mec="white", mew=0.6, color=C_MEANONLY, ls="none", label="mean-only prior")
+            ax.plot([k], [ms(rows, lambda r: r["stochastic"][key])[0]], marker=M_MEANONLY, ms=5, mec="white", mew=0.6, color=C_MEANONLY, ls="none", label="anchor on the mean network only")
         if prior_full:
             ax.axhline(prior_full[key][0], color=C_FULL, lw=0.8, ls=":")
         if prior_matched:
@@ -137,9 +137,9 @@ def main():
         ax.xaxis.set_minor_locator(plt.NullLocator()); ax.set_xlim(-0.25, 300)
         ax.set_xlabel("anchor strength $\\kappa_p$"); ax.set_ylabel(lab); panel_label(ax, panel)
     # one legend for the figure (panel a): the action-anchored configurations appear in panel (c) only
-    handles = [Line2D([], [], marker=M_FULL, color=C_FULL, ms=4.5, mec="white", mew=0.6, label="anchor, $\\sigma_a=0.37$"),
-               Line2D([], [], marker=M_MATCHED, color=C_MATCHED, ms=4.0, mec="white", mew=0.6, label="matched, $\\sigma_a=0.1$"),
-               Line2D([], [], marker=M_MEANONLY, ls="none", color=C_MEANONLY, ms=5, mec="white", mew=0.6, label="mean-only prior"),
+    handles = [Line2D([], [], marker=M_FULL, color=C_FULL, ms=4.5, mec="white", mew=0.6, label="prior dispersion $0.37$"),
+               Line2D([], [], marker=M_MATCHED, color=C_MATCHED, ms=4.0, mec="white", mew=0.6, label="prior dispersion $0.1$"),
+               Line2D([], [], marker=M_MEANONLY, ls="none", color=C_MEANONLY, ms=5, mec="white", mew=0.6, label="anchor on the mean network only"),
                Line2D([], [], marker=M_ACTION, ls="none", color=C_ACTION, ms=4, mec="white", mew=0.5, label="action regularization, panel (c)")]
     legend_below(fig, handles, ncol=2)
     # (c) risk against the action relative entropy to the action reference: all anchors, labelled by hand
@@ -157,7 +157,7 @@ def main():
         ax.plot(xs, ys, marker=M_MATCHED, ms=3.2, mec="white", mew=0.5, color=C_MATCHED, ls="none")
         if k in (0.0, 1.0):   # the two lower clusters are too close to the action-regularized ones for labels: the caption gives the order
             dxy, ha = {0.0: ((7, 0), "left"), 1.0: ((-8, 0), "right")}[k]
-            label(f"$\\kappa_p={k:g}$ m.", (float(np.mean(xs)), float(np.mean(ys))), dxy, C_MATCHED, ha=ha)
+            label(f"$\\kappa_p={k:g}$", (float(np.mean(xs)), float(np.mean(ys))), dxy, C_MATCHED, ha=ha)
     for eta, rows in action.items():
         if not rows:
             continue
@@ -187,19 +187,19 @@ def main():
         return [dict(stochastic=r["prior_policy"]["stochastic"], action_kl=r["prior_policy"]["action_kl"], log_std=logstd) for r in rows]
     summary = dict(counts=counts, exact_m003=exact)
     if rows_full:
-        lines.append(row("Prior policy", "$x_0$, $\\sigma_a=0.37$", prior_rows(rows_full, -1.0)))
+        lines.append(row("Prior policy, first set", "$x_0$, $\\sigma_a=0.37$", prior_rows(rows_full, -1.0)))
         for i, k in enumerate(ks_full):
-            lines.append(row("Parameter anchor" if i == 0 else "", f"$\\kappa_p={k:g}$", full[k]))
+            lines.append(row("Parameter anchor, first set" if i == 0 else "", f"$\\kappa_p={k:g}$", full[k]))
         summary["prior_full"] = prior_full
         summary["full"] = {f"{k:g}": dict(n=len(full[k]), q=ms(full[k], lambda r: r["stochastic"]["risk"]), U=ms(full[k], lambda r: r["stochastic"]["U"]),
                                           A=ms(full[k], lambda r: r["action_kl"]["A"]), distance=ms(full[k], lambda r: r["distance"])) for k in ks_full}
     for k, rows in meanonly.items():
-        lines.append(row("Mean-only prior", f"$\\kappa_p={k:g}$", rows))
+        lines.append(row("Mean network anchored", f"$\\kappa_p={k:g}$", rows))
     if rows_matched:
-        lines.append(row("Prior policy, matched", "$x_0$, $\\sigma_a=0.1$ (incumbent)", prior_rows(rows_matched, rows_matched[0]["arm"]["prior_logstd"])))
+        lines.append(row("Prior policy, second set", "$x_0$, $\\sigma_a=0.1$ (incumbent)", prior_rows(rows_matched, rows_matched[0]["arm"]["prior_logstd"])))
         for i, k in enumerate(ks_matched):
-            setting = f"$\\kappa_p={k:g}$" + (" (unanchored control)" if k == 0 else "")
-            lines.append(row("Matched prior" if i == 0 else "", setting, matched[k]))
+            setting = f"$\\kappa_p={k:g}$" + (" (no anchor)" if k == 0 else "")
+            lines.append(row("Parameter anchor, second set" if i == 0 else "", setting, matched[k]))
         summary["prior_matched"] = prior_matched
         summary["matched"] = {f"{k:g}": dict(n=len(matched[k]), seeds=[r["seed"] for r in matched[k]], q=ms(matched[k], lambda r: r["stochastic"]["risk"]),
                                              U=ms(matched[k], lambda r: r["stochastic"]["U"]), A=ms(matched[k], lambda r: r["action_kl"]["A"]),
@@ -209,9 +209,9 @@ def main():
             lines.append(row("Action regularization" if i == 0 else "", f"$\\eta={eta:g}$", rows))
     if unanch:
         lines.append(row("No anchor", "$m=0.03$", [dict(stochastic=r["stochastic"], action_kl=dict(A=float("nan")), log_std=r["log_std"]) for r in unanch]))
-    note = "\\multicolumn{7}{@{}l@{}}{Matched prior: prior policy equal to the action reference (incumbent rule, dispersion $0.1$); other rows: earlier sets of runs.} \\\\"
+    note = ""   # the two sets of runs are named in the rows (revision 76)
     tex = ("\\setlength{\\tabcolsep}{4pt}\\begin{tabular}{llrrrrr}\n\\toprule\n"
-           "Configuration & Setting & $q_\\beta$ (\\%) & $U$ & $\\mathcal A$ & $\\|x-x_0\\|$ & $\\sigma_a$ \\\\\n\\midrule\n" + "\n".join(lines) + "\n\\bottomrule\n" + note + "\n\\end{tabular}\n")
+           "Configuration & Setting & $q_\\beta$ (\\%) & $U$ & $\\mathcal A$ & $\\|x-x_0\\|$ & $\\sigma_a$ \\\\\n\\midrule\n" + "\n".join(lines) + "\n\\bottomrule\n" + (note + "\n" if note else "") + "\\end{tabular}\n")
     (ROOT / "wear-anchor-table-v41.tex").write_text(tex)
     (ROOT / "wear-anchor-summary-v41.json").write_text(json.dumps(summary, indent=1, default=float) + "\n")
     if prior_full:
