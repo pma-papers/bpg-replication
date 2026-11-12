@@ -15,7 +15,7 @@ and 75 changed the paper's wording, not its numbers.
 
 | Folder | Study in the paper | What it tests |
 |---|---|---|
-| [`wear-allowance/`](wear-allowance) | An asset operated under a wear allowance; the prior on a learned controller; noise and pull on a learned controller | The price against an exact benchmark, the adaptive multiplier, the interior barrier under a misjudged allowance, the action anchor, the parameter anchor and parameter noise |
+| [`wear-allowance/`](wear-allowance) | An asset operated under a wear allowance; the prior on a learned controller; noise and the anchor on a learned controller | The price against an exact benchmark, the adaptive multiplier, the interior barrier when the true allowance is smaller than the allowance used in training, the action anchor, the parameter anchor and parameter noise |
 | [`fuel-tank/`](fuel-tank) | A learned controller with a fuel tank | The price on a learned controller (LunarLander with a fuel tank), the dual step of an adaptive multiplier |
 | [`solvable-flow/`](solvable-flow) | The convergence theorem and the regularizers on the solvable flow | The slack of the curvature threshold, the prior policy, noise, pull and spread, the particle form |
 | [`benchmark-suite/`](benchmark-suite) | A task of a benchmark suite (details in Online Resource 1) | A Safety-Gymnasium navigation task: the price, the adaptive multiplier and the expected-cost formulation |
@@ -61,7 +61,7 @@ scripts carry the corrections the paper made in revision 70: the reference sprea
 `sqrt(kappa_1/kappa_2)` (`analyze_noise_v60.py`; the protocol's design values stay in its check (R1)), the
 benchmark suite's validation shares the error `0.05` among all 72 reported candidates (`analyze_safety_v63.py`), and
 the solvable flow's curvature constant is called a finite-difference estimate (`regularizer_figure_v41.py`).
-The wear-allowance table carries the column "bound": the price–risk law with the idle policy as comparison and
+The wear-allowance table carries the column "bound": the price–risk bound with standing still as the comparison policy and
 the measured optimization error, computed per seed in `wear-allowance/analyze_v41.py`.
 
 Four outputs are records that the paper no longer prints. The Online Resource was shortened on 9 November 2026 and
