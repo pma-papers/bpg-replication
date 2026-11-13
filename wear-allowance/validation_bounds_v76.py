@@ -80,13 +80,15 @@ P = np.array([parts(M_A, HMAX, int(n)) for n in Ngrid])
 cert = {H: np.array([sum(parts(m, H)) for m in PRICES]) for H in HS}
 assert all((cert[H] >= q_beta).all() for H in HS), "a bound lies below the sample value of q_beta"
 
-fig, axes = plt.subplots(2, 2, figsize=(TEXTW, 4.6), gridspec_kw=dict(wspace=0.45, hspace=0.95))
+fig, axes = plt.subplots(2, 2, figsize=(TEXTW, 4.9), gridspec_kw=dict(wspace=0.45, hspace=1.1))
 LG = dict(fontsize=FS - 1.5, handlelength=1.8, labelspacing=0.3, loc="upper center", bbox_to_anchor=(0.5, -0.30))
 ax = axes[0, 0]
-ax.stackplot(Ngrid, P[:, 2], P[:, 1], P[:, 0], colors=[MUTED, PAL[3], PAL[0]], alpha=0.55, labels=["truncation error", "sampling error", "plug-in estimate"])
+ax.stackplot(Ngrid, P[:, 2], P[:, 1], P[:, 0], colors=[MUTED, PAL[3], PAL[0]], alpha=0.55, labels=["truncation error $m\\beta^H/(m+\\bar u)$", "sampling error $(1-\\beta^H)\\sqrt{\\log(1/\\zeta)/(2N)}$",
+                     "plug-in estimate $[\\bar u-(1-\\beta)\\widehat V_H]/(m+\\bar u)$"])
 ax.axhline(q_beta, color="k", lw=0.9, label="$q_\\beta$ of the candidate")
 ax.set_xscale("log"); ax.set_ylim(0, 0.2); ax.set_xlabel("validation episodes $N$"); ax.set_ylabel("bound on $q_\\beta$")
-ax.legend(ncol=2, **LG); panel_label(ax, "a")
+h_, l_ = ax.get_legend_handles_labels()
+ax.legend([h_[i] for i in (2, 1, 0, 3)], [l_[i] for i in (2, 1, 0, 3)], ncol=1, **LG); panel_label(ax, "a")       # the terms in the order of the display, each with its formula
 ax = axes[0, 1]
 for H, c, ls in zip(HS, (PAL[2], PAL[0], PAL[3]), ("-", "--", "-.")):
     ax.plot(PRICES, np.minimum(1, cert[H]), color=c, lw=1.2, ls=ls, label=f"$H={H}$")
