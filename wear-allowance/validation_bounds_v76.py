@@ -103,8 +103,10 @@ for m, c, ls in zip(MS_C, (PAL[2], PAL[0], PAL[7]), ("-", "--", "-.")):
     ax.plot(TG, byT[m], color=c, lw=1.2, ls=ls, label=f"$m={m:g}$")
 pTG = np.array([p(int(T_)) for T_ in TG])
 assert all((byT[m] >= pTG).all() for m in MS_C)
-ax.plot(TG, pTG, color="k", lw=0.9, label="$p_T$ of the candidate")
-ax.set_ylim(0, 0.4); ax.set_xlabel("horizon $T$"); ax.set_ylabel("bound on $p_T$"); ax.legend(ncol=2, **LG); panel_label(ax, "c")
+ax.axhline(0, color=MUTED, lw=0.5)
+ax.plot(TG, pTG, color="k", lw=1.2, label="$p_T$ of the candidate")
+ax.set_ylim(-0.03, 0.4);          # the axis starts below zero, so that the candidate's line stands clear of it
+ax.spines["bottom"].set_position(("data", -0.03)); ax.set_xlabel("horizon $T$"); ax.set_ylabel("bound on $p_T$"); ax.legend(ncol=2, **LG); panel_label(ax, "c")
 # a task that ends after H actions: the price is charged from failure to action H - 1
 HG = np.arange(T_D + 5, HMAX + 1)
 bound = {}
@@ -116,8 +118,9 @@ assert all((bound[m] >= pTD).all() for m in MS_D)
 ax = axes[1, 1]
 for m, c, ls in zip(MS_D, (PAL[3], PAL[2], PAL[0]), (":", "-", "--")):
     ax.plot(HG, bound[m], color=c, lw=1.2, ls=ls, label=f"$m={m:g}$")
-ax.axhline(pTD, color="k", lw=0.9, label=f"$p_{{{T_D}}}$ of the candidate")
-ax.set_ylim(0, 0.4); ax.set_xlabel("task length $H$"); ax.set_ylabel(f"bound on $p_{{{T_D}}}$"); ax.legend(ncol=2, **LG); panel_label(ax, "d")
+ax.axhline(0, color=MUTED, lw=0.5)
+ax.axhline(pTD, color="k", lw=1.2, label=f"$p_{{{T_D}}}$ of the candidate")
+ax.set_ylim(-0.03, 0.4); ax.set_xlabel("task length $H$"); ax.set_ylabel(f"bound on $p_{{{T_D}}}$"); ax.legend(ncol=2, **LG); panel_label(ax, "d")
 out = dict(cited=CITED, candidate="incumbent rule min{1, z/(3b)} with dispersion 0.05 of the rate", episodes=N, zeta=ZETA, q_beta=q_beta,
            p_T={str(T_): p(T_) for T_ in (5, 10, 20, 40)},
            bound_on_q_beta_at_m30_H200_by_episodes={str(int(n)): float(s) for n, s in zip(Ngrid[[0, len(Ngrid) // 2, -1]], P.sum(1)[[0, len(Ngrid) // 2, -1]])},
