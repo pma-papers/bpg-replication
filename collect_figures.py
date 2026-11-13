@@ -1,7 +1,7 @@
 """Copy the regenerated figures of the paper into a manuscript figure folder under the manuscript's names.
 
 Usage:  python collect_figures.py <figures folder of the manuscript>
-The mapping is that of the README's regeneration table; the three illustrations (logic, identity, curvature) come
+The mapping is that of the README's regeneration table; the illustrations (logic, identity, curvature and four of revision 76) come
 from illustrations/. Every source must exist; nothing else in the target folder is touched.
 """
 import shutil
@@ -18,6 +18,13 @@ MAP = {
     "prior-sweep": "solvable-flow/prior-flow.pdf", "particle-flow": "solvable-flow/particle-flow-v58.pdf",
     "roles-flow": "solvable-flow/roles-flow-v59.pdf", "corollary-bound": "solvable-flow/corollary-bound-v60.pdf",
     "safety": "output/figures/safety.pdf",
+    # figures added in revision 76 of the paper
+    "wear-problem": "wear-allowance/wear-problem-v76.pdf", "fuel-tank-problem": "fuel-tank/lunar-problem-v76.pdf",
+    "fuel-tank-setup": "fuel-tank/lunar-setup-v76.pdf", "benchmark-problem": "benchmark-suite/safety-problem-v76.pdf",
+    "example-setup": "solvable-flow/example-setup-v76.pdf", "price-geometry": "wear-allowance/price-geometry-v76.pdf",
+    "failure-time-tail": "wear-allowance/failure-time-tail-v76.pdf", "validation-bounds": "wear-allowance/validation-bounds-v76.pdf",
+    "shadow-price-frontier": "illustrations/shadow-price-frontier-v76.pdf", "cvar-consumption": "illustrations/cvar-consumption-v76.pdf",
+    "regularizer-geometry": "illustrations/regularizer-geometry-v76.pdf", "network-transfer": "illustrations/network-transfer-v76.pdf",
 }
 
 if __name__ == "__main__":

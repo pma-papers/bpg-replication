@@ -58,7 +58,7 @@ simulator.
 
 | Configuration | `q_beta` (%) | `U` | gap (%) | pass (of 8) | near (%) | at `0.9 b` (%) |
 |---|---|---|---|---|---|---|
-| unpriced, `m = 0` | 59.90 | 5.35 | -0.2 | 0 | 61.4 | 62.8 |
+| no price, `m = 0` | 59.90 | 5.35 | -0.2 | 0 | 61.4 | 62.8 |
 | fixed price `m = 0.3` | 4.42 | 4.76 | 0.9 | 3 | 29.4 | 45.1 |
 | fixed price `m = 1` | 1.90 | 4.50 | 1.7 | 8 | 12.6 | 32.6 |
 | fixed price `m = 10` | 0.53 | 4.01 | 4.8 | 8 | 2.0 | 11.0 |
@@ -73,18 +73,18 @@ at most 0.05. The incumbent rule has `q_beta = 1.08%` and `U = 2.73`. Full table
 
 ### What the practitioner decides, and what came out
 
-1. **Price it.** The unpriced learner runs to failure, as the exact solution does. A price removes most of that risk at
+1. **Price it.** The learner without a price runs to failure, as the exact solution does. A price removes most of that risk at
    a small utility cost, because the gamble it forgoes is the last one before exhaustion. Learned fixed-price
-   policies lie within a few percent of the exact frontier. The price-risk law (`certificates.price_risk_law`,
+   policies lie within a few percent of the exact frontier. The price-risk bound (`certificates.price_risk_bound`,
    checked by `frontier.check_runs`) has the right dependence on the price and is conservative by a factor of twenty
-   to thirty. At `m = 0.1` three of eight seeds stayed at the unpriced optimum: check every seed.
+   to thirty. At `m = 0.1` three of eight seeds stayed at the optimum without a price: check every seed.
 2. **Price or tolerance.** The adaptive multiplier reaches its prescribed level on the same frontier. Its multiplier
    for the target 0.05 converges at the tolerance itself, so no seed passes validation at 0.05: set a prescribed level
    below the tolerance by the width of the confidence bound. For the zero target the multiplier increases throughout
    training; `DualAscent.diagnose` reports that it has not converged.
-3. **Margin.** The failure-only price leaves no reserve: at `m = 1`, 32.6% of episodes break down when the true
+3. **Reserve.** The failure-only price leaves no reserve: at `m = 1`, 32.6% of episodes break down when the true
    allowance is `0.9 b`. The interior barrier at the same price brings this to 1.5% at a utility cost within its
-   interior loss. Test the margin with `BudgetWrapper(true_budget_scale=0.9)`; if the size of the error is known,
+   interior loss. Test the reserve with `BudgetWrapper(true_budget_scale=0.9)`; if the size of the error is known,
    plan with the tightened allowance instead.
 4. **Action anchor.** At the deliberately low price `m = 0.03` the exact optimum breaks down in about a third of the
    episodes. The action relative entropy to the incumbent rule (`ActionAnchor`) keeps the breakdown probability near
@@ -97,12 +97,12 @@ at most 0.05. The incumbent rule has `q_beta = 1.08%` and `U = 2.73`. Full table
 ## 2. The prior on a learned controller
 
 Same problem, price `m = 0.03`. The actor is fitted to the incumbent rule (parameters `theta_0`) and trained with weight
-decay toward `theta_0`, the pull part of a Gaussian prior that a finite network carries:
+decay toward `theta_0`, the drift part of a Gaussian prior that a finite network carries:
 
 ```python
 from barrierpg.callbacks import fit_actor_mean, set_log_std, ParameterAnchor
 mse = fit_actor_mean(ppo, incumbent_mean, observations)   # theta_0: the actor's mean fitted to the rule
-set_log_std(ppo, math.log(0.05))                           # the matched prior: the incumbent's own dispersion
+set_log_std(ppo, math.log(0.05))                           # the incumbent's own dispersion, so that the prior policy is the incumbent
 anchor = ParameterAnchor(ppo, kappa_p=10.0).install()      # covers the dispersion by default
 ```
 
@@ -110,11 +110,11 @@ anchor = ParameterAnchor(ppo, kappa_p=10.0).install()      # covers the dispersi
 |---|---|---|---|
 | prior policy, the learner's default dispersion 0.37 | 6.04 | 2.85 | 0.37 |
 | anchor `kappa_p = 100`, default dispersion | 6.43 | 2.86 | 0.37 |
-| mean-only anchor `kappa_p = 100` | 34.32 | 4.01 | 7.50 |
-| prior policy, matched dispersion (the incumbent rule) | 1.03 | 2.73 | 0.10 |
-| unanchored control `kappa_p = 0` | 35.02 | 4.37 | 0.02 |
-| matched anchor `kappa_p = 10` | 3.35 | 2.89 | 0.10 |
-| matched anchor `kappa_p = 100` | 1.21 | 2.74 | 0.10 |
+| anchor on the mean network only, `kappa_p = 100` | 34.32 | 4.01 | 7.50 |
+| prior policy, the incumbent's dispersion 0.1 (the incumbent rule) | 1.03 | 2.73 | 0.10 |
+| no anchor, `kappa_p = 0` | 35.02 | 4.37 | 0.02 |
+| anchor `kappa_p = 10`, the incumbent's dispersion | 3.35 | 2.89 | 0.10 |
+| anchor `kappa_p = 100`, the incumbent's dispersion | 1.21 | 2.74 | 0.10 |
 
 (Dispersions in the pre-clipping action variable of the paper's learner.) The learner inherits the prior policy, not
 the rule the actor was fitted to: evaluate the prior policy as a candidate before training, and anchor the dispersion
@@ -135,7 +135,7 @@ is the task's own reward, landing bonus and crash penalty included. With `beta =
 
 ```python
 spec = BudgetSpec(budgets=[22.0], beta=0.999, ubar=100.0, u_minus=100.0, horizon=1000)
-stage = Stage(m=0.5, clip_utility=False)     # the crash penalty lies below every price: frozen-multiplier form
+stage = Stage(m=0.5, clip_utility=False)     # the crash penalty lies below every price: fixed-multiplier form
 env = BudgetWrapper(gym.make("LunarLanderContinuous-v3"), cost=fuel_used, spec=spec, stage=stage)
 ```
 
@@ -159,7 +159,7 @@ existing controller. Five seeds; every configuration of a seed starts from the s
 | adaptive, target 0.05, dual step 100 (fixed before the campaign) | 78.3 | 5.0 | 16.7 | 91 |
 
 1. **A moderate price works on a learned controller.** At `m = 0.5` exhaustion falls in nearly every pair of priced and
-   unpriced runs with the same seed and tank, while crashes rise and the utility falls.
+   runs without a price with the same seed and tank, while crashes rise and the utility falls.
 2. **Do not charge far more for a failure than an episode earns.** At `m = 2` the failing frame costs about ten times
    the landing bonus, several seeds crash in most episodes, and both exhaustion and utility worsen.
    `plan(..., episode_earnings=...)` warns.
@@ -176,16 +176,16 @@ existing controller. Five seeds; every configuration of a seed starts from the s
 ## 4. The roles of the regularizers
 
 The paper reports the first part with its other checks on the analytical example (Sect. 6.3, called the solvable flow
-until 9 November 2026) and the second part as *Noise and pull on a learned controller*.
+until 9 November 2026) and the second part as *Noise and the anchor on a learned controller*.
 
 ### On the analytical example
 
 The paper's analytical example (`barrierpg.examples.plateau`, the solvable flow of the folder names) has one parameter per unit and a feature that is flat on
 `[-1, 1]`. From the plateau initial law the value gradient vanishes, so only the regularizers move the units. With the
-prior `N(0, 1)`: relative entropy with strength `kappa1` (pull and noise tied), the quadratic potential with strength
-`kappa2` (pull only), and their sum.
+prior `N(0, 1)`: relative entropy with strength `kappa1` (drift and noise tied), the quadratic potential with strength
+`kappa2` (drift only), and their sum.
 
-| Regularizer | `kappa1` (noise) | `kappa2` (pull) | final `V_m` | final spread | OU reference |
+| Regularizer | `kappa1` (noise) | `kappa2` (potential) | final `V_m` | final spread | OU spread |
 |---|---|---|---|---|---|
 | relative entropy | 0.1 | 0 | -1.9644 | 2.288 | 1.000 |
 | relative entropy | 1 | 0 | -2.2176 | 1.071 | 1.000 |
@@ -211,35 +211,35 @@ that strength essentially the prior.
 
 ### On a learned controller
 
-In the setting of the parameter-anchor walk-through above with the matched prior, Gaussian noise of variance `2 kappa1 x lr` was added to every
-actor parameter after each optimizer step (`ParameterNoise`), at the pull `kappa2 = 10`:
+In the setting of the parameter-anchor walk-through above with the incumbent's dispersion as the prior's, Gaussian noise of variance `2 kappa1 x lr` was added to every
+actor parameter after each optimizer step (`ParameterNoise`), at the anchor strength `kappa2 = 10`:
 
-| Configuration | `kappa1` | `kappa2` | reference spread | `q_beta` (%) | `U` | measured spread |
+| Configuration | `kappa1` | `kappa2` | `sqrt(kappa1/kappa2)` | `q_beta` (%) | `U` | measured spread |
 |---|---|---|---|---|---|---|
-| pull alone | 0 | 10 | -- | 3.35 | 2.89 | 3.2e-4 |
-| pull with noise | 0.001 | 10 | 0.01 | 3.17 | 2.89 | 1.2e-3 |
-| pull with noise | 0.009 | 10 | 0.03 | 3.24 | 2.88 | 1.1e-2 |
-| pull with noise | 0.101 | 10 | 0.1 | 13.77 | 3.08 | 1.3e-1 |
-| pull with noise | 0.989 | 10 | 0.314 | 16.24 | 2.36 | 1.3 |
+| anchor alone | 0 | 10 | -- | 3.35 | 2.89 | 3.2e-4 |
+| anchor with noise | 0.001 | 10 | 0.01 | 3.17 | 2.89 | 1.2e-3 |
+| anchor with noise | 0.009 | 10 | 0.03 | 3.24 | 2.88 | 1.1e-2 |
+| anchor with noise | 0.101 | 10 | 0.1 | 13.77 | 3.08 | 1.3e-1 |
+| anchor with noise | 0.989 | 10 | 0.314 | 16.24 | 2.36 | 1.3 |
 | noise alone | 0.101 | 0 | -- | 50.62 | 5.24 | 1.5 |
-| unanchored control | 0 | 0 | -- | 35.02 | 4.37 | 4.4e-2 |
+| no anchor, no noise | 0 | 0 | -- | 35.02 | 4.37 | 4.4e-2 |
 
-The reference spread is `sqrt(kappa1/kappa2)`: the injected noise carries no pull of its own, so only the anchor
+The stationary spread without the value drift is `sqrt(kappa1/kappa2)`: the injected noise carries no drift of its own, so only the anchor
 holds the parameters (`roles.noise_and_anchor_spread`). The anchor's gradient was added to the actor gradient before
 the Adam step (the coupled form), and the measured spread grew in proportion to `kappa1` over three decades and crossed
-the reference curve. The paper proposes, after the runs, the interaction of the coupled pull with Adam's normalization
+that value. The paper proposes, after the runs, the interaction of the coupled anchor with Adam's normalization
 of each coordinate as a possible explanation. Risk and utility stayed at the anchored values while the spread was small
 against the incumbent's dispersion and moved once it was not, the seeds splitting; noise alone acted as exploration and
 abandoned the prior. Vary `kappa1` and measure (`ParameterNoise.spread`, `regularizer_effects(..., noise_kappa1=, anchor_kappa2=, spread=)`).
 
-After revision 68 the same rows were rerun with the pull decoupled from Adam (applied to the parameters after the
-step, the toolbox's default from version 0.6.1) and under plain SGD, with a zero-objective control
-(`wear-allowance/PROTOCOL-optimizers-v68.md`, `REPORT-optimizers-v68.md`). The formula survives once the pull is a
-gradient step: the spread is `sqrt(kappa1 / kappa2)` within 1% under SGD and under the decoupled pull (0.100 and 0.318
-at `kappa2 = 10` and `1` with `kappa1 = 0.101`; the noise here carries no pull of its own, so the stationary spread is
-`sqrt(kappa1 / kappa2)` rather than `sqrt(kappa1 / (kappa1 + kappa2))`), while the coupled pull gives Adam's Laplace law,
-0.128 at both pulls. The coupled pull without noise holds the policy where SGD's does (`kappa2 = 10` keeps the
-incumbent in both), but the decoupled pull at the same strength and Adam's learning rate does not: read a decoupled
+After revision 68 the same rows were rerun with the anchor decoupled from Adam (applied to the parameters after the
+step, the toolbox's default from version 0.6.1) and under plain SGD, with a run without the objective
+(`wear-allowance/PROTOCOL-optimizers-v68.md`, `REPORT-optimizers-v68.md`). The formula survives once the anchor acts by a
+gradient step: the spread is `sqrt(kappa1 / kappa2)` within 1% under SGD and under the decoupled anchor (0.100 and 0.318
+at `kappa2 = 10` and `1` with `kappa1 = 0.101`; the noise here carries no drift of its own, so the stationary spread is
+`sqrt(kappa1 / kappa2)` rather than `sqrt(kappa1 / (kappa1 + kappa2))`), while the coupled anchor gives Adam's Laplace law,
+0.128 at both anchor strengths. The coupled anchor without noise holds the policy where SGD's does (`kappa2 = 10` keeps the
+incumbent in both), but the decoupled anchor at the same strength and Adam's learning rate does not: read a decoupled
 strength through its per-step contraction `1 - lr kappa2` (`ParameterAnchor.half_life`), not through the strength the
 coupled runs used.
 
@@ -280,7 +280,7 @@ validation with the error `0.05` shared among all 72 reported candidates (`0.05/
 
 | Configuration | exhausted (%) | return | mean cost | pass at 0.2 | pass at 0.05 |
 |---|---|---|---|---|---|
-| unpriced, `m = 0` | 50.2 | 15.6 | 17.2 | 0/8 | 0/8 |
+| no price, `m = 0` | 50.2 | 15.6 | 17.2 | 0/8 | 0/8 |
 | fixed price `m = 0.03` | 10.3 | 1.7 | 3.7 | 5/8 | 0/8 |
 | fixed price `m = 0.1` | 3.1 | -0.5 | 1.1 | 8/8 | 0/8 |
 | fixed price `m = 0.3` | 1.2 | -0.8 | 0.7 | 8/8 | 4/8 |

@@ -8,16 +8,16 @@ that each table and figure of the paper can be regenerated from the records, and
 It is separate from the toolbox. The toolbox, [`barrierpg`](https://github.com/pma-papers/barrierpg), is for applying
 clipped barrier policy gradients to a new problem; this repository is for checking the paper. Results are named by the
 titles the paper gives them, not by statement, section or table numbers, which change between revisions. The tables
-the scripts generate were checked against revision 75 of the paper, the revision submitted to the journal; revisions 74
-and 75 changed the paper's wording, not its numbers.
+the scripts generate were checked against revision 76 of the paper. Revisions 74 to 76 changed the paper's wording and
+added figures; the fifty fuel-tank runs of 10 November 2026 and their tables are the only new numbers since revision 73.
 
 ## Studies
 
 | Folder | Study in the paper | What it tests |
 |---|---|---|
 | [`wear-allowance/`](wear-allowance) | An asset operated under a wear allowance; the prior on a learned controller; noise and the anchor on a learned controller | The price against an exact benchmark, the adaptive multiplier, the interior barrier when the true allowance is smaller than the allowance used in training, the action anchor, the parameter anchor and parameter noise |
-| [`fuel-tank/`](fuel-tank) | A learned controller with a fuel tank | The price on a learned controller (LunarLander with a fuel tank), the dual step of an adaptive multiplier |
-| [`solvable-flow/`](solvable-flow) | The convergence theorem and the regularizers on the solvable flow | The slack of the curvature threshold, the prior policy, noise, pull and spread, the particle form |
+| [`fuel-tank/`](fuel-tank) | A learned controller under a fuel limit | The price on a learned controller (LunarLander with a fuel tank), the dual step of an adaptive multiplier |
+| [`solvable-flow/`](solvable-flow) | The convergence theorem and the regularizers on the analytical example | The slack of the curvature threshold, the prior policy, noise, drift and spread, the particle system |
 | [`benchmark-suite/`](benchmark-suite) | A task of a benchmark suite (details in Online Resource 1) | A Safety-Gymnasium navigation task: the price, the adaptive multiplier and the expected-cost formulation |
 | [`lib/`](lib) | shared modules | plotting style, density flow, digest helpers |
 
@@ -36,28 +36,34 @@ each output corresponds to is named in the last column.
 
 | Result | Script | Python | Manuscript file |
 |---|---|---|---|
-| Wear allowance: exact benchmark and campaign tables, margin figure | `wear-allowance/analyze_v41.py` | `constrained-rl` | `tables/wear-benchmark`, `tables/wear-campaign`, `figures/wear-margin` |
+| Wear allowance: exact benchmark and campaign tables, the figure for a smaller true allowance | `wear-allowance/analyze_v41.py` | `constrained-rl` | `tables/wear-benchmark`, `tables/wear-campaign`, `figures/wear-margin` |
 | Wear allowance: frontier, multiplier and anchor figures | `wear-allowance/relabel_wear_figures_v47.py` | `constrained-rl` | `figures/wear-frontier`, `wear-multiplier`, `parameter-anchor` |
 | The prior on a learned controller: table | `wear-allowance/anchor_analyze_v41.py` | `constrained-rl` | `tables/parameter-anchor` |
 | Roles of the regularizers on PPO: table and figure | `wear-allowance/analyze_noise_v60.py` | `constrained-rl` | `tables/wear-noise`, `figures/wear-noise` |
-| Roles of the regularizers on PPO, the pull decoupled from Adam (2026-10-20, after revision 68) | `wear-allowance/analyze_decoupled_v68.py` | `constrained-rl` | no table of its own; `wear-allowance/REPORT-decoupled-v68.md` |
+| Roles of the regularizers on PPO, the anchor decoupled from Adam (2026-10-20, after revision 68) | `wear-allowance/analyze_decoupled_v68.py` | `constrained-rl` | no table of its own; `wear-allowance/REPORT-decoupled-v68.md` |
 | Roles of the regularizers on PPO under three optimizers, with the amendment's rows (2026-10-20, after revision 68) | `wear-allowance/analyze_optimizers_v68.py` (per-coordinate records: `coordinate_diagnostic_v68.py`, `constrained-rl-numerics`) | `constrained-rl` | no table of its own; `wear-allowance/REPORT-optimizers-v68.md`, `wear-allowance/wear-optimizers-v68.tex` |
 | Fuel tank: tables and figure | `fuel-tank/lunar_analyze_v41.py` | `constrained-rl` | `tables/fuel-tank`, `tables/fuel-tank-paired`, `tables/fuel-tank-price-risk`, `tables/fuel-tank-amount`, `figures/fuel-tank` |
 | Fuel tank: priced risk of the stored fixed-price policies (the exhaustion frames of a second evaluation on the same episodes; `priced-risk.json` in each run folder) | `fuel-tank/lunar_reeval.py` | `constrained-rl-numerics` | read by `lunar_analyze_v41.py` |
 | Solvable flow: convergence test | `solvable-flow/regularizer_figure_v46.py` | `constrained-rl` | `tables/flow-test`, `figures/flow-test` |
 | Solvable flow: prior strength | `solvable-flow/prior_figure.py` | `constrained-rl` | `tables/prior-sweep`, `figures/prior-sweep` |
 | Solvable flow: regularization paths | `solvable-flow/prior_figure_v47.py`, `prior_path_table_v41.py` | `constrained-rl` | `figures/prior`, `tables/prior-paths` |
-| Solvable flow: particle form | `solvable-flow/particle_flow_v58.py`, `particle_table_v58.py` | `constrained-rl` | `figures/particle-flow`, `tables/particle-flow` |
-| Solvable flow: roles of the regularizers | `solvable-flow/roles_flow_v59.py` | `constrained-rl` | `figures/roles-flow`, `tables/roles-flow` |
-| Solvable flow: the learning-error bound | `solvable-flow/corollary_bound_v60.py` | `constrained-rl` | `figures/corollary-bound` |
+| Solvable flow: particle system | `solvable-flow/particle_flow_v58.py`, `particle_table_v58.py` | `constrained-rl` | `figures/particle-flow`, `tables/particle-flow` |
+| Solvable flow: roles of the regularizers | `solvable-flow/roles_flow_v59.py`, `roles_table_v76.py` | `constrained-rl` | `figures/roles-flow`, `tables/roles-flow` |
+| Solvable flow: the bound of the corollary on the risk along the flow | `solvable-flow/corollary_bound_v60.py` | `constrained-rl` | `figures/corollary-bound` |
 | Benchmark suite: table and figure | `benchmark-suite/analyze_safety_v63.py` (writes to `output/`) | `constrained-rl` | `tables/safety`, `figures/safety` |
-| Illustrations of the theory (Figures 1 and 3, the curvature budget) | `illustrations/introduction_schematic.py`, `running_example_figures.py`, `concept_figures.py` | `constrained-rl` | `figures/logic`, `identity`, `curvature` |
+| Illustrations of the theory (the logic of the clipped barrier, the identity on one path, the curvature budget) | `illustrations/introduction_schematic.py`, `running_example_figures.py`, `concept_figures.py` | `constrained-rl` | `figures/logic`, `identity`, `curvature` |
+| Setup of the test problems (Online Resource 1): the wear-allowance problem | `wear-allowance/problem_figure_v76.py` | `constrained-rl` | `figures/wear-problem` |
+| Setup of the test problems: the fuel tank (the task, and fuel use at the tank of 20 units) | `fuel-tank/lunar_problem_figure_v76.py`; `lunar_setup_eval.py` (`constrained-rl-numerics`), then `lunar_setup_figure_v76.py` | `constrained-rl` | `figures/fuel-tank-problem`, `figures/fuel-tank-setup` |
+| Setup of the test problems: the benchmark task | `benchmark-suite/safety_problem_eval_v76.py` (`constrained-rl-safety310`), then `safety_problem_figure_v76.py` | `constrained-rl` | `figures/benchmark-problem` |
+| Setup of the analytical example, with its optimum in closed form | `solvable-flow/example_setup_v76.py` | `constrained-rl` | `figures/example-setup` |
+| Illustrations on the wear-allowance example: the fixed-price proposition and the matched-risk theorem, the bounds on the failure time, the empirical certificate | `wear-allowance/price_geometry_v76.py`, `failure_time_tail_v76.py`, `validation_bounds_v76.py` | `constrained-rl` | `figures/price-geometry`, `failure-time-tail`, `validation-bounds` |
+| Illustrations for Online Resource 1: the shadow price on an exact frontier, the consumption-based penalties, the admissible regularizers, the transfer to a network | `illustrations/shadow_price_frontier_v76.py`, `cvar_consumption_v76.py`, `regularizer_geometry_v76.py`, `network_transfer_v76.py` | `constrained-rl` | `figures/shadow-price-frontier`, `cvar-consumption`, `regularizer-geometry`, `network-transfer` |
 
 `collect_figures.py <folder>` copies every figure above into a manuscript figure folder under the manuscript's
 names. The figures are drawn at the journal's print width with sans-serif lettering (`lib/plotstyle.py`). The
-generated tables reproduce the manuscript's table files of revision 75 byte for byte, except the table of the roles
-of the regularizers on the solvable flow, which was assembled by hand from `solvable-flow/roles-flow-v59.json`. Three
-scripts carry the corrections the paper made in revision 70: the reference spread of injected noise under the pull is
+generated tables reproduce the manuscript's table files of revision 76 byte for byte; the table of the roles of the
+regularizers on the solvable flow, assembled by hand until revision 75, is now written by `roles_table_v76.py`. Three
+scripts carry the corrections the paper made in revision 70: the stationary spread of injected noise under the anchor, without the value drift, is
 `sqrt(kappa_1/kappa_2)` (`analyze_noise_v60.py`; the protocol's design values stay in its check (R1)), the
 benchmark suite's validation shares the error `0.05` among all 72 reported candidates (`analyze_safety_v63.py`), and
 the solvable flow's curvature constant is called a finite-difference estimate (`regularizer_figure_v41.py`).
@@ -67,11 +73,11 @@ the measured optimization error, computed per seed in `wear-allowance/analyze_v4
 Four outputs are records that the paper no longer prints. The Online Resource was shortened on 9 November 2026 and
 now points to this repository for them: the exact optima on the grid (`tables/wear-benchmark`), the runs over prior
 locations and widths (`tables/prior-sweep`, `figures/prior-sweep`), the regularization paths as a table
-(`tables/prior-paths`) and the learning-error bound along the flow (`figures/corollary-bound`). The figure of the
-noise-and-pull check on the solvable flow (`figures/roles-flow`) is printed in the Online Resource since the same day. The same revision
+(`tables/prior-paths`) and the bound of the corollary along the flow (`figures/corollary-bound`). The figure of the
+check of noise and drift on the analytical example (`figures/roles-flow`) is printed in the Online Resource since the same day. The same revision
 writes the parameter of a unit as `x`, the anchor as `x_0` and the feature of the solvable flow as `varphi`, and the
 labels of the tables and figures follow. Since the night of 9 November the paper calls the solvable flow the
-*analytical example* (Sect. 6.3 and Appendix E of Online Resource 1); the folder `solvable-flow/` and the script
+*analytical example*; the folder `solvable-flow/` and the script
 names keep the old name.
 
 ## Running the campaigns again
@@ -97,7 +103,7 @@ The frozen package lists are in [`environments/`](environments).
 
 Protocols, run records, logs and audits are kept as they were written, including the revision names they carry.
 [`ERRATA.md`](ERRATA.md) lists the corrections to the records (software versions, optimizer settings, the warm start's
-optimizer state, the form of the parameter pull) with their evidence.
+optimizer state, the form of the parameter anchor) with their evidence.
 The protocols, which are records, call their statements predictions; the last section maps them to the paper's
 observations.
 [`PROVENANCE.md`](PROVENANCE.md) lists, for each protocol, its SHA-256, the date it states, and the private commits
@@ -108,7 +114,7 @@ in the paper.
 This repository is a curated copy of the numerics folder of the paper's working tree, taken on 2026-10-15; only the
 paths to the toolbox and the output folder were changed, and wording in code comments. Earlier revisions of the paper
 reported an emissions application, which revision 72 removed. Its folder is not part of this repository. The
-three-optimizer and decoupled-pull protocols and reports of 2026-10-20 also describe runs on that application; those
+three-optimizer and decoupled-anchor protocols and reports of 2026-10-20 also describe runs on that application; those
 records are not here either, and `analyze_optimizers_v68.py` skips them. Before publication, the home folder of the
 authors' working tree was replaced by `<project>` in the run records and logs that recorded it (65 fuel-tank result
 files and nine logs); nothing else in them changed. The same replacement was made in the fifty result files and the log
@@ -126,7 +132,7 @@ repository as in [`CITATION.cff`](CITATION.cff). The repository is archived on Z
 ## Observations of the paper and the protocols
 
 The paper reports its findings as observations, labelled (O1)–(O24) in the order of its experiments (the labels of
-revision 75 since 9 November 2026, when the noise-and-pull check on the analytical example (the solvable flow) joined the other checks on that
+revision 75 since 9 November 2026, when the check of noise and drift on the analytical example (the solvable flow) joined the other checks on that
 flow: the former (O15) is now (O13), and the former (O13) and (O14) are (O14) and (O15)). An observation that a result of the paper implies names that result. Where the result's conditions
 hold in the experiment, as for the bounds and rates computed on the exact benchmark and on the analytical example, the
 observation shows the slack of the bound. Where the result needs an assumption about the learner, such as a small
@@ -135,14 +141,14 @@ statement that covered the same finding.
 
 | Paper | Protocol file | Statement in the protocol |
 |---|---|---|
-| (O1) | `wear-allowance/PROTOCOL.md` | P1, the price–risk law |
+| (O1) | `wear-allowance/PROTOCOL.md` | P1, the price–risk bound |
 | (O2) | `wear-allowance/PROTOCOL.md` | P1, the fall of risk with the price |
 | (O3) | `wear-allowance/PROTOCOL.md` | P2 |
 | (O4) | `wear-allowance/PROTOCOL.md` | P3 |
 | (O5) | `wear-allowance/PROTOCOL.md` | P4, the utility cost of the barrier |
 | (O6) | `wear-allowance/PROTOCOL.md` | P4, the effect of the barrier |
 | (O7) | `wear-allowance/PROTOCOL.md` | P5 |
-| (O8) | `fuel-tank/lunar-protocol.json` | none for the first runs; the entry `additions_2026_11_10` states what was expected of the fifty runs added on 2026-11-10, and Appendix F.2 of Online Resource 1 reports the outcome |
+| (O8) | `fuel-tank/lunar-protocol.json` | none for the first runs; the entry `additions_2026_11_10` states what was expected of the fifty runs added on 2026-11-10, and the appendix on the fuel-tank study of Online Resource 1 reports the outcome |
 | (O9) | `fuel-tank/lunar-protocol.json` | none; the protocol holds no text of the statement |
 | (O10) | none (the analytical example has no protocol file) | none |
 | (O11) | none (the analytical example has no protocol file) | none |
