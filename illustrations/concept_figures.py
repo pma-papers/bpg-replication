@@ -4,8 +4,8 @@
                  bounded barrier and a failure-only price; (b) the risk-utility plane of a represented
                  class (schematic frontier) with its lower bound on the risk, a price, a tolerance and the methods.
   identity.pdf   (revision 46; superseded by running_example_figures.py) Section 3: the identity V_m = U - I_m - m beta^tau/(1-beta) on one trajectory.
-  curvature.pdf  Section 4: the curvature budget along a generalized geodesic (toy one-dimensional
-                 objective) and the minimizer's position as the regularizer's strength grows.
+  curvature.pdf  (revisions 46 to 75; superseded by curvature_geodesic_v76.py) Section 4: the curvature budget along a
+                 generalized geodesic (toy one-dimensional objective) and the minimizer's position as the regularizer's strength grows.
 
 Run: ~/.venvs/constrained-rl/bin/python concept_figures.py  (writes into ../figures/).
 Every number printed in a panel is computed here; the toy parameters are the constants below.
@@ -188,7 +188,8 @@ def curvature():
 
 
 if __name__ == "__main__":
-    # Only the curvature figure is still drawn here. The paper's logic.pdf comes from introduction_schematic.py and
-    # identity.pdf from running_example_figures.py; logic() and identity() are the revision-46 versions, kept as records
-    # and not called, so that running this script cannot overwrite the current figures.
-    print("curvature", curvature())
+    # No figure of the current paper is drawn here. The paper's logic.pdf comes from introduction_schematic.py,
+    # identity.pdf from running_example_figures.py and the curvature figure from curvature_geodesic_v76.py; logic()
+    # and identity() are the revision-46 versions, kept as records and not called. curvature() draws the toy
+    # function that the paper showed up to revision 75, into curvature.pdf, which the paper no longer uses.
+    print("curvature (toy function, revisions 46 to 75)", curvature())

@@ -1,0 +1,71 @@
+{
+ "feature": "g * N(0, W^2), g(x) = BETA (1 + cos(OM0 (x - XC)))/2 + (1 - BETA) (1 - 2 frac((x - X1)/ELL))^2",
+ "feature_parameters": {
+  "BETA": 0.7,
+  "W": 0.3,
+  "OM0": 0.14544,
+  "ELL": 7.92,
+  "XC": 8.4,
+  "X1": 2.4
+ },
+ "heights_as_shares_of_the_range": {
+  "prior": 0.663,
+  "wells": [
+   0.203,
+   0.0,
+   0.49
+  ],
+  "minimizer_at_the_moderate_strength": 0.213,
+  "minimizer_at_1_5_times_kappa_geo": 0.321
+ },
+ "mu_0": [
+  -3.6,
+  1.0529
+ ],
+ "mu_1": [
+  20.4,
+  0.7
+ ],
+ "prior_position": 0.15,
+ "positions_of_the_densities": [
+  0.0,
+  0.15,
+  0.42,
+  0.7,
+  1.0
+ ],
+ "W2_squared": 576.1246,
+ "range_of_minus_V": 0.3181,
+ "curvature_deficit_along_the_geodesic": 0.0234,
+ "kappa_geo": 0.0234,
+ "marked": {
+  "0": {
+   "local_minimizers": [
+    0.27,
+    0.575,
+    0.891
+   ]
+  },
+  "0.3": {
+   "convex": false,
+   "local_minimizers": [
+    0.255
+   ],
+   "global_minimizer": 0.255
+  },
+  "1.5": {
+   "convex": true,
+   "local_minimizers": [
+    0.218
+   ],
+   "global_minimizer": 0.218
+  }
+ },
+ "jumps_of_the_minimizer": [
+  {
+   "strength_in_units_of_kappa_geo": 0.0587,
+   "from_position": 0.565,
+   "to_position": 0.266
+  }
+ ]
+}

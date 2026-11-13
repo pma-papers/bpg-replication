@@ -1,7 +1,7 @@
 """Copy the regenerated figures of the paper into a manuscript figure folder under the manuscript's names.
 
 Usage:  python collect_figures.py <figures folder of the manuscript>
-The mapping is that of the README's regeneration table; the illustrations (logic, identity, curvature and four of revision 76) come
+The mapping is that of the README's regeneration table; the illustrations (logic, identity and five of revision 76, the curvature figure among them) come
 from illustrations/. Every source must exist; nothing else in the target folder is touched.
 """
 import shutil
@@ -10,7 +10,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 MAP = {
-    "logic": "illustrations/logic.pdf", "identity": "illustrations/identity.pdf", "curvature": "illustrations/curvature.pdf",
+    "logic": "illustrations/logic.pdf", "identity": "illustrations/identity.pdf", "curvature": "illustrations/curvature-geodesic-v76.pdf",
     "wear-frontier": "wear-allowance/wear-frontier-v47.pdf", "parameter-anchor": "wear-allowance/wear-anchor-v47.pdf",
     "wear-multiplier": "wear-allowance/wear-dual-v47.pdf", "wear-margin": "wear-allowance/wear-margin-v41.pdf",
     "wear-noise": "wear-allowance/wear-noise-v60.pdf", "fuel-tank": "fuel-tank/lunar-campaign-v41.pdf",
