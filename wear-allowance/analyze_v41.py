@@ -30,7 +30,7 @@ V38 = ROOT.parent / "wear-allowance"
 sys.path.insert(0, str(ROOT.parent / "lib"))
 sys.path.insert(0, str(V38))
 sys.path.insert(0, str(ROOT))
-from plotstyle import PAL, TEXT2, MUTED, TEXTW, FS, LS, MK, panel_label, legend_below, save  # noqa: E402
+from plotstyle import PAL, TEXT2, MUTED, SURFACE, TEXTW, FS, LS, MK, panel_label, legend_below, save  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from model import Model, simulate  # noqa: E402
@@ -320,7 +320,14 @@ def fig_margin(bench, summary):
             U_old = [r["grid"]["U"] if r["grid"] else r["nominal"]["U"] for r in rows]
             y = [max(r[key]["risk"], 1e-4) for r in rows]
             before += [U_old, y]; after += [U, y]
-            ax.plot(U, y, color=col, ls=ls, marker=".", ms=3, label=name)
+            # every curve carries a filled dot at the four prices that all families share; the failure-only
+            # family is computed at five further prices, which are drawn as open dots
+            shared = [r["m"] in (0.3, 1, 3, 10) for r in rows]
+            ax.plot(U, y, color=col, ls=ls)
+            ax.plot([u for u, k in zip(U, shared) if k], [v for v, k in zip(y, shared) if k], color=col, ls="none", marker="o", ms=3)
+            ax.plot([u for u, k in zip(U, shared) if not k], [v for v, k in zip(y, shared) if not k], color=col, ls="none",
+                    marker="o", ms=3, mfc=SURFACE, mew=0.8)
+            ax.plot([], [], color=col, ls=ls, marker="o", ms=3, label=name)
         DIGESTS[f"wear-margin/{lab} exact curves"] = dict(before=digest(*before), after=digest(*after), changed=True)
         pts = []
         for arm, s in summary.items():
@@ -334,6 +341,8 @@ def fig_margin(bench, summary):
     handles, labels = axes[0].get_legend_handles_labels()
     handles += [Line2D([], [], marker="o", ls="none", color=C_FIXED, ms=4), Line2D([], [], marker="^", ls="none", color=C_BARRIER, ms=4)]
     labels += ["learned, fixed price", "learned, barrier"]
+    handles.insert(1, Line2D([], [], marker="o", ls="none", color=TEXT2, ms=3, mfc=SURFACE, mew=0.8))
+    labels.insert(1, "further prices")
     legend_below(fig, handles, labels, ncol=3)
     save(fig, "wear-margin-v41", ROOT)
 
