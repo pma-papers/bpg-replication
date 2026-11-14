@@ -23,8 +23,8 @@ W_2(mu_0, mu_1)^2 = (A1-A0)^2 + (S1-S0)^2. A functional phi is lambda-convex alo
 d^2/dtheta^2 phi(mu_theta) >= lambda W_2^2; the relative entropy is 1-convex along it (lambda_W = 1).
 (a) -V_m and the regularized objective along the geodesic, at 0.3 times and at 1.5 times kappa_geo, the smallest
     strength at which the objective is convex along this geodesic. The threshold of the convergence theorem makes the
-    objective convex along every generalized geodesic, so kappa_geo is at most that threshold. The strip above shows
-    the density of mu_theta at five positions.
+    objective convex along every generalized geodesic, so kappa_geo is at most that threshold. The strip below shows
+    the density of mu_theta at five positions, each with the name of its law.
 (b) The position of the minimizer of the regularized objective among the laws of the geodesic, against the strength.
 Output: curvature-geodesic-v76 (pdf/png) and curvature-geodesic-v76.json.
 """
@@ -85,11 +85,11 @@ deficit = float(-f2[inner].min() / W2SQ)                      # curvature defici
 k_star = float((-f2[inner] / h2[inner]).max())                # the smallest strength at which the sum is convex along it
 local_min = lambda y: np.where((y[1:-1] < y[:-2]) & (y[1:-1] < y[2:]))[0] + 1
 
-fig = plt.figure(figsize=(TEXTW, 3.05))
-gs = fig.add_gridspec(2, 2, height_ratios=[0.2, 1.0], hspace=0.08, wspace=0.32)
-ax = fig.add_subplot(gs[1, 0]); strip = fig.add_subplot(gs[0, 0], sharex=ax)
-# the strip: the density of mu_theta at five positions, on the scale of the parameter x. The mean of mu_theta is
-# A0 + theta (A1 - A0), so the parameter axis and the position axis are aligned and each density stands above its position.
+fig = plt.figure(figsize=(TEXTW, 3.2))
+gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 0.2], hspace=0.72, wspace=0.32)
+ax = fig.add_subplot(gs[0, 0]); strip = fig.add_subplot(gs[1, 0], sharex=ax)
+# the strip below panel (a): the density of mu_theta at five positions, on the scale of the parameter x. The mean of mu_theta is
+# A0 + theta (A1 - A0), so the parameter axis and the position axis are aligned and each density stands below its position.
 to_u = lambda x: (x - A0) / (A1 - A0)
 SHOWN = (0.0, PRIOR, 0.42, 0.7, 1.0)
 peak = 1 / (S1 * np.sqrt(2 * np.pi))
@@ -99,19 +99,20 @@ for th in SHOWN:
     col = TEXT2 if abs(th - PRIOR) < 1e-9 else PAL[0]
     strip.fill_between(to_u(xs), 0, dens / peak, color=col, alpha=0.25, lw=0, clip_on=False)
     strip.plot(to_u(xs), dens / peak, color=col, lw=1.0, clip_on=False)
+    name = {0.0: "$\\mu_0$", PRIOR: "$\\Gamma$", 1.0: "$\\mu_1$"}.get(th, f"$\\mu_{{{th:g}}}$")
+    strip.text(th, S1 / sdev(th) + 0.18, name, ha="center", va="bottom", fontsize=FS, color=col, clip_on=False)
 strip.set_ylim(0, 1.0)
 for side in ("left", "right", "bottom"):
     strip.spines[side].set_visible(False)
-strip.spines["top"].set_visible(True); strip.spines["top"].set_position(("axes", 1.25)); strip.spines["top"].set_color(MUTED)
-strip.yaxis.set_visible(False); strip.tick_params(axis="x", bottom=False, labelbottom=False)
-sec = strip.secondary_xaxis(1.25, functions=(lambda u: A0 + u * (A1 - A0), to_u))
-sec.set_xticks([0, 10, 20]); sec.tick_params(labelsize=FS - 1, length=2, pad=1, colors=TEXT2); sec.spines["top"].set_color(MUTED)
-sec.set_xlabel("parameter $x$ (above each position: the density of $\\mu_\\vartheta$)", fontsize=FS - 1, color=TEXT2, labelpad=2)
+strip.grid(False); strip.yaxis.set_visible(False); strip.tick_params(axis="x", bottom=False, labelbottom=False)
+sec = strip.secondary_xaxis(-0.08, functions=(lambda u: A0 + u * (A1 - A0), to_u))
+sec.set_xticks([0, 10, 20]); sec.tick_params(labelsize=FS - 1, length=2, pad=1, colors=TEXT2); sec.spines["bottom"].set_color(MUTED)
+sec.set_xlabel("parameter $x$", fontsize=FS - 1, color=TEXT2, labelpad=2)
 ax.plot(TH, f - f.min(), color=TEXT2, lw=1.2, label="$-V_m(\\mu_\\vartheta)$")
 k0 = local_min(f); ax.plot(TH[k0], (f - f.min())[k0], marker="o", color=TEXT2, ms=3.5, ls="none")
 marked = {"0": dict(local_minimizers=[round(float(x), 3) for x in TH[k0]])}
-for mult, col, ls, lab in ((MODERATE, PAL[1], "--", f"$-V_m+\\kappa\\mathcal{{H}}$ at $\\kappa={MODERATE:g}\\,\\kappa_{{\\mathrm{{geo}}}}$, not convex, one minimizer"),
-                           (1.5, PAL[0], "-.", "$-V_m+\\kappa\\mathcal{H}$ at $\\kappa=1.5\\,\\kappa_{\\mathrm{geo}}$, convex")):
+for mult, col, ls, lab in ((MODERATE, PAL[1], "--", f"$-V_m+\\kappa\\mathcal{{H}}$, $\\kappa={MODERATE:g}\\,\\kappa_{{\\mathrm{{geo}}}}$: not convex,\none minimizer"),
+                           (1.5, PAL[0], "-.", "$-V_m+\\kappa\\mathcal{H}$, $\\kappa=1.5\\,\\kappa_{\\mathrm{geo}}$: convex")):
     y = f + mult * k_star * h
     ax.plot(TH, y - y.min(), color=col, lw=1.2, ls=ls, label=lab)
     k = local_min(y)
@@ -124,10 +125,10 @@ assert marked["1.5"]["convex"] and len(marked["1.5"]["local_minimizers"]) == 1 a
 ax.axvline(PRIOR, color=MUTED, lw=0.7, ls=":")
 YTOP = 1.6 * float((f - f.min()).max())
 ax.set_ylim(0, YTOP); ax.set_xlim(-0.08, 1.08); ax.text(PRIOR + 0.02, 0.92 * YTOP, "prior", fontsize=FS, color=TEXT2)
-ax.set_xticks([0.0, PRIOR, 0.5, 1.0]); ax.set_xticklabels(["$0$\n$\\mu_0$", "$0.15$\n$\\Gamma$", "$0.5$", "$1$\n$\\mu_1$"])
-ax.set_xlabel("position $\\vartheta$ on the geodesic $\\vartheta\\mapsto\\mu_\\vartheta$"); ax.set_ylabel("objective (shifted)")
-panel_label(strip, "(a)", y=0.2)
-ax = fig.add_subplot(gs[1, 1]); top = fig.add_subplot(gs[0, 1]); top.axis("off"); panel_label(top, "(b)", y=0.2)
+ax.set_xticks([0.0, PRIOR, 0.5, 1.0]); ax.set_xticklabels(["$0$", "$0.15$", "$0.5$", "$1$"])
+ax.set_xlabel("position $\\vartheta$ on the geodesic $\\vartheta\\mapsto\\mu_\\vartheta$", labelpad=2); ax.set_ylabel("objective (shifted)")
+panel_label(ax, "(a)")
+ax = fig.add_subplot(gs[0, 1]); panel_label(ax, "(b)")
 kappas = np.geomspace(1e-3 * k_star, 10 * k_star, 1600)
 mins = np.array([TH[int(np.argmin(f + k * h))] for k in kappas])
 ax.plot(kappas / k_star, mins, color=PAL[0])
@@ -142,7 +143,9 @@ ax.text(1.3e-3, float(TH[k0[0]]) + 0.025, "nearest well", fontsize=FS, color=TEX
 ax.text(1.3e-3, float(TH[np.argmin(f)]) + 0.025, "minimizer of $-V_m$", fontsize=FS, color=TEXT2, va="bottom")
 ax.set_xscale("log"); ax.set_ylim(0, 1.03)
 ax.set_xlabel("strength $\\kappa/\\kappa_{\\mathrm{geo}}$"); ax.set_ylabel("minimizing position $\\vartheta$")
-legend_below(fig, *fig.axes[0].get_legend_handles_labels(), ncol=1)
+# the legend of panel (a) stands under panel (b), beside the strip
+fig.canvas.draw(); box = ax.get_tightbbox(fig.canvas.get_renderer()).transformed(fig.transFigure.inverted())
+fig.legend(*fig.axes[0].get_legend_handles_labels(), loc="upper left", bbox_to_anchor=(box.x0 + 0.02, box.y0 - 0.03), ncol=1, frameon=False, fontsize=FS, handlelength=1.8)
 R = float(f.max() - f.min()); height = lambda i: round(float((f[i] - f.min()) / R), 3)
 at = lambda mult: int(np.argmin(f + mult * k_star * h))
 out = dict(feature="g * N(0, W^2), g(x) = BETA (1 + cos(OM0 (x - XC)))/2 + (1 - BETA) (1 - 2 frac((x - X1)/ELL))^2",
