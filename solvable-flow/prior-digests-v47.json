@@ -9,5 +9,23 @@
   "c": true
  },
  "plateau_V_m": -2.253269450469755,
- "optimum_V_m": -1.6382430075426535
+ "optimum_V_m": -1.6382430075426535,
+ "unregularized_transport_from_the_prior": {
+  "$N(0,1/4)$": {
+   "mass_outside_the_plateau": 0.0455,
+   "limit_V_m": -2.223
+  },
+  "$N(0,1)$": {
+   "mass_outside_the_plateau": 0.3173,
+   "limit_V_m": -2.0464
+  },
+  "$N(0,4)$": {
+   "mass_outside_the_plateau": 0.6171,
+   "limit_V_m": -1.8604
+  },
+  "$N(2,1)$": {
+   "mass_outside_the_plateau": 0.8427,
+   "limit_V_m": -1.7273
+  }
+ }
 }

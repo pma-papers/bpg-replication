@@ -9,7 +9,10 @@ initial law mu_0 stays, and the unregularized optimum of the class, which transp
 reach without regularization. Panels (a) and (c) are drawn by the revision-41 code unchanged; their data
 digests are checked against prior-digests-v41.json. The data are those of revision 41 (solvable-flow path
 and flow files, with the revision-41 rerun substituted for the one run that had not converged).
-Outputs: prior-v47.pdf/png, prior-digests-v47.json."""
+Outputs: prior-v47.pdf/png, prior-digests-v47.json.
+
+Revision 76: panel (b) has a column for the strength zero, with the limit of unregularized transport started from
+each prior (open markers), and the dashed line is labelled as the value of the initial law."""
 import json
 import sys
 from pathlib import Path
@@ -27,6 +30,7 @@ from plotstyle import PAL, TEXT2, MUTED, TEXTW, FS, MK, panel_label, legend_belo
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from digest_v41 import digest  # noqa: E402
+from scipy.stats import norm  # noqa: E402
 
 
 def main():
@@ -63,19 +67,30 @@ def main():
     ax.axhline(v_plateau, color=TEXT2, lw=0.9, ls="--")
     arrs = []
     x_star = K.max() * 2.2
+    x_zero = K.min() / 3.0                                    # the column of the strength zero (revision 76)
+    curve_c, curve_V = np.array(D["curve"]["c"]), np.array(D["curve"]["V_m"])
+    unregularized = {}
     for prior in m.PRIORS:
         rs = m.runs_of(prior)
         v = np.array([r["final"]["V_m"] for r in rs]); arrs.append(v)
         ax.plot(K, v, marker=PMK[prior], ms=3.5, mec="white", mew=0.4, color=m.COL[prior], lw=0.9, label=m.LAB[prior])
         ax.plot([x_star], [rs[0]["prior"]["V_m"]], marker="*", ms=8, mec="white", mew=0.5, color=m.COL[prior], ls="none")
+        # Revision 76: the limit of unregularized transport started from the prior. The clipped value increases in the
+        # tilt and the feature increases in |x| outside the plateau, so every unit there moves outward and its feature
+        # tends to one, while the units on the plateau do not move. The limiting tilt is the prior's mass outside it.
+        x0, sigma = prior
+        mass = float(norm.cdf(-1, x0, sigma) + norm.sf(1, x0, sigma))
+        unregularized[m.LAB[prior]] = dict(mass_outside_the_plateau=round(mass, 4), limit_V_m=round(float(np.interp(mass, curve_c, curve_V)), 4))
+        ax.plot([x_zero], [np.interp(mass, curve_c, curve_V)], marker=PMK[prior], ms=4, mfc="white", mec=m.COL[prior], mew=1.0, ls="none")
+    ax.axvline(np.sqrt(x_zero * K.min()), color=MUTED, lw=0.6, ls=":")
     digests["prior/b clipped value of the minimizers"] = digest(K, *arrs, [v_plateau, v_opt])
     ax.text(K.min(), v_opt + 0.012, "unregularized optimum", fontsize=FS, color=TEXT2, va="bottom")
-    ax.text(K.min(), v_plateau - 0.03, "plateau", fontsize=FS, color=TEXT2, va="top")
-    ax.set_xscale("log"); ax.set_xlim(K.min() / 1.6, x_star * 1.6)
+    ax.text(K.min(), v_plateau - 0.03, "initial law", fontsize=FS, color=TEXT2, va="top")
+    ax.set_xscale("log"); ax.set_xlim(x_zero / 1.7, x_star * 1.6)
     ax.set_ylim(v_plateau - 0.12, v_opt + 0.10)
-    ax.set_xticks([0.03, 0.1, 1, 10, x_star]); ax.set_xticklabels(["0.03", "0.1", "1", "10", "$\\star$"])
+    ax.set_xticks([x_zero, 0.1, 1, 10, x_star]); ax.set_xticklabels(["$0$", "0.1", "1", "10", "$\\star$"])
     ax.xaxis.set_minor_locator(plt.NullLocator())
-    ax.set_xlabel("$\\kappa$ ($\\star$: the prior policy)"); ax.set_ylabel("clipped value $V_m$ of the minimizer")
+    ax.set_xlabel("strength $\\kappa$"); ax.set_ylabel("clipped value $V_m$ of the minimizer")
     legend_below(fig, *ax.get_legend_handles_labels(), ncol=2, axes=[ax], title="prior", title_fontsize=FS)
     panel_label(ax, "b")
 
@@ -99,7 +114,8 @@ def main():
     check = {"a": digests["prior/a rate collapse"] == ref["prior/a rate collapse"]["after"],
              "c": digests["prior/c deviations"] == ref["prior/c deviations"]["after"]}
     (HERE / "prior-digests-v47.json").write_text(json.dumps(dict(digests=digests, equal_to_v41=check,
-                                                                 plateau_V_m=v_plateau, optimum_V_m=v_opt), indent=1) + "\n")
+                                                                 plateau_V_m=v_plateau, optimum_V_m=v_opt,
+                                                                 unregularized_transport_from_the_prior=unregularized), indent=1) + "\n")
     print("digests equal to v41:", check)
     assert all(check.values())
     for prior in m.PRIORS:
