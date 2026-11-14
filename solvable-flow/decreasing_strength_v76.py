@@ -59,10 +59,13 @@ def minimizer_values(sigma):
 
 
 def run(args):
-    kind, c, sigma, seed = args
+    kind, c, sigma, seed = args[:4]
     rng = np.random.default_rng(seed)
-    x = rng.standard_normal(12 * N)
-    x = x[np.abs(x) <= 0.5][:N]
+    if len(args) > 4:                                       # a Gaussian initial law N(0, args[4]^2), for initial_law_check_v76.py
+        x = args[4] * rng.standard_normal(N)
+    else:                                                   # the initial law of the paper: N(0,1) conditioned on [-1/2, 1/2]
+        x = rng.standard_normal(12 * N)
+        x = x[np.abs(x) <= 0.5][:N]
     target = minimizer_values(sigma)[STAGES[-1]] - WITHIN
     stage = len(STAGES) - 1 if kind == "fixed" else 0
     l, start, i = 0.0, 0.0, 0

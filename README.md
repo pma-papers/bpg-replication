@@ -44,13 +44,14 @@ each output corresponds to is named in the last column.
 | Roles of the regularizers on PPO under three optimizers, with the amendment's rows (2026-10-20, after revision 68) | `wear-allowance/analyze_optimizers_v68.py` (per-coordinate records: `coordinate_diagnostic_v68.py`, `constrained-rl-numerics`) | `constrained-rl` | no table of its own; `wear-allowance/REPORT-optimizers-v68.md`, `wear-allowance/wear-optimizers-v68.tex` |
 | Fuel tank: tables and figure | `fuel-tank/lunar_analyze_v41.py` | `constrained-rl` | `tables/fuel-tank`, `tables/fuel-tank-paired`, `tables/fuel-tank-price-risk`, `tables/fuel-tank-amount`, `figures/fuel-tank` |
 | Fuel tank: priced risk of the stored fixed-price policies (the exhaustion frames of a second evaluation on the same episodes; `priced-risk.json` in each run folder) | `fuel-tank/lunar_reeval.py` | `constrained-rl-numerics` | read by `lunar_analyze_v41.py` |
-| Solvable flow: convergence test | `solvable-flow/regularizer_figure_v46.py` | `constrained-rl` | `tables/flow-test`, `figures/flow-test` |
+| Solvable flow: convergence test | `solvable-flow/regularizer_figure_v76.py` (figures), `regularizer_figure_v46.py` (table) | `constrained-rl` | `tables/flow-test`, `figures/flow-test`, `figures/flow-test-below` |
 | Solvable flow: prior strength | `solvable-flow/prior_figure.py` | `constrained-rl` | `tables/prior-sweep`, `figures/prior-sweep` |
-| Solvable flow: regularization paths | `solvable-flow/prior_figure_v47.py`, `prior_path_table_v41.py` | `constrained-rl` | `figures/prior`, `tables/prior-paths` |
+| Solvable flow: regularization paths | `solvable-flow/prior_figure_v76.py`, `prior_path_table_v41.py` | `constrained-rl` | `figures/prior`, `tables/prior-paths` |
 | Solvable flow: particle system | `solvable-flow/particle_flow_v58.py`, `particle_table_v58.py` | `constrained-rl` | `figures/particle-flow`, `tables/particle-flow` |
 | Solvable flow: roles of the regularizers | `solvable-flow/roles_flow_v59.py`, `roles_table_v76.py` | `constrained-rl` | `figures/roles-flow`, `tables/roles-flow` |
 | Solvable flow: a strength lowered in steps | `solvable-flow/decreasing_strength_v76.py` | `constrained-rl` | `figures/decreasing-strength`, `tables/decreasing-strength` |
-| Solvable flow: unregularized transport from the prior | `solvable-flow/unregularized_from_prior_v76.py`, `prior_figure_v47.py` (open markers) | `constrained-rl` | `figures/prior` |
+| Solvable flow: the prior, the strength and a strength lowered in steps (figure of the paper) | `solvable-flow/prior_strength_figure_v76.py`, `unregularized_from_prior_v76.py` | `constrained-rl` | `figures/prior-strength` |
+| Solvable flow: the runs from a Gaussian initial law | `solvable-flow/initial_law_check_v76.py` | `constrained-rl` | numbers of Appendix D.3 |
 | Solvable flow: the bound of the corollary on the risk along the flow | `solvable-flow/corollary_bound_v60.py` | `constrained-rl` | `figures/corollary-bound` |
 | Benchmark suite: table and figure | `benchmark-suite/analyze_safety_v63.py` (writes to `output/`) | `constrained-rl` | `tables/safety`, `figures/safety` |
 | Illustrations of the theory (the logic of the clipped barrier, the identity on one path, the curvature budget along a geodesic of Gaussian laws) | `illustrations/introduction_schematic.py`, `running_example_figures.py`, `curvature_geodesic_v76.py` | `constrained-rl` | `figures/logic`, `identity`, `curvature` |

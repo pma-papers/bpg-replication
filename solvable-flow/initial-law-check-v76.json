@@ -1,0 +1,64 @@
+{
+ "gaussian_initial_standard_deviation": 0.25,
+ "units": 10000,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8
+ ],
+ "runs": {
+  "prior N(0,1), fixed, conditioned prior": {
+   "time_mean": 186.3,
+   "time_min": 180.3,
+   "time_max": 190.0,
+   "final_value": -1.7499
+  },
+  "prior N(0,1), fixed, Gaussian": {
+   "time_mean": 186.3,
+   "time_min": 180.8,
+   "time_max": 191.3,
+   "final_value": -1.7499
+  },
+  "prior N(0,1), rule, conditioned prior": {
+   "time_mean": 179.7,
+   "time_min": 168.0,
+   "time_max": 194.3,
+   "final_value": -1.7497
+  },
+  "prior N(0,1), rule, Gaussian": {
+   "time_mean": 177.4,
+   "time_min": 168.0,
+   "time_max": 189.8,
+   "final_value": -1.7497
+  },
+  "prior N(0,4), fixed, conditioned prior": {
+   "time_mean": 135.5,
+   "time_min": 132.4,
+   "time_max": 137.2,
+   "final_value": -1.6904
+  },
+  "prior N(0,4), fixed, Gaussian": {
+   "time_mean": 134.8,
+   "time_min": 131.6,
+   "time_max": 137.1,
+   "final_value": -1.6905
+  },
+  "prior N(0,4), rule, conditioned prior": {
+   "time_mean": 95.7,
+   "time_min": 92.0,
+   "time_max": 99.3,
+   "final_value": -1.6904
+  },
+  "prior N(0,4), rule, Gaussian": {
+   "time_mean": 96.2,
+   "time_min": 93.8,
+   "time_max": 98.9,
+   "final_value": -1.6904
+  }
+ }
+}

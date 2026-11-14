@@ -78,8 +78,10 @@ ax = axes[1]
 x = np.linspace(-4.5, 4.5, 1801)
 ax.plot(x, feature(x), color="k", lw=1.2, label="feature $\\varphi$")
 ax.plot(x, phi_gauss(x), color=MUTED, lw=1.0, ls="--", label="prior $N(0,1)$")
-p0 = np.where(np.abs(x) <= 0.5, phi_gauss(x), 0.0); p0 /= np.trapezoid(p0, x)
-ax.fill_between(x, 0, p0, color=MUTED, alpha=0.35, lw=0, label="initial law")
+# the plateau as a band, and the initial law by its support alone (the prior conditioned on [-1/2, 1/2]): its
+# density is a piece of the prior's and is not drawn
+ax.axvspan(-1.0, 1.0, color=MUTED, alpha=0.13, lw=0, label="plateau $|x|\\leq1$")
+ax.plot([-0.5, 0.5], [0.025, 0.025], color=TEXT2, lw=3.0, solid_capstyle="butt", label="support of the initial law")
 marks = [("initial law", 0.0, MUTED, "o"), ("prior", d["c_Gamma"], TEXT2, "D")]
 MIN = {}
 for kappa, col, mk, ls in KAPPAS:
