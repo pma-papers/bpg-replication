@@ -1,0 +1,33 @@
+--stage campaign --kappa2 10 --anchor-part dispersion --lr-schedule constant --seed 94001
+--stage campaign --kappa2 10 --anchor-part dispersion --lr-schedule constant --seed 94002
+--stage campaign --kappa2 100@0.0667,10@0.1333,1@0.2,0@1 --lr-schedule constant --steps 24000000 --eval-every 600000 --seed 94001
+--stage campaign --kappa2 100@0.0667,10@0.1333,1@0.2,0@1 --lr-schedule constant --steps 24000000 --eval-every 600000 --seed 94002
+--stage campaign --start default --eta 0.01 --lr-schedule linear --seed 92004
+--stage campaign --start default --eta 0.1 --lr-schedule linear --seed 92003
+--stage campaign --start default --eta 0.1 --lr-schedule linear --seed 92004
+--stage campaign --start default --eta 1 --lr-schedule linear --seed 92003
+--stage campaign --start default --eta 1 --lr-schedule linear --seed 92004
+--stage campaign --start default --eta 0.01 --lr-schedule constant --seed 92003
+--stage campaign --start default --eta 0.01 --lr-schedule constant --seed 92004
+--stage campaign --start default --eta 1@0.25,0.1@0.5,0.01@1 --lr-schedule constant --seed 92003
+--stage campaign --start default --eta 1@0.25,0.1@0.5,0.01@1 --lr-schedule constant --seed 92004
+--stage campaign --kappa2 10 --kappa1 0.009 --lr-schedule linear --seed 94003
+--stage campaign --kappa2 10 --kappa1 0.009 --lr-schedule linear --seed 94004
+--stage campaign --kappa2 10 --kappa1 0.101 --lr-schedule linear --seed 94003
+--stage campaign --kappa2 10 --kappa1 0.101 --lr-schedule linear --seed 94004
+--stage campaign --kappa2 10 --kappa1 0.101@0.5,0@1 --lr-schedule constant --seed 94003
+--stage campaign --kappa2 10 --kappa1 0.101@0.5,0@1 --lr-schedule constant --seed 94004
+--stage campaign --optimizer sgd --lr 0.001 --kappa2 10 --kappa1 0.101@0.5,0@1 --lr-schedule constant --seed 94003
+--stage campaign --optimizer sgd --lr 0.001 --kappa2 10 --kappa1 0.101@0.5,0@1 --lr-schedule constant --seed 94004
+--stage campaign --start default --m 0.1 --lr-schedule linear --seed 92001
+--stage campaign --start default --m 0.1 --lr-schedule linear --seed 92002
+--stage campaign --start default --m 0.1 --lr-schedule constant --seed 92001
+--stage campaign --start default --m 0.1 --lr-schedule constant --seed 92002
+--stage campaign --start default --m 1 --lr-schedule linear --seed 92001
+--stage campaign --start default --m 1 --lr-schedule linear --seed 92002
+--stage campaign --start default --m 1 --lr-schedule constant --seed 92001
+--stage campaign --start default --m 1 --lr-schedule constant --seed 92002
+--stage campaign --start default --m 10 --lr-schedule linear --seed 92001
+--stage campaign --start default --m 10 --lr-schedule linear --seed 92002
+--stage campaign --start default --m 10 --lr-schedule constant --seed 92001
+--stage campaign --start default --m 10 --lr-schedule constant --seed 92002
