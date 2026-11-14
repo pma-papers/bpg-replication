@@ -49,6 +49,8 @@ each output corresponds to is named in the last column.
 | Solvable flow: regularization paths | `solvable-flow/prior_figure_v47.py`, `prior_path_table_v41.py` | `constrained-rl` | `figures/prior`, `tables/prior-paths` |
 | Solvable flow: particle system | `solvable-flow/particle_flow_v58.py`, `particle_table_v58.py` | `constrained-rl` | `figures/particle-flow`, `tables/particle-flow` |
 | Solvable flow: roles of the regularizers | `solvable-flow/roles_flow_v59.py`, `roles_table_v76.py` | `constrained-rl` | `figures/roles-flow`, `tables/roles-flow` |
+| Solvable flow: a strength lowered in steps | `solvable-flow/decreasing_strength_v76.py` | `constrained-rl` | `figures/decreasing-strength`, `tables/decreasing-strength` |
+| Solvable flow: unregularized transport from the prior | `solvable-flow/unregularized_from_prior_v76.py`, `prior_figure_v47.py` (open markers) | `constrained-rl` | `figures/prior` |
 | Solvable flow: the bound of the corollary on the risk along the flow | `solvable-flow/corollary_bound_v60.py` | `constrained-rl` | `figures/corollary-bound` |
 | Benchmark suite: table and figure | `benchmark-suite/analyze_safety_v63.py` (writes to `output/`) | `constrained-rl` | `tables/safety`, `figures/safety` |
 | Illustrations of the theory (the logic of the clipped barrier, the identity on one path, the curvature budget along a geodesic of Gaussian laws) | `illustrations/introduction_schematic.py`, `running_example_figures.py`, `curvature_geodesic_v76.py` | `constrained-rl` | `figures/logic`, `identity`, `curvature` |

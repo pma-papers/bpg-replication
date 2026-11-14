@@ -16,7 +16,8 @@ MAP = {
     "wear-noise": "wear-allowance/wear-noise-v60.pdf", "fuel-tank": "fuel-tank/lunar-campaign-v41.pdf",
     "flow-test": "solvable-flow/regularizer-flow-v41.pdf", "prior": "solvable-flow/prior-v47.pdf",
     "prior-sweep": "solvable-flow/prior-flow.pdf", "particle-flow": "solvable-flow/particle-flow-v58.pdf",
-    "roles-flow": "solvable-flow/roles-flow-v59.pdf", "corollary-bound": "solvable-flow/corollary-bound-v60.pdf",
+    "roles-flow": "solvable-flow/roles-flow-v59.pdf", "decreasing-strength": "solvable-flow/decreasing-strength-v76.pdf",
+    "corollary-bound": "solvable-flow/corollary-bound-v60.pdf",
     "safety": "output/figures/safety.pdf",
     # figures added in revision 76 of the paper
     "wear-problem": "wear-allowance/wear-problem-v76.pdf", "fuel-tank-problem": "fuel-tank/lunar-problem-v76.pdf",
