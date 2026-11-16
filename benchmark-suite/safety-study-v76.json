@@ -1,0 +1,33 @@
+{
+ "study": "Benchmark-suite study, design of November 2026 (SafetyPointGoal1-v0). Runner: safety_study_v76.py. Design note of 16 November 2026. The stored runs of safety_pilot_v63.py and safety_ramp_v65.py are not touched.",
+ "learner": {
+  "name": "PPO (Stable-Baselines3 2.2.1)",
+  "n_envs": 8, "n_steps": 1024, "batch_size": 64, "n_epochs": 4, "learning_rate": 0.0003,
+  "gae_lambda": 0.95, "clip_range": 0.2, "ent_coef": 0.0, "max_grad_norm": 0.5, "net_arch": [64, 64]
+ },
+ "defaults": {
+  "price": "0", "lr_schedule": "constant", "eval_every": 1000000, "trace_eval_n": 200, "eval_n": 1000, "copy_every": 2000000
+ },
+ "stages": {
+  "smoke": {
+   "note": "Short runs that test the runner; no result of the study.",
+   "seeds": [95099],
+   "defaults": {"steps": 32768, "eval_every": 16384, "trace_eval_n": 16, "eval_n": 16, "copy_every": 16384},
+   "configurations": {
+    "no-price": {},
+    "price-0.08": {"price": "0.08", "init": {"stage": "smoke", "config": "no-price"}},
+    "price-0.08-anchor": {"price": "0.08", "kappa": "1@0.5,0.1@1", "init": {"stage": "smoke", "config": "no-price", "steps": 16384}},
+    "price-raised": {"price": "0.08", "price_ramp": 0.5, "init": {"stage": "smoke", "config": "no-price"}}
+   }
+  },
+  "pilot-no-price": {
+   "note": "Pilot, first part (16 November 2026). No price, from scratch, two seeds, 16 million steps, constant against linearly decayed learning rate. Questions: when the run levels off, what the controller without a price reaches, and which of the two learning-rate settings the study uses. The learner's settings are chosen on this stage alone.",
+   "seeds": [95001, 95002],
+   "defaults": {"steps": 16000000},
+   "configurations": {
+    "no-price-constant": {"lr_schedule": "constant"},
+    "no-price-decayed": {"lr_schedule": "linear"}
+   }
+  }
+ }
+}
