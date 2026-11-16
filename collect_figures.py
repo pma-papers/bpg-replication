@@ -21,7 +21,7 @@ MAP = {
     "corollary-bound": "solvable-flow/corollary-bound-v60.pdf",
     "safety": "output/figures/safety.pdf",
     # figures added in revision 76 of the paper
-    "wear-problem": "wear-allowance/wear-problem-v76.pdf", "fuel-tank-problem": "fuel-tank/lunar-problem-v76.pdf",
+    "wear-problem": "wear-allowance/wear-problem-v76.pdf", "fuel-tank-problem": "fuel-tank/lunar-flights-fuelprice-20-const.pdf",
     "fuel-tank-setup": "fuel-tank/lunar-setup-v76.pdf", "benchmark-problem": "benchmark-suite/safety-problem-v76.pdf",
     "example-setup": "solvable-flow/example-setup-v76.pdf", "price-geometry": "wear-allowance/price-geometry-v76.pdf",
     "failure-time-tail": "wear-allowance/failure-time-tail-v76.pdf", "validation-bounds": "wear-allowance/validation-bounds-v76.pdf",

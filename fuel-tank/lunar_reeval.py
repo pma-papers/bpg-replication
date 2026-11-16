@@ -73,7 +73,7 @@ def main():
         r = json.loads((d / "result.json").read_text())
         st = r["stochastic"]
         cf = bool(r["arm"].get("crash_fails", False))
-        options = dict(crash_fails=cf, tank_until_touchdown=bool(r["arm"].get("tank_until_touchdown", False)))
+        options = dict(crash_fails=cf, tank_until_touchdown=bool(r["arm"].get("tank_until_touchdown", False)), fuel_price=float(r["arm"].get("fuel_price", 1.0)))
         model = d / "final_model.zip" if (d / "final_model.zip").exists() else ROOT / r["model"]   # the controllers without a fuel limit are those of the stage campaign
         rec = evaluate(PPO.load(model, device="cpu"), r["arm"]["budget"], st["n"], st["seed"], **options)
         U = np.array([x[0] for x in rec])
