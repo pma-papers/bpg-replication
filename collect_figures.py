@@ -13,7 +13,7 @@ MAP = {
     "logic": "illustrations/logic.pdf", "identity": "illustrations/identity.pdf", "curvature": "illustrations/curvature-geodesic-v76.pdf",
     "wear-frontier": "wear-allowance/wear-frontier-v47.pdf", "parameter-anchor": "wear-allowance/wear-anchor-v47.pdf",
     "wear-multiplier": "wear-allowance/wear-dual-v47.pdf", "wear-margin": "wear-allowance/wear-margin-v41.pdf",
-    "wear-noise": "wear-allowance/wear-noise-v60.pdf", "fuel-tank": "fuel-tank/lunar-campaign-v41.pdf",
+    "fuel-tank": "fuel-tank/lunar-campaign-v41.pdf",
     "flow-test": "solvable-flow/regularizer-flow-v76.pdf", "prior": "solvable-flow/prior-v76.pdf",
     "flow-test-below": "solvable-flow/regularizer-flow-below-v76.pdf", "prior-strength": "solvable-flow/prior-strength-v76.pdf",
     "prior-sweep": "solvable-flow/prior-flow.pdf", "particle-flow": "solvable-flow/particle-flow-v58.pdf",
@@ -27,6 +27,10 @@ MAP = {
     "failure-time-tail": "wear-allowance/failure-time-tail-v76.pdf", "validation-bounds": "wear-allowance/validation-bounds-v76.pdf",
     "shadow-price-frontier": "illustrations/shadow-price-frontier-v76.pdf", "cvar-consumption": "illustrations/cvar-consumption-v76.pdf",
     "regularizer-geometry": "illustrations/regularizer-geometry-v76.pdf", "network-transfer": "illustrations/network-transfer-v76.pdf",
+    # convergence, strengths changed during training and the three optimizers on the wear-allowance example (revision 76)
+    "wear-optimizers": "wear-allowance/wear-optimizers-v76.pdf", "wear-anchor-traces": "wear-allowance/wear-anchor-traces-v76.pdf",
+    "wear-anchor-schedules": "wear-allowance/wear-anchor-schedules-v76.pdf", "wear-noise-traces": "wear-allowance/wear-noise-traces-v76.pdf",
+    "wear-action-kernel": "wear-allowance/wear-action-kernel-v76.pdf", "wear-price-traces": "wear-allowance/wear-price-traces-v76.pdf",
 }
 
 if __name__ == "__main__":
