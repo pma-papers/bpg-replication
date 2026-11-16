@@ -164,6 +164,59 @@
    "kind": "fixed",
    "m": 2.0,
    "budget": 20.0
+  },
+  "lunar-b24-m0.15": {
+   "kind": "fixed",
+   "m": 0.15,
+   "budget": 24.0
+  },
+  "lunar-b24-m2": {
+   "kind": "fixed",
+   "m": 2.0,
+   "budget": 24.0
+  },
+  "lunar-b24-m0.75": {
+   "kind": "fixed",
+   "m": 0.75,
+   "budget": 24.0
+  },
+  "lunar-b24-m1": {
+   "kind": "fixed",
+   "m": 1.0,
+   "budget": 24.0
+  },
+  "lunar-b24-m1.25": {
+   "kind": "fixed",
+   "m": 1.25,
+   "budget": 24.0
+  },
+  "lunar-b24-adaptive-a0.05-s5": {
+   "kind": "adaptive",
+   "alpha": 0.05,
+   "dual_step": 5.0,
+   "multiplier0": 0.0,
+   "budget": 24.0
+  },
+  "lunar-b24-adaptive-a0.02-s5": {
+   "kind": "adaptive",
+   "alpha": 0.02,
+   "dual_step": 5.0,
+   "multiplier0": 0.0,
+   "budget": 24.0
+  },
+  "lunar-b24-adaptive-a0.05-s20": {
+   "kind": "adaptive",
+   "alpha": 0.05,
+   "dual_step": 20.0,
+   "multiplier0": 0.0,
+   "budget": 24.0
+  },
+  "lunar-b24-adaptive-a0.02-s20": {
+   "kind": "adaptive",
+   "alpha": 0.02,
+   "dual_step": 20.0,
+   "multiplier0": 0.0,
+   "budget": 24.0
   }
  },
  "stages": {
@@ -321,6 +374,477 @@
     "ent_coef": 0.0,
     "gae_lambda": 0.95
    }
+  },
+  "crash-campaign": {
+   "steps": 5000000,
+   "warm_steps": 3000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": false,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true
+   },
+   "arms": [
+    "lunar-b22-m0",
+    "lunar-b22-m0.05",
+    "lunar-b22-m0.15",
+    "lunar-b22-m0.5",
+    "lunar-b22-m2",
+    "lunar-b22-adaptive-a0.05",
+    "lunar-b22-adaptive-a0.02",
+    "lunar-b21-m0",
+    "lunar-b21-m0.5",
+    "lunar-b22-adaptive-a0.05-s5",
+    "lunar-b22-adaptive-a0.02-s5",
+    "lunar-b20-m0",
+    "lunar-b20-m0.5",
+    "lunar-b21-m0.05",
+    "lunar-b21-m0.15",
+    "lunar-b21-m2",
+    "lunar-b20-m0.05",
+    "lunar-b20-m0.15",
+    "lunar-b20-m2",
+    "lunar-b23-m0",
+    "lunar-b23-m0.5",
+    "lunar-b24-m0",
+    "lunar-b24-m0.5"
+   ],
+   "note": "Added on 2026-11-14. The whole study is trained again under a revised failure. (1) The loss of the lander (a crash, or leaving the frame) is a failure and is charged like an empty tank (option crash_fails of lunar.py). Reason: in the stage campaign a price above about 0.17 makes an empty tank cost more than a crash (the charge is about 590 m, the native crash penalty is 100), and the returned policies exchange exhaustion for crashes; at the tank of 20 units and the price 0.5 the exhaustion frequency falls from 0.27 to 0.12 and the crash frequency rises from 0.07 to 0.25. (2) The tank can fail only before touchdown, the first frame at which a leg touches the ground; after it an empty tank switches the engines off and the episode continues to a landing or to the loss of the lander (option tank_until_touchdown). Reason: in the stage campaign a leg had touched the ground before the tank ran out in 71 percent of the exhausted episodes at the tank of 20 units without a price and in 97 percent at the price 0.5. All other settings are those of the stage campaign: the same 23 configurations and five seeds, continued training for warm_steps from the unconstrained controller of the same seed (stage campaign, trained on the native task and not trained again), the same learner settings, 1000 evaluation episodes. The adaptive configurations keep their tolerances and dual steps; their failure rate now includes the loss of the lander, which the unconstrained controllers incur in 2 to 6 percent of the episodes. The stage campaign is kept unchanged as a record. A first start of this stage on the same day with rule (1) alone was stopped after five runs, which are not kept."
+  },
+  "crash-pilot-norm": {
+   "steps": 5000000,
+   "warm_steps": 3000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true
+   },
+   "arms": [
+    "lunar-b20-m0",
+    "lunar-b20-m0.15",
+    "lunar-b20-m0.5",
+    "lunar-b20-m2"
+   ],
+   "note": "Tuning pilot of 2026-11-14 at the tank of 20 units, under the failure of the stage crash-campaign. Finding that led to it: with the learner settings of the stage campaign (rewards not normalized) the failure probability after 3 million steps rises with the price (0.16, 0.18, 0.22, 0.59 at the prices 0, 0.15, 0.5, 2). The training traces show a delay and not another optimum: every run starts at the failure rate 1, since the unconstrained controller empties the tank before touchdown, and the fall of the failure rate begins later the larger the charge (at the price 2 after 60 to 100 percent of the training), and no run has levelled off. This pilot changes one learner setting, the normalization of the rewards by a running estimate of the standard deviation of the return (VecNormalize of Stable-Baselines3, rewards only), so that the size of the charge does not set the size of the value targets. Everything else is as in the stage crash-campaign."
+  },
+  "sac-pilot": {
+   "steps": 500000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "learner": {
+    "algo": "sac",
+    "normalize": true
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true
+   },
+   "arms": [
+    "lunar-b20-m0",
+    "lunar-b20-m0.15",
+    "lunar-b20-m0.5",
+    "lunar-b20-m2"
+   ],
+   "note": "Pilot of 2026-11-14 at the tank of 20 units with another learner, the soft actor-critic of Stable-Baselines3, under the failure of the stage crash-campaign. Reason: with the proximal policy optimization of the stage campaign, continued from the unconstrained controller, every run starts at the failure rate 1 and has not levelled off after 3 million steps, so the outcomes compare learning speeds (stages crash-campaign and crash-pilot-norm at this tank). The soft actor-critic is trained from scratch for 500,000 steps under each configuration, with the discount of the study (0.999), rewards normalized, and otherwise the reference settings of the RL Baselines3 Zoo for this lander task (batch 256, buffer 10^6, tau 0.01, one gradient step per step, 10,000 steps before learning, networks 400-300, automatic entropy coefficient; learning rate 3e-4 constant). The paper's results do not depend on the learner, which enters only through the optimization error.",
+   "result_note": "Stopped after its first batch (no price and the price 0.5). From scratch the learner did not find the landing in 2 of 5 seeds without a price and in 3 of 5 at the price 0.5 (failure probabilities 0.98, 0.16, 0.99, 0.13, 0.19 and 0.99, 0.84, 0.96, 0.11, 0.21). Across all runs of the stages crash-campaign, crash-pilot-norm and sac-pilot at this tank the stopped utility falls with the failure probability (about 245 minus 150 times it): the task has no trade-off between utility and risk for a price to act on."
+  },
+  "fuelprice-pilot": {
+   "steps": 5000000,
+   "warm_steps": 3000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 5.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m2"
+   ],
+   "note": "Pilot of 2026-11-14: the utility charges 5 per unit of fuel in place of the native 1 (option fuel_price of lunar.py), at the tank of 24 units, under the failure of the stage crash-campaign, with the learner of the stage crash-pilot-norm (continued proximal policy optimization, rewards normalized). Reason: see the result note of the stage sac-pilot; with valuable fuel the utility rewards late braking and thin reserves, so there is a trade-off between utility and risk that a price on failure can act on. The tank of 24 units is chosen so that the starting controller does not fail in every episode.",
+   "result_note": "Failure probability 0.097, 0.077, 0.058, 0.046 at the prices 0, 0.15, 0.5, 2 (means over five seeds); landed 0.901, 0.921, 0.941, 0.952; median fuel 19.6, 19.9, 19.9, 21.1; stopped utility 162.5, 163.5, 166.2, 158.4. The order is as wanted in the means; per seed the failure probability falls in 2, 3 and 3 of 5 seeds, so the effect is of the size of the differences between seeds."
+  },
+  "fuelprice-pilot-8": {
+   "steps": 5000000,
+   "warm_steps": 3000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 8.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m2"
+   ],
+   "note": "As the stage fuelprice-pilot, with 8 per unit of fuel in the utility, to see whether a larger value of fuel makes the effect of the price larger than the differences between seeds.",
+   "result_note": "Failure probability 0.070, 0.095, 0.070, 0.094 at the prices 0, 0.15, 0.5, 2; median fuel 18.8, 18.9, 19.8, 20.4; stopped utility 116, 111, 109, 102. No fall of the failure probability."
+  },
+  "fuelprice-pilot-12": {
+   "steps": 5000000,
+   "warm_steps": 3000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 12.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m0.75",
+    "lunar-b24-m1",
+    "lunar-b24-m1.25",
+    "lunar-b24-m2"
+   ],
+   "note": "As the stage fuelprice-pilot, with 12 per unit of fuel in the utility, to see whether a larger value of fuel makes the effect of the price larger than the differences between seeds.",
+   "result_note": "Failure probability 0.177, 0.110, 0.065, 0.127 at the prices 0, 0.15, 0.5, 2 (it falls in 4, 5 and 3 of 5 seeds); landed 0.821, 0.886, 0.932, 0.870; median fuel 18.1, 19.1, 19.8, 20.4; stopped utility 35.9, 35.3, 35.4, 20.9. One seed (72003) learns slowly at every price and ends at 0.43 at the price 2; several runs have not levelled off.",
+   "grid_note": "The prices 0.75, 1 and 1.25 were added on 2026-11-14 to fill the range between 0.5 and 2; the price 2 may be dropped from the final design if its large charge keeps disturbing the learner."
+  },
+  "fuelprice-12-long": {
+   "steps": 5000000,
+   "warm_steps": 9000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 12.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m2"
+   ],
+   "note": "As the stage fuelprice-pilot-12 (12 per unit of fuel in the utility, tank 24), with three times the training (9 million steps), to see the outcomes after the runs have levelled off.",
+   "result_note": "Failure probability 0.067, 0.030, 0.025, 0.013 at the prices 0, 0.15, 0.5, 2 (it falls in 4, 5 and 5 of 5 seeds); landed 0.931, 0.969, 0.975, 0.987; median fuel 18.1, 18.1, 18.7, 20.3; stopped utility 55.3, 64.3, 58.3, 40.6. The priced runs have levelled off; without a price two seeds (72003, 72005) are still improving at the end, which is why the utility without a price is below that at the price 0.15. The price 2 trains without trouble at this length."
+  },
+  "fuelprice-pilot-16": {
+   "steps": 5000000,
+   "warm_steps": 3000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 16.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m0.75",
+    "lunar-b24-m1",
+    "lunar-b24-m1.25",
+    "lunar-b24-m2"
+   ],
+   "note": "As the stage fuelprice-pilot, with 16 per unit of fuel in the utility. At this value a landing with about 18 units of fuel costs about as much as the landing is worth, so that without a price the utility may prefer to give up the lander.",
+   "grid_note": "The prices 0.75, 1 and 1.25 were added on 2026-11-14 to fill the range between 0.5 and 2; the price 2 may be dropped from the final design if its large charge keeps disturbing the learner.",
+   "result_note": "Failure probability 0.251, 0.175, 0.136, 0.087, 0.171, 0.070, 0.079 at the prices 0, 0.15, 0.5, 0.75, 1, 1.25, 2 (medians over seeds 0.224, 0.129, 0.067, 0.063, 0.061, 0.061, 0.053; it falls in 3, 4, 5, 4, 5, 5 of 5 seeds); median fuel 18.1, 19.3, 20.6, 20.9, 20.7, 20.0, 20.2; stopped utility -39, -47, -56, -53, -65, -43, -49. Seed 72003 learns slowly (0.64 at the price 1)."
+  },
+  "fuelprice-pilot-20": {
+   "steps": 5000000,
+   "warm_steps": 3000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 20.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m0.75",
+    "lunar-b24-m1",
+    "lunar-b24-m1.25",
+    "lunar-b24-m2"
+   ],
+   "note": "As the stage fuelprice-pilot, with 20 per unit of fuel in the utility. At this value a landing with about 18 units of fuel costs about as much as the landing is worth, so that without a price the utility may prefer to give up the lander.",
+   "grid_note": "The prices 0.75, 1 and 1.25 were added on 2026-11-14 to fill the range between 0.5 and 2; the price 2 may be dropped from the final design if its large charge keeps disturbing the learner.",
+   "result_note": "Failure probability 0.543, 0.241, 0.166, 0.232, 0.113, 0.043, 0.062 at the prices 0, 0.15, 0.5, 0.75, 1, 1.25, 2 (medians over seeds 0.594, 0.255, 0.122, 0.109, 0.061, 0.046, 0.047; it falls in 5, 5, 4, 5, 5, 5 of 5 seeds); median fuel 15.9, 18.6, 20.6, 20.3, 21.1, 20.0, 19.6; stopped utility -117, -111, -131, -144, -139, -111, -110. Seed 72003 learns slowly (0.81 at the price 0.75)."
+  },
+  "fuelprice-20-long": {
+   "steps": 5000000,
+   "warm_steps": 15000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 20.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m0.75",
+    "lunar-b24-m1",
+    "lunar-b24-m1.25",
+    "lunar-b24-m2"
+   ],
+   "note": "The design with 20 per unit of fuel in the utility (tank 24, failure of the stage crash-campaign, continued proximal policy optimization with normalized rewards), all seven prices, trained for 15 million steps so that the runs level off (the stage fuelprice-12-long showed that 9 million steps settle the priced runs and not yet all runs without a price).",
+   "result_note": "Failure probability 0.359, 0.050, 0.032, 0.021, 0.021, 0.015, 0.012 at the prices 0, 0.15, 0.5, 0.75, 1, 1.25, 2 (it falls in 5 of 5 seeds at every price); landed 0.640, 0.950, 0.968, 0.978, 0.978, 0.984, 0.987; median fuel 14.4, 17.2, 17.8, 18.1, 17.9, 18.8, 18.5; stopped utility -63.4, -58.5, -67.7, -74.9, -69.2, -88.7, -78.8. No tank runs empty before touchdown. The training failure rate is flat over the last three tenths of the training at every price. Without a price the seeds end at 0.09, 0.05, 0.47, 0.34, 0.85 with utilities between -53 and -78: at this value of fuel landing and giving up the lander are worth about the same."
+  },
+  "fuelprice-20-const": {
+   "steps": 5000000,
+   "warm_steps": 15000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": false
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 20.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.5",
+    "lunar-b24-m2"
+   ],
+   "note": "Convergence check of the stage fuelprice-20-long (2026-11-16): the same design at the prices 0, 0.5 and 2 with a constant learning rate (3e-4) in place of the rate decayed linearly to zero. A flat end of a trace under a decaying learning rate does not show convergence, since the decay stops a run in any case; the outcomes under a constant rate show whether the levels of the stage depend on the schedule."
+  },
+  "fuelprice-20-30m": {
+   "steps": 5000000,
+   "warm_steps": 30000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 20.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.5",
+    "lunar-b24-m2"
+   ],
+   "note": "Convergence check of the stage fuelprice-20-long (2026-11-16): the same design at the prices 0, 0.5 and 2 with twice the training (30 million steps)."
+  },
+  "fuelprice-20-adaptive": {
+   "steps": 5000000,
+   "warm_steps": 15000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 20.0
+   },
+   "arms": [
+    "lunar-b24-adaptive-a0.05-s5",
+    "lunar-b24-adaptive-a0.02-s5",
+    "lunar-b24-adaptive-a0.05-s20",
+    "lunar-b24-adaptive-a0.02-s20"
+   ],
+   "note": "The adaptive multiplier in the design of the stage fuelprice-20-long (2026-11-16): the failing frame receives minus the multiplier, which is raised after every rollout by the dual step times the excess of the rollout's failure rate over the tolerance. Tolerances 0.05 and 0.02, attained in the stage fuelprice-20-long at the fixed prices 0.15 and 0.75 to 1 (charges of about 88 and 440 to 590). Dual steps 5 and 20. At the start the continued controller fails in 40 to 100 percent of the episodes, so the multiplier rises fast in the first rollouts and falls only slowly afterwards, by the step times the small shortfall below the tolerance."
+  },
+  "fuelprice-12-grid-long": {
+   "steps": 5000000,
+   "warm_steps": 15000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 12.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m0.75",
+    "lunar-b24-m1",
+    "lunar-b24-m1.25",
+    "lunar-b24-m2"
+   ],
+   "note": "The design with 12 per unit of fuel in the utility, all seven prices, 15 million steps: the milder case next to the stage fuelprice-20-long, for the Online Resource."
   }
  }
 }

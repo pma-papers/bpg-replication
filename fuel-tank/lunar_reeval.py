@@ -8,7 +8,9 @@ number of episodes of its result.json, and writes priced-risk.json next to it: t
 risk, and the exhaustion probability and stopped utility of the new evaluation. The run stops if these two do not
 equal the stored values, so the priced risk belongs to the same thousand episodes as the stored record.
 
-Usage:  python lunar_reeval.py [--shard i/n] [--force]        (runtime: the constrained-rl-numerics environment)
+Usage:  python lunar_reeval.py [--stage campaign] [--shard i/n] [--force]        (runtime: the constrained-rl-numerics environment)
+With --stage crash-campaign (2026-11-14) the failure is that of the stage, an empty tank before touchdown or the loss of the lander,
+and the record also holds the frequencies of the two kinds of failure.
 About six seconds per policy. Shards split the runs for parallel processes, for example
     for i in 0 1 2 3 4; do python lunar_reeval.py --shard $i/5 & done; wait
 """
@@ -31,9 +33,9 @@ from stable_baselines3.common.vec_env import DummyVecEnv  # noqa: E402
 BETA, H, N_ENVS = 0.999, lunar.H, 32
 
 
-def evaluate(model, budget, n, seed):
+def evaluate(model, budget, n, seed, **options):
     """The episodes of lunar.py's evaluation of a stochastic policy, with the frame at which each one ended."""
-    envs = DummyVecEnv([lambda: lunar.FuelLander(budget, "failure", 0.0, BETA) for _ in range(N_ENVS)])
+    envs = DummyVecEnv([lambda: lunar.FuelLander(budget, "failure", 0.0, BETA, **options) for _ in range(N_ENVS)])
     envs.seed(seed)
     torch.manual_seed(seed)
     obs = envs.reset()
@@ -48,7 +50,7 @@ def evaluate(model, budget, n, seed):
             a["t"] += 1
             if dones[i]:
                 if done < n:
-                    rec.append((a["U"], a["t"], bool(infos[i]["failure"]), bool(infos[i]["landed"]), bool(infos[i]["crashed"])))
+                    rec.append((a["U"], a["t"], bool(infos[i]["failure"]), bool(infos[i]["landed"]), bool(infos[i]["crashed"]), bool(infos[i]["exhausted"]), bool(infos[i]["lost"])))
                 done += 1
                 acc[i] = dict(U=0.0, t=0)
     envs.close()
@@ -58,10 +60,11 @@ def evaluate(model, budget, n, seed):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--shard", default="0/1")
+    ap.add_argument("--stage", default="campaign")
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
     i, n = (int(x) for x in args.shard.split("/"))
-    folders = sorted(p.parent for p in (ROOT / "lunar" / "campaign").glob("*/result.json"))
+    folders = sorted(p.parent for p in (ROOT / "lunar" / args.stage).glob("*/result.json"))
     fixed = [d for d in folders if json.loads((d / "result.json").read_text())["arm"]["kind"] == "fixed"]
     for d in fixed[i::n]:
         out = d / "priced-risk.json"
@@ -69,17 +72,24 @@ def main():
             continue
         r = json.loads((d / "result.json").read_text())
         st = r["stochastic"]
-        rec = evaluate(PPO.load(d / "final_model.zip", device="cpu"), r["arm"]["budget"], st["n"], st["seed"])
+        cf = bool(r["arm"].get("crash_fails", False))
+        options = dict(crash_fails=cf, tank_until_touchdown=bool(r["arm"].get("tank_until_touchdown", False)))
+        model = d / "final_model.zip" if (d / "final_model.zip").exists() else ROOT / r["model"]   # the controllers without a fuel limit are those of the stage campaign
+        rec = evaluate(PPO.load(model, device="cpu"), r["arm"]["budget"], st["n"], st["seed"], **options)
         U = np.array([x[0] for x in rec])
         failed = np.array([x[2] for x in rec])
-        frames = np.array([x[1] - 1 for x in rec])[failed]          # index of the exhausting frame
+        frames = np.array([x[1] - 1 for x in rec])[failed]          # index of the failing frame
         risk, Umean = float(failed.mean()), float(U.mean())
         if abs(risk - st["risk"]) > 1e-12 or abs(Umean - st["U"]) > 1e-6:
             raise SystemExit(f"{d.name}: the new evaluation gives risk {risk} and U {Umean}, the record has {st['risk']} and {st['U']}")
         q = float((BETA ** frames * (1 - BETA ** (H - frames))).sum() / len(rec))
-        out.write_text(json.dumps(dict(run=d.name, n=len(rec), evaluation_seed=st["seed"], beta=BETA, H=H, risk=risk, U=Umean,
-                                       priced_risk=q, exhaustion_frames=[int(t) for t in frames],
-                                       landed=float(np.mean([x[3] for x in rec])), crashed=float(np.mean([x[4] for x in rec]))), indent=1) + "\n")
+        record = dict(run=d.name, n=len(rec), evaluation_seed=st["seed"], beta=BETA, H=H, risk=risk, U=Umean,
+                      priced_risk=q, exhaustion_frames=[int(t) for t in frames],
+                      landed=float(np.mean([x[3] for x in rec])), crashed=float(np.mean([x[4] for x in rec])))
+        if cf:                                                      # the frames are those of either failure; the key keeps its name
+            record.update(exhausted=float(np.mean([x[5] for x in rec])), lost=float(np.mean([x[6] for x in rec])),
+                          failure_is_exhaustion=[bool(x[5]) for x in rec if x[2]])
+        out.write_text(json.dumps(record, indent=1) + "\n")
         print(f"{d.name}: risk {risk:.3f}  U {Umean:.2f}  priced risk {q:.4f}", flush=True)
 
 

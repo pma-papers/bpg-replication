@@ -11,6 +11,29 @@ Failure-only price m: the failing frame receives -m (1 - beta^(H - t)) / (1 - be
 discounted tail of a per-frame penalty m until the physical horizon H = 1000.
 Adaptive arm: the failing frame receives -lambda with lambda updated by dual ascent.
 Observation: the eight native coordinates and the remaining fuel fraction.
+
+Option crash_fails (added on 2026-11-14, stage crash-campaign; off in all earlier stages): the loss of the lander
+is a failure as well. The lander is lost when it crashes or leaves the frame, the two events that end a native
+episode with the reward -100. The frame of the loss then receives the same charge as the frame at which the tank
+runs out, in place of the native reward, and its utility is zero, so the two failures are treated alike. Without
+the option a price above about 0.17 makes an empty tank cost more than a crash, and the learner trades the one
+for the other (see the note of the stage crash-campaign in lunar-protocol.json).
+
+Option tank_until_touchdown (added on 2026-11-14, stage crash-campaign; off in all earlier stages): the tank can
+fail only before touchdown, the first frame at which a leg of the lander touches the ground. From then on an empty
+tank is not a failure: the engines are off once the tank is empty, and the episode continues to its native end,
+a landing or the loss of the lander. Without the option most failures of the stage campaign are landers that have
+touched down and are still firing to come to rest.
+
+Option fuel_price (added on 2026-11-14, pilot stage fuelprice-pilot; 1 in all other stages): the utility charges
+fuel_price per unit of fuel in place of the native 1. Reason: under the revised failure the native utility and
+safety point the same way (a failed episode forgoes the landing bonus, which is worth far more than the fuel a
+risky descent saves), so a price on failure has nothing to trade against. A higher value of fuel gives the
+utility a reason to take risk, to brake late and land with thin reserves, which the price then counters.
+
+Learner (added on 2026-11-14): a stage may name another learner in its entry "learner". With algo "sac" the policy
+is trained from scratch by the soft actor-critic of Stable-Baselines3, with the discount of the study. The price
+enters through the reward alone, so the task, the failure and the evaluation are the same for every learner.
 """
 from __future__ import annotations
 
@@ -28,7 +51,7 @@ ROOT = Path(__file__).resolve().parent
 import gymnasium as gym
 import numpy as np
 import torch
-from stable_baselines3 import PPO
+from stable_baselines3 import PPO, SAC
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv, VecNormalize
 
@@ -46,8 +69,9 @@ def fuel_use(action):
 class FuelLander(gym.Env):
     metadata = {"render_modes": []}
 
-    def __init__(self, budget, objective="failure", m=0.0, beta=0.999, multiplier=0.0):
+    def __init__(self, budget, objective="failure", m=0.0, beta=0.999, multiplier=0.0, crash_fails=False, tank_until_touchdown=False, fuel_price=1.0):
         super().__init__()
+        self.crash_fails, self.tank_until_touchdown, self.fuel_price = bool(crash_fails), bool(tank_until_touchdown), float(fuel_price)
         self.inner = gym.make("LunarLanderContinuous-v3")
         self.budget, self.objective, self.m, self.beta = float(budget), objective, float(m), beta
         self.multiplier = float(multiplier)
@@ -66,15 +90,27 @@ class FuelLander(gym.Env):
         super().reset(seed=seed)
         o, info = self.inner.reset(seed=seed)
         self.reserve, self.t, self.used = self.budget, 0, 0.0
+        self.touched = False                         # whether a leg has touched the ground in an earlier frame
         return self._obs(o), info
 
     def step(self, action):
+        after_touchdown = self.tank_until_touchdown and self.touched
+        if after_touchdown and self.reserve <= 0.0:
+            action = np.array([-1.0, 0.0], dtype=np.float32)      # the tank is empty: both engines are off
         o, r, terminated, truncated, info = self.inner.step(action)
         g = fuel_use(action)
-        utility = float(r)                          # native reward, fuel charge included
+        if after_touchdown:
+            g = min(g, max(self.reserve, 0.0))      # the last frame of thrust uses what is left
+        utility = float(r) - (self.fuel_price - 1.0) * g      # native reward, with fuel charged at fuel_price per unit (native: 1)
         self.reserve -= g
         self.used += g
-        failed = self.reserve < 0.0
+        exhausted = self.reserve < 0.0 and not after_touchdown
+        self.touched = self.touched or bool(o[6] > 0.5 or o[7] > 0.5)
+        core = self.inner.unwrapped
+        crashed = bool(terminated and not exhausted and core.game_over)
+        landed = bool(terminated and not exhausted and not core.game_over and not core.lander.awake)
+        lost = bool(terminated and not exhausted and not landed)          # crashed, or left the frame
+        failed = exhausted or (self.crash_fails and lost)
         if failed:
             if self.objective == "chance":
                 reward = -self.multiplier
@@ -85,19 +121,20 @@ class FuelLander(gym.Env):
         else:
             reward = utility
         self.t += 1
-        core = self.inner.unwrapped
-        landed = bool(terminated and not failed and not core.game_over and not core.lander.awake)
-        crashed = bool(terminated and not failed and core.game_over)
-        info = dict(fuel=g, failure=bool(failed), utility=utility, landed=landed, crashed=crashed, used=self.used)
+        info = dict(fuel=g, failure=bool(failed), utility=utility, landed=landed, crashed=crashed, used=self.used,
+                    exhausted=bool(exhausted), lost=lost, touched=self.touched, empty=bool(self.reserve <= 0.0))
         if terminated or truncated:
             info["episode_failed"] = bool(failed)
         return self._obs(o), float(reward), bool(terminated), bool(truncated), info
 
 
 class Control(BaseCallback):
-    def __init__(self, arm):
+    def __init__(self, arm, every=None, log=None):
         super().__init__(verbose=0)
         self.arm = arm
+        self.every, self.last = every, 0             # a learner with short rollouts records and updates every `every` steps
+        self.log = log                               # file that receives each record of the trace as it is made
+        self.ends = dict(landed=0, exhausted=0, lost=0)
         self.multiplier = float(arm.get("multiplier0", 0.0))
         self.episodes = self.failures = 0
         self.trace = []
@@ -107,26 +144,39 @@ class Control(BaseCallback):
             if "episode_failed" in info:
                 self.episodes += 1
                 self.failures += int(info["episode_failed"])
+                for k in self.ends:
+                    self.ends[k] += int(info[k])
         return True
 
     def _on_rollout_end(self):
+        if self.every is not None:
+            if self.num_timesteps - self.last < self.every:
+                return
+            self.last = self.num_timesteps
         rate = self.failures / self.episodes if self.episodes else float("nan")
         if self.arm["kind"] == "adaptive" and self.episodes:
             self.multiplier = max(0.0, self.multiplier + self.arm["dual_step"] * (rate - self.arm["alpha"]))
             self.training_env.env_method("set_multiplier", self.multiplier)
-        self.trace.append(dict(steps=int(self.num_timesteps), multiplier=self.multiplier, episodes=self.episodes, failure_rate=rate))
+        record = dict(steps=int(self.num_timesteps), multiplier=self.multiplier, episodes=self.episodes, failure_rate=rate,
+                      **{k: (v / self.episodes if self.episodes else float("nan")) for k, v in self.ends.items()})
+        self.trace.append(record)
+        if self.log is not None:
+            with open(self.log, "a") as fh:
+                fh.write(json.dumps(record) + "\n")
         self.episodes = self.failures = 0
+        self.ends = dict(landed=0, exhausted=0, lost=0)
 
 
-def evaluate(sb3, budget, beta, *, n, seed, n_envs=32, deterministic=False):
-    """n independent episodes; failure = fuel exhausted; utility discounted by beta."""
-    envs = DummyVecEnv([lambda i=i: FuelLander(budget, "failure", 0.0, beta) for i in range(n_envs)])
+def evaluate(sb3, budget, beta, *, n, seed, n_envs=32, deterministic=False, crash_fails=False, tank_until_touchdown=False, fuel_price=1.0):
+    """n independent episodes; failure = fuel exhausted (with crash_fails: or the lander lost; with tank_until_touchdown:
+    exhausted before touchdown); utility discounted by beta."""
+    envs = DummyVecEnv([lambda i=i: FuelLander(budget, "failure", 0.0, beta, crash_fails=crash_fails, tank_until_touchdown=tank_until_touchdown, fuel_price=fuel_price) for i in range(n_envs)])
     envs.seed(seed)
     torch.manual_seed(seed)
     obs = envs.reset()
     done_count = 0
     records = []
-    acc = [dict(U=0.0, t=0, failed=False, landed=False, used=0.0, crashed=False) for _ in range(n_envs)]
+    acc = [dict(U=0.0, t=0, failed=False, landed=False, used=0.0, crashed=False, exhausted=False, lost=False, empty=False) for _ in range(n_envs)]
     while done_count < n:
         act, _ = sb3.predict(obs, deterministic=deterministic)
         obs, rew, dones, infos = envs.step(act)
@@ -136,16 +186,19 @@ def evaluate(sb3, budget, beta, *, n, seed, n_envs=32, deterministic=False):
             a["t"] += 1
             if dones[i]:
                 a["failed"] = infos[i]["failure"]; a["landed"] = infos[i]["landed"]; a["used"] = infos[i]["used"]
-                a["crashed"] = infos[i]["crashed"]
+                a["crashed"] = infos[i]["crashed"]; a["exhausted"] = infos[i]["exhausted"]; a["lost"] = infos[i]["lost"]; a["empty"] = infos[i]["empty"]
                 if done_count < n:
                     records.append(a)
                 done_count += 1
-                acc[i] = dict(U=0.0, t=0, failed=False, landed=False, used=0.0, crashed=False)
+                acc[i] = dict(U=0.0, t=0, failed=False, landed=False, used=0.0, crashed=False, exhausted=False, lost=False, empty=False)
     envs.close()
     fail = np.array([r["failed"] for r in records]); land = np.array([r["landed"] for r in records])
     used = np.array([r["used"] for r in records]); U = np.array([r["U"] for r in records]); T = np.array([r["t"] for r in records])
     return dict(n=n, seed=seed, deterministic=deterministic, risk=float(fail.mean()), failures=int(fail.sum()),
                 landed=float(land.mean()), crashed=float(np.mean([r["crashed"] for r in records])),
+                exhausted=float(np.mean([r["exhausted"] for r in records])), lost=float(np.mean([r["lost"] for r in records])),
+                landed_empty=float(np.mean([r["landed"] and r["empty"] for r in records])),      # landed with the tank empty at the end
+                lost_empty=float(np.mean([r["lost"] and r["empty"] for r in records])),
                 U=float(U.mean()), U_se=float(U.std(ddof=1) / np.sqrt(n)), length=float(T.mean()),
                 fuel_quantiles=np.quantile(used, [0.1, 0.25, 0.5, 0.75, 0.9]).tolist())
 
@@ -154,22 +207,32 @@ def run(arm, seed, steps, out, eval_n, hp, init=None):
     """init: path of a saved model to continue from (the unconstrained lander of the same seed);
     the learning-rate schedule restarts, the tank, price and objective are those of `arm`."""
     budget, beta = arm["budget"], arm.get("beta", 0.999)
+    cf = dict(crash_fails=bool(arm.get("crash_fails", False)), tank_until_touchdown=bool(arm.get("tank_until_touchdown", False)), fuel_price=float(arm.get("fuel_price", 1.0)))
     objective = {"fixed": "failure", "adaptive": "chance"}[arm["kind"]]
-    n_envs = hp.get("n_envs", 16)
-    venv = SubprocVecEnv([lambda: FuelLander(budget, objective, arm.get("m", 0.0), beta, arm.get("multiplier0", 0.0)) for _ in range(n_envs)]) \
-        if hp.get("subproc", False) else DummyVecEnv([lambda: FuelLander(budget, objective, arm.get("m", 0.0), beta, arm.get("multiplier0", 0.0)) for _ in range(n_envs)])
+    algo = hp.get("algo", "ppo")
+    n_envs = hp.get("n_envs", 16 if algo == "ppo" else 1)
+    venv = SubprocVecEnv([lambda: FuelLander(budget, objective, arm.get("m", 0.0), beta, arm.get("multiplier0", 0.0), **cf) for _ in range(n_envs)]) \
+        if hp.get("subproc", False) else DummyVecEnv([lambda: FuelLander(budget, objective, arm.get("m", 0.0), beta, arm.get("multiplier0", 0.0), **cf) for _ in range(n_envs)])
     venv.seed(seed)
     if hp.get("normalize", True):
         venv = VecNormalize(venv, norm_obs=False, norm_reward=True, clip_reward=1e9, gamma=beta)
     lr = (lambda p: 3e-4 * p) if hp.get("lr_linear", True) else 3e-4
-    if init is None:
+    if algo == "sac":
+        assert init is None, "the soft actor-critic is trained from scratch"
+        sb3 = SAC("MlpPolicy", venv, seed=seed, gamma=beta, learning_rate=hp.get("learning_rate", 3e-4), buffer_size=hp.get("buffer_size", 1_000_000),
+                  batch_size=hp.get("batch_size", 256), tau=hp.get("tau", 0.01), train_freq=hp.get("train_freq", 1), gradient_steps=hp.get("gradient_steps", 1),
+                  learning_starts=hp.get("learning_starts", 10_000), ent_coef="auto", policy_kwargs=dict(net_arch=hp.get("net_arch", [400, 300])),
+                  device="cpu", verbose=0)
+    elif init is None:
         sb3 = PPO("MlpPolicy", venv, seed=seed, n_steps=hp.get("n_steps", 1024), batch_size=hp.get("batch_size", 64),
                   n_epochs=hp.get("n_epochs", 4), learning_rate=lr,
                   gamma=beta, gae_lambda=hp.get("gae_lambda", 0.98), clip_range=0.2, ent_coef=hp.get("ent_coef", 0.01),
                   max_grad_norm=0.5, policy_kwargs=dict(net_arch=[64, 64]), device="cpu", verbose=0)
     else:
         sb3 = PPO.load(init, env=venv, device="cpu", seed=seed, custom_objects=dict(learning_rate=lr))
-    control = Control(arm)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "progress.jsonl").unlink(missing_ok=True)
+    control = Control(arm, every=hp.get("trace_every", 10_000) if algo == "sac" else None, log=out / "progress.jsonl")
     t0 = time.monotonic()
     sb3.learn(total_timesteps=steps, callback=control, reset_num_timesteps=True)
     train_wall = time.monotonic() - t0
@@ -178,8 +241,8 @@ def run(arm, seed, steps, out, eval_n, hp, init=None):
     t1 = time.monotonic()
     result = dict(arm=arm, seed=seed, steps=int(sb3.num_timesteps), train_wall=train_wall, trace=control.trace,
                   final_multiplier=control.multiplier,
-                  stochastic=evaluate(sb3, budget, beta, n=eval_n, seed=10_000 + seed),
-                  mean_action=evaluate(sb3, budget, beta, n=eval_n, seed=20_000 + seed, deterministic=True))
+                  stochastic=evaluate(sb3, budget, beta, n=eval_n, seed=10_000 + seed, **cf),
+                  mean_action=evaluate(sb3, budget, beta, n=eval_n, seed=20_000 + seed, deterministic=True, **cf))
     result["eval_wall"] = time.monotonic() - t1
     (out / "result.json").write_text(json.dumps(result, indent=1) + "\n")
     return result
@@ -191,15 +254,16 @@ if __name__ == "__main__":
     ap.add_argument("--init", default=None, help="model to continue from; default from the stage's warm_from entry")
     args = ap.parse_args()
     protocol = json.loads((ROOT / "lunar-protocol.json").read_text())
-    arm, stage = protocol["arms"][args.arm], protocol["stages"][args.stage]
+    stage = protocol["stages"][args.stage]
+    arm = {**protocol["arms"][args.arm], **stage.get("arm_overrides", {})}      # a stage may set options for all its arms
     out = ROOT / "lunar" / args.stage / f"{args.arm}__seed{args.seed}"
     if (out / "result.json").exists():
         print("exists", out.name); sys.exit(0)
     init = args.init
     if init is None and stage.get("warm_from") and arm.get("warm", True) and args.arm != stage["warm_from"]:
-        init = str(ROOT / "lunar" / args.stage / f"{stage['warm_from']}__seed{args.seed}" / "final_model.zip")
+        init = str(ROOT / "lunar" / stage.get("warm_stage", args.stage) / f"{stage['warm_from']}__seed{args.seed}" / "final_model.zip")
     steps = stage["warm_steps"] if init else stage["steps"]
-    r = run(arm, args.seed, steps, out, stage["eval_n"], stage.get("ppo", {}), init=init)
+    r = run(arm, args.seed, steps, out, stage["eval_n"], stage.get("learner", stage.get("ppo", {})), init=init)
     r["init"] = init
     (out / "result.json").write_text(json.dumps(r, indent=1) + "\n")
     s = r["stochastic"]
