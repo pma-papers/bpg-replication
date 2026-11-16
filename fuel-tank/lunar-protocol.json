@@ -906,6 +906,39 @@
     "lunar-b24-m2"
    ],
    "note": "Final phase of the final design (2026-11-16): every run of the stage fuelprice-20-const is continued for 5 million steps with the learning rate decayed linearly from 3e-4 to zero. The constant rate lets the runs without a price reach the policies that give up the lander, and the decay at the end removes the movement of the policy that a constant rate leaves. The learning rate of the final design is thus constant for 15 million steps and then decayed to zero over 5 million."
+  },
+  "fuelprice-20-adaptive-anneal": {
+   "steps": 5000000,
+   "warm_steps": 5000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "@same",
+   "warm_stage": "fuelprice-20-adaptive",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": true
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 20.0
+   },
+   "arms": [
+    "lunar-b24-adaptive-a0.05-s5",
+    "lunar-b24-adaptive-a0.02-s5",
+    "lunar-b24-adaptive-a0.05-s20",
+    "lunar-b24-adaptive-a0.02-s20"
+   ],
+   "note": "Final phase of the adaptive configurations of the final design (2026-11-16): every run of the stage fuelprice-20-adaptive is continued for 5 million steps with the learning rate decayed linearly from 3e-4 to zero and the multiplier held at the value at which that run ended, so that every run of the study has the same learning-rate schedule. The multiplier is not updated in this phase, since a policy that no longer moves cannot answer it.",
+   "hold_multiplier": true
   }
  }
 }

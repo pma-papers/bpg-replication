@@ -262,6 +262,9 @@ if __name__ == "__main__":
     init = args.init
     if init is None and stage.get("warm_from") == "@same":      # continue the run of the same configuration and seed in another stage
         init = str(ROOT / "lunar" / stage["warm_stage"] / f"{args.arm}__seed{args.seed}" / "final_model.zip")
+        if arm["kind"] == "adaptive" and stage.get("hold_multiplier", False):      # the multiplier keeps the value at which that run ended
+            prev = json.loads((ROOT / "lunar" / stage["warm_stage"] / f"{args.arm}__seed{args.seed}" / "result.json").read_text())
+            arm = {**arm, "multiplier0": prev["final_multiplier"], "dual_step": 0.0}
     elif init is None and stage.get("warm_from") and arm.get("warm", True) and args.arm != stage["warm_from"]:
         init = str(ROOT / "lunar" / stage.get("warm_stage", args.stage) / f"{stage['warm_from']}__seed{args.seed}" / "final_model.zip")
     steps = stage["warm_steps"] if init else stage["steps"]

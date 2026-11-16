@@ -10,8 +10,9 @@ seeds; the fall of the failure probability against the run without a price, seed
 priced-risk.json of lunar_reeval.py --stage STAGE exist, the priced risk q_{beta,H}, the frames of the failures and
 the value U - m' q_{beta,H}/(1-beta) of every trained policy at every price m'), lunar-STAGE-table.tex,
 lunar-STAGE-values.tex (the values, one row per training price), and lunar-STAGE (pdf/png) with three panels:
-(a) the failure probability against the price, (b) the median fuel use against the price, (c) the stopped utility
-against the failure probability.
+the failure probability (a), the median fuel use (b) and the stopped utility (c) against the price, with the seeds
+as small markers and their means as large markers (the third panel showed the utility against the failure probability
+until 16 November 2026, which nine prices made unreadable).
 """
 import json
 import sys
@@ -83,29 +84,17 @@ for m in prices:
                 + (f"${c['priced_risk']['mean']:.4f}$ & " if "priced_risk" in c else "-- & ") +
                 f"${c['fuel_median']['mean']:.1f}$ & ${c['U']['mean']:.0f}\\pm{c['U']['sd']:.0f}$ & " + (f"${c['fall_of_failure_against_no_price']['seeds_with_a_fall']}/{len(seeds)}$" if m > 0 else "--") + " \\\\")
 (ROOT / f"lunar-{stage}-table.tex").write_text(
-    "\\begin{tabular}{lrrrrrrrr}\n\\toprule\nPrice $m$ & failed (\\%) & lander lost (\\%) & tank empty (\\%) & landed (\\%) & $q_{\\beta,H}$ & fuel & $U$ & fell \\\\\n\\midrule\n" + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n")
+    "\\begin{tabular}{lrrrrrrrr}\n\\toprule\nPrice $m$ & Failed (\\%) & Lander lost (\\%) & Tank empty (\\%) & Landed (\\%) & $q_{\\beta,H}$ & Fuel & $U_H$ & Fell \\\\\n\\midrule\n" + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n")
 
-fig, axes = plt.subplots(1, 3, figsize=(TEXTW, 2.35), gridspec_kw=dict(wspace=0.62))
+fig, axes = plt.subplots(1, 3, figsize=(TEXTW, 2.25), gridspec_kw=dict(wspace=0.62))
 xs = np.arange(len(prices))
-for ax, key, lab, scale in ((axes[0], "risk", "failure probability", 1.0), (axes[1], "fuel_median", "median fuel use", 1.0)):
+for ax, key, lab, tag in ((axes[0], "risk", "failure probability", "a"), (axes[1], "fuel_median", "median fuel use", "b"), (axes[2], "U", "stopped utility $U_H$", "c")):
     for i, m in enumerate(prices):
-        c = C[f"{m:g}"][key]
-        ax.plot([i] * len(seeds), c["per_seed"], marker="o", ms=2.6, color=MUTED, ls="none", zorder=2)
+        ax.plot([i] * len(seeds), C[f"{m:g}"][key]["per_seed"], marker="o", ms=2.6, color=MUTED, ls="none", zorder=2)
     ax.plot(xs, [C[f"{m:g}"][key]["mean"] for m in prices], marker="D", ms=4.5, mec="white", mew=0.6, color=PAL[0], lw=1.0, zorder=3)
-    ax.set_xticks(xs); ax.set_xticklabels([f"{m:g}" for m in prices], fontsize=FS - 2, rotation=45)
-    ax.set_xlabel("price $m$"); ax.set_ylabel(lab)
-axes[0].set_yscale("log"); axes[0].set_yticks([0.01, 0.03, 0.1, 0.3, 1.0]); axes[0].set_yticklabels(["1%", "3%", "10%", "30%", "100%"]); axes[0].set_ylim(0.004, 1.0)
-panel_label(axes[0], "a"); panel_label(axes[1], "b")
-ax = axes[2]
-for m in prices:
-    c = C[f"{m:g}"]
-    ax.plot(c["risk"]["per_seed"], c["U"]["per_seed"], marker="o", ms=2.6, color=MUTED, ls="none", zorder=2)
-ax.plot([C[f"{m:g}"]["risk"]["mean"] for m in prices], [C[f"{m:g}"]["U"]["mean"] for m in prices], marker="D", ms=4.5, mec="white", mew=0.6, color=PAL[0], lw=0.8, zorder=3)
-for m in prices:
-    c = C[f"{m:g}"]
-    ax.annotate(f"{m:g}", (c["risk"]["mean"], c["U"]["mean"]), textcoords="offset points", xytext=(-5, -2) if 0 < m else (5, 3), ha="right" if 0 < m else "left", va="center", fontsize=FS - 2, color=TEXT2)
-ax.set_xscale("log"); ax.set_xticks([0.01, 0.03, 0.1, 0.3, 1.0]); ax.set_xticklabels(["1%", "3%", "10%", "30%", "100%"], fontsize=FS - 2); ax.set_xlim(0.004, 1.0)
-ax.set_xlabel("failure probability"); ax.set_ylabel("stopped utility $U$"); panel_label(ax, "c")
+    ax.set_xticks(xs); ax.set_xticklabels([f"{m:g}" for m in prices], fontsize=FS - 2, rotation=60)
+    ax.set_xlabel("price $m$"); ax.set_ylabel(lab); panel_label(ax, tag)
+axes[0].set_yscale("log"); axes[0].set_yticks([0.01, 0.03, 0.1, 0.3, 1.0]); axes[0].set_yticklabels(["1%", "3%", "10%", "30%", "100%"]); axes[0].set_ylim(0.004, 1.2); axes[0].minorticks_off()
 save(fig, f"lunar-{stage}", ROOT)
 print(f"{stage}: tank {summary['tank']:g}, {summary['steps']} steps, options {summary['options']}")
 for m in prices:

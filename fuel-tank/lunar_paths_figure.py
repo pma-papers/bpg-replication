@@ -88,7 +88,7 @@ for i, ax in enumerate(axes.ravel()[:len(panels)]):                       # a pa
     if i + ncol >= len(panels) and i // ncol < nrow - 1:
         ax.tick_params(labelbottom=True); ax.set_xlabel("horizontal position")
 handles = [Line2D([], [], color="k", lw=2.5, label="landing pad")] + [Line2D([], [], color=END_COL[e], marker=END_MK[e], mfc="white", mew=1.1, lw=0.9, ms=4.5, label=END_LAB[e]) for e in ENDS]
-fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 0.02 if nrow > 1 else -0.08), ncol=4, frameon=False, fontsize=FS - 1, columnspacing=1.0, handletextpad=0.5)
+fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, (-0.03 if EACH else 0.02) if nrow > 1 else -0.08), ncol=4, frameon=False, fontsize=FS - 1, columnspacing=1.0, handletextpad=0.5)
 assert name != f"lunar-paths-{stage}", "the output name must differ from the file of the recorded flights"
 (ROOT / f"{name}-numbers.json").write_text(json.dumps(out, indent=1) + "\n")
 save(fig, name, ROOT)
