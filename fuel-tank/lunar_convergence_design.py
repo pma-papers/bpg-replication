@@ -96,10 +96,13 @@ for ax, m, tag in zip(np.atleast_1d(axes), prices, "abcdef"):
     else:
         ax.set_yscale("log"); ax.set_ylim(0.008, 1.2); ax.set_yticks([0.01, 0.03, 0.1, 0.3, 1.0]); ax.set_yticklabels(["1%", "3%", "10%", "30%", "100%"])
         ax.minorticks_off()
-        if len(prices) > 2 and m != min(x for x in prices if x > 0):
-            ax.set_yticklabels([])                                                  # the priced panels share the axis of the first of them
+        if len(prices) > 2:                                                         # the priced panels share one axis, labelled at the right of the last of them
+            if m == prices[-1]:
+                ax.yaxis.tick_right(); ax.tick_params(axis="y", right=True, left=False)
+            else:
+                ax.set_yticklabels([])
     ax.set_xlim(0, total[longer] / 1e6); ax.set_xticks(np.arange(0, total[longer] / 1e6 + 1, 5 if len(prices) <= 2 else 10))
-    ax.set_xlabel("training steps ($10^6$)")
+    ax.set_xlabel("training steps ($10^6$)" if len(prices) <= 2 else "steps ($10^6$)")
     ax.text(0.5, 1.03, "no price" if m == 0 else f"price $m={m:g}$", transform=ax.transAxes, ha="center", va="bottom", fontsize=FS)
     panel_label(ax, tag)
 np.atleast_1d(axes)[0].set_ylabel("failure rate in training")
