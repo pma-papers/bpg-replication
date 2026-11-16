@@ -205,6 +205,8 @@ def table(summary, inc=None):
         st = setting(s["cfg"])
         if kind == "fixed" and s["cfg"]["m"] == 0.1:
             st += "\\textsuperscript{$\\dagger$}"
+        if kind == "anchored" and s["cfg"]["eta"] == 0.01:   # revision 76: breakdown probability not converged (convergence check of 14 November 2026)
+            st += "\\textsuperscript{\\S}"
         A = f"${s['A_mean']:.3g}$" if "A_mean" in s else "--"
         bound = f"${100*s['bound_mean']:.1f}$" if "bound_mean" in s else "--"
         lines.append(f"{st} & ${100*s['q_mean']:.2f}\\pm{100*s['q_sd']:.2f}$ & {bound} & ${s['U_mean']:.2f}\\pm{s['U_sd']:.2f}$ & "
@@ -214,7 +216,9 @@ def table(summary, inc=None):
         lines += ["\\midrule", f"Incumbent rule & ${100*inc['q']:.2f}$ & -- & ${inc['U']:.2f}$ & -- & -- & -- & -- & -- & $0$ \\\\"]
     note = ("\\multicolumn{10}{@{}p{\\linewidth}@{}}{\\textsuperscript{$\\dagger$}three seeds remained at the optimum without a price ($q_\\beta=0.59$), "
             "four reached $0.11$ to $0.17$ and one $0.33$; the mean is of a two-cluster sample. "
-            "\\textsuperscript{$\\ddagger$}dual step $1$ instead of $5$.} \\\\")
+            "\\textsuperscript{$\\ddagger$}dual step $1$ instead of $5$. "
+            "\\textsuperscript{\\S}the breakdown probability differs between the seeds, from $2.9$ to $8.6$ percent, and was still falling when training ended; "
+            "the action kernel that maximizes the same objective over all kernels has $1.36$ percent.} \\\\")
     (ROOT / "wear-campaign-table-v41.tex").write_text(
         "\\setlength{\\tabcolsep}{2.5pt}\\begin{tabular}{@{}lrrrrrrrrr@{}}\n\\toprule\n"
         "Setting & $q_\\beta$ & bound & $U$ & $\\mathcal I_m$ & gap & pass & near & at $0.9b$ & $\\mathcal A$ \\\\\n\\midrule\n"
