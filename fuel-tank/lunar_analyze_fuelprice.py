@@ -30,9 +30,11 @@ runs = {}
 for f in sorted((ROOT / "lunar" / stage).glob("*/result.json")):
     r = json.loads(f.read_text())
     runs.setdefault(r["arm"]["m"], {})[r["seed"]] = r
-prices = sorted(runs)
 seeds = sorted(runs[0.0])
-assert all(sorted(runs[m]) == seeds for m in prices), "every price needs the same seeds"
+incomplete = [m for m in sorted(runs) if sorted(runs[m]) != seeds]
+prices = [m for m in sorted(runs) if m not in incomplete]            # a price enters when all its seeds have finished
+if incomplete:
+    print("prices left out, not all seeds finished:", incomplete)
 FIELDS = ("risk", "exhausted", "lost", "landed", "U")
 summary = dict(stage=stage, options=protocol["stages"][stage]["arm_overrides"], tank=runs[0.0][seeds[0]]["arm"]["budget"], steps=runs[0.0][seeds[0]]["steps"], seeds=seeds, prices=prices, configurations={})
 for m in prices:

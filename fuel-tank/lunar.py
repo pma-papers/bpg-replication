@@ -260,7 +260,9 @@ if __name__ == "__main__":
     if (out / "result.json").exists():
         print("exists", out.name); sys.exit(0)
     init = args.init
-    if init is None and stage.get("warm_from") and arm.get("warm", True) and args.arm != stage["warm_from"]:
+    if init is None and stage.get("warm_from") == "@same":      # continue the run of the same configuration and seed in another stage
+        init = str(ROOT / "lunar" / stage["warm_stage"] / f"{args.arm}__seed{args.seed}" / "final_model.zip")
+    elif init is None and stage.get("warm_from") and arm.get("warm", True) and args.arm != stage["warm_from"]:
         init = str(ROOT / "lunar" / stage.get("warm_stage", args.stage) / f"{stage['warm_from']}__seed{args.seed}" / "final_model.zip")
     steps = stage["warm_steps"] if init else stage["steps"]
     r = run(arm, args.seed, steps, out, stage["eval_n"], stage.get("learner", stage.get("ppo", {})), init=init)

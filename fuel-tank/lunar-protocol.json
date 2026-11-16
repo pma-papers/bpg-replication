@@ -767,7 +767,8 @@
    ],
    "note": "Convergence check of the stage fuelprice-20-long (2026-11-16): the same design at the prices 0, 0.5 and 2 with a constant learning rate (3e-4) in place of the rate decayed linearly to zero. A flat end of a trace under a decaying learning rate does not show convergence, since the decay stops a run in any case; the outcomes under a constant rate show whether the levels of the stage depend on the schedule. From 2026-11-16 this stage, with all seven prices, is the final design; the stage fuelprice-20-long is its comparison under the decayed rate.",
    "result_note": "First three prices (2026-11-16): with a price the outcomes equal those under the decayed rate (failure probability 0.030 against 0.032 at the price 0.5, 0.021 against 0.012 at the price 2; median fuel 17.6 against 17.8 and 18.5 against 18.5; stopped utility -68 against -68 and -83 against -79). Without a price they do not: failure probability 0.715 against 0.359, median fuel 6.2 against 14.4, stopped utility -38 against -63. Two seeds end at failure probability 1 with half a unit of fuel and utilities -15 and -11, far above the utility of the policies that land (-53 to -64). The runs without a price under the decayed rate had been stopped by the decay; at 20 per unit of fuel the utility is highest when the lander is given up. The constant rate is therefore the learner setting of the final design, and the other four prices are added to this stage.",
-   "grid_note": "The prices 0.05 and 0.1 were added on 2026-11-16, after the runs without a price under the constant learning rate gave up the lander: their charges at the failing frame are about 30 and 59, and the utility of giving up the lander exceeds that of landing by about 40 to 50, so the change from giving up to landing is expected between them."
+   "grid_note": "The prices 0.05 and 0.1 were added on 2026-11-16, after the runs without a price under the constant learning rate gave up the lander: their charges at the failing frame are about 30 and 59, and the utility of giving up the lander exceeds that of landing by about 40 to 50, so the change from giving up to landing is expected between them.",
+   "result_note_all_prices": "Seven prices (2026-11-16): failure probability 0.715, 0.071, 0.030, 0.036, 0.040, 0.045, 0.021 at the prices 0, 0.15, 0.5, 0.75, 1, 1.25, 2 (it falls in 5 of 5 seeds at every price); median fuel 6.2, 17.1, 17.6, 18.0, 17.9, 18.5, 18.5; stopped utility -38.4, -64.5, -68.0, -71.8, -74.5, -81.9, -83.1. The utility falls at every step. Among the prices the failure probabilities differ by less than their spread over the seeds (1 to 4 percentage points), which is larger than under the decayed rate, since under a constant rate the policy keeps moving."
   },
   "fuelprice-20-adaptive": {
    "steps": 5000000,
@@ -862,9 +863,49 @@
    },
    "arms": [
     "lunar-b24-m0",
+    "lunar-b24-m0.05",
+    "lunar-b24-m0.1",
     "lunar-b24-m0.5"
    ],
-   "note": "Convergence check of the final design (2026-11-16): the prices 0 and 0.5 under the constant learning rate with twice the training (30 million steps), to see where the runs without a price end."
+   "note": "Convergence check of the final design (2026-11-16): the prices 0, 0.05, 0.1 and 0.5 under the constant learning rate with twice the training (30 million steps), to see where the runs without a price end and whether the runs at the two smallest prices, at which giving up the lander has about the value of landing, stay with the policies that land. The prices 0.05 and 0.1 were added in the evening of 16 November.",
+   "result_note": "No price: failed 77.5 % [100, 3.9, 100, 98.7, 85.1], utility -27; four of the five seeds end near giving up the lander, one stays with landing. Price 0.5: failed 2.4 % [2.1, 2.1, 2.2, 4.3, 1.5], fuel 17.4, utility -59, against 2.5 %, 17.2 and -58 in the design. The traces contain those of fuelprice-20-const (same seeds)."
+  },
+  "fuelprice-20-anneal": {
+   "steps": 5000000,
+   "warm_steps": 5000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "@same",
+   "warm_stage": "fuelprice-20-const",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": true
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 20.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.05",
+    "lunar-b24-m0.1",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m0.75",
+    "lunar-b24-m1",
+    "lunar-b24-m1.25",
+    "lunar-b24-m2"
+   ],
+   "note": "Final phase of the final design (2026-11-16): every run of the stage fuelprice-20-const is continued for 5 million steps with the learning rate decayed linearly from 3e-4 to zero. The constant rate lets the runs without a price reach the policies that give up the lander, and the decay at the end removes the movement of the policy that a constant rate leaves. The learning rate of the final design is thus constant for 15 million steps and then decayed to zero over 5 million."
   }
  }
 }
