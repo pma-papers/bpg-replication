@@ -139,9 +139,12 @@ repository as in [`CITATION.cff`](CITATION.cff). The repository is archived on Z
 
 ## Observations of the paper and the protocols
 
-The paper reports its findings as observations, labelled (O1)–(O24) in the order of its experiments (the labels of
-revision 75 since 9 November 2026, when the check of noise and drift on the analytical example (the solvable flow) joined the other checks on that
-flow: the former (O15) is now (O13), and the former (O13) and (O14) are (O14) and (O15)). An observation that a result of the paper implies names that result. Where the result's conditions
+The paper reports its findings as observations, labelled (O1)–(O26) in the order of its experiments. These are the
+labels of revision 76 since 16 November 2026. Against the release of revision 75, which had (O1)–(O24), revision 76
+adds (O13), on a regularization strength lowered in steps on the analytical example, and (O17), on the anchor
+strength changed in steps on the learned controller, and it rewrites the observations on noise and the anchor,
+now (O18)–(O21), around the three ways of taking the optimizer step. The former (O13)–(O15) are (O14)–(O16), and
+the former (O20)–(O24), on the benchmark-suite study, are (O22)–(O26). An observation that a result of the paper implies names that result. Where the result's conditions
 hold in the experiment, as for the bounds and rates computed on the exact benchmark and on the analytical example, the
 observation shows the slack of the bound. Where the result needs an assumption about the learner, such as a small
 optimization error, the observation names that assumption. The table gives, for each observation, the protocol
@@ -161,20 +164,24 @@ statement that covered the same finding.
 | (O10) | none (the analytical example has no protocol file) | none |
 | (O11) | none (the analytical example has no protocol file) | none |
 | (O12) | none (the analytical example has no protocol file) | none |
-| (O13) | none | none |
-| (O14) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P12') and (P12'') |
-| (O15) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P13') |
-| (O16) | `wear-allowance/PROTOCOL-noise-v60.md` | (R1), the same quantity |
-| (O17) | `wear-allowance/PROTOCOL-noise-v60.md` | (R2), the same quantity |
-| (O18) | `wear-allowance/PROTOCOL-noise-v60.md` | (R3), the same quantity |
-| (O19) | none | none |
-| (O20) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S1) |
-| (O21) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S4), the certificates |
-| (O22) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S2) |
-| (O23) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S5) |
-| (O24) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S4), the pass pattern |
+| (O13) | none (the analytical example has no protocol file) | none; formulated after the runs |
+| (O14) | none | none |
+| (O15) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P12') and (P12'') |
+| (O16) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P13') |
+| (O17) | none (the runs of `wear-allowance/wear_schedules_v76.py`) | none; formulated after the runs |
+| (O18) | `wear-allowance/PROTOCOL-noise-v60.md`, `wear-allowance/PROTOCOL-optimizers-v68.md`, `wear-allowance/PROTOCOL-decoupled-v68.md` | (R1), (E2)–(E4), (D1) and (D2), the same quantity |
+| (O19) | the same three files | (R2), (E5) and (D4), the same quantity; none for the runs with the noise removed during training (`wear-allowance/wear_schedules_v76.py`) |
+| (O20) | `wear-allowance/PROTOCOL-optimizers-v68.md`, `wear-allowance/PROTOCOL-decoupled-v68.md` | (E5), reported without a numerical statement, and (D3), which concerns the spread in the same runs |
+| (O21) | `wear-allowance/PROTOCOL-noise-v60.md` | (R3), the same quantity; the runs under the two other ways of taking the step are in `wear-allowance/REPORT-optimizers-v68.md` |
+| (O22) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S1) |
+| (O23) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S4), the certificates |
+| (O24) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S2) |
+| (O25) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S5) |
+| (O26) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S4), the pass pattern |
 
 Two statements whose premises did not arise appear in the paper as one unlabelled sentence each: the fuel-tank
 statement on a tank the controller cannot respect, and (S3) of the benchmark-suite protocol. (R4) of
 `wear-allowance/PROTOCOL-noise-v60.md` and (R1)–(R4) of `benchmark-suite/PROTOCOL-ramp-v65.md` do not appear in the
-paper. The observations (O16)–(O18) report what the runs showed, not the protocol's statements.
+paper. The observations (O18)–(O21) report what the runs showed, not the protocol's statements, and the paper
+says that all four were formulated after the runs. The protocol and report files keep the observation labels of
+the revision in which they were written.
