@@ -22,7 +22,7 @@ from plotstyle import PAL, TEXT2, FS, TEXTW, plt  # noqa: E402
 
 BETA = 0.95
 bench = json.load(open(HERE / "benchmark.json"))
-ex = {(r["kind"], r["m"]): r["nominal"] for r in bench["rows"]}
+ex = {(r["kind"], r["m"]): r["nominal"] for r in bench["rows"] if r["kind"] == "failure" or (r["kind"] == "barrier" and r["theta"] == 0.1)}   # the barrier of the study has the scale 0.1
 soft = {s["eta"]: s for s in json.load(open(HERE / "soft-benchmark-v76.json"))["rows"]} if (HERE / "soft-benchmark-v76.json").exists() else {}
 g = defaultdict(list)
 for f in sorted(glob.glob(str(HERE / "campaign/*/result.json"))):
@@ -50,7 +50,7 @@ for ax, (key, title) in zip(axes.ravel(), ORDER):
     if arm["kind"] in ("fixed", "barrier"):
         e = ex[("failure" if arm["kind"] == "fixed" else "barrier", m)]
         ref, ref_label = 100 * e["risk"], "exact optimum"
-        Jex = e["U"] - m * e["risk"] / (1 - BETA) if arm["kind"] == "fixed" else None      # the barrier objective is not recomputed here
+        Jex = e["U"] - m * e["risk"] / (1 - BETA) - (e["I"] if arm["kind"] == "barrier" else 0.0)
     elif arm["kind"] == "adaptive":
         ref, ref_label = 100 * arm["alpha"], "tolerance"
     elif arm["eta"] in soft:

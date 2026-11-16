@@ -26,7 +26,7 @@ from plotstyle import PAL, MK, MUTED, TEXT2, FS, TEXTW, legend_below, panel_labe
 
 BETA, M0, D = 0.95, 0.03, 4418
 bench = json.load(open(HERE / "benchmark.json"))
-EX = {(r["kind"], r["m"]): r["nominal"] for r in bench["rows"]}
+EX = {(r["kind"], r["m"]): r["nominal"] for r in bench["rows"] if r["kind"] == "failure" or (r["kind"] == "barrier" and r["theta"] == 0.1)}   # the study's barrier has the scale 0.1
 exact = EX[("failure", M0)]
 soft = json.load(open(HERE / "soft-benchmark-v76.json"))["rows"]
 SOFT = {s["eta"]: s for s in soft}
@@ -350,6 +350,14 @@ for ax, (key, title) in zip(axes.ravel(), PANELS):
         tex.append("\\addlinespace")
     tex.append(f"{title} & ${ref_q:.2f}$ & {pm(q)} & ${Jex:.2f}$ & {pm(J)} & ${Jex - J.min():.2f}$ \\\\")
     out["own_price"][key] = dict(reference_q=ref_q, q=q.tolist(), J_reference=Jex, J=J.tolist(), shortfall_mean=float(Jex - J.mean()), shortfall_max=float(Jex - J.min()))
+    if key == "fixed-m10":                              # the two configurations with the interior barrier, whose objective contains the interior loss
+        tex.append("\\addlinespace")
+        for bkey, btitle in [("barrier-m1", "Barrier, $m=1$"), ("barrier-m3", "Barrier, $m=3$")]:
+            brs = g[bkey]; bm = brs[0]["arm"]["m"]; bref = EX[("barrier", bm)]
+            bJex = bref["U"] - bref["I"] - bm * bref["risk"] / (1 - BETA)
+            bJ = np.array([r["stochastic"]["U"] - r["stochastic"]["I"] - bm * r["stochastic"]["risk"] / (1 - BETA) for r in brs]); bq = final(brs, "q")
+            tex.append(f"{btitle} & ${100 * bref['risk']:.2f}$ & {pm(bq)} & ${bJex:.2f}$ & {pm(bJ)} & ${bJex - bJ.min():.2f}$ \\\\")
+            out["own_price"][bkey] = dict(reference_q=100 * bref["risk"], q=bq.tolist(), J_reference=bJex, J=bJ.tolist(), shortfall_mean=float(bJex - bJ.mean()), shortfall_max=float(bJex - bJ.min()))
 tex += ["\\bottomrule", "\\end{tabular}"]
 (HERE / "wear-own-price-table-v76.tex").write_text("\n".join(tex) + "\n")
 for ax in axes[-1]:
