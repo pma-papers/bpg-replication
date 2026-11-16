@@ -28,6 +28,17 @@
     "no-price-constant": {"lr_schedule": "constant"},
     "no-price-decayed": {"lr_schedule": "linear"}
    }
+  },
+  "pilot-price": {
+   "note": "Pilot, second part. Each run continues for 6 million steps from the controller without a price of its seed, taken from the constant-rate run of the first part at 10 million steps (the stored copy, which is the policy evaluated at that step), with that controller's observation normalization kept fixed and a constant learning rate. Prices 0.04, 0.08 and 0.16 imposed at once, and the run without a price continued equally. Questions: the direction and size of the change, whether each policy scores at least as well at its own price as the controller without a price and as never moving, when the runs level off, and how far the parameters travel from the controller (the scale of the anchor).",
+   "seeds": [95001, 95002],
+   "defaults": {"steps": 6000000, "init": {"stage": "pilot-no-price", "config": "no-price-constant", "steps": 10000000}},
+   "configurations": {
+    "price-0": {"price": "0"},
+    "price-0.04": {"price": "0.04"},
+    "price-0.08": {"price": "0.08"},
+    "price-0.16": {"price": "0.16"}
+   }
   }
  }
 }
