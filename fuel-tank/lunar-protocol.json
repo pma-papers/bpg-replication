@@ -939,6 +939,41 @@
    ],
    "note": "Final phase of the adaptive configurations of the final design (2026-11-16): every run of the stage fuelprice-20-adaptive is continued for 5 million steps with the learning rate decayed linearly from 3e-4 to zero and the multiplier held at the value at which that run ended, so that every run of the study has the same learning-rate schedule. The multiplier is not updated in this phase, since a policy that no longer moves cannot answer it.",
    "hold_multiplier": true
+  },
+  "fuelprice-12-grid-anneal": {
+   "steps": 5000000,
+   "warm_steps": 5000000,
+   "eval_n": 1000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005
+   ],
+   "warm_from": "@same",
+   "warm_stage": "fuelprice-12-grid-long",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": true
+   },
+   "arm_overrides": {
+    "crash_fails": true,
+    "tank_until_touchdown": true,
+    "fuel_price": 12.0
+   },
+   "arms": [
+    "lunar-b24-m0",
+    "lunar-b24-m0.15",
+    "lunar-b24-m0.5",
+    "lunar-b24-m0.75",
+    "lunar-b24-m1",
+    "lunar-b24-m1.25",
+    "lunar-b24-m2"
+   ],
+   "note": "Final phase of the milder case with fuel at 12 per unit (2026-11-16): every run of the stage fuelprice-12-grid-long is continued for 5 million steps with the learning rate decayed linearly from 3e-4 to zero, the schedule of the final design."
   }
  }
 }

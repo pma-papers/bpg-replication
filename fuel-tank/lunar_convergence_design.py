@@ -15,7 +15,8 @@ failure probability, median fuel and stopped utility of the final policies, per 
 lunar-FINAL-PHASE-STAGE-convergence-table.tex, and lunar-FINAL-PHASE-STAGE-convergence (pdf/png): the failure rate
 of training against the training steps, one panel per price and one line per seed; solid lines are the runs at the
 constant rate, dashed lines the final phase of the design, which leaves them at the end of the constant phase.
-Each point is a mean over about 2 percent of the longer training.
+Each point is a mean over about 2 percent of the longer training. A price that the decayed stage does not hold
+is reported without that schedule.
 """
 import json
 import sys
@@ -52,12 +53,15 @@ out = dict(schedules={s: n for s, n in SCHEDULES}, training_steps=total, prices=
 rows = []
 for m in prices:
     out["configurations"][f"{m:g}"] = {}
+    first = next(stage for stage, _ in SCHEDULES if m in R[stage])
     for stage, name in SCHEDULES:
+        if m not in R[stage]:
+            continue
         S = [R[stage][m][s]["stochastic"] for s in seeds]
         c = dict(risk=[x["risk"] for x in S], fuel_median=[x["fuel_quantiles"][2] for x in S], U=[x["U"] for x in S])
         c.update(risk_mean=float(np.mean(c["risk"])), fuel_mean=float(np.mean(c["fuel_median"])), U_mean=float(np.mean(c["U"])))
         out["configurations"][f"{m:g}"][stage] = c
-        rows.append((f"${m:g}$" if stage == decayed else "") + f" & {name} & ${total[stage] / 1e6:.0f}$ & " + ", ".join(f"${100 * x:.1f}$" for x in c["risk"])
+        rows.append((f"${m:g}$" if stage == first else "") + f" & {name} & ${total[stage] / 1e6:.0f}$ & " + ", ".join(f"${100 * x:.1f}$" for x in c["risk"])
                     + f" & ${100 * c['risk_mean']:.1f}$ & ${c['fuel_mean']:.1f}$ & ${c['U_mean']:.0f}$ \\\\" + ("\n\\addlinespace" if stage == longer and m != prices[-1] else ""))
     # the longer stage contains the constant stage: same seeds, same settings, hence the same trace over its length
     for s in seeds:
@@ -76,7 +80,7 @@ def binned(trace, k):
     return st[:nb * k].reshape(nb, k).mean(1), np.nanmean(f[:nb * k].reshape(nb, k), axis=1)
 
 
-fig, axes = plt.subplots(1, len(prices), figsize=(TEXTW, 2.45), gridspec_kw=dict(wspace=0.3))
+fig, axes = plt.subplots(1, len(prices), figsize=(TEXTW, 2.45 if len(prices) <= 2 else 2.1), gridspec_kw=dict(wspace=0.3 if len(prices) <= 2 else 0.16))
 k = max(1, len(R[longer][prices[0]][seeds[0]]["trace"]) // 50)
 for ax, m, tag in zip(np.atleast_1d(axes), prices, "abcdef"):
     for i, s in enumerate(seeds):
@@ -92,7 +96,9 @@ for ax, m, tag in zip(np.atleast_1d(axes), prices, "abcdef"):
     else:
         ax.set_yscale("log"); ax.set_ylim(0.008, 1.2); ax.set_yticks([0.01, 0.03, 0.1, 0.3, 1.0]); ax.set_yticklabels(["1%", "3%", "10%", "30%", "100%"])
         ax.minorticks_off()
-    ax.set_xlim(0, total[longer] / 1e6); ax.set_xticks(np.arange(0, total[longer] / 1e6 + 1, 5))
+        if len(prices) > 2 and m != min(x for x in prices if x > 0):
+            ax.set_yticklabels([])                                                  # the priced panels share the axis of the first of them
+    ax.set_xlim(0, total[longer] / 1e6); ax.set_xticks(np.arange(0, total[longer] / 1e6 + 1, 5 if len(prices) <= 2 else 10))
     ax.set_xlabel("training steps ($10^6$)")
     ax.text(0.5, 1.03, "no price" if m == 0 else f"price $m={m:g}$", transform=ax.transAxes, ha="center", va="bottom", fontsize=FS)
     panel_label(ax, tag)
@@ -102,5 +108,7 @@ legend_below(fig, handles, ["constant learning rate", "final phase with the rate
 save(fig, f"lunar-{final}-convergence", ROOT)
 for m in prices:
     for stage, name in SCHEDULES:
+        if stage not in out["configurations"][f"{m:g}"]:
+            continue
         c = out["configurations"][f"{m:g}"][stage]
         print(f"m={m:<4g} {name:38s} {total[stage] / 1e6:4.0f}M  failed {100 * c['risk_mean']:5.1f} {[round(100 * x, 1) for x in c['risk']]}  fuel {c['fuel_mean']:5.1f}  U {c['U_mean']:6.1f}")
