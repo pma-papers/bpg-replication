@@ -39,6 +39,16 @@
     "price-0.08": {"price": "0.08"},
     "price-0.16": {"price": "0.16"}
    }
+  },
+  "pilot-anchor": {
+   "note": "Pilot, third part. The runs of the second part at the price 0.08, repeated with the anchor toward the controller they start from, at three constant strengths a factor of ten apart. The scale comes from the first seed of the second part: without an anchor the parameters end about 13 from the controller at every price, the price 0 included, and the norm of the mean gradient of a rollout is about 0.012, so that the pull equals that norm at that distance for a strength near 0.001; the strengths 0.01 and 0.1 would hold the parameters near 1.2 and 0.12 by the same rule. Questions: where each strength holds the parameters, and what it does to the stopped utility, which fell from 10.6 to about 7 in the unanchored run at this price, and to the exhaustion probability.",
+   "seeds": [95001, 95002],
+   "defaults": {"steps": 6000000, "price": "0.08", "init": {"stage": "pilot-no-price", "config": "no-price-constant", "steps": 10000000}},
+   "configurations": {
+    "anchor-0.001": {"kappa": "0.001@1"},
+    "anchor-0.01": {"kappa": "0.01@1"},
+    "anchor-0.1": {"kappa": "0.1@1"}
+   }
   }
  }
 }
