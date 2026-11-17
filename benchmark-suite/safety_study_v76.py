@@ -44,6 +44,7 @@ import argparse
 import json
 import math
 import os
+import platform
 import subprocess
 import sys
 import time
@@ -63,7 +64,8 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from safety_pilot_v63 import BudgetGoal, H, TASK  # noqa: E402  (wrapper, task, horizon: unchanged)
 
-torch.set_num_threads(1)
+THREADS = int(os.environ.get("STUDY_TORCH_THREADS", "1"))     # one thread unless the batch script gives the run more cores
+torch.set_num_threads(THREADS)
 BETA, BUDGET = 0.999, 25.0
 STUDY = HERE / "safety-study-v76.json"
 
@@ -460,7 +462,7 @@ def run_sac(stage_name, config_name, seed, study, cfg, out):
     eps_mean = cb.evaluator.episodes(sb3, venv, cfg["eval_n"], [seed, 11], mean_action=True)
     result = dict(stage=stage_name, config=config_name, settings=cfg, learner=hp, seed=seed, source=source, steps=int(sb3.num_timesteps),
                   task=dict(task=TASK, H=H, budget=BUDGET, beta=BETA, time_observed=bool(cfg.get("time_observed", False))), train_wall=train_wall, eval_wall=time.monotonic() - t1,
-                  versions=dict(sb3=stable_baselines3.__version__, torch=torch.__version__, python=sys.version.split()[0]),
+                  versions=dict(sb3=stable_baselines3.__version__, torch=torch.__version__, python=sys.version.split()[0], machine=platform.machine(), host=platform.node(), torch_threads=THREADS),
                   final=summarize(eps, cfg["objective_price"]), final_mean_action=summarize(eps_mean, cfg["objective_price"]), action_std=std, temperature=temperature(sb3),
                   distance=(spread(sb3.actor.parameters(), theta0) if theta0 is not None else None), n_actor_params=sum(p.numel() for p in sb3.actor.parameters()),
                   evals=cb.evals, trace=cb.trace, episodes=eps, episodes_mean_action=eps_mean)
