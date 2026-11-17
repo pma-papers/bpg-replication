@@ -52,7 +52,7 @@ def label(v):
 
 if seed == "grid":                                    # rows the configurations, columns the seeds
     nrow, ncol = len(arms), len(seeds)
-    fig, axes = plt.subplots(nrow, ncol, figsize=(TEXTW, 1.0 * nrow + 0.75), sharex=True, sharey=True, gridspec_kw=dict(wspace=0.08, hspace=0.34), squeeze=False)
+    fig, axes = plt.subplots(nrow, ncol, figsize=(TEXTW, 0.78 * nrow + 0.75), sharex=True, sharey=True, gridspec_kw=dict(wspace=0.08, hspace=0.42), squeeze=False)
     out = dict(stage=stage, seed="grid")
     for i, arm in enumerate(arms):
         for j, sd in enumerate(seeds):
@@ -77,7 +77,7 @@ if seed == "grid":                                    # rows the configurations,
     axes[-1, ncol // 2].set_xlabel("horizontal position", fontsize=FS - 1)
     handles = [Line2D([], [], color="k", lw=2.0, label="landing pad")] + [Line2D([], [], color=END_COL[e], marker=END_MK[e], mfc="white", mew=0.9, lw=0.8, ms=3.5, label=END_LAB[e]) for e in ENDS]
     fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, -0.01), ncol=4, frameon=False, fontsize=FS - 1.5, columnspacing=1.0, handletextpad=0.5)
-    fig.subplots_adjust(bottom=0.11, top=0.95)
+    fig.subplots_adjust(bottom=0.135, top=0.94)
     (ROOT / f"{name}-numbers.json").write_text(json.dumps(out, indent=1) + "\n")
     save(fig, name, ROOT)
     sys.exit(0)
