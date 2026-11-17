@@ -1,0 +1,11 @@
+# Base of the environment of the lander study on Roihu (CPU nodes).
+# The packages of environments/constrained-rl-numerics.txt are added by post-install-numerics313.sh.
+# swig and the compilers are needed to build Box2D from its source.
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13
+  - pip
+  - swig
+  - c-compiler
+  - cxx-compiler

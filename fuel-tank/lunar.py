@@ -66,12 +66,25 @@ def fuel_use(action):
     return 0.30 * m_power + 0.03 * s_power
 
 
+def potential(o):
+    """The potential of the benchmark's reward, from the first eight coordinates of the observation."""
+    return float(-100.0 * np.hypot(o[0], o[1]) - 100.0 * np.hypot(o[2], o[3]) - 100.0 * abs(o[4]) + 10.0 * o[6] + 10.0 * o[7])
+
+
 class FuelLander(gym.Env):
     metadata = {"render_modes": []}
 
-    def __init__(self, budget, objective="failure", m=0.0, beta=0.999, multiplier=0.0, crash_fails=False, tank_until_touchdown=False, fuel_price=1.0):
+    def __init__(self, budget, objective="failure", m=0.0, beta=0.999, multiplier=0.0, crash_fails=False, tank_until_touchdown=False, fuel_price=1.0,
+                 revenue=None, progress="benchmark", aid_scale=1.0 / 12.0):
         super().__init__()
         self.crash_fails, self.tank_until_touchdown, self.fuel_price = bool(crash_fails), bool(tank_until_touchdown), float(fuel_price)
+        # Formulations added on 2026-11-17 (stages formulations-*). With `revenue` set, the utility is a ledger: the revenue is
+        # paid once, when the lander comes to rest on the pad, and fuel costs fuel_price per unit; nothing else enters it.
+        # With progress == "aid" the benchmark's potential enters the training reward as beta * Phi(s') - Phi(s), with
+        # Phi = 0 at the end of an episode, so that its discounted sum is -Phi(s_0) on every path and the objective is unchanged.
+        self.revenue = None if revenue is None else float(revenue)
+        self.progress, self.aid_scale = progress, float(aid_scale)
+        assert progress in ("benchmark", "aid") and (self.revenue is not None or progress == "benchmark")
         self.inner = gym.make("LunarLanderContinuous-v3")
         self.budget, self.objective, self.m, self.beta = float(budget), objective, float(m), beta
         self.multiplier = float(multiplier)
@@ -91,6 +104,7 @@ class FuelLander(gym.Env):
         o, info = self.inner.reset(seed=seed)
         self.reserve, self.t, self.used = self.budget, 0, 0.0
         self.touched = False                         # whether a leg has touched the ground in an earlier frame
+        self.prev_phi = potential(o)
         return self._obs(o), info
 
     def step(self, action):
@@ -101,7 +115,10 @@ class FuelLander(gym.Env):
         g = fuel_use(action)
         if after_touchdown:
             g = min(g, max(self.reserve, 0.0))      # the last frame of thrust uses what is left
-        utility = float(r) - (self.fuel_price - 1.0) * g      # native reward, with fuel charged at fuel_price per unit (native: 1)
+        if self.revenue is None:
+            utility = float(r) - (self.fuel_price - 1.0) * g  # native reward, with fuel charged at fuel_price per unit (native: 1)
+        else:
+            utility = -self.fuel_price * g                    # the ledger: fuel now, the revenue at completion (below)
         self.reserve -= g
         self.used += g
         exhausted = self.reserve < 0.0 and not after_touchdown
@@ -111,6 +128,10 @@ class FuelLander(gym.Env):
         landed = bool(terminated and not exhausted and not core.game_over and not core.lander.awake)
         lost = bool(terminated and not exhausted and not landed)          # crashed, or left the frame
         failed = exhausted or (self.crash_fails and lost)
+        on_pad = bool(abs(float(o[0])) <= 0.2)                 # the pad spans the horizontal coordinates -0.2 to 0.2
+        completed = bool(landed and on_pad)
+        if self.revenue is not None and completed:
+            utility += self.revenue
         if failed:
             if self.objective == "chance":
                 reward = -self.multiplier
@@ -120,9 +141,13 @@ class FuelLander(gym.Env):
             terminated = True
         else:
             reward = utility
+        if self.progress == "aid":
+            phi = 0.0 if (terminated or truncated) else potential(o)
+            reward += self.aid_scale * (self.beta * phi - self.prev_phi)
+            self.prev_phi = phi
         self.t += 1
         info = dict(fuel=g, failure=bool(failed), utility=utility, landed=landed, crashed=crashed, used=self.used,
-                    exhausted=bool(exhausted), lost=lost, touched=self.touched, empty=bool(self.reserve <= 0.0))
+                    exhausted=bool(exhausted), lost=lost, touched=self.touched, empty=bool(self.reserve <= 0.0), completed=completed)
         if terminated or truncated:
             info["episode_failed"] = bool(failed)
         return self._obs(o), float(reward), bool(terminated), bool(truncated), info
@@ -167,16 +192,16 @@ class Control(BaseCallback):
         self.ends = dict(landed=0, exhausted=0, lost=0)
 
 
-def evaluate(sb3, budget, beta, *, n, seed, n_envs=32, deterministic=False, crash_fails=False, tank_until_touchdown=False, fuel_price=1.0):
+def evaluate(sb3, budget, beta, *, n, seed, n_envs=32, deterministic=False, crash_fails=False, tank_until_touchdown=False, fuel_price=1.0, **formulation):
     """n independent episodes; failure = fuel exhausted (with crash_fails: or the lander lost; with tank_until_touchdown:
     exhausted before touchdown); utility discounted by beta."""
-    envs = DummyVecEnv([lambda i=i: FuelLander(budget, "failure", 0.0, beta, crash_fails=crash_fails, tank_until_touchdown=tank_until_touchdown, fuel_price=fuel_price) for i in range(n_envs)])
+    envs = DummyVecEnv([lambda i=i: FuelLander(budget, "failure", 0.0, beta, crash_fails=crash_fails, tank_until_touchdown=tank_until_touchdown, fuel_price=fuel_price, **formulation) for i in range(n_envs)])
     envs.seed(seed)
     torch.manual_seed(seed)
     obs = envs.reset()
     done_count = 0
     records = []
-    acc = [dict(U=0.0, t=0, failed=False, landed=False, used=0.0, crashed=False, exhausted=False, lost=False, empty=False) for _ in range(n_envs)]
+    acc = [dict(U=0.0, t=0, failed=False, landed=False, used=0.0, crashed=False, exhausted=False, lost=False, empty=False, completed=False) for _ in range(n_envs)]
     while done_count < n:
         act, _ = sb3.predict(obs, deterministic=deterministic)
         obs, rew, dones, infos = envs.step(act)
@@ -187,15 +212,17 @@ def evaluate(sb3, budget, beta, *, n, seed, n_envs=32, deterministic=False, cras
             if dones[i]:
                 a["failed"] = infos[i]["failure"]; a["landed"] = infos[i]["landed"]; a["used"] = infos[i]["used"]
                 a["crashed"] = infos[i]["crashed"]; a["exhausted"] = infos[i]["exhausted"]; a["lost"] = infos[i]["lost"]; a["empty"] = infos[i]["empty"]
+                a["completed"] = infos[i]["completed"]
                 if done_count < n:
                     records.append(a)
                 done_count += 1
-                acc[i] = dict(U=0.0, t=0, failed=False, landed=False, used=0.0, crashed=False, exhausted=False, lost=False, empty=False)
+                acc[i] = dict(U=0.0, t=0, failed=False, landed=False, used=0.0, crashed=False, exhausted=False, lost=False, empty=False, completed=False)
     envs.close()
     fail = np.array([r["failed"] for r in records]); land = np.array([r["landed"] for r in records])
     used = np.array([r["used"] for r in records]); U = np.array([r["U"] for r in records]); T = np.array([r["t"] for r in records])
     return dict(n=n, seed=seed, deterministic=deterministic, risk=float(fail.mean()), failures=int(fail.sum()),
-                landed=float(land.mean()), crashed=float(np.mean([r["crashed"] for r in records])),
+                landed=float(land.mean()), completed=float(np.mean([r["completed"] for r in records])), fuel_mean=float(used.mean()),
+                crashed=float(np.mean([r["crashed"] for r in records])),
                 exhausted=float(np.mean([r["exhausted"] for r in records])), lost=float(np.mean([r["lost"] for r in records])),
                 landed_empty=float(np.mean([r["landed"] and r["empty"] for r in records])),      # landed with the tank empty at the end
                 lost_empty=float(np.mean([r["lost"] and r["empty"] for r in records])),
@@ -208,6 +235,8 @@ def run(arm, seed, steps, out, eval_n, hp, init=None):
     the learning-rate schedule restarts, the tank, price and objective are those of `arm`."""
     budget, beta = arm["budget"], arm.get("beta", 0.999)
     cf = dict(crash_fails=bool(arm.get("crash_fails", False)), tank_until_touchdown=bool(arm.get("tank_until_touchdown", False)), fuel_price=float(arm.get("fuel_price", 1.0)))
+    if arm.get("revenue") is not None:                       # the ledger formulations of 2026-11-17
+        cf.update(revenue=float(arm["revenue"]), progress=arm.get("progress", "aid"), aid_scale=float(arm.get("aid_scale", 1.0 / 12.0)))
     objective = {"fixed": "failure", "adaptive": "chance"}[arm["kind"]]
     algo = hp.get("algo", "ppo")
     n_envs = hp.get("n_envs", 16 if algo == "ppo" else 1)
