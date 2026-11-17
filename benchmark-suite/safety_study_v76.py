@@ -22,6 +22,18 @@ What this runner adds to the stored ones (safety_pilot_v63.py, safety_ramp_v65.p
   * per evaluation episode: exhausted or not, the exhausting step, return, stopped utility, cost (equal to
     the number of steps inside hazards), goals reached, distance travelled.
 
+Added on 17 November 2026, after the pilot with proximal policy optimization (stages pilot-*):
+
+  * a second learner, the soft actor-critic (a configuration with "algorithm": "sac"; settings under
+    "learner_sac"): one environment, one update after every step, rewards as they are (no reward
+    normalization, which does not fit a replay memory), observations normalized or not, separate learning
+    rates of the policy and of the action-value networks if given, a discount other than 0.999 if given
+    ("beta", which then also defines the stopped utility and the priced risk of the evaluations); a run that continues from
+    a stored controller starts with an empty replay memory and fills it with the controller's own actions
+    before the first update;
+  * the share of the horizon that remains as one more observation ("time_observed"), with the end of the
+    episode at the horizon a termination, so that the learner does not add a value beyond the last step.
+
 The runs of a stage and their settings are listed in safety-study-v76.json.
 
 Usage (runtime ~/.venvs/constrained-rl-safety310/bin/python):
@@ -38,10 +50,11 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+import gymnasium as gym
 import numpy as np
 import torch
 import stable_baselines3
-from stable_baselines3 import PPO
+from stable_baselines3 import PPO, SAC
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.running_mean_std import RunningMeanStd
 from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
@@ -90,6 +103,52 @@ class StudyGoal(BudgetGoal):
         if terminated or truncated:
             info.update(episode_failed=bool(failed), episode_cost=self.used, episode_goals=self.goals, episode_path=self.path, episode_steps=self.t)
         return self._obs(o), float(reward), bool(terminated), bool(truncated), info
+
+
+class StudyGoalTime(StudyGoal):
+    """The same task with the share of the horizon that remains as the last observation, and with the end at the
+    horizon a termination: with time observed the problem of H steps is a Markov one, and the learner must not add
+    a value beyond the last step. The remaining budget is then the last observation but one."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        low = np.append(self.observation_space.low, 0.0).astype(np.float32)
+        high = np.append(self.observation_space.high, 1.0).astype(np.float32)
+        self.observation_space = gym.spaces.Box(low, high, dtype=np.float32)
+
+    def _obs(self, o):
+        return np.append(super()._obs(o), (H - self.t) / H).astype(np.float32)
+
+    def step(self, action):
+        o, reward, terminated, truncated, info = super().step(action)
+        if truncated and not terminated:
+            terminated, truncated = True, False
+        return o, reward, terminated, truncated, info
+
+
+class StudySAC(SAC):
+    """The soft actor-critic of Stable-Baselines3. One change: in a run that continues from a stored controller the
+    steps before the first update are taken with the controller's own actions, not with uniformly drawn ones."""
+
+    warmup_with_policy = False
+    actor_lr = None
+    critic_lr = None
+
+    def _update_learning_rate(self, optimizers):
+        """Separate learning rates of the policy and of the action-value networks, where a configuration gives them."""
+        super()._update_learning_rate(optimizers)
+        for opt, lr in ((self.actor.optimizer, self.actor_lr), (self.critic.optimizer, self.critic_lr)):
+            if lr is not None:
+                for group in opt.param_groups:
+                    group["lr"] = lr
+
+    def _sample_action(self, learning_starts, action_noise=None, n_envs=1):
+        return super()._sample_action(0 if self.warmup_with_policy else learning_starts, action_noise, n_envs)
+
+
+def tag_of(steps):
+    """The name of a stored copy: '-10M', '-0.5M'."""
+    return f"-{steps / 1e6:g}M"
 
 
 class FixedMeanStd(RunningMeanStd):
@@ -188,10 +247,11 @@ class Evaluator:
     """Fresh episodes of the stopped task without a charge, the same number in each of n_envs environments
     (so that short episodes are not over-represented); the random streams of training are restored afterwards."""
 
-    def __init__(self, n_envs=8):
-        self.envs = [StudyGoal(BUDGET, "failure", 0.0, BETA) for _ in range(n_envs)]
+    def __init__(self, n_envs=8, make=StudyGoal):
+        self.envs = [make(BUDGET, "failure", 0.0, BETA) for _ in range(n_envs)]
+        self.action_std = None
 
-    def episodes(self, sb3, venv, n, key):
+    def episodes(self, sb3, venv, n, key, mean_action=False):
         per = max(n // len(self.envs), 1)
         seeds = [int(s) for s in np.random.SeedSequence(key).generate_state(len(self.envs) + 1)]
         ts, ns = torch.get_rng_state(), np.random.get_state()
@@ -200,8 +260,13 @@ class Evaluator:
         k = len(self.envs)
         done = [0] * k; eps = []
         ret = np.zeros(k); util = np.zeros(k); cost = np.zeros(k); t = np.zeros(k, dtype=int)
+        stds, count = [], 0
         while min(done) < per:
-            act, _ = sb3.policy.predict(venv.normalize_obs(obs), deterministic=False)
+            act, _ = sb3.policy.predict(venv.normalize_obs(obs), deterministic=mean_action)
+            if count % 25 == 0 and isinstance(sb3, SAC):          # dispersion of the action before squashing, on visited states
+                with torch.no_grad():
+                    stds.append(float(sb3.actor.get_action_dist_params(torch.as_tensor(venv.normalize_obs(obs), dtype=torch.float32))[1].exp().mean()))
+            count += 1
             for i, e in enumerate(self.envs):
                 if done[i] >= per:
                     continue
@@ -217,6 +282,7 @@ class Evaluator:
                     t[i] += 1
                 obs[i] = o
         torch.set_rng_state(ts); np.random.set_state(ns)
+        self.action_std = float(np.mean(stds)) if stds else None
         return eps
 
 
@@ -280,22 +346,141 @@ class Trace(BaseCallback):
             (self.out / "progress.json").write_text(json.dumps(dict(steps=int(self.num_timesteps), wall=time.monotonic() - self.started,
                                                                     evals=self.evals, trace=self.trace), allow_nan=True) + "\n")
         if self.num_timesteps >= self.next_copy:
-            save_learner(self.model, self.out / "copies", f"-{self.next_copy // 1_000_000}M"); self.next_copy += self.cfg["copy_every"]
+            save_learner(self.model, self.out / "copies", tag_of(self.next_copy)); self.next_copy += self.cfg["copy_every"]
         st.fraction = self.num_timesteps / self.total          # the price and strength of the next rollout and of the updates before it
         self.price_now = price_at(self.price_sched, self.ramp, st.fraction)
         self.training_env.env_method("set_price", self.price_now)
+
+
+class TraceSteps(BaseCallback):
+    """The trace for a learner that updates after every step: a row every `every` steps; evaluations (the first one
+    before the first step, so that it is the policy the run starts from) and stored copies at intervals."""
+
+    def __init__(self, cfg, total, theta0, seed, out, price_sched, ramp, evaluator, every):
+        super().__init__(verbose=0)
+        self.cfg, self.total, self.theta0, self.seed, self.out = cfg, total, theta0, seed, out
+        self.price_sched, self.ramp, self.evaluator, self.every = price_sched, ramp, evaluator, every
+        self.trace = []; self.evals = []; self.next_row = every; self.next_eval = cfg["eval_every"]; self.next_copy = cfg["copy_every"]
+        self.price_now = price_at(price_sched, ramp, 0.0)
+        self.started = time.monotonic()
+        self.ep = dict(n=0, failed=0, ret=0.0, cost=0.0, goals=0, steps=0)
+
+    def evaluate(self):
+        eps = self.evaluator.episodes(self.model, self.model.get_vec_normalize_env(), self.cfg["trace_eval_n"], [self.seed, 7, len(self.evals)])
+        self.evals.append(dict(steps=int(self.num_timesteps), price_in_force=self.price_now, action_std=self.evaluator.action_std,
+                               temperature=temperature(self.model), **summarize(eps, self.cfg["objective_price"])))
+        self.out.mkdir(parents=True, exist_ok=True)
+        (self.out / "progress.json").write_text(json.dumps(dict(steps=int(self.num_timesteps), wall=time.monotonic() - self.started,
+                                                                evals=self.evals, trace=self.trace), allow_nan=True) + "\n")
+
+    def _on_training_start(self):
+        self.training_env.env_method("set_price", self.price_now)
+        self.acc = np.zeros(self.training_env.num_envs)
+        self.evaluate()
+
+    def _on_step(self):
+        for i, info in enumerate(self.locals["infos"]):
+            self.acc[i] += info["utility"]
+            if "episode_failed" in info:
+                e = self.ep
+                e["n"] += 1; e["failed"] += int(info["episode_failed"]); e["ret"] += self.acc[i]; e["cost"] += info["episode_cost"]
+                e["goals"] += info["episode_goals"]; e["steps"] += info["episode_steps"]
+                self.acc[i] = 0.0
+        if self.num_timesteps >= self.next_row:
+            e = self.ep
+            mean = lambda key: (e[key] / e["n"] if e["n"] else float("nan"))
+            row = dict(steps=int(self.num_timesteps), price=self.price_now, lr=float(self.model.actor.optimizer.param_groups[0]["lr"]),
+                       lr_critic=float(self.model.critic.optimizer.param_groups[0]["lr"]), episodes=e["n"],
+                       failure_rate=mean("failed"), mean_return=mean("ret"), mean_cost=mean("cost"), mean_goals=mean("goals"), mean_steps=mean("steps"),
+                       temperature=temperature(self.model), updates=int(self.model._n_updates))
+            if self.theta0 is not None:
+                row["distance"] = spread(self.model.actor.parameters(), self.theta0)
+            self.trace.append(row)
+            self.ep = dict(n=0, failed=0, ret=0.0, cost=0.0, goals=0, steps=0)
+            self.next_row += self.every
+            if self.num_timesteps >= self.next_eval:
+                self.evaluate(); self.next_eval += self.cfg["eval_every"]
+            if self.num_timesteps >= self.next_copy:
+                save_learner(self.model, self.out / "copies", tag_of(self.next_copy)); self.next_copy += self.cfg["copy_every"]
+            self.price_now = price_at(self.price_sched, self.ramp, self.num_timesteps / self.total)
+            self.training_env.env_method("set_price", self.price_now)
+        return True
+
+
+def temperature(sb3):
+    """The weight of the entropy term in the soft actor-critic's objective."""
+    return float(sb3.log_ent_coef.detach().exp()) if getattr(sb3, "log_ent_coef", None) is not None else float(sb3.ent_coef_tensor)
+
+
+def spread(params, theta0):
+    with torch.no_grad():
+        return float(torch.sqrt(sum(((p - p0) ** 2).sum() for p, p0 in zip(params, theta0))))
+
+
+def run_sac(stage_name, config_name, seed, study, cfg, out):
+    global BETA
+    BETA = float(cfg.get("beta", BETA))                         # the discount of the problem: the learner, the charge and the evaluations use the same one
+    hp = dict(study["learner_sac"]); hp.update(cfg.get("learner", {}))
+    steps = int(cfg["steps"])
+    price_sched, ramp = parse_schedule(cfg["price"]), float(cfg.get("price_ramp", 0.0))
+    assert all(v == 0 for _, v in parse_schedule(cfg.get("kappa", "0"))), "the anchor is not set up for this learner"
+    cfg.setdefault("objective_price", price_sched[-1][1])
+    make = StudyGoalTime if cfg.get("time_observed", False) else StudyGoal
+    venv = DummyVecEnv([lambda: make(BUDGET, "failure", 0.0, BETA)])
+    init, theta0, source = cfg.get("init"), None, None
+    if init is None:
+        venv = VecNormalize(venv, norm_obs=bool(hp["normalize_observations"]), norm_reward=False, gamma=BETA)
+        sb3 = StudySAC("MlpPolicy", venv, seed=seed, gamma=BETA, learning_rate=hp["learning_rate"], buffer_size=hp["buffer_size"], batch_size=hp["batch_size"],
+                       tau=hp["tau"], train_freq=1, gradient_steps=1, learning_starts=hp["learning_starts"], ent_coef=hp["ent_coef"],
+                       policy_kwargs=dict(net_arch=hp["net_arch"]), device="cpu", verbose=0)
+        venv.seed(100 * seed)
+    else:
+        src = HERE / "safety" / init["stage"] / f"{init['config']}__seed{seed}"
+        tag = tag_of(init["steps"]) if init.get("steps") else ""
+        source = dict(model=str((src / ("copies" if tag else "") / f"model{tag}.zip").relative_to(HERE)),
+                      normalization=str((src / ("copies" if tag else "") / f"vecnormalize{tag}.pkl").relative_to(HERE)))
+        venv = VecNormalize.load(str(HERE / source["normalization"]), venv)
+        assert venv.norm_obs == bool(hp["normalize_observations"]) and abs(venv.gamma - BETA) < 1e-12, "the run continues with the settings of its controller"
+        venv.training, venv.norm_reward = True, False
+        fixed = FixedMeanStd(shape=venv.obs_rms.mean.shape); fixed.mean, fixed.var, fixed.count = venv.obs_rms.mean.copy(), venv.obs_rms.var.copy(), venv.obs_rms.count
+        venv.obs_rms = fixed
+        sb3 = StudySAC.load(str(HERE / source["model"]), env=venv, device="cpu", seed=seed + 500_000)
+        sb3.warmup_with_policy, sb3.learning_starts = True, int(hp["learning_starts"])     # the replay memory starts empty and is filled by the controller
+        theta0 = [p.detach().clone() for p in sb3.actor.parameters()]
+        venv.seed(100 * seed + 50)
+    sb3.actor_lr, sb3.critic_lr = hp.get("actor_learning_rate"), hp.get("critic_learning_rate")
+    cb = TraceSteps(cfg, steps, theta0, seed, out, price_sched, ramp, Evaluator(make=make), int(hp["trace_every"]))
+    started = time.monotonic()
+    sb3.learn(total_timesteps=steps, callback=cb)
+    train_wall = time.monotonic() - started
+    save_learner(sb3, out)
+    t1 = time.monotonic()
+    venv = sb3.get_vec_normalize_env()
+    eps = cb.evaluator.episodes(sb3, venv, cfg["eval_n"], [seed, 11]); std = cb.evaluator.action_std
+    eps_mean = cb.evaluator.episodes(sb3, venv, cfg["eval_n"], [seed, 11], mean_action=True)
+    result = dict(stage=stage_name, config=config_name, settings=cfg, learner=hp, seed=seed, source=source, steps=int(sb3.num_timesteps),
+                  task=dict(task=TASK, H=H, budget=BUDGET, beta=BETA, time_observed=bool(cfg.get("time_observed", False))), train_wall=train_wall, eval_wall=time.monotonic() - t1,
+                  versions=dict(sb3=stable_baselines3.__version__, torch=torch.__version__, python=sys.version.split()[0]),
+                  final=summarize(eps, cfg["objective_price"]), final_mean_action=summarize(eps_mean, cfg["objective_price"]), action_std=std, temperature=temperature(sb3),
+                  distance=(spread(sb3.actor.parameters(), theta0) if theta0 is not None else None), n_actor_params=sum(p.numel() for p in sb3.actor.parameters()),
+                  evals=cb.evals, trace=cb.trace, episodes=eps, episodes_mean_action=eps_mean)
+    (out / "result.json").write_text(json.dumps(result, allow_nan=True) + "\n")
+    f, g = result["final"], result["final_mean_action"]
+    print(f"{stage_name} {config_name} seed {seed}: exhausted={f['exhausted']:.3f} U={f['U']:.2f} objective={f['objective']:.2f} goals={f['mean_goals']:.2f} | "
+          f"mean action: exhausted={g['exhausted']:.3f} U={g['U']:.2f} objective={g['objective']:.2f} | train={train_wall:.0f}s eval={result['eval_wall']:.0f}s")
 
 
 def save_learner(sb3, folder, tag=""):
     """The model and its normalization, the latter with plain statistics so that it loads without this module."""
     folder.mkdir(parents=True, exist_ok=True)
     venv = sb3.get_vec_normalize_env()
-    kept = venv.obs_rms
+    kept = getattr(venv, "obs_rms", None)                      # absent when the observations are not normalized
     if isinstance(kept, FixedMeanStd):
         plain = RunningMeanStd(shape=kept.mean.shape); plain.mean, plain.var, plain.count = kept.mean.copy(), kept.var.copy(), kept.count
         venv.obs_rms = plain
     sb3.save(folder / f"model{tag}.zip"); venv.save(folder / f"vecnormalize{tag}.pkl")
-    venv.obs_rms = kept
+    if kept is not None:
+        venv.obs_rms = kept
 
 
 def settings(stage_name, config_name):
@@ -307,6 +492,11 @@ def settings(stage_name, config_name):
 
 def run(stage_name, config_name, seed):
     study, stage, cfg = settings(stage_name, config_name)
+    if cfg.get("algorithm", "ppo") == "sac":
+        out = HERE / "safety" / stage_name / f"{config_name}__seed{seed}"
+        if (out / "result.json").exists():
+            print("exists", out); return
+        return run_sac(stage_name, config_name, seed, study, cfg, out)
     hp = dict(study["learner"]); changed = dict(cfg.get("learner", {})); hp.update(changed)   # a configuration may change settings of the learner
     out = HERE / "safety" / stage_name / f"{config_name}__seed{seed}"
     if (out / "result.json").exists():
@@ -326,7 +516,7 @@ def run(stage_name, config_name, seed):
         venv.seed(100 * seed)                                      # environment seeds 100 s, ..., 100 s + 7: no overlap between the seeds of a stage
     else:
         src = HERE / "safety" / init["stage"] / f"{init['config']}__seed{seed}"
-        tag = f"-{init['steps'] // 1_000_000}M" if init.get("steps") else ""
+        tag = tag_of(init["steps"]) if init.get("steps") else ""
         source = dict(model=str((src / ("copies" if tag else "") / f"model{tag}.zip").relative_to(HERE)),
                       normalization=str((src / ("copies" if tag else "") / f"vecnormalize{tag}.pkl").relative_to(HERE)))
         venv = VecNormalize.load(str(HERE / source["normalization"]), venv)

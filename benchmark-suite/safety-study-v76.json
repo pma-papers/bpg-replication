@@ -5,6 +5,11 @@
   "n_envs": 8, "n_steps": 1024, "batch_size": 64, "n_epochs": 4, "learning_rate": 0.0003,
   "gae_lambda": 0.95, "clip_range": 0.2, "ent_coef": 0.0, "max_grad_norm": 0.5, "net_arch": [64, 64]
  },
+ "learner_sac": {
+  "name": "Soft actor-critic (Stable-Baselines3 2.2.1)",
+  "n_envs": 1, "learning_rate": 0.0003, "buffer_size": 1000000, "batch_size": 256, "tau": 0.005, "learning_starts": 10000,
+  "ent_coef": "auto", "net_arch": [256, 256], "normalize_observations": true, "trace_every": 10000
+ },
  "defaults": {
   "price": "0", "lr_schedule": "constant", "eval_every": 1000000, "trace_eval_n": 200, "eval_n": 1000, "copy_every": 2000000
  },
@@ -18,6 +23,35 @@
     "price-0.08": {"price": "0.08", "init": {"stage": "smoke", "config": "no-price"}},
     "price-0.08-anchor": {"price": "0.08", "kappa": "1@0.5,0.1@1", "init": {"stage": "smoke", "config": "no-price", "steps": 16384}},
     "price-raised": {"price": "0.08", "price_ramp": 0.5, "init": {"stage": "smoke", "config": "no-price"}}
+   }
+  },
+  "smoke-sac": {
+   "note": "Short runs that test the soft actor-critic in the runner; no result of the study.",
+   "seeds": [95099],
+   "defaults": {"algorithm": "sac", "time_observed": true, "steps": 30000, "eval_every": 10000, "trace_eval_n": 8, "eval_n": 8, "copy_every": 10000, "learner": {"learning_starts": 2000, "trace_every": 2000}},
+   "configurations": {
+    "no-price": {},
+    "price-0.08": {"price": "0.08", "steps": 10000, "init": {"stage": "smoke-sac", "config": "no-price", "steps": 20000}},
+    "published-0.99": {"steps": 10000, "eval_every": 5000, "beta": 0.99, "learner": {"learning_starts": 2000, "trace_every": 2000, "ent_coef": 0.00001, "actor_learning_rate": 0.000005, "critic_learning_rate": 0.001, "normalize_observations": false}}
+   }
+  },
+  "sac-no-price": {
+   "note": "Second pilot (17 November 2026), first part: the soft actor-critic without a price, from scratch, two seeds, 3 million steps, with the share of the horizon that remains observed and the end at the horizon a termination. Three configurations. 'published' takes the temperature (fixed at 0.00001), the learning rates (policy 0.000005, action values 0.001) and the unnormalized observations from the configuration that the OmniSafe benchmark lists for this task (file omnisafe/configs/off-policy/SAC.yaml, entry SafetyPointGoal1-v0; its table reports return 27.0 and cost 67.6 after 3 million steps for the task without a budget); the discount stays at 0.999, where the published configuration uses 0.99, and its delayed policy update and gradient clipping are not reproduced. 'published-0.99' is the same with the discount 0.99 for the learner and for the stopped utility, to separate the effect of the discount. 'default' is the library's setting (temperature tuned to the target entropy, learning rate 0.0003, observations normalized). Questions: which configuration learns the stopped task, when it levels off, and what the controller without a price reaches against the 9 to 11 of the first pilot.",
+   "seeds": [95001, 95002],
+   "defaults": {"algorithm": "sac", "time_observed": true, "steps": 3000000, "eval_every": 250000, "copy_every": 500000},
+   "configurations": {
+    "published": {"learner": {"ent_coef": 0.00001, "actor_learning_rate": 0.000005, "critic_learning_rate": 0.001, "normalize_observations": false}},
+    "published-0.99": {"beta": 0.99, "learner": {"ent_coef": 0.00001, "actor_learning_rate": 0.000005, "critic_learning_rate": 0.001, "normalize_observations": false}},
+    "default": {}
+   }
+  },
+  "sac-scratch": {
+   "note": "Second pilot, an addition that was not in the plan put to the author: the price 0.16 from scratch (no controller to start from), with the configurations 'published' and 'default' of the stage sac-no-price, run at the same time on cores that were free. Question: whether this learner needs the controller without a price as its start at all.",
+   "seeds": [95001, 95002],
+   "defaults": {"algorithm": "sac", "time_observed": true, "steps": 3000000, "eval_every": 250000, "copy_every": 500000, "price": "0.16"},
+   "configurations": {
+    "published-0.16": {"learner": {"ent_coef": 0.00001, "actor_learning_rate": 0.000005, "critic_learning_rate": 0.001, "normalize_observations": false}},
+    "default-0.16": {}
    }
   },
   "pilot-no-price": {
