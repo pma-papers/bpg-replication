@@ -307,7 +307,7 @@ def settings(stage_name, config_name):
 
 def run(stage_name, config_name, seed):
     study, stage, cfg = settings(stage_name, config_name)
-    hp = study["learner"]
+    hp = dict(study["learner"]); changed = dict(cfg.get("learner", {})); hp.update(changed)   # a configuration may change settings of the learner
     out = HERE / "safety" / stage_name / f"{config_name}__seed{seed}"
     if (out / "result.json").exists():
         print("exists", out); return
@@ -334,8 +334,12 @@ def run(stage_name, config_name, seed):
         if cfg.get("fix_observation_normalization", True):
             fixed = FixedMeanStd(shape=venv.obs_rms.mean.shape); fixed.mean, fixed.var, fixed.count = venv.obs_rms.mean.copy(), venv.obs_rms.var.copy(), venv.obs_rms.count
             venv.obs_rms = fixed
-        sb3 = PPO.load(str(HERE / source["model"]), env=venv, device="cpu", seed=seed + 500_000, custom_objects=dict(learning_rate=lr_fn, lr_schedule=lr_fn))
+        sb3 = PPO.load(str(HERE / source["model"]), env=venv, device="cpu", seed=seed + 500_000, custom_objects=dict(learning_rate=lr_fn, lr_schedule=lr_fn),
+                       **{k: changed[k] for k in ("n_steps", "batch_size", "n_epochs", "ent_coef") if k in changed})
         theta0 = [p.detach().clone() for p in actor_params(sb3.policy)]
+        if cfg.get("action_std0") is not None:                     # the action dispersion set back to a given value; the mean action is unchanged
+            with torch.no_grad():
+                sb3.policy.log_std.fill_(math.log(float(cfg["action_std0"])))
         venv.seed(100 * seed + 50)
     st = State()
     install_hook(sb3, theta0, st, kappa_sched)

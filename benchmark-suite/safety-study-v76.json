@@ -49,6 +49,17 @@
     "anchor-0.01": {"kappa": "0.01@1"},
     "anchor-0.1": {"kappa": "0.1@1"}
    }
+  },
+  "pilot-diagnosis": {
+   "note": "Pilot, diagnosis (17 November 2026). Not a part of the design. In the second part the policies trained under a price did not beat the controller they started from at that price, and at 0.16 they stayed below never moving, although a rule made by hand on the same controller (stop once 40 % of the budget is used, script safety_stop_rule_v76.py) scores well above the trained policy on both seeds (3.1 and -0.3 against about -10 and -12) and on the first seed above never moving, and the critic had taken up the charge (script safety_reserve_response_v76.py). This stage repeats the run at the price 0.16 with one setting of the learner changed at a time, to see which of them lets the policy follow the charge: minibatches eight times larger, an entropy bonus, the action dispersion of the controller set back to 0.5 (it had narrowed to about 0.19), and a learning rate ten times smaller. The comparison is the run price-0.16 of the second part.",
+   "seeds": [95001, 95002],
+   "defaults": {"steps": 6000000, "price": "0.16", "init": {"stage": "pilot-no-price", "config": "no-price-constant", "steps": 10000000}},
+   "configurations": {
+    "batch-512": {"learner": {"batch_size": 512}},
+    "entropy-0.01": {"learner": {"ent_coef": 0.01}},
+    "dispersion-0.5": {"action_std0": 0.5},
+    "rate-3e-5": {"learning_rate": 0.00003}
+   }
   }
  }
 }

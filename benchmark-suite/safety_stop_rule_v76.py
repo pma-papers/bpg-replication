@@ -28,7 +28,7 @@ sys.path.insert(0, str(HERE))
 from safety_study_v76 import BETA, BUDGET, StudyGoal, summarize  # noqa: E402
 
 torch.set_num_threads(1)
-SHARES = [0.0, 0.1, 0.2, 0.4, 0.6]
+SHARES = [0.0, 0.1, 0.2, 0.4, 0.6, 0.8, 0.95]
 PRICES = [0.0, 0.04, 0.08, 0.16]
 
 
