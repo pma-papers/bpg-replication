@@ -32,7 +32,7 @@ SHARES = [0.0, 0.1, 0.2, 0.4, 0.6, 0.8, 0.95]
 PRICES = [0.0, 0.04, 0.08, 0.16]
 
 
-def episodes(model, norm, share, n, key, n_envs=8):
+def episodes(model, norm, share, n, key, n_envs=8, mean_action=False):
     envs = [StudyGoal(BUDGET, "failure", 0.0, BETA) for _ in range(n_envs)]
     per = max(n // n_envs, 1)
     seeds = [int(s) for s in np.random.SeedSequence(key).generate_state(n_envs + 1)]
@@ -42,7 +42,7 @@ def episodes(model, norm, share, n, key, n_envs=8):
     ret = np.zeros(n_envs); util = np.zeros(n_envs); cost = np.zeros(n_envs); t = np.zeros(n_envs, dtype=int)
     stopped = np.zeros(n_envs, dtype=bool); last_cost = np.zeros(n_envs); stop_step = [None] * n_envs
     while min(done) < per:
-        act, _ = model.policy.predict(norm.normalize_obs(obs), deterministic=False)
+        act, _ = model.policy.predict(norm.normalize_obs(obs), deterministic=mean_action)
         for i, e in enumerate(envs):
             if done[i] >= per:
                 continue
@@ -69,6 +69,8 @@ def main():
     ap.add_argument("--stage", required=True); ap.add_argument("--config", required=True)
     ap.add_argument("--seed", type=int, required=True); ap.add_argument("--steps", type=int, default=None)
     ap.add_argument("--n", type=int, default=400)
+    ap.add_argument("--mean-action", action="store_true", help="the mean action in place of a sampled one")
+    ap.add_argument("--shares", type=float, nargs="+", default=SHARES)
     a = ap.parse_args()
     folder = HERE / "safety" / a.stage / f"{a.config}__seed{a.seed}"
     tag = "" if a.steps is None else f"-{a.steps // 1_000_000}M"
@@ -76,16 +78,16 @@ def main():
     model = PPO.load(sub / f"model{tag}.zip", device="cpu")
     with open(sub / f"vecnormalize{tag}.pkl", "rb") as f:
         norm = pickle.load(f)
-    out = dict(source=dict(stage=a.stage, config=a.config, seed=a.seed, steps=a.steps), n=a.n, shares={})
-    for share in SHARES:
-        eps = episodes(model, norm, share, a.n, [a.seed, 13])
+    out = dict(source=dict(stage=a.stage, config=a.config, seed=a.seed, steps=a.steps), n=a.n, mean_action=a.mean_action, shares={})
+    for share in a.shares:
+        eps = episodes(model, norm, share, a.n, [a.seed, 13], mean_action=a.mean_action)
         rows = {str(m): summarize(eps, m) for m in PRICES}
         stops = [e["stop_step"] for e in eps if e["stop_step"] is not None]
         out["shares"][str(share)] = dict(by_price=rows, share_stopped=len(stops) / len(eps), mean_stop_step=float(np.mean(stops)) if stops else None, episodes=eps)
         s = rows["0.0"]
         print("share %.1f: exhausted %.3f U %.2f (%.2f) goals %.2f stopped %.2f | value at prices " % (share, s["exhausted"], s["U"], s["U_se"], s["mean_goals"], len(stops) / len(eps))
               + "  ".join("%s: %.2f (%.2f)" % (m, rows[str(m)]["objective"], rows[str(m)]["objective_se"]) for m in PRICES), flush=True)
-    dest = HERE / "safety" / "stop-rule" / f"{a.stage}__{a.config}__seed{a.seed}{tag}.json"
+    dest = HERE / "safety" / "stop-rule" / f"{a.stage}__{a.config}__seed{a.seed}{tag}{'-mean-action' if a.mean_action else ''}.json"
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(json.dumps(out))
 
