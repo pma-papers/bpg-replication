@@ -1,0 +1,12 @@
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --steps 20000000 --eval-every 100000 --rule start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0 --seed 94001
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --steps 20000000 --eval-every 100000 --rule start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0.0009 --seed 94001
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --kappa2 0.01 --kappa1 0 --seed 94001
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --steps 20000000 --eval-every 100000 --rule start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0 --seed 94002
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --steps 20000000 --eval-every 100000 --rule start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0.0009 --seed 94002
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --kappa2 0.01 --kappa1 0 --seed 94002
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --steps 20000000 --eval-every 100000 --rule start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0 --seed 94003
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --steps 20000000 --eval-every 100000 --rule start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0.0009 --seed 94003
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --kappa2 0.01 --kappa1 0 --seed 94003
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --steps 20000000 --eval-every 100000 --rule start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0 --seed 94004
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --steps 20000000 --eval-every 100000 --rule start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0.0009 --seed 94004
+--stage schedules-v77 --optimizer sgd --lr 0.001 --lr-schedule constant --kappa2 0.01 --kappa1 0 --seed 94004

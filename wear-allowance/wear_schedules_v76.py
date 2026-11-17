@@ -25,6 +25,13 @@ With a constant strength, --lr-schedule linear and 8,000,000 steps a run repeats
 Runtime: ~/.venvs/constrained-rl-numerics.
 
   python wear_schedules_v76.py --optimizer adam-coupled --kappa2 100@0.33,10@0.66,1@1 --lr-schedule constant --seed 94001
+
+--rule (added on 2026-11-17 for revision 77) lowers the pull by a rule in place of stages fixed in advance:
+"start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0". The pull starts at `start`. After every evaluation the
+monitored value U - m q / (1 - beta) of the current policy is recorded. When the stage holds at least two windows of
+`window` evaluations and the mean over the last window differs from the mean over the window before it by less than
+`tol`, the pull is divided by `factor`; below `min` it is removed. With sigma2 > 0 the noise strength is sigma2
+times the pull (relative entropy to a prior of variance sigma2). The changes are stored as rule_changes.
 """
 from __future__ import annotations
 import argparse, json, math, os, sys, time
@@ -67,6 +74,7 @@ def value_at(stages, fraction):
 class State:
     """Shared between the optimizer hook and the callback."""
     def __init__(self):
+        self.rule = None; self.k2 = 0.0; self.k1 = 0.0      # with --rule the strengths in force are set by the callback
         self.fraction = 0.0
         self.steps = 0; self.lr_sum = 0.0; self.noise_var_sum = 0.0
         self.reset_window()
@@ -85,7 +93,7 @@ def install_hook(sb3, theta0, arm, seed, st, k2_sched, k1_sched):
     held = [True] * len(params) if arm.get("anchor_part", "all") == "all" else [p is sb3.policy.log_std for p in params]
 
     def step(closure=None):
-        k2, k1 = value_at(k2_sched, st.fraction), value_at(k1_sched, st.fraction)
+        k2, k1 = (st.k2, st.k1) if st.rule else (value_at(k2_sched, st.fraction), value_at(k1_sched, st.fraction))
         with torch.no_grad():
             lr = max(float(opt.param_groups[0]["lr"]), 0.0)
             st.steps += 1; st.lr_sum += lr; st.noise_var_sum += 2.0 * k1 * lr
@@ -126,6 +134,7 @@ class Trace(BaseCallback):
         self.eval_every, self.eval_n, self.m, self.seed = eval_every, eval_n, m, seed
         self.episodes = 0; self.failures = 0; self.utility = 0.0
         self.trace = []; self.evals = []; self.next_eval = 0
+        self.stage_values = []; self.rule_changes = []
 
     def _on_step(self):
         for info in self.locals["infos"]:
@@ -151,11 +160,21 @@ class Trace(BaseCallback):
         a = stopped_action_kl(self.mdl, self.model, self.incumbent, n=max(self.eval_n // 2, 1), seed=8_000_000 + 1000 * k + self.seed % 1000)
         torch.set_rng_state(ts); np.random.set_state(ns)
         self.evals.append(dict(steps=int(self.num_timesteps), risk=s["risk"], U=s["U"], U_se=s["U_se"], A=a["A"]))
+        rule = self.st.rule
+        if rule and self.st.k2 > 0:                         # lower the pull when the monitored value has stopped changing
+            self.stage_values.append(s["U"] - self.m * s["risk"] / (1.0 - self.mdl.beta))
+            w = int(rule["window"])
+            if len(self.stage_values) >= 2 * w and abs(np.mean(self.stage_values[-w:]) - np.mean(self.stage_values[-2 * w:-w])) < rule["tol"]:
+                k2 = self.st.k2 / rule["factor"]
+                self.st.k2 = k2 if k2 >= rule["min"] * (1 - 1e-9) else 0.0
+                self.st.k1 = rule["sigma2"] * self.st.k2
+                self.rule_changes.append(dict(steps=int(self.num_timesteps), kappa2=self.st.k2, kappa1=self.st.k1))
+                self.stage_values = []
 
     def _on_rollout_end(self):
         st = self.st
         row = dict(steps=int(self.num_timesteps), lr=float(self.model.policy.optimizer.param_groups[0]["lr"]), lr_sum=st.lr_sum,
-                   kappa2=value_at(self.k2_sched, st.fraction), kappa1=value_at(self.k1_sched, st.fraction), eta=value_at(self.eta_sched, st.fraction),
+                   kappa2=(st.k2 if st.rule else value_at(self.k2_sched, st.fraction)), kappa1=(st.k1 if st.rule else value_at(self.k1_sched, st.fraction)), eta=value_at(self.eta_sched, st.fraction),
                    log_std=float(self.model.policy.log_std.detach().numpy().reshape(-1)[0]),
                    episodes=self.episodes, failure_rate=(self.failures / self.episodes if self.episodes else float("nan")),
                    utility=(self.utility / self.episodes if self.episodes else float("nan")))
@@ -176,7 +195,7 @@ def run(arm, seed, steps, out, eval_n, eval_every, trace_eval_n):
     model = Model(**arm["model"])
     incumbent = Incumbent(model, **arm["incumbent"])
     start, lr0 = arm["start"], arm["lr0"]
-    k2_sched, k1_sched, eta_sched = (parse_schedule(arm[k]) for k in ("kappa2", "kappa1", "eta"))
+    k2_sched, k1_sched, eta_sched = (parse_schedule("0" if arm[k] == "rule" else arm[k]) for k in ("kappa2", "kappa1", "eta"))
     venv = DummyVecEnv([lambda: WearEnv(model, "failure", arm["m"]) for _ in range(32)])
     venv.seed(seed)
     venv = VecNormalize(venv, norm_obs=False, norm_reward=True, clip_reward=1e9, gamma=1.0)
@@ -198,6 +217,9 @@ def run(arm, seed, steps, out, eval_n, eval_every, trace_eval_n):
     else:
         assert arm["optimizer"] == "adam-coupled" and all(v == 0 for _, v in k2_sched + k1_sched), "the default start has no theta_0"
     st = State()
+    if arm.get("rule"):
+        st.rule = {k: float(v) for k, v in (item.split("=") for item in arm["rule"].split(","))}
+        st.k2 = st.rule["start"]; st.k1 = st.rule["sigma2"] * st.k2
     install_hook(sb3, theta0, arm, seed, st, k2_sched, k1_sched)
     cb = Trace(st, model, incumbent, theta0, steps, (k2_sched, k1_sched, eta_sched), eval_every, trace_eval_n, arm["m"], seed)
     started = time.monotonic()
@@ -217,6 +239,8 @@ def run(arm, seed, steps, out, eval_n, eval_every, trace_eval_n):
         d = W.distance(sb3, theta0, True); n_par = sum(p.numel() for p in theta0)
         result.update(distance=d, n_actor_params=n_par, spread=d / math.sqrt(n_par))
     result["evals"] = cb.evals; result["trace"] = cb.trace
+    if st.rule:
+        result["rule_changes"] = cb.rule_changes
     out.mkdir(parents=True, exist_ok=True)
     sb3.save(out / "final_model.zip")
     (out / "result.json").write_text(json.dumps(result, allow_nan=True) + "\n")
@@ -238,11 +262,14 @@ if __name__ == "__main__":
     ap.add_argument("--eval-every", type=int, default=200_000); ap.add_argument("--trace-eval", type=int, default=4_000)
     ap.add_argument("--anchor-part", choices=["all", "dispersion"], default="all", help="the parameters the pull holds: all actor parameters, or the dispersion alone")
     ap.add_argument("--m", type=float, default=0.03, help="price of a breakdown (0.03 in the regularization studies)")
+    ap.add_argument("--rule", default="", help="lower the pull by a rule, e.g. start=100,factor=10,min=0.01,window=4,tol=0.04,sigma2=0")
     args = ap.parse_args()
     arm = dict(kind="schedules-v76", m=args.m, model=dict(wear_shape=0.5), incumbent=dict(span=3.0, std=0.1), start=args.start, optimizer=args.optimizer,
                lr0=args.lr, lr_schedule=args.lr_schedule, kappa2=args.kappa2, kappa1=args.kappa1, eta=args.eta, anchor_part=args.anchor_part)
+    if args.rule:
+        arm.update(rule=args.rule, kappa2="rule", kappa1="rule")
     name = (f"{args.start}__{args.optimizer}__lr{args.lr:g}-{args.lr_schedule}__steps{args.steps // 1_000_000}M"
-            f"__k2_{tag(args.kappa2)}__k1_{tag(args.kappa1)}__eta_{tag(args.eta)}{'' if args.m == 0.03 else f'__m{args.m:g}'}{'' if args.anchor_part == 'all' else '__anchor-' + args.anchor_part}__seed{args.seed}")
+            f"__k2_{tag(args.kappa2)}__k1_{tag(args.kappa1)}__eta_{tag(args.eta)}{'' if args.m == 0.03 else f'__m{args.m:g}'}{'' if args.anchor_part == 'all' else '__anchor-' + args.anchor_part}{'__rule_' + args.rule.replace(',', '_').replace('=', '') if args.rule else ''}__seed{args.seed}")
     out = HERE / "wear-schedules-v76" / args.stage / name
     if (out / "result.json").exists():
         print("exists", out); sys.exit(0)
