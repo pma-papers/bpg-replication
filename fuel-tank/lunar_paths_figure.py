@@ -6,7 +6,9 @@ a path in the colour of its end, a marker where it ended, and above each panel t
 Usage:  python lunar_paths_figure.py STAGE OUTPUT-NAME ARM [ARM ...] [--seed SEED | --seed all]
 Without --seed the seed is the one whose failure probability, summed over the configurations shown, is the median
 of the five seeds. With --seed all the panels show the 32 episodes of every seed (160 flights), and the numbers
-above a panel are means over the seeds. With --seed each and one ARM the panels are the seeds of that configuration. Reads lunar-paths-STAGE.json (lunar_problem_eval_v76.py --stage STAGE); writes OUTPUT-NAME (pdf/png) and OUTPUT-NAME-numbers.json.
+above a panel are means over the seeds. With --seed each and one ARM the panels are the seeds of that configuration. With --seed grid the rows are the
+configurations and the columns the seeds; above a panel are then the percentages of the three ends alone, in the
+colours of the ends. Reads lunar-paths-STAGE.json (lunar_problem_eval_v76.py --stage STAGE); writes OUTPUT-NAME (pdf/png) and OUTPUT-NAME-numbers.json.
 """
 import json
 import sys
@@ -23,7 +25,7 @@ from matplotlib.lines import Line2D  # noqa: E402
 args = sys.argv[1:]
 seed = None
 if "--seed" in args:
-    i = args.index("--seed"); seed = args[i + 1] if args[i + 1] in ("all", "each") else int(args[i + 1]); args = args[:i] + args[i + 2:]
+    i = args.index("--seed"); seed = args[i + 1] if args[i + 1] in ("all", "each", "grid") else int(args[i + 1]); args = args[:i] + args[i + 2:]
 stage, name, arms = args[0], args[1], args[2:]
 ENDS = ("landed", "lost", "empty")
 END_MK = {"landed": "o", "lost": "v", "empty": "x"}
@@ -48,6 +50,37 @@ def label(v):
     return price if ONE_TANK else f"tank ${v['budget']:g}$, {price}"
 
 
+if seed == "grid":                                    # rows the configurations, columns the seeds
+    nrow, ncol = len(arms), len(seeds)
+    fig, axes = plt.subplots(nrow, ncol, figsize=(TEXTW, 1.0 * nrow + 0.75), sharex=True, sharey=True, gridspec_kw=dict(wspace=0.08, hspace=0.34), squeeze=False)
+    out = dict(stage=stage, seed="grid")
+    for i, arm in enumerate(arms):
+        for j, sd in enumerate(seeds):
+            ax, v = axes[i, j], d[f"{arm}__seed{sd}"]
+            for e in ENDS:
+                for q in v["paths"]:
+                    if q["end"] != e:
+                        continue
+                    ax.plot(q["x"], q["y"], color=END_COL[e], lw=0.5, alpha=0.55 if e == "landed" else 0.85, zorder=2 if e == "landed" else 3)
+                    ax.plot(np.clip(q["x"][-1], *XLIM), np.clip(q["y"][-1], *YLIM), marker=END_MK[e], color=END_COL[e], ms=2.6, mew=0.7, mfc="white", ls="none", zorder=5, clip_on=False)
+            ax.plot([-0.2, 0.2], [0, 0], color="k", lw=1.8, solid_capstyle="butt", zorder=4)
+            ax.axhline(0, color=MUTED, lw=0.5, zorder=1)
+            ax.set_xlim(*XLIM); ax.set_ylim(*YLIM); ax.grid(False); ax.set_xticks([-0.3, 0, 0.3]); ax.set_yticks([0, 0.2, 0.4]); ax.tick_params(labelsize=FS - 2.5)
+            f = v["frequencies"]
+            for e, xpos, ha in zip(ENDS, (0.0, 0.5, 1.0), ("left", "center", "right")):
+                ax.text(xpos, 1.03, f"{100 * f[e]:.0f}%", transform=ax.transAxes, ha=ha, va="bottom", fontsize=FS - 2.8, color=END_COL[e])
+            if i == 0:
+                ax.text(0.5, 1.24, f"seed {j + 1}", transform=ax.transAxes, ha="center", va="bottom", fontsize=FS - 1)
+            if j == 0:
+                ax.set_ylabel("no price" if v["m"] == 0 else f"$m={v['m']:g}$", fontsize=FS - 1)
+            out[f"{arm} seed {sd}"] = dict(frequencies=f, U=v["U"], fuel_median=v["fuel_median"], paths={e: sum(q["end"] == e for q in v["paths"]) for e in ENDS})
+    axes[-1, ncol // 2].set_xlabel("horizontal position", fontsize=FS - 1)
+    handles = [Line2D([], [], color="k", lw=2.0, label="landing pad")] + [Line2D([], [], color=END_COL[e], marker=END_MK[e], mfc="white", mew=0.9, lw=0.8, ms=3.5, label=END_LAB[e]) for e in ENDS]
+    fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, -0.01), ncol=4, frameon=False, fontsize=FS - 1.5, columnspacing=1.0, handletextpad=0.5)
+    fig.subplots_adjust(bottom=0.11, top=0.95)
+    (ROOT / f"{name}-numbers.json").write_text(json.dumps(out, indent=1) + "\n")
+    save(fig, name, ROOT)
+    sys.exit(0)
 EACH = seed == "each"
 if EACH:
     assert len(arms) == 1
