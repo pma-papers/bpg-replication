@@ -1235,6 +1235,54 @@
    "tank_until_touchdown": true,
    "fuel_price": 16.0,
    "vehicle_worth_in_landings": 8
+  },
+  "ledger-R36-b24-k0.25": {
+   "kind": "fixed",
+   "m": 0.015161383388273386,
+   "budget": 24.0,
+   "crash_fails": true,
+   "tank_until_touchdown": true,
+   "fuel_price": 1.0,
+   "revenue": 36.0,
+   "progress": "aid",
+   "aid_scale": 0.08333333333333333,
+   "vehicle_worth_in_landings": 0.25
+  },
+  "ledger-R36-b24-k1": {
+   "kind": "fixed",
+   "m": 0.060645533553093545,
+   "budget": 24.0,
+   "crash_fails": true,
+   "tank_until_touchdown": true,
+   "fuel_price": 1.0,
+   "revenue": 36.0,
+   "progress": "aid",
+   "aid_scale": 0.08333333333333333,
+   "vehicle_worth_in_landings": 1
+  },
+  "ledger-R36-b24-k4": {
+   "kind": "fixed",
+   "m": 0.24258213421237418,
+   "budget": 24.0,
+   "crash_fails": true,
+   "tank_until_touchdown": true,
+   "fuel_price": 1.0,
+   "revenue": 36.0,
+   "progress": "aid",
+   "aid_scale": 0.08333333333333333,
+   "vehicle_worth_in_landings": 4
+  },
+  "ledger-R36-b24-k16": {
+   "kind": "fixed",
+   "m": 0.9703285368494967,
+   "budget": 24.0,
+   "crash_fails": true,
+   "tank_until_touchdown": true,
+   "fuel_price": 1.0,
+   "revenue": 36.0,
+   "progress": "aid",
+   "aid_scale": 0.08333333333333333,
+   "vehicle_worth_in_landings": 16
   }
  },
  "stages": {
@@ -2340,6 +2388,112 @@
     "bench-c16-b22-k8"
    ],
    "note": "Test of the stage formulations-const on Roihu (500,000 steps), to measure the speed and the memory of a run before the pilot is submitted."
+  },
+  "ledger-const": {
+   "steps": 5000000,
+   "warm_steps": 30000000,
+   "eval_n": 2000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005,
+    72006,
+    72007,
+    72008,
+    72009,
+    72010
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": false
+   },
+   "arms": [
+    "ledger-R36-b24-k0",
+    "ledger-R36-b24-k0.25",
+    "ledger-R36-b24-k0.5",
+    "ledger-R36-b24-k1",
+    "ledger-R36-b24-k2",
+    "ledger-R36-b24-k4",
+    "ledger-R36-b24-k8",
+    "ledger-R36-b24-k16"
+   ],
+   "protocol_note": "Main runs of the lander problem in the form chosen by the author on 2026-11-18 after the pilot across formulations: the ledger with revenue 36, paid once when the lander rests on the pad, fuel at 1 per unit and a tank of 24 units. The worth of the vehicle is k = 0, 0.25, 0.5, 1, 2, 4, 8, 16 landings (the price m is such that a failure at frame 100 is charged 36 k), ten seeds. Training continues from the controller of the same seed trained without a tank under the benchmark's reward (stage campaign, lunar-unlimited), 30 million steps at a constant rate and 10 million with the rate decayed to zero, twice the pilot, because the failure rate was still falling at the end of several pilot runs. The trace records per rollout the failure rate, the completed share, the fuel used and the discounted utility of the training episodes. 2000 evaluation episodes per run."
+  },
+  "ledger-anneal": {
+   "steps": 5000000,
+   "warm_steps": 10000000,
+   "eval_n": 2000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005,
+    72006,
+    72007,
+    72008,
+    72009,
+    72010
+   ],
+   "warm_from": "@same",
+   "warm_stage": "ledger-const",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": true
+   },
+   "arms": [
+    "ledger-R36-b24-k0",
+    "ledger-R36-b24-k0.25",
+    "ledger-R36-b24-k0.5",
+    "ledger-R36-b24-k1",
+    "ledger-R36-b24-k2",
+    "ledger-R36-b24-k4",
+    "ledger-R36-b24-k8",
+    "ledger-R36-b24-k16"
+   ]
+  },
+  "ledger-test": {
+   "steps": 5000000,
+   "warm_steps": 60000,
+   "eval_n": 64,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005,
+    72006,
+    72007,
+    72008,
+    72009,
+    72010
+   ],
+   "warm_from": "lunar-unlimited",
+   "warm_stage": "campaign",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": false
+   },
+   "arms": [
+    "ledger-R36-b24-k0",
+    "ledger-R36-b24-k0.25",
+    "ledger-R36-b24-k0.5",
+    "ledger-R36-b24-k1",
+    "ledger-R36-b24-k2",
+    "ledger-R36-b24-k4",
+    "ledger-R36-b24-k8",
+    "ledger-R36-b24-k16"
+   ]
   }
  }
 }

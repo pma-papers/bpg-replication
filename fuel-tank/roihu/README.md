@@ -11,3 +11,13 @@
   controllers of `lunar/campaign/lunar-unlimited__seed*`, logs, records).
 
 All computation runs through Slurm on compute nodes. The login node is used for building, submitting and light checks.
+
+## The main runs of the chosen form (18 November 2026)
+
+The ledger with revenue 36 and a tank of 24 units, chosen by the author after the pilot. Eight prices (worth of the
+vehicle 0, 0.25, 0.5, 1, 2, 4, 8, 16 landings) and ten seeds, 30 million steps at a constant rate (stage
+`ledger-const`) and 10 million with the rate decayed to zero (stage `ledger-anneal`).
+
+- `run_lunar_unlimited.sh`: the starting controllers of the seeds 72006 to 72010, `sbatch --array=6-10 run_lunar_unlimited.sh`.
+- `runs-ledger.txt`: the 80 runs, one per array task, submitted after the first job with
+  `sbatch --dependency=afterok:JOB --time=06:00:00 --array=1-80 run_lunar_array.sh runs-ledger.txt 1 ledger-const ledger-anneal`.

@@ -103,6 +103,7 @@ class FuelLander(gym.Env):
         super().reset(seed=seed)
         o, info = self.inner.reset(seed=seed)
         self.reserve, self.t, self.used = self.budget, 0, 0.0
+        self.episode_utility = 0.0                   # the discounted utility of the episode so far
         self.touched = False                         # whether a leg has touched the ground in an earlier frame
         self.prev_phi = potential(o)
         return self._obs(o), info
@@ -145,8 +146,9 @@ class FuelLander(gym.Env):
             phi = 0.0 if (terminated or truncated) else potential(o)
             reward += self.aid_scale * (self.beta * phi - self.prev_phi)
             self.prev_phi = phi
+        self.episode_utility += self.beta ** self.t * utility
         self.t += 1
-        info = dict(fuel=g, failure=bool(failed), utility=utility, landed=landed, crashed=crashed, used=self.used,
+        info = dict(fuel=g, failure=bool(failed), utility=utility, landed=landed, crashed=crashed, used=self.used, episode_utility=self.episode_utility,
                     exhausted=bool(exhausted), lost=lost, touched=self.touched, empty=bool(self.reserve <= 0.0), completed=completed)
         if terminated or truncated:
             info["episode_failed"] = bool(failed)
@@ -160,6 +162,7 @@ class Control(BaseCallback):
         self.every, self.last = every, 0             # a learner with short rollouts records and updates every `every` steps
         self.log = log                               # file that receives each record of the trace as it is made
         self.ends = dict(landed=0, exhausted=0, lost=0)
+        self.sums = dict(completed=0.0, used=0.0, episode_utility=0.0)      # of the episodes that ended since the last record
         self.multiplier = float(arm.get("multiplier0", 0.0))
         self.episodes = self.failures = 0
         self.trace = []
@@ -171,6 +174,8 @@ class Control(BaseCallback):
                 self.failures += int(info["episode_failed"])
                 for k in self.ends:
                     self.ends[k] += int(info[k])
+                for k in self.sums:
+                    self.sums[k] += float(info[k])
         return True
 
     def _on_rollout_end(self):
@@ -183,13 +188,15 @@ class Control(BaseCallback):
             self.multiplier = max(0.0, self.multiplier + self.arm["dual_step"] * (rate - self.arm["alpha"]))
             self.training_env.env_method("set_multiplier", self.multiplier)
         record = dict(steps=int(self.num_timesteps), multiplier=self.multiplier, episodes=self.episodes, failure_rate=rate,
-                      **{k: (v / self.episodes if self.episodes else float("nan")) for k, v in self.ends.items()})
+                      **{k: (v / self.episodes if self.episodes else float("nan")) for k, v in self.ends.items()},
+                      **{{"used": "fuel", "episode_utility": "U"}.get(k, k): (v / self.episodes if self.episodes else float("nan")) for k, v in self.sums.items()})
         self.trace.append(record)
         if self.log is not None:
             with open(self.log, "a") as fh:
                 fh.write(json.dumps(record) + "\n")
         self.episodes = self.failures = 0
         self.ends = dict(landed=0, exhausted=0, lost=0)
+        self.sums = dict(completed=0.0, used=0.0, episode_utility=0.0)
 
 
 def evaluate(sb3, budget, beta, *, n, seed, n_envs=32, deterministic=False, crash_fails=False, tank_until_touchdown=False, fuel_price=1.0, **formulation):
