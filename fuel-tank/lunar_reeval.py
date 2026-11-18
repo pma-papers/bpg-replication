@@ -74,6 +74,8 @@ def main():
         st = r["stochastic"]
         cf = bool(r["arm"].get("crash_fails", False))
         options = dict(crash_fails=cf, tank_until_touchdown=bool(r["arm"].get("tank_until_touchdown", False)), fuel_price=float(r["arm"].get("fuel_price", 1.0)))
+        if r["arm"].get("revenue") is not None:                   # the ledger of 2026-11-17: revenue at completion, fuel at its price, the progress aid
+            options.update(revenue=float(r["arm"]["revenue"]), progress=r["arm"].get("progress", "aid"), aid_scale=float(r["arm"].get("aid_scale", 1.0 / 12.0)))
         model = d / "final_model.zip" if (d / "final_model.zip").exists() else ROOT / r["model"]   # the controllers without a fuel limit are those of the stage campaign
         rec = evaluate(PPO.load(model, device="cpu"), r["arm"]["budget"], st["n"], st["seed"], **options)
         U = np.array([x[0] for x in rec])

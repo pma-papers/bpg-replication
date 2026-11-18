@@ -81,6 +81,8 @@ def main():
             st = r["stochastic"]
             a = r["arm"]
             options = {k: a[k] for k in ("crash_fails", "tank_until_touchdown", "fuel_price") if k in a}
+            if a.get("revenue") is not None:                      # the ledger of 2026-11-17
+                options.update(revenue=float(a["revenue"]), progress=a.get("progress", "aid"), aid_scale=float(a.get("aid_scale", 1.0 / 12.0)))
             loader = SAC if (d / "final_model.zip").exists() and "sac" in stage else PPO
             model = d / "final_model.zip" if (d / "final_model.zip").exists() else ROOT / r["model"]
             ends, paths = evaluate(loader.load(model, device="cpu"), a["budget"], st["n"], st["seed"], **options)
