@@ -2494,6 +2494,77 @@
     "ledger-R36-b24-k8",
     "ledger-R36-b24-k16"
    ]
+  },
+  "ledger-staged-const": {
+   "steps": 5000000,
+   "warm_steps": 20000000,
+   "eval_n": 2000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005,
+    72006,
+    72007,
+    72008,
+    72009,
+    72010
+   ],
+   "warm_from": "ledger-R36-b24-k0",
+   "warm_stage": "ledger-const",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": false
+   },
+   "arms": [
+    "ledger-R36-b24-k0",
+    "ledger-R36-b24-k0.25",
+    "ledger-R36-b24-k0.5",
+    "ledger-R36-b24-k1",
+    "ledger-R36-b24-k2",
+    "ledger-R36-b24-k4",
+    "ledger-R36-b24-k8",
+    "ledger-R36-b24-k16"
+   ],
+   "protocol_note": "Added on 2026-11-18 while the runs of the stages ledger-const and ledger-anneal were at 8 to 17 million of their 40 million steps, before any of them had been evaluated. Reason, from their training traces: the controller trained without a tank, from which those runs start, empties the tank of 24 units in the air in every episode (near frame 143), so every run begins with all episodes failed. The time until the learner first lands differs by seed and by price (median about 1.2 million steps at every price; with the starting controllers of the seeds 72006 and 72007 between 2 and more than 14 million steps, and three runs at the worths 4, 8 and 16 had not left that state). After the first landings many runs keep the habit of the starting controller and burn the rest of the tank on the ground for millions of steps, longer at the larger prices. Both are effects of the starting point on the learner and not of the price on the problem. In this stage every run therefore starts from the controller of the same seed trained on the same problem without a price (stage ledger-const, worth 0, 30 million steps at a constant rate), which lands. The run without a price is continued for the same number of steps, so that all prices have had equal training. 20 million steps at a constant rate, then 10 million with the rate decayed to zero (stage ledger-staged-anneal). All other settings, the prices, the seeds and the 2000 evaluation episodes are those of ledger-const. The runs of ledger-const and ledger-anneal are completed and reported as well. The job script passes the starting model with --init for every worth, the worth 0 included."
+  },
+  "ledger-staged-anneal": {
+   "steps": 5000000,
+   "warm_steps": 10000000,
+   "eval_n": 2000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005,
+    72006,
+    72007,
+    72008,
+    72009,
+    72010
+   ],
+   "warm_from": "@same",
+   "warm_stage": "ledger-staged-const",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": true
+   },
+   "arms": [
+    "ledger-R36-b24-k0",
+    "ledger-R36-b24-k0.25",
+    "ledger-R36-b24-k0.5",
+    "ledger-R36-b24-k1",
+    "ledger-R36-b24-k2",
+    "ledger-R36-b24-k4",
+    "ledger-R36-b24-k8",
+    "ledger-R36-b24-k16"
+   ]
   }
  }
 }

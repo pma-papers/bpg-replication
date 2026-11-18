@@ -21,3 +21,15 @@ vehicle 0, 0.25, 0.5, 1, 2, 4, 8, 16 landings) and ten seeds, 30 million steps a
 - `run_lunar_unlimited.sh`: the starting controllers of the seeds 72006 to 72010, `sbatch --array=6-10 run_lunar_unlimited.sh`.
 - `runs-ledger.txt`: the 80 runs, one per array task, submitted after the first job with
   `sbatch --dependency=afterok:JOB --time=06:00:00 --array=1-80 run_lunar_array.sh runs-ledger.txt 1 ledger-const ledger-anneal`.
+
+### Runs that start from the controller trained without a price (added 18 November 2026)
+
+The traces of the main runs showed, before any run had been evaluated, that the starting controller (trained without
+a tank) empties the tank in the air in every episode, and that the time until the learner first lands differs by seed
+and by price. A second set of 80 runs therefore starts from the controller of the same seed trained on the same
+problem without a price (stage `ledger-const`, worth 0): 20 million steps at a constant rate (stage
+`ledger-staged-const`) and 10 million with the rate decayed to zero (stage `ledger-staged-anneal`). The reason is
+recorded in the design file with the stage.
+
+- `run_lunar_staged.sh`: submitted when the ten runs without a price of `ledger-const` have ended, with
+  `sbatch --array=1-80 run_lunar_staged.sh runs-ledger.txt`.
