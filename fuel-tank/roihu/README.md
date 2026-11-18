@@ -33,3 +33,10 @@ recorded in the design file with the stage.
 
 - `run_lunar_staged.sh`: submitted when the ten runs without a price of `ledger-const` have ended, with
   `sbatch --array=1-80 run_lunar_staged.sh runs-ledger.txt`.
+
+### Continuation of the runs started from the no-price controller (added 18 November 2026)
+
+At the end of the constant phase of `ledger-staged-const` the runs at the largest price had not settled. Every run
+is continued from the end of that phase for 30 million further steps at the constant rate (stage
+`ledger-staged-const2`) and 10 million with the rate decayed to zero (stage `ledger-staged-anneal2`), submitted with
+`sbatch --job-name=bpg-ext --time=06:00:00 --array=1-80 run_lunar_array.sh runs-ledger.txt 1 ledger-staged-const2 ledger-staged-anneal2`.

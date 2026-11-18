@@ -2565,6 +2565,77 @@
     "ledger-R36-b24-k8",
     "ledger-R36-b24-k16"
    ]
+  },
+  "ledger-staged-const2": {
+   "steps": 5000000,
+   "warm_steps": 30000000,
+   "eval_n": 2000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005,
+    72006,
+    72007,
+    72008,
+    72009,
+    72010
+   ],
+   "warm_from": "@same",
+   "warm_stage": "ledger-staged-const",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": false
+   },
+   "arms": [
+    "ledger-R36-b24-k0",
+    "ledger-R36-b24-k0.25",
+    "ledger-R36-b24-k0.5",
+    "ledger-R36-b24-k1",
+    "ledger-R36-b24-k2",
+    "ledger-R36-b24-k4",
+    "ledger-R36-b24-k8",
+    "ledger-R36-b24-k16"
+   ],
+   "protocol_note": "Added on 2026-11-18 when the constant phase of the stage ledger-staged-const had ended (20 million steps) and before its final phase had been evaluated. Reason, from the training traces: at the worths 0 to 2 the fuel used and the utility of the training episodes had been level since about 4 million steps, at the worths 4 and 8 they were nearly level, and at the worth 16 they were still moving (fuel used 19.0, 19.3 and 19.5 units and utility 11.7, 11.4 and 11.2 in the windows 8 to 12, 12 to 16 and 16 to 20 million steps, means over the ten seeds). The runs of the first set (stage ledger-const), which come down from a full tank, ended with more fuel used at the worths 4, 8 and 16 than these runs, so the two sets had not met there. This stage continues every run of ledger-staged-const from the end of its constant phase for 30 million further steps at the constant rate, at all worths, so that all have had equal training, followed by 10 million steps with the rate decayed to zero (stage ledger-staged-anneal2). The runs of ledger-staged-anneal, decayed after 20 million steps, are completed and reported as well."
+  },
+  "ledger-staged-anneal2": {
+   "steps": 5000000,
+   "warm_steps": 10000000,
+   "eval_n": 2000,
+   "seeds": [
+    72001,
+    72002,
+    72003,
+    72004,
+    72005,
+    72006,
+    72007,
+    72008,
+    72009,
+    72010
+   ],
+   "warm_from": "@same",
+   "warm_stage": "ledger-staged-const2",
+   "ppo": {
+    "normalize": true,
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "lr_linear": true
+   },
+   "arms": [
+    "ledger-R36-b24-k0",
+    "ledger-R36-b24-k0.25",
+    "ledger-R36-b24-k0.5",
+    "ledger-R36-b24-k1",
+    "ledger-R36-b24-k2",
+    "ledger-R36-b24-k4",
+    "ledger-R36-b24-k8",
+    "ledger-R36-b24-k16"
+   ]
   }
  }
 }
