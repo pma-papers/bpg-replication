@@ -146,6 +146,7 @@ The code is under the MIT licence ([`LICENSE`](LICENSE)); the protocols, reports
 tables and figures are under CC BY 4.0 ([`LICENSE-records.md`](LICENSE-records.md)). Cite the paper and this
 repository as in [`CITATION.cff`](CITATION.cff). The repository is archived on Zenodo:
 [10.5281/zenodo.23597426](https://doi.org/10.5281/zenodo.23597426) for all versions,
+[10.5281/zenodo.24369373](https://doi.org/10.5281/zenodo.24369373) for the release of revision 77,
 [10.5281/zenodo.24194766](https://doi.org/10.5281/zenodo.24194766) for the release of revision 76,
 [10.5281/zenodo.23986660](https://doi.org/10.5281/zenodo.23986660) for the release of revision 75, and
 [10.5281/zenodo.23597427](https://doi.org/10.5281/zenodo.23597427) for the release of revision 73, whose records and numbers are the same.
