@@ -1,5 +1,7 @@
 # Runs of the benchmark-suite study on CSC's supercomputer Roihu
 
+Before submitting, the CSC project and the Slurm account are set in the shell on Roihu, `export CSC_PROJECT=<CSC project> SBATCH_ACCOUNT=<CSC project>`. The scripts build their folders from `$CSC_PROJECT` and the login name `$USER`, under `/projappl/$CSC_PROJECT/$USER-bpg` and `/scratch/$CSC_PROJECT/$USER-bpg`.
+
 From 17 November 2026 the runs of `safety_study_v76.py` with the soft actor-critic are made on Roihu
 (CPU nodes, AMD EPYC 9965), as batch jobs on compute nodes. Nothing of the study is computed on a login node.
 

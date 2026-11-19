@@ -87,3 +87,7 @@ The published snapshot differs from the working history in two ways.
   (`fuel-tank/lunar/campaign/*/result.json`), three fuel-tank campaign logs, three wear-allowance pilot logs and
   three benchmark-suite logs. Nothing else in these files changed, and no protocol or hashed file contained the path,
   so every hash above still holds.
+- Records added from 13 to 18 November 2026 were treated in the same way before they were published (2026-11-19):
+  the home folder was replaced by `<project>` in 512 files, mostly result files and logs of the lander runs, and the
+  CSC project and user name in the Roihu job scripts and their READMEs were replaced by `$CSC_PROJECT` and `$USER`
+  (the account line by a comment on `SBATCH_ACCOUNT`). Nothing else in these files changed.

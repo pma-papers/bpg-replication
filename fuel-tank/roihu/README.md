@@ -1,5 +1,7 @@
 # The lander pilot across formulations on CSC's Roihu (17 November 2026)
 
+Before submitting, the CSC project and the Slurm account are set in the shell on Roihu, `export CSC_PROJECT=<CSC project> SBATCH_ACCOUNT=<CSC project>`. The scripts build their folders from `$CSC_PROJECT` and the login name `$USER`, under `/projappl/$CSC_PROJECT/$USER-bpg` and `/scratch/$CSC_PROJECT/$USER-bpg`.
+
 - `env-numerics313.yml`, `post-install-numerics313.sh`: the environment, built on the login node with
   `conda-containerize new --prefix /projappl/${CSC_PROJECT}/${USER}-bpg/numerics313 --post-install post-install-numerics313.sh env-numerics313.yml`
   (module tykky/0.6.0). The packages are those of `environments/constrained-rl-numerics.txt`, torch in its CPU build.
