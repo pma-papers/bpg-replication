@@ -91,3 +91,9 @@ The published snapshot differs from the working history in two ways.
   the home folder was replaced by `<project>` in 512 files, mostly result files and logs of the lander runs, and the
   CSC project and user name in the Roihu job scripts and their READMEs were replaced by `$CSC_PROJECT` and `$USER`
   (the account line by a comment on `SBATCH_ACCOUNT`). Nothing else in these files changed.
+- The records of the landing problem published with the release of revision 77 (the stages `formulations-const`,
+  `formulations-anneal`, `ledger-const`, `ledger-anneal`, `ledger-staged-const`, `ledger-staged-anneal`,
+  `ledger-staged-const2` and `ledger-staged-anneal2`, five starting controllers in `fuel-tank/lunar/campaign/`, and
+  `fuel-tank/lunar-paths-ledger-staged-anneal2.json`) were treated in the same way: the path of the working folder on
+  Roihu, `/scratch/<CSC project>/<CSC user>-bpg`, was written `/scratch/${CSC_PROJECT}/${USER}-bpg` in 1360 result,
+  progress and priced-risk files. Nothing else in these files changed, and the trained policies contained no such path.

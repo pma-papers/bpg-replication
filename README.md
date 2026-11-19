@@ -8,17 +8,20 @@ that each table and figure of the paper can be regenerated from the records, and
 It is separate from the toolbox. The toolbox, [`barrierpg`](https://github.com/pma-papers/barrierpg), is for applying
 clipped barrier policy gradients to a new problem; this repository is for checking the paper. Results are named by the
 titles the paper gives them, not by statement, section or table numbers, which change between revisions. The tables
-the scripts generate were checked against revision 76 of the paper. Revisions 74 to 76 changed the paper's wording and
-added figures; the fifty fuel-tank runs of 10 November 2026 and their tables are the only new numbers since revision 73.
+the scripts generate were checked against revision 77 of the paper. Revision 77 replaced the lander study by a landing
+problem of our own (the runs of 17 and 18 November 2026, stages `formulations-*` and `ledger-*` in `fuel-tank/lunar/`),
+added runs with regularization strengths lowered by a schedule or by a rule on the wear-allowance controller (stage
+`schedules-v77`), and moved the benchmark-suite study out of the paper. The folders of the earlier lander studies and
+of the benchmark suite stay here with their records.
 
 ## Studies
 
 | Folder | Study in the paper | What it tests |
 |---|---|---|
 | [`wear-allowance/`](wear-allowance) | An asset operated under a wear allowance; the prior on a learned controller; noise and the anchor on a learned controller | The price against an exact benchmark, the adaptive multiplier, the interior barrier when the true allowance is smaller than the allowance used in training, the action anchor, the parameter anchor and parameter noise |
-| [`fuel-tank/`](fuel-tank) | A learned controller under a fuel limit | The price on a learned controller (LunarLander with a fuel tank), the dual step of an adaptive multiplier |
+| [`fuel-tank/`](fuel-tank) | A learned lander paid for each landing (the landing problem: revenue 36 on the pad, fuel at 1 per unit, a tank of 24 units, built on the simulator of LunarLanderContinuous-v3); the fuel-tank studies of revisions up to 76 | The price on a learned controller and the optimization error, which grows with the price and with a poorer start; in revisions up to 76, the dual step of an adaptive multiplier |
 | [`solvable-flow/`](solvable-flow) | The convergence theorem and the regularizers on the analytical example | The slack of the curvature threshold, the prior policy, noise, drift and spread, the particle system |
-| [`benchmark-suite/`](benchmark-suite) | A task of a benchmark suite (details in Online Resource 1) | A Safety-Gymnasium navigation task: the price, the adaptive multiplier and the expected-cost formulation |
+| [`benchmark-suite/`](benchmark-suite) | A task of a benchmark suite, reported in revisions up to 76 and not in revision 77 | A Safety-Gymnasium navigation task: the price, the adaptive multiplier and the expected-cost formulation |
 | [`lib/`](lib) | shared modules | plotting style, density flow, digest helpers |
 
 Each folder has the protocols (`PROTOCOL*.md`, some with a SHA256 recorded before the campaign), the runners, the
@@ -45,8 +48,14 @@ each output corresponds to is named in the last column.
 | Wear allowance, convergence and strengths changed during training (revision 76, 2026-11-14): runs with a trace after every rollout, a constant learning rate, anchor strengths changed in steps, noise removed, action regularization lowered, three fixed prices | `wear-allowance/wear_schedules_v76.py` (run lists `schedules-*-v76.txt`, runs in `wear-schedules-v76/campaign`) | `constrained-rl-numerics` | none directly |
 | Wear allowance, the kernel of the action-regularized objective by dynamic programming | `wear-allowance/soft_benchmark_v76.py` | `constrained-rl` | `soft-benchmark-v76.json` |
 | Wear allowance, the figures and tables on convergence, strength schedules and the three optimizers | `wear-allowance/regularization_figures_v76.py` (first drawings: `analyze_schedules_v76.py`, `campaign_convergence_v76.py`, `optimizers_figure_v76.py`) | `constrained-rl` | `figures/wear-optimizers` (paper), `figures/wear-anchor-traces`, `wear-anchor-schedules`, `wear-noise-traces`, `wear-action-kernel`, `wear-price-traces`, `tables/wear-optimizers`, `wear-anchor-schedules`, `wear-own-price` |
-| Fuel tank: tables and figure | `fuel-tank/lunar_analyze_v41.py` | `constrained-rl` | `tables/fuel-tank`, `tables/fuel-tank-paired`, `tables/fuel-tank-price-risk`, `tables/fuel-tank-amount`, `figures/fuel-tank` |
-| Fuel tank: priced risk of the stored fixed-price policies (the exhaustion frames of a second evaluation on the same episodes; `priced-risk.json` in each run folder) | `fuel-tank/lunar_reeval.py` | `constrained-rl-numerics` | read by `lunar_analyze_v41.py` |
+| Landing problem (revision 77): the figures and tables of the paper and of Online Resource 1, and every number of the text | `fuel-tank/lunar_landing_paper.py OUTDIR` | `constrained-rl` | `figures/landing-flights`, `landing-summary`, `landing-descent-seeds`, `landing-convergence`, `tables/landing`, `landing-values`, `landing-convergence`; `landing-numbers.json` |
+| Landing problem: fuel before and after touchdown of the stored policies (500 episodes per policy) | `fuel-tank/lunar_touchdown_split.py` | `constrained-rl-numerics` | read by `lunar_landing_paper.py` (`lunar-touchdown-split-*.json`) |
+| Landing problem: summaries of the three sets of runs, with training traces | `fuel-tank/lunar_ledger_main.py` | `constrained-rl` | none directly (`lunar-ledger-{main,staged,staged2}.*`) |
+| Landing problem: the trial runs across formulations (benchmark reward with costly fuel, revenue on the pad; tanks of 18 to 24 units) | `fuel-tank/lunar_formulations_pilot.py` | `constrained-rl` | the table of trial runs in Online Resource 1 (`lunar-formulations-pilot*`) |
+| Wear allowance, strengths lowered by a schedule against strengths held fixed (revision 77) | `wear-allowance/analyze_schedules_v77.py` (runs of `wear_schedules_v76.py --stage schedules-v77`, run list `schedules-v77-campaign.txt`, logs in `schedules-logs/`) | `constrained-rl` | `figures/wear-schedules`, `tables/wear-schedules` |
+| Wear allowance, the pull lowered by a rule (revision 77) | `wear-allowance/analyze_rule_v77.py` (run list `schedules-v77-rule-campaign.txt`) | `constrained-rl` | `figures/wear-rule`, `tables/wear-rule` |
+| Fuel tank (revisions up to 76): tables and figure | `fuel-tank/lunar_analyze_v41.py` | `constrained-rl` | `tables/fuel-tank`, `tables/fuel-tank-paired`, `tables/fuel-tank-price-risk`, `tables/fuel-tank-amount`, `figures/fuel-tank` |
+| Fuel tank and landing problem: priced risk of the stored fixed-price policies (the failing frames of a second evaluation on the same episodes; `priced-risk.json` in each run folder) | `fuel-tank/lunar_reeval.py` | `constrained-rl-numerics` | read by `lunar_analyze_v41.py` |
 | Solvable flow: convergence test | `solvable-flow/regularizer_figure_v76.py` (figures), `regularizer_figure_v46.py` (table) | `constrained-rl` | `tables/flow-test`, `figures/flow-test`, `figures/flow-test-below` |
 | Solvable flow: prior strength | `solvable-flow/prior_figure.py` | `constrained-rl` | `tables/prior-sweep`, `figures/prior-sweep` |
 | Solvable flow: regularization paths | `solvable-flow/prior_figure_v76.py`, `prior_path_table_v41.py` | `constrained-rl` | `figures/prior`, `tables/prior-paths` |
@@ -56,7 +65,7 @@ each output corresponds to is named in the last column.
 | Solvable flow: the prior, the strength and a strength lowered in steps (figure of the paper) | `solvable-flow/prior_strength_figure_v76.py`, `unregularized_from_prior_v76.py` | `constrained-rl` | `figures/prior-strength` |
 | Solvable flow: the runs from a Gaussian initial law | `solvable-flow/initial_law_check_v76.py` | `constrained-rl` | numbers of Appendix D.3 |
 | Solvable flow: the bound of the corollary on the risk along the flow | `solvable-flow/corollary_bound_v60.py` | `constrained-rl` | `figures/corollary-bound` |
-| Benchmark suite: table and figure | `benchmark-suite/analyze_safety_v63.py` (writes to `output/`) | `constrained-rl` | `tables/safety`, `figures/safety` |
+| Benchmark suite (revisions up to 76): table and figure | `benchmark-suite/analyze_safety_v63.py` (writes to `output/`) | `constrained-rl` | `tables/safety`, `figures/safety` |
 | Illustrations of the theory (the logic of the clipped barrier, the identity on one path, the curvature budget along a geodesic of Gaussian laws) | `illustrations/introduction_schematic.py`, `running_example_figures.py`, `curvature_geodesic_v76.py` | `constrained-rl` | `figures/logic`, `identity`, `curvature` |
 | Setup of the test problems (Online Resource 1): the wear-allowance problem | `wear-allowance/problem_figure_v76.py` | `constrained-rl` | `figures/wear-problem` |
 | Setup of the test problems: the lander (flights near the pad in the design with costly fuel, stage `fuelprice-20-const`) | `fuel-tank/lunar_problem_eval_v76.py --stage fuelprice-20-const` (`constrained-rl-numerics`), then `lunar_paths_figure.py` | `constrained-rl` | `figures/fuel-tank-problem` |
@@ -94,7 +103,9 @@ the three-optimizer campaigns and their amendment read their run lists (`wear-al
 `xargs`, as their reports state.
 Runtimes on one CPU core per run: about ninety seconds per wear-allowance PPO run at a quarter of the paper's budget
 and several minutes at the full budget, an hour or more per fuel-tank controller, and about thirty-five minutes per
-benchmark-suite run.
+benchmark-suite run. The runs of the landing problem and of the schedules were run on the CSC cluster Roihu with the
+job scripts in `fuel-tank/roihu/` and their run lists (`runs-formulations*.txt`, `runs-ledger.txt`); a run of the
+landing problem takes about fifty minutes of 20 million steps there.
 
 ## Python environments
 
@@ -125,7 +136,9 @@ three-optimizer and decoupled-anchor protocols and reports of 2026-10-20 also de
 records are not here either, and `analyze_optimizers_v68.py` skips them. Before publication, the home folder of the
 authors' working tree was replaced by `<project>` in the run records and logs that recorded it (65 fuel-tank result
 files and nine logs); nothing else in them changed. The same replacement was made in the fifty result files and the log
-of the fuel-tank runs added on 2026-11-10.
+of the fuel-tank runs added on 2026-11-10, and in the records of the landing problem and of the schedules, run on
+the CSC cluster Roihu from 13 to 18 November 2026, where the CSC project and user name in the recorded paths were
+also replaced.
 
 ## Licence and citation
 
@@ -139,49 +152,49 @@ repository as in [`CITATION.cff`](CITATION.cff). The repository is archived on Z
 
 ## Observations of the paper and the protocols
 
-The paper reports its findings as observations, labelled (O1)–(O26) in the order of its experiments. These are the
-labels of revision 76 since 16 November 2026. Against the release of revision 75, which had (O1)–(O24), revision 76
-adds (O13), on a regularization strength lowered in steps on the analytical example, and (O17), on the anchor
-strength changed in steps on the learned controller, and it rewrites the observations on noise and the anchor,
-now (O18)–(O21), around the three ways of taking the optimizer step. The former (O13)–(O15) are (O14)–(O16), and
-the former (O20)–(O24), on the benchmark-suite study, are (O22)–(O26). An observation that a result of the paper implies names that result. Where the result's conditions
-hold in the experiment, as for the bounds and rates computed on the exact benchmark and on the analytical example, the
-observation shows the slack of the bound. Where the result needs an assumption about the learner, such as a small
-optimization error, the observation names that assumption. The table gives, for each observation, the protocol
-statement that covered the same finding.
+The paper reports its findings as observations, labelled (O1)–(O12) in the paper and (O13)–(O24) in Online Resource 1,
+in the order of its experiments. These are the labels of revision 77. Against revision 76, which had (O1)–(O26),
+revision 77 states the former (O4) in a sentence without a label, so the former (O5)–(O7) are (O4)–(O6). (O7) and
+(O8) concern the landing problem, which replaced the earlier lander study, and the former observation on the adaptive
+multiplier was dropped. The former (O10)–(O17) are (O9)–(O16). The former (O18)–(O21), on noise and the anchor, are
+(O17)–(O20), and (O21)–(O24) are new and concern strengths lowered by a schedule or by a rule. The former (O22)–(O26),
+on the benchmark-suite study, are not in revision 77. An observation that a result of the paper implies names that
+result. Where the result's conditions hold in the experiment, as for the bounds and rates computed on the exact
+benchmark and on the analytical example, the observation shows the slack of the bound. Where the result needs an
+assumption about the learner, such as a small optimization error, the observation names that assumption. The table
+gives, for each observation, the protocol statement that covered the same finding.
 
 | Paper | Protocol file | Statement in the protocol |
 |---|---|---|
 | (O1) | `wear-allowance/PROTOCOL.md` | P1, the price–risk bound |
 | (O2) | `wear-allowance/PROTOCOL.md` | P1, the fall of risk with the price |
 | (O3) | `wear-allowance/PROTOCOL.md` | P2 |
-| (O4) | `wear-allowance/PROTOCOL.md` | P3 |
-| (O5) | `wear-allowance/PROTOCOL.md` | P4, the utility cost of the barrier |
-| (O6) | `wear-allowance/PROTOCOL.md` | P4, the effect of the barrier |
-| (O7) | `wear-allowance/PROTOCOL.md` | P5 |
-| (O8) | `fuel-tank/lunar-protocol.json` | none for the first runs; the entry `additions_2026_11_10` states what was expected of the fifty runs added on 2026-11-10, and the appendix on the fuel-tank study of Online Resource 1 reports the outcome |
-| (O9) | `fuel-tank/lunar-protocol.json` | none; the protocol holds no text of the statement |
+| (O4) | `wear-allowance/PROTOCOL.md` | P4, the utility cost of the barrier |
+| (O5) | `wear-allowance/PROTOCOL.md` | P4, the effect of the barrier |
+| (O6) | `wear-allowance/PROTOCOL.md` | P5 |
+| (O7) | `fuel-tank/lunar-protocol.json`, stages `ledger-*` | none; the stages record the design, and the entry of the stages `ledger-staged-*` the reason for the start from the controller trained without a price |
+| (O8) | the same stages | none; formulated after the runs |
+| (O9) | none (the analytical example has no protocol file) | none |
 | (O10) | none (the analytical example has no protocol file) | none |
 | (O11) | none (the analytical example has no protocol file) | none |
-| (O12) | none (the analytical example has no protocol file) | none |
-| (O13) | none (the analytical example has no protocol file) | none; formulated after the runs |
-| (O14) | none | none |
-| (O15) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P12') and (P12'') |
-| (O16) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P13') |
-| (O17) | none (the runs of `wear-allowance/wear_schedules_v76.py`) | none; formulated after the runs |
-| (O18) | `wear-allowance/PROTOCOL-noise-v60.md`, `wear-allowance/PROTOCOL-optimizers-v68.md`, `wear-allowance/PROTOCOL-decoupled-v68.md` | (R1), (E2)–(E4), (D1) and (D2), the same quantity |
-| (O19) | the same three files | (R2), (E5) and (D4), the same quantity; none for the runs with the noise removed during training (`wear-allowance/wear_schedules_v76.py`) |
-| (O20) | `wear-allowance/PROTOCOL-optimizers-v68.md`, `wear-allowance/PROTOCOL-decoupled-v68.md` | (E5), reported without a numerical statement, and (D3), which concerns the spread in the same runs |
-| (O21) | `wear-allowance/PROTOCOL-noise-v60.md` | (R3), the same quantity; the runs under the two other ways of taking the step are in `wear-allowance/REPORT-optimizers-v68.md` |
-| (O22) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S1) |
-| (O23) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S4), the certificates |
-| (O24) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S2) |
-| (O25) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S5) |
-| (O26) | `benchmark-suite/PROTOCOL-safety-v63.md` | (S4), the pass pattern |
+| (O12) | none (the analytical example has no protocol file) | none; formulated after the runs |
+| (O13) | none | none |
+| (O14) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P12') and (P12'') |
+| (O15) | `wear-allowance/PROTOCOL-anchor-v41.md` | (P13'), for the anchor on every parameter; formulated after the runs for the anchor on the mean network only |
+| (O16) | none (the runs of `wear-allowance/wear_schedules_v76.py`) | none; formulated after the runs |
+| (O17) | `wear-allowance/PROTOCOL-noise-v60.md`, `wear-allowance/PROTOCOL-optimizers-v68.md`, `wear-allowance/PROTOCOL-decoupled-v68.md` | (R1), (E2)–(E4), (D1) and (D2), the same quantity |
+| (O18) | the same three files | (R2), (E5) and (D4), the same quantity |
+| (O19) | `wear-allowance/PROTOCOL-optimizers-v68.md`, `wear-allowance/PROTOCOL-decoupled-v68.md` | (E5), reported without a numerical statement, and (D3), which concerns the spread in the same runs |
+| (O20) | `wear-allowance/PROTOCOL-noise-v60.md` | (R3), the same quantity; none for the runs with the noise lowered during training (`wear-allowance/wear_schedules_v76.py`) |
+| (O21) | none (stage `schedules-v77`) | none; formulated after the runs |
+| (O22) | none (stage `schedules-v77`) | none; formulated after the runs |
+| (O23) | none (stage `schedules-v77`) | none; formulated after the runs |
+| (O24) | none (stage `schedules-v77`, runs with the rule) | none; formulated after the runs |
 
-Two statements whose premises did not arise appear in the paper as one unlabelled sentence each: the fuel-tank
+The statement (P3) of `wear-allowance/PROTOCOL.md` appears in the paper as one sentence without a label. Two
+statements whose premises did not arise appear in revision 76 as one unlabelled sentence each: the fuel-tank
 statement on a tank the controller cannot respect, and (S3) of the benchmark-suite protocol. (R4) of
 `wear-allowance/PROTOCOL-noise-v60.md` and (R1)–(R4) of `benchmark-suite/PROTOCOL-ramp-v65.md` do not appear in the
-paper. The observations (O18)–(O21) report what the runs showed, not the protocol's statements, and the paper
-says that all four were formulated after the runs. The protocol and report files keep the observation labels of
-the revision in which they were written.
+paper. The paper says that all observations of Appendix D.6 of Online Resource 1, (O17)–(O24), were formulated after
+the runs; (O17)–(O20) report what the runs showed, not the protocol's statements. The protocol and report files keep
+the observation labels of the revision in which they were written.

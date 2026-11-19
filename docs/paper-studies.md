@@ -7,6 +7,12 @@ Each walk-through states the problem in the paper's vocabulary, the configuratio
 numbers, and what a practitioner should take from them. The prescriptions behind each choice are in the toolbox's practitioner guide, and its 'under the hood' notebooks run
 reduced versions with outputs.
 
+The fuel-tank and benchmark-suite sections below follow revisions up to 76 of the paper. Revision 77 replaced the
+fuel-tank study by a landing problem of its own (revenue 36 on the pad, fuel at 1 per unit, a tank of 24 units) and
+moved the benchmark-suite study out of the paper. The landing problem is defined in `fuel-tank/lunar.py` (the arms
+`ledger-R36-b24-k*`), its design and sets of runs are described at the head of `fuel-tank/lunar_landing_paper.py`, and
+Appendix D.3 of Online Resource 1 reports it.
+
 Every number below is from the paper's tables. The campaigns' protocols were fixed before each campaign, and no seed or
 checkpoint was selected. For every study below, the simulators, the protocols, the records of every run, the trained
 policies and the code that generates every table and figure are in this repository. The studies check the paper's bounds and record what the
