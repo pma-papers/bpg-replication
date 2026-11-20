@@ -72,6 +72,7 @@ def simulate(model: Model, policy, *, n, seed, m=1.0, horizon=None, budget_scale
 
     budget_scale < 1 evaluates robustness: the policy observes the nominal reserve
     (allowance b), while breakdown occurs when cumulative wear exceeds budget_scale * b.
+    Set max_steps=None to run geometric episodes until every trajectory terminates.
     """
     rng = np.random.default_rng(seed)
     b = model.budget
@@ -89,7 +90,7 @@ def simulate(model: Model, policy, *, n, seed, m=1.0, horizon=None, budget_scale
     steps = 0
     t = 0
     T = max_steps if horizon is None else horizon + 1
-    while alive.any() and t < T:
+    while alive.any() and (T is None or t < T):
         ids = np.flatnonzero(alive)
         a = np.clip(policy(s[ids], np.maximum(z_nominal[ids], 0.0)), 0.0, 1.0)
         xi = rng.gamma(model.wear_shape, 1.0 / model.wear_shape, len(ids))
