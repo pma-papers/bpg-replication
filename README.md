@@ -7,7 +7,7 @@ that each table and figure of the paper can be regenerated from the records, and
 
 It is separate from the toolbox. The toolbox, [`barrierpg`](https://github.com/pma-papers/barrierpg), is for applying
 clipped barrier policy gradients to a new problem; this repository is for checking the paper. Results are named by the
-titles the paper gives them, not by statement, section or table numbers, which change between revisions. The landing and wear tables were checked against revision 78 of the paper. The archived revision-77 release contains the reported experiment records. Revision 77 replaced the lander study by a landing
+titles the paper gives them, not by statement, section or table numbers, which change between revisions. The landing and wear tables were checked against revision 78 of the paper. The revision-78 archive contains the main experiment records and the separate architecture pilot. Revision 77 replaced the lander study by a landing
 problem of our own (the runs of 17 and 18 November 2026, stages `formulations-*` and `ledger-*` in `fuel-tank/lunar/`),
 added runs with regularization strengths lowered by a schedule or by a rule on the wear-allowance controller (stage
 `schedules-v77`), and moved the benchmark-suite study out of the paper. The folders of the earlier lander studies and
@@ -150,6 +150,7 @@ The code is under the MIT licence ([`LICENSE`](LICENSE)); the protocols, reports
 tables and figures are under CC BY 4.0 ([`LICENSE-records.md`](LICENSE-records.md)). Cite the paper and this
 repository as in [`CITATION.cff`](CITATION.cff). The repository is archived on Zenodo:
 [10.5281/zenodo.23597426](https://doi.org/10.5281/zenodo.23597426) for all versions,
+[10.5281/zenodo.24395579](https://doi.org/10.5281/zenodo.24395579) for the release of revision 78,
 [10.5281/zenodo.24369373](https://doi.org/10.5281/zenodo.24369373) for the release of revision 77,
 [10.5281/zenodo.24194766](https://doi.org/10.5281/zenodo.24194766) for the release of revision 76,
 [10.5281/zenodo.23986660](https://doi.org/10.5281/zenodo.23986660) for the release of revision 75, and
