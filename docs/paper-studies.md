@@ -37,30 +37,28 @@ Maintenance access arrives after each period with probability `1 - beta`, `beta 
 `q_beta` is exactly the probability of a breakdown before access, and the price of failure risk is a quantity of the
 application. Standing still never fails; every positive rate can fail.
 
-The problem ships with the toolbox as `barrierpg.examples.wear`, with the exact benchmark's frontier:
+The problem ships with the toolbox as `barrierpg.examples.wear`, with reference points from the grid benchmark:
 
 ```python
 from barrierpg import Requirement, plan
-from barrierpg.examples.wear import WearModel, EXACT_FRONTIER
+from barrierpg.examples.wear import WearModel
 
 model = WearModel()
 spec = model.spec(ubar=1.0)                                   # b = 1, beta = 0.95, utility in [0, 1]
 req = Requirement(T=19, alpha=0.05, zeta=0.05, family=2)
-p = plan(spec, req, sup_U=EXACT_FRONTIER[0.0][1], expected_failure_rate=0.01, allowance_error_known=False,
+p = plan(spec, req, sup_U=spec.ubar / (1 - spec.beta), expected_failure_rate=0.01, allowance_error_known=False,
          regularizers=dict(action_reference_trusted=True, price_trusted=False, incumbent_available=True))
 print(p.explain())
 ```
 
-The toolbox's notebooks T1 and T2 (its 'under the hood' track) evaluate rules against the exact frontier and train PPO through the wrapper.
+The toolbox's notebooks T1 and T2 (its 'under the hood' track) compare rules with the grid benchmark and train PPO through the wrapper.
 
 ### The paper's campaign
 
 Fifteen configurations, eight seeds each, PPO of Stable-Baselines3 with one setting throughout (32 environments,
 rollouts of 256 steps, minibatches of 1024, ten epochs, a learning rate decaying linearly to zero, no entropy bonus,
 `8 x 10^6` steps per run), and evaluation of each final stochastic policy on 20,000 fresh episodes. Geometric stopping
-(`BudgetWrapper(geometric_stop=True)`) implements the discount with algorithmic discount one. The exact benchmark
-solves the stationary problem by dynamic programming on a grid and re-evaluates every exact policy in the continuous
-simulator.
+(`BudgetWrapper(geometric_stop=True)`) implements the discount with algorithmic discount one. The benchmark solves a discretized problem by dynamic programming and re-evaluates the resulting policies in the continuous simulator.
 
 | Configuration | `q_beta` (%) | `U` | gap (%) | pass (of 8) | near (%) | at `0.9 b` (%) |
 |---|---|---|---|---|---|---|
@@ -73,26 +71,22 @@ simulator.
 | adaptive multiplier, target 0 | 0.79 | 4.16 | 3.9 | 8 | 3.2 | 15.5 |
 | action-regularized, `m = 0.03`, `eta = 0.1` | 1.47 | 2.80 | 37.9 | 8 | 3.2 | 5.7 |
 
-Means over eight seeds. Gap is the relative shortfall from the exact frontier at the attained risk; pass counts the
+Means over eight seeds. Gap is the relative shortfall from the interpolated benchmark at the attained risk; pass counts the
 seeds whose exact binomial upper bound on `q_beta`, simultaneous over the 120 learned policies at confidence 95%, is
 at most 0.05. The incumbent rule has `q_beta = 1.08%` and `U = 2.73`. Full table: the wear-allowance campaign in the paper.
 
 ### What the practitioner decides, and what came out
 
-1. **Price it.** The learner without a price runs to failure, as the exact solution does. A price removes most of that risk at
-   a small utility cost, because the gamble it forgoes is the last one before exhaustion. Learned fixed-price
-   policies lie within a few percent of the exact frontier. The price-risk bound (`certificates.price_risk_bound`,
-   checked by `frontier.check_runs`) has the right dependence on the price and is conservative by a factor of twenty
-   to thirty. At `m = 0.1` three of eight seeds stayed at the optimum without a price: check every seed.
-2. **Price or tolerance.** The adaptive multiplier reaches its prescribed level on the same frontier. Its multiplier
-   for the target 0.05 converges at the tolerance itself, so no seed passes validation at 0.05: set a prescribed level
-   below the tolerance by the width of the confidence bound. For the zero target the multiplier increases throughout
+1. **Price it.** The learned fixed-price policies reduced risk at a utility cost in the tested runs. Their measured utilities
+   can be compared with the interpolated benchmark. The plug-in price–risk values use an estimated benchmark
+   shortfall, while validation uses the binomial limit. At `m = 0.1` three of eight seeds retained risk near the no-price policy.
+2. **Price or tolerance.** The policies trained at target 0.05 have estimated risks around that level. None of the eight passed validation at 0.05. For the zero target the multiplier increases throughout
    training; `DualAscent.diagnose` reports that it has not converged.
-3. **Reserve.** The failure-only price leaves no reserve: at `m = 1`, 32.6% of episodes break down when the true
+3. **Reserve.** The tested failure-only policies gave less protection against a smaller allowance: at `m = 1`, 32.6% of episodes break down when the true
    allowance is `0.9 b`. The interior barrier at the same price brings this to 1.5% at a utility cost within its
    interior loss. Test the reserve with `BudgetWrapper(true_budget_scale=0.9)`; if the size of the error is known,
    plan with the tightened allowance instead.
-4. **Action anchor.** At the deliberately low price `m = 0.03` the exact optimum breaks down in about a third of the
+4. **Action anchor.** At the deliberately low price `m = 0.03` the grid benchmark breaks down in about a third of the
    episodes. The action relative entropy to the incumbent rule (`ActionAnchor`) keeps the breakdown probability near
    the incumbent's for `eta >= 0.1`, and the bound `kl(q || q_rho) <= A` holds in every run but is informative only
    when `A` is small. The anchored policies lie far inside the frontier: the anchor protects against a mispriced

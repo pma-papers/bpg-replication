@@ -2,8 +2,8 @@
 revision-38 campaign (wear-allowance/campaign/*/result.json, benchmark.json, protocol.json).
 
 Changes against wear-allowance/analyze.py (review findings):
- * frontier convention: the learned policies are evaluated in the continuous simulator, so the exact
-   frontier, the exact barrier curve and the price-risk law use the DP policies re-evaluated in the same
+ * frontier convention: the learned policies are evaluated in the continuous simulator, so the benchmark
+   frontier, barrier curve and plug-in price-risk estimates use the DP policies re-evaluated in the same
    simulator (benchmark rows[*]["nominal"]); the gap is computed against this frontier (gap_reeval) and,
    for the record, against the grid values (gap_grid, the revision-38 convention);
  * table: interior loss I_m, gap mean and max, action relative entropy A (the mean-action risk left the table in revision 75, kept in the summary); footnote on
@@ -92,7 +92,7 @@ def load():
 
 def frontier(bench, conv="reeval"):
     """Failure-only DP policies: price m, breakdown probability q, stopped utility U and the interpolant
-    U_exact(q), linear in log q. conv='grid': DP grid values (revision-38 convention); conv='reeval': the same
+    linear in log q. conv='grid': DP grid values (revision-38 convention); conv='reeval': the same
     policies re-evaluated in the continuous simulator (benchmark 'nominal'), the convention of the learned policies."""
     rows = [r for r in bench["rows"] if r["kind"] == "failure"]
     m = np.array([r["m"] for r in rows])
@@ -113,11 +113,10 @@ def bench_point(r, conv):
 def price_risk_bound(bench, kind, m, s):
     """The price-risk law with the idle policy as comparison policy and the measured optimization error, for one
     learned policy with stochastic record s: q <= q(idle) + (1-beta)/m [sup U - U(idle) + I_m(idle) + delta].
-    The idle policy has q = 0 and U = 0; sup U over the represented class is bounded by the exact unpriced optimum
-    re-evaluated in the simulator; I_m(idle) is the interior loss of standing still, min{B(b), m} per period over the
-    geometric horizon, for the barrier objective and zero for the failure-only price; delta is the shortfall of the
-    policy's objective V_m = U - I_m - m q/(1-beta) (I_m only for the barrier objective) from the exact optimum's,
-    floored at zero (a negative shortfall is Monte Carlo error of the benchmark). Capped at one."""
+    The standing-still policy has zero risk and utility. Use the simulated no-price grid policy's value
+    for sup U and the nonnegative shortfall against the simulated own-price grid policy for delta.
+    Neither quantity is a certified upper bound in the continuous model. The result is a plug-in
+    estimate, capped at one. The binomial pass counts use independent failure counts instead."""
     model = Model(**bench["model"])
     U0 = [r for r in bench["rows"] if r["kind"] == "failure" and r["m"] == 0][0]["nominal"]["U"]
     ex = [r for r in bench["rows"] if r["kind"] == ("barrier" if kind == "barrier" else "failure") and r["m"] == m
@@ -140,8 +139,7 @@ def summarize(bench, protocol, runs):
         rs = runs[arm]
         cfg = protocol["arms"][arm]
         q = np.array([r["stochastic"]["risk"] for r in rs]); U = np.array([r["stochastic"]["U"] for r in rs])
-        n = rs[0]["stochastic"]["n"]
-        ups = [cp_upper(r["stochastic"]["failures"], n, 0.05 / n_candidates) for r in rs]
+        ups = [cp_upper(r["stochastic"]["failures"], r["stochastic"]["n"], 0.05 / n_candidates) for r in rs]
         gap_grid = np.array([(U_grid(a) - b) / U_grid(a) for a, b in zip(q, U)])
         gap_re = np.array([(U_re(a) - b) / U_re(a) for a, b in zip(q, U)])
         s = dict(kind=cfg["kind"], cfg=cfg, seeds=len(rs), seed_ids=[r["seed"] for r in rs],
@@ -214,14 +212,14 @@ def table(summary, inc=None):
                      f"${100*s['near05']:.1f}$ & ${100*s['q90']:.1f}$ & {A} \\\\")
     if inc:
         lines += ["\\midrule", f"Incumbent rule & ${100*inc['q']:.2f}$ & -- & ${inc['U']:.2f}$ & -- & -- & -- & -- & -- & $0$ \\\\"]
-    note = ("\\multicolumn{10}{@{}p{\\linewidth}@{}}{\\textsuperscript{$\\dagger$}three seeds remained at the optimum without a price ($q_\\beta=0.59$), "
+    note = ("\\multicolumn{10}{@{}p{\\linewidth}@{}}{\\textsuperscript{$\\dagger$}three seeds stayed near the risk of the no-price policy ($q_\\beta=0.59$), "
             "four reached $0.11$ to $0.17$ and one $0.33$; the mean is of a two-cluster sample. "
             "\\textsuperscript{$\\ddagger$}dual step $1$ instead of $5$. "
             "\\textsuperscript{\\S}the breakdown probability differs between the seeds, from $2.9$ to $8.6$ percent, and was still falling when training ended; "
-            "the action kernel that maximizes the same objective over all kernels has $1.36$ percent.} \\\\")
+            "the grid benchmark for the action-regularized objective has $1.36$ percent.} \\\\")
     (ROOT / "wear-campaign-table-v41.tex").write_text(
         "\\setlength{\\tabcolsep}{2.5pt}\\begin{tabular}{@{}lrrrrrrrrr@{}}\n\\toprule\n"
-        "Setting & $q_\\beta$ & bound & $U$ & $\\mathcal I_m$ & gap & pass & near & at $0.9b$ & $\\mathcal A$ \\\\\n\\midrule\n"
+        "Setting & $q_\\beta$ & bound est. & $U$ & $\\mathcal I_m$ & gap & pass & near & at $0.9b$ & $\\mathcal A$ \\\\\n\\midrule\n"
         + "\n".join(lines) + "\n\\bottomrule\n" + note + "\n\\end{tabular}\n")
 
 
@@ -266,12 +264,12 @@ def fig_frontier(bench, summary):
     legend_below(fig, *ax.get_legend_handles_labels(), ncol=1, axes=[ax]); panel_label(ax, "a")
     # (b) frontier: exact curves under the re-evaluated convention
     ax = axes[1]
-    ax.plot(q_ex, U_ex, color=TEXT2, lw=1.2, label="exact frontier", zorder=1)
+    ax.plot(q_ex, U_ex, color=TEXT2, lw=1.2, label="grid benchmark", zorder=1)
     for mm in (0.1, 1, 10):
         i = int(np.argmin(np.abs(m_ex - mm)))
         ax.annotate(f"$m={mm:g}$", (q_ex[i], U_ex[i]), textcoords="offset points", xytext={0.1: (-40, -12), 1: (-38, 3), 10: (-44, -4)}[mm], fontsize=FS, color=TEXT2)
         ax.plot([q_ex[i]], [U_ex[i]], marker="|", color=TEXT2, ms=5)
-    ax.plot(bq, bU, color=C_BARRIER, lw=1.0, ls="--", label="exact, barrier", zorder=1)
+    ax.plot(bq, bU, color=C_BARRIER, lw=1.0, ls="--", label="grid, barrier", zorder=1)
     DIGESTS["wear-frontier/b exact frontier and barrier curve"] = dict(before=digest(old[1], old[2], old[3], old[4]), after=digest(q_ex, U_ex, bq, bU), changed=True)
     learned = []
     for kind, col, mk, lab in (("fixed", C_FIXED, "o", "fixed price"), ("adaptive", C_ADAPT, "s", "adaptive multiplier"), ("barrier", C_BARRIER, "^", "fixed price, barrier")):
@@ -289,8 +287,8 @@ def fig_frontier(bench, summary):
     # (c) price-risk law: exact curve and bound re-evaluated; m = 0.1 as individual seeds
     ax = axes[2]
     pos = m_ex > 0
-    ax.plot(m_ex[pos], q_ex[pos], color=TEXT2, label="exact")
-    ax.plot(m_ex[pos], bound, color=MUTED, ls="--", label="upper bound")
+    ax.plot(m_ex[pos], q_ex[pos], color=TEXT2, label="grid benchmark")
+    ax.plot(m_ex[pos], bound, color=MUTED, ls="--", label="plug-in estimate")
     DIGESTS["wear-frontier/c exact curve and bound"] = dict(before=digest(old[0][pos], old[1][pos], old[5]), after=digest(m_ex[pos], q_ex[pos], bound), changed=True)
     xs, ys, lo, hi, sx, sy = [], [], [], [], [], []
     xs_old, ys_old, lo_old, hi_old = [], [], [], []

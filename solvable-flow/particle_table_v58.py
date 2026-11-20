@@ -4,7 +4,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 S = json.loads((HERE / "particle-flow-v58.json").read_text())
 lines = ["\\begin{tabular}{llrrr}", "\\toprule",
-         "Strength & Units $n$ & final $V_m$, particles & final $V_m$, flow & largest deviation \\\\", "\\midrule"]
+         "Strength & Units $n$ & final $V_m$, particles & final $V_m$, gradient flow & largest deviation \\\\", "\\midrule"]
 for run, R in S["runs"].items():
     first = True
     for n, q in R["particles"].items():

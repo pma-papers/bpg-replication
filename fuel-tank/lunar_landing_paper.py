@@ -98,7 +98,7 @@ for k in KS:
                 f" & ${c['q']:.4f}$ & ${c['fuel_before']:.1f}$ & ${c['fuel']:.1f}$ & ${c['U_mean']:.2f}\\pm{c['U_sd']:.2f}$ & {'--' if fell is None else f'${fell}/{len(SEEDS)}$'} \\\\")
 numbers["design"] = cells
 (OUT / "landing.tex").write_text(
-    "\\begin{tabular}{rrrrrrrrrrr}\n\\toprule\n$k$ & $m$ & Failed (\\%) & Lost (\\%) & Empty (\\%) & Pad (\\%) & $q_{\\beta,H}$ & Fuel before & Fuel & $U_H$ & Fell \\\\\n\\midrule\n"
+    "\\begin{tabular}{rrrrrrrrrrr}\n\\toprule\n$k$ & $m$ & Failed (\\%) & Lost (\\%) & Empty (\\%) & Pad (\\%) & $q_{\\beta,H}$ & Fuel before & Fuel & $U_H$ & Improved \\\\\n\\midrule\n"
     + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n")
 
 # the value of every policy at every price (means over the seeds)

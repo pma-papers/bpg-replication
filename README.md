@@ -7,8 +7,7 @@ that each table and figure of the paper can be regenerated from the records, and
 
 It is separate from the toolbox. The toolbox, [`barrierpg`](https://github.com/pma-papers/barrierpg), is for applying
 clipped barrier policy gradients to a new problem; this repository is for checking the paper. Results are named by the
-titles the paper gives them, not by statement, section or table numbers, which change between revisions. The tables
-the scripts generate were checked against revision 77 of the paper. Revision 77 replaced the lander study by a landing
+titles the paper gives them, not by statement, section or table numbers, which change between revisions. The landing and wear tables were checked against revision 78 of the paper. The archived revision-77 release contains the reported experiment records. Revision 77 replaced the lander study by a landing
 problem of our own (the runs of 17 and 18 November 2026, stages `formulations-*` and `ledger-*` in `fuel-tank/lunar/`),
 added runs with regularization strengths lowered by a schedule or by a rule on the wear-allowance controller (stage
 `schedules-v77`), and moved the benchmark-suite study out of the paper. The folders of the earlier lander studies and
@@ -18,8 +17,8 @@ of the benchmark suite stay here with their records.
 
 | Folder | Study in the paper | What it tests |
 |---|---|---|
-| [`wear-allowance/`](wear-allowance) | An asset operated under a wear allowance; the prior on a learned controller; noise and the anchor on a learned controller | The price against an exact benchmark, the adaptive multiplier, the interior barrier when the true allowance is smaller than the allowance used in training, the action anchor, the parameter anchor and parameter noise |
-| [`fuel-tank/`](fuel-tank) | A learned lander paid for each landing (the landing problem: revenue 36 on the pad, fuel at 1 per unit, a tank of 24 units, built on the simulator of LunarLanderContinuous-v3); the fuel-tank studies of revisions up to 76 | The price on a learned controller and the optimization error, which grows with the price and with a poorer start; in revisions up to 76, the dual step of an adaptive multiplier |
+| [`wear-allowance/`](wear-allowance) | An asset operated under a wear allowance; the prior on a learned controller; noise and the anchor on a learned controller | The price against a grid-based benchmark, the adaptive multiplier, the interior barrier when the true allowance is smaller than the allowance used in training, the action anchor, the parameter anchor and parameter noise |
+| [`fuel-tank/`](fuel-tank) | A learned lander paid for each landing (the landing problem: revenue 36 on the pad, fuel at 1 per unit, a tank of 24 units, built on the simulator of LunarLanderContinuous-v3); the fuel-tank studies of revisions up to 76 | The price on a learned controller and own-charge shortfalls against the best evaluated policies; in revisions up to 76, the dual step of an adaptive multiplier |
 | [`solvable-flow/`](solvable-flow) | The convergence theorem and the regularizers on the analytical example | The slack of the curvature threshold, the prior policy, noise, drift and spread, the particle system |
 | [`benchmark-suite/`](benchmark-suite) | A task of a benchmark suite, reported in revisions up to 76 and not in revision 77 | A Safety-Gymnasium navigation task: the price, the adaptive multiplier and the expected-cost formulation |
 | [`lib/`](lib) | shared modules | plotting style, density flow, digest helpers |
@@ -39,7 +38,7 @@ each output corresponds to is named in the last column.
 
 | Result | Script | Python | Manuscript file |
 |---|---|---|---|
-| Wear allowance: exact benchmark and campaign tables, the figure for a smaller true allowance | `wear-allowance/analyze_v41.py` | `constrained-rl` | `tables/wear-benchmark`, `tables/wear-campaign`, `figures/wear-margin` |
+| Wear allowance: grid benchmark and campaign tables, the figure for a smaller true allowance | `wear-allowance/analyze_v41.py` | `constrained-rl` | `tables/wear-benchmark`, `tables/wear-campaign`, `figures/wear-margin` |
 | Wear allowance: frontier, multiplier and anchor figures | `wear-allowance/relabel_wear_figures_v47.py` | `constrained-rl` | `figures/wear-frontier`, `wear-multiplier`, `parameter-anchor` |
 | The prior on a learned controller: table | `wear-allowance/anchor_analyze_v41.py` | `constrained-rl` | `tables/parameter-anchor` |
 | Roles of the regularizers on PPO: table (its figure left the manuscript on 2026-11-16) | `wear-allowance/analyze_noise_v60.py` | `constrained-rl` | `tables/wear-noise` |
@@ -83,8 +82,8 @@ scripts carry the corrections the paper made in revision 70: the stationary spre
 `sqrt(kappa_1/kappa_2)` (`analyze_noise_v60.py`; the protocol's design values stay in its check (R1)), the
 benchmark suite's validation shares the error `0.05` among all 72 reported candidates (`analyze_safety_v63.py`), and
 the solvable flow's curvature constant is called a finite-difference estimate (`regularizer_figure_v41.py`).
-The wear-allowance table carries the column "bound": the price–risk bound with standing still as the comparison policy and
-the measured optimization error, computed per seed in `wear-allowance/analyze_v41.py`.
+The wear-allowance table's "bound est." column substitutes simulator estimates for the value and objective gap in the
+price–risk expression. The binomial pass counts use the actual failure counts and their own confidence allocation. See `wear-allowance/analyze_v41.py`.
 
 Four outputs are records that the paper no longer prints. The Online Resource was shortened on 9 November 2026 and
 now points to this repository for them: the exact optima on the grid (`tables/wear-benchmark`), the runs over prior
@@ -160,9 +159,8 @@ revision 77 states the former (O4) in a sentence without a label, so the former 
 multiplier was dropped. The former (O10)–(O17) are (O9)–(O16). The former (O18)–(O21), on noise and the anchor, are
 (O17)–(O20), and (O21)–(O24) are new and concern strengths lowered by a schedule or by a rule. The former (O22)–(O26),
 on the benchmark-suite study, are not in revision 77. An observation that a result of the paper implies names that
-result. Where the result's conditions hold in the experiment, as for the bounds and rates computed on the exact
-benchmark and on the analytical example, the observation shows the slack of the bound. Where the result needs an
-assumption about the learner, such as a small optimization error, the observation names that assumption. The table
+result. The analytical example compares observed rates with the theoretical rate where its hypotheses hold. The wear
+benchmark uses a grid and continuous-simulator evaluation. Its measured shortfalls do not certify continuous-model optimization gaps. The table
 gives, for each observation, the protocol statement that covered the same finding.
 
 | Paper | Protocol file | Statement in the protocol |

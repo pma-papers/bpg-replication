@@ -58,7 +58,7 @@ def logic():
     ax.axvspan(0.0, qf, color=MUTED, alpha=0.18, lw=0)
     ax.plot(q, U, color=TEXT2, lw=1.4)
     ax.text(0.43, 1.04, "frontier of the class", fontsize=9, color=TEXT2, ha="center", va="bottom")
-    ax.annotate("below the lower bound:\nno policy, no multiplier converges",
+    ax.annotate("below the lower bound:\ninfeasible tolerance",
                 xy=(qf * 0.5, 0.12), xytext=(0.13, 0.05), fontsize=9, color=TEXT2, va="bottom",
                 arrowprops=dict(arrowstyle="->", color=TEXT2, lw=0.6))
     # a price: tangent with slope m/(1-beta) (scaled for the schematic)

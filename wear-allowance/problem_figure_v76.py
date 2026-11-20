@@ -77,7 +77,7 @@ dist = gamma_dist(model.wear_shape, scale=1.0 / model.wear_shape)
 ax.plot(z, dist.sf(z / model.wear_rate), color=TEXT2, lw=1.2)
 ax.set_yscale("log"); ax.set_ylim(1e-3, 1.2); ax.set_xlim(0, 1)
 ax.set_xlabel("part $z$ of the allowance"); ax.set_ylabel("probability of wear above $z$"); panel_label(ax, "c")
-handles = [Line2D([], [], color=C0, lw=1.2, label="exact optimum, no price"), Line2D([], [], color=C1, lw=1.2, label="exact optimum, $m=1$"),
+handles = [Line2D([], [], color=C0, lw=1.2, label="grid, no price"), Line2D([], [], color=C1, lw=1.2, label="grid, $m=1$"),
            Line2D([], [], color=TEXT2, marker="x", ls="none", ms=4.5, mew=1.0, label="breakdown"),
            Line2D([], [], color=TEXT2, marker="o", mfc="white", ls="none", ms=4.5, label="maintenance access")]
 fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, -0.10), ncol=4, frameon=False, fontsize=FS, columnspacing=1.2, handletextpad=0.5)
