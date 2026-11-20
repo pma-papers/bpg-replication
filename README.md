@@ -13,6 +13,11 @@ added runs with regularization strengths lowered by a schedule or by a rule on t
 `schedules-v77`), and moved the benchmark-suite study out of the paper. The folders of the earlier lander studies and
 of the benchmark suite stay here with their records.
 
+The exploratory wear-allowance formulation comparison in Appendix E.1 is available with the
+[toolbox code and seed-level results](https://github.com/pma-papers/barrierpg/blob/main/docs/wear-benchmark.md).
+A separate [PPO architecture pilot](wear-allowance/ARCHITECTURE-PILOT.md) compares the published
+network with two LayerNorm networks and includes its frozen source and all 24 run records.
+
 ## Studies
 
 | Folder | Study in the paper | What it tests |
